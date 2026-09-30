@@ -918,6 +918,7 @@ body.is-home .ftr{padding-top:calc(clamp(170px,19vw,270px) * .5 - 20px)}
 .rbg-cut img{width:100%!important;height:100%!important;object-fit:contain;padding:6px 0;box-sizing:border-box}
 .ai-cost{gap:6px;font-weight:500;color:#2A2E34}
 .ai-coin{width:20px;height:20px;flex:none}
+.ai-cost-t{white-space:nowrap}
 .ai-info{width:18px!important;height:18px!important;border:0!important;background:none!important;padding:0;display:grid;place-items:center;cursor:help;opacity:.85;transition:opacity .15s ease}
 .ai-info:hover{opacity:1}
 .ai-info img{width:18px;height:18px;display:block}
@@ -2359,7 +2360,7 @@ function pageCreate(){
     <div class="ai-grid">
       <section class="ai-panel ai-left" aria-label="Create sticker"><div class="ai-scroll">${aiLeft(c)}</div>
         <div class="ai-foot">${c.err?`<p class="err" role="alert">${c.err}</p>`:''}<button class="ai-go" id="aiGo" ${can?'':'disabled'}>Generate Now</button>
-          <p class="ai-cost"><img class="ai-coin" src="${AIA.coin}" alt="" width="20" height="20">Free to generate · new pack uses ${PACK_COST} credit${S.user?`<span class="ai-bal">· You have ${S.credits}</span>`:''} <button class="ai-info" aria-label="About credits" title="Generating stickers is free. Saving them as a new pack uses ${PACK_COST} credit. You have ${S.user?S.credits:0}."><img src="${AIA.info}" alt="" width="18" height="18"></button></p></div></section>
+          <p class="ai-cost"><img class="ai-coin" src="${AIA.coin}" alt="" width="20" height="20"><span class="ai-cost-t">Free to generate${S.user?`<span class="ai-bal"> · ${S.credits} ${S.credits===1?'credit':'credits'} left</span>`:''}</span> <button class="ai-info" aria-label="About credits" title="Generating stickers is free. Saving them as a new pack uses ${PACK_COST} credit. You have ${S.user?S.credits:0}."><img src="${AIA.info}" alt="" width="18" height="18"></button></p></div></section>
       <section class="ai-panel ai-right${c.results&&!c.busy?' has':''}" aria-live="polite">${right}${histRow}</section>
     </div></div></div>`;
 }
