@@ -1738,30 +1738,32 @@ body.has-appbar{padding-bottom:84px}
  .how-head .lead{margin-top:8px;font-size:15.5px}
  .frow .fart{order:-1}
  .frow{gap:20px;padding-block:28px}
- .frow .feat-tag,.frow .checks{display:none}
- .frow h2.display{margin-top:0!important;font-size:34px!important;line-height:.95}
+ .frow h2.display{font-size:34px!important;line-height:.95}
+ .frow .checks{margin:16px 0 4px}
  .frow .lead{font-size:15.5px}
  a.btn-dl.m-only{display:inline-flex;align-items:center;gap:10px;margin-top:20px;height:50px;padding:0 28px;border-radius:999px;background:var(--green);color:#fff;font-family:var(--f-round);font-weight:500;font-size:15px;letter-spacing:.02em;text-decoration:none;box-shadow:0 10px 22px -8px rgba(31,161,70,.55)}
  .trend-head .car-nav{display:none}
  .trend-head{margin-bottom:24px}
  .carousel{grid-auto-columns:calc(100vw - 32px);-webkit-mask-image:none!important;mask-image:none!important}
  .car-nav-m.m-only{display:flex;justify-content:center;gap:14px;margin-top:14px}
- .faq-head .tilt,.faq-dog{display:none}
- .faq-head{margin-bottom:24px}
- .faq-list{gap:10px}
  .ev-copy{text-align:center}
  .ev-copy>p{margin-inline:auto}
  .ev-tools{grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:8px}
  .ev-ic{height:68px}
- .ftr-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:24px 12px}
- .ftr-grid>:first-child,.ftr-grid>:last-child{grid-column:1/-1}
- .ftr h4{font-size:15px}
- .ftr a,.ftr .ftr-ck{font-size:14px}
 }
 .faq-more{display:flex;flex-direction:column;align-items:center;gap:12px;margin-top:28px}
 .faq-more p{font-family:var(--f-round);font-size:16px;color:#3A3F47;margin:0}
 .btn-contact{display:inline-flex;align-items:center;gap:10px;height:50px;padding:0 26px;border-radius:999px;background:#4CC456;color:#fff;font-family:var(--f-round);font-weight:500;font-size:17px;text-decoration:none;box-shadow:0 10px 22px -8px rgba(31,161,70,.5);transition:transform .15s ease}
 .btn-contact:hover{transform:translateY(-2px)}
+
+/* floating mobile menu */
+.mnav{position:absolute;left:12px;right:12px;top:calc(100% + 8px);z-index:70;background:var(--card);border:1px solid var(--card-line)!important;border-radius:22px;padding:10px!important;box-shadow:0 24px 50px -12px rgba(16,48,26,.3),0 4px 12px rgba(16,48,26,.08);max-height:calc(100dvh - 110px);overflow:auto;opacity:0;transform:translateY(-12px) scale(.97);transform-origin:top right;transition:opacity .22s ease,transform .26s cubic-bezier(.22,1,.36,1);animation:none!important}
+.mnav.on{opacity:1;transform:none}
+.mnav-bg{position:fixed;inset:0;z-index:65;background:rgba(10,30,18,.35);opacity:0;transition:opacity .22s ease}
+.mnav-bg.on{opacity:1}
+.mnav-bg[hidden]{display:none}
+body.mnav-open #hdr{z-index:80!important}
+@media (prefers-reduced-motion:reduce){.mnav,.mnav-bg{transition:none}}
 </style>
 
 <div id="hdr"></div>
@@ -2003,7 +2005,10 @@ function header(route){
 function wireHeader(){
   const hd=document.getElementById('hdrEl');
   const mb=document.getElementById('mBtn'),mn=document.getElementById('mnav');
-  mb.onclick=()=>{mn.hidden=!mn.hidden;mb.setAttribute('aria-expanded',!mn.hidden);mb.setAttribute('aria-label',mn.hidden?'Open menu':'Close menu');mb.innerHTML=mn.hidden?I.menu:I.close};
+  let bg=document.getElementById('mnavBg');if(!bg){bg=document.createElement('div');bg.id='mnavBg';bg.className='mnav-bg';bg.hidden=true;document.body.appendChild(bg)}bg.classList.remove('on');bg.hidden=true;
+  const setM=open=>{if(open){mn.hidden=false;bg.hidden=false;requestAnimationFrame(()=>{mn.classList.add('on');bg.classList.add('on')})}else{mn.classList.remove('on');bg.classList.remove('on');clearTimeout(mn._t);mn._t=setTimeout(()=>{mn.hidden=true;bg.hidden=true},220)}
+    document.body.classList.toggle('mnav-open',open);mb.setAttribute('aria-expanded',open);mb.setAttribute('aria-label',open?'Close menu':'Open menu');mb.innerHTML=open?I.close:I.menu};
+  mb.onclick=()=>setM(!mn.classList.contains('on'));bg.onclick=()=>setM(false);mn.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>setM(false)));
   const av=document.getElementById('avBtn');
   if(av){const a=document.getElementById('acct');
     const close=()=>{a.hidden=true;av.setAttribute('aria-expanded','false')};
@@ -2138,7 +2143,7 @@ function pageHome(){
 
   <section class="faq-sec" id="faq" style="background-image:url(${ASSET.faqBg});--plus:url(${ASSET.faqPlus});--close:url(${ASSET.faqClose})"><div class="wrap faq-wrap">
     <img class="faq-dog" src="${ASSET.faqDog}" alt="" width="180" height="180" loading="lazy">
-    <div class="faq-head"><span class="tilt">Questions</span><h2 class="disc-title faq-h"><span class="d-only">Frequently Asked Questions</span><span class="m-only">Sticker Maker FAQs</span></h2><p>Everything you need to know about making and sharing stickers.</p></div>
+    <div class="faq-head"><span class="tilt">Questions</span><h2 class="disc-title faq-h">Frequently Asked Questions</h2><p>Everything you need to know about making and sharing stickers.</p></div>
     <div class="faq-list">${[['What is WaSticker - Sticker Maker?','WaSticker is a free sticker library and sticker maker. Browse packs made by our team and community, or create your own from photos and text in the iPhone app.'],
        ['Can I create stickers from my own photos?','Yes. Upload a photo, and WaSticker cuts out the subject, adds a sticker border and turns it into a matching set with captions.'],
        ['Can I add text to my stickers?','Yes. Add captions like “On my way” or “Haha”, pick a text style, and finish with emojis and borders.'],
@@ -2163,7 +2168,7 @@ function pageHome(){
   </div></div></section>`;
 }
 function wireFaq(){
-  if(!isMobile()){const f=document.querySelector('details.faq');if(f)f.open=true}
+  {const f=document.querySelector('details.faq');if(f)f.open=true}
   const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
   const ease='cubic-bezier(.22,1,.36,1)';
   document.querySelectorAll('details.faq').forEach(d=>{
