@@ -1707,6 +1707,61 @@ body.lb-open{overflow:hidden}
 .appbar-x{flex:none;width:28px;height:28px;border:0;background:none;color:var(--muted);font-size:20px;line-height:1;cursor:pointer}
 body.mdl-open .appbar,body:has(#ckBar) .appbar{transform:translateY(140%)}
 body.has-appbar{padding-bottom:84px}
+
+/* ---------- mobile (Figma: Landing Page 414) ---------- */
+.m-only,.hdr-open{display:none}
+@media (max-width:560px){
+ .d-only{display:none!important}
+ span.m-only,i.m-only{display:inline}
+ div.m-only{display:block}
+ .hdr-open{display:inline-grid;place-items:center;height:34px;padding:0 16px;border-radius:9px;background:var(--green);color:#fff;font-family:var(--f-round);font-weight:600;font-size:15px;text-decoration:none;margin-right:6px}
+ .menu-btn{border:0;width:40px}
+ .hero{position:relative;padding-bottom:84px}
+ .hero p{font-size:15.5px;margin-top:22px;max-width:34ch;margin-inline:auto}
+ .hero-girl-m.m-only{display:block;position:absolute;right:10px;bottom:-24px;width:112px;height:auto;z-index:4;transform:rotate(6deg);filter:drop-shadow(0 8px 14px rgba(0,0,0,.18));pointer-events:none}
+ .feat-strip{display:none}
+ .disc-sec{padding-top:36px}
+ body .grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+ body .pcard{padding:0;gap:0;border-radius:10px;overflow:hidden}
+ body .pcard .pthumb{border-radius:0;aspect-ratio:1/.86}
+ body .pcard .pthumb img{width:86%;height:86%}
+ body .pcard .pthumb .stk{font-size:46px}
+ body .pcard .pmeta{padding:7px 8px 9px}
+ body .pcard .pmeta b{font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+ body .pcard .pmeta span{font-size:10.5px;margin-top:2px;white-space:nowrap}
+ body .pcard .anim-badge{transform:scale(.72);transform-origin:top right}
+ .home-pager{margin-top:22px}
+ .home-pager .pager .pg{gap:0}
+ .disc-sec .see-all{display:none}
+ .how-head.m-only{text-align:center;padding:28px 4px 8px}
+ .how-head h2{font-size:30px}
+ .how-head .lead{margin-top:8px;font-size:15.5px}
+ .frow .fart{order:-1}
+ .frow{gap:20px;padding-block:28px}
+ .frow .feat-tag,.frow .checks{display:none}
+ .frow h2.display{margin-top:0!important;font-size:34px!important;line-height:.95}
+ .frow .lead{font-size:15.5px}
+ a.btn-dl.m-only{display:inline-flex;align-items:center;gap:10px;margin-top:20px;height:50px;padding:0 28px;border-radius:999px;background:var(--green);color:#fff;font-family:var(--f-round);font-weight:500;font-size:15px;letter-spacing:.02em;text-decoration:none;box-shadow:0 10px 22px -8px rgba(31,161,70,.55)}
+ .trend-head .car-nav{display:none}
+ .trend-head{margin-bottom:24px}
+ .carousel{grid-auto-columns:calc(100vw - 32px);-webkit-mask-image:none!important;mask-image:none!important}
+ .car-nav-m.m-only{display:flex;justify-content:center;gap:14px;margin-top:14px}
+ .faq-head .tilt,.faq-dog{display:none}
+ .faq-head{margin-bottom:24px}
+ .faq-list{gap:10px}
+ .ev-copy{text-align:center}
+ .ev-copy>p{margin-inline:auto}
+ .ev-tools{grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:8px}
+ .ev-ic{height:68px}
+ .ftr-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:24px 12px}
+ .ftr-grid>:first-child,.ftr-grid>:last-child{grid-column:1/-1}
+ .ftr h4{font-size:15px}
+ .ftr a,.ftr .ftr-ck{font-size:14px}
+}
+.faq-more{display:flex;flex-direction:column;align-items:center;gap:12px;margin-top:28px}
+.faq-more p{font-family:var(--f-round);font-size:16px;color:#3A3F47;margin:0}
+.btn-contact{display:inline-flex;align-items:center;gap:10px;height:50px;padding:0 26px;border-radius:999px;background:#4CC456;color:#fff;font-family:var(--f-round);font-weight:500;font-size:17px;text-decoration:none;box-shadow:0 10px 22px -8px rgba(31,161,70,.5);transition:transform .15s ease}
+.btn-contact:hover{transform:translateY(-2px)}
 </style>
 
 <div id="hdr"></div>
@@ -1722,6 +1777,7 @@ const UA=navigator.userAgent;
 const IS_IOS=/iPhone|iPad|iPod/.test(UA)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1);
 const IS_ANDROID=/Android/i.test(UA);
 const IS_IOS_SAFARI=IS_IOS&&/Safari/.test(UA)&&!/CriOS|FxiOS|EdgiOS|OPiOS|GSA\/|FBAN|FBAV|Instagram|Line\/|WhatsApp|Twitter/.test(UA);
+const isMobile=()=>matchMedia('(max-width:560px)').matches;
 /* ---------- icons ---------- */
 const sv=(p,extra='')=>`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" ${extra}>${p}</svg>`;
 const I={
@@ -1895,7 +1951,7 @@ const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'
 const stk=(e,size)=>`<span class="stk"${size?` style="font-size:${size}px"`:''}>${e}</span>`;
 function packCard(p){
   const art=p.img?`<img src="${p.img}" alt="" loading="lazy"${p.imgScale?` style="width:${p.imgScale*100}%;height:${p.imgScale*100}%"`:''}>`:stk(p.e[0]);
-  const meta=`${(p.imgs||p.e).length} Stickers / ${fmt(p.dl)} Downloads`;
+  const meta=`${(p.imgs||p.e).length} Stickers / ${fmt(p.dl)}<i class="d-only" style="font-style:normal"> Downloads</i>`;
   return `<a class="pcard" href="#pack-${p.id}">
     <div class="pthumb${p.anim?' anim':''}" style="background:${p.c}">${art}${p.anim?`<span class="anim-badge">Animated</span>`:''}</div>
     <div class="pmeta"><b>${esc(p.name)}</b><span>${meta}</span></div></a>`;
@@ -1933,6 +1989,7 @@ function header(route){
       <span class="vdiv hide-m" aria-hidden="true"></span>
       <a class="hlink hl-create hide-m${ac('create')}" href="#create">${ICO_CREATE}Create Sticker</a>
       ${right}
+      <a class="hdr-open" href="${appUrl('header_open')}" target="_blank" rel="noopener">Open</a>
       <button class="menu-btn" id="mBtn" aria-label="Open menu" aria-expanded="false" aria-controls="mnav">${I.menu}</button>
     </div></div>
     <nav class="mnav" id="mnav" aria-label="Mobile" hidden>
@@ -1999,16 +2056,16 @@ function pageHome(){
   const top=PACKS.slice().sort((a,b)=>b.dl-a.dl);
   const f=S.homeCat||'all';
   const full=f==='all'?FIG_ORDER.map(byId).concat(top.filter(p=>!FIG_ORDER.includes(p.id))):f==='trending'?top.filter(p=>p.anim):f==='popular'?top:top.filter(p=>p.cat===f);
-  const list=full.slice(0,10);
+  const mob=isMobile(),per=6,hp=Math.min(S.homePage||1,4);const list=mob?full.slice(0,24).slice((hp-1)*per,hp*per):full.slice(0,10);
   const trending=[111,112,113,114,24,14,11,107,3,12].map(byId);
   return `
   <section class="hero"><div class="wrap">
     <span class="hero-logo">${LOGO}</span>
     <h1>Welcome To<br><span class="l2"><span class="hl"><span class="burst">${BURST}</span><em>Sticker</em></span> Maker<span class="swash">${SWASH}</span></span></h1>
-    <p>Browse free WhatsApp sticker packs, or turn your own photos into a pack in a couple of minutes. Your first pack is free.</p>
+    <p><span class="d-only">Browse free WhatsApp sticker packs, or turn your own photos into a pack in a couple of minutes. Your first pack is free.</span><span class="m-only">Create custom stickers with the top sticker-making app. Download your favorite packs and share them on WhatsApp, iMessage, Telegram, and more.</span></p>
     <p class="get-app">Get the app!<img src="${ASSET.splashSm}" alt="" width="16" height="14"></p>
     <div class="stores" style="margin-top:10px">${stores()}</div>
-  </div></section>
+  </div><img class="hero-girl-m m-only" src="${ASSET.girl}" alt="" width="120" height="128"></section>
   <div class="feat-strip wrap"><img class="hero-girl" src="${ASSET.girl}" alt="" width="194" height="207"><div class="in">
     <div class="fs"><img src="${ASSET.ai}" alt="" width="50" height="50"><div><b>AI-Powered Cutout</b><span>Photos to sticker instantly</span></div></div>
     <div class="fs"><img src="${ASSET.hq}" alt="" width="50" height="50"><div><b>High Quality</b><span>Crisp and clean stickers</span></div></div>
@@ -2024,43 +2081,45 @@ function pageHome(){
       ${CATS.map(c=>`<button class="chip${f===c.slug?' on':''}" data-hc="${c.slug}">${c.e} ${c.name}</button>`).join('')}
     </div><button class="chip-nav next" aria-label="Scroll categories right">${I.right}</button></div>
     <div class="grid" id="homeGrid">${list.map(packCard).join('')}</div>
+    ${mob?`<div class="home-pager">${pagerFig(Math.min(full.length,24),per,hp,'hpg')}</div>`:''}
     <div class="see-all"><a class="btn-see" href="#categories">See all categories ${I.arrow}</a></div>
   </div></section>
 
   <section class="doodle"><div class="wrap">
+    <div class="how-head m-only"><h2 class="disc-title">How to use Sticker Maker</h2><p class="lead">Sticker Maker is a smart photo editor that can easily turn photos into stickers.</p></div>
     <div class="frow">
       <div><span class="feat-tag"><i>${I.magic}</i>AI Sticker Generator</span><h2 class="display" style="margin-top:16px;font-size:clamp(34px,4.4vw,52px)">Create stickers<br>with AI magic</h2>
         <p class="lead" style="margin-top:14px">Type an idea or upload a photo. WaSticker draws a full set of expressions in one style so your pack feels like a matching set.</p>
         <ul class="checks"><li>Describe it in words or start from a photo</li><li>Cartoon, pop art, 3D and more styles</li><li>Ready for WhatsApp, Telegram and Signal</li></ul>
-        <a class="btn btn-primary" href="#create">Try it free ${I.arrow}</a></div>
+        <a class="btn btn-primary d-only" href="#create">Try it free ${I.arrow}</a><a class="btn-dl m-only" href="${appUrl('feature')}" target="_blank" rel="noopener">DOWNLOAD APP <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"/></svg></a></div>
       <div class="fart"><img class="feat-img" src="${ASSET.feat_ai}" alt="" width="1006" height="962" loading="lazy"></div>
     </div>
     <div class="frow flip">
       <div><span class="feat-tag"><i>${I.scissors}</i>Background Remover</span><h2 class="display" style="margin-top:16px;font-size:clamp(34px,4.4vw,52px)">Remove the background<br>in one tap</h2>
         <p class="lead" style="margin-top:14px">WaSticker finds the person, pet or object in your photo and cuts it out with a clean white sticker border.</p>
         <ul class="checks"><li>Works on people, pets, food and objects</li><li>Soft, even edges around hair and fur</li><li>Choose a round or rounded-square frame</li></ul>
-        <a class="btn btn-primary" href="#article-remove-background">See how it works ${I.arrow}</a></div>
+        <a class="btn btn-primary d-only" href="#article-remove-background">See how it works ${I.arrow}</a><a class="btn-dl m-only" href="${appUrl('feature')}" target="_blank" rel="noopener">DOWNLOAD APP <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"/></svg></a></div>
       <div class="fart"><img class="feat-img" src="${ASSET.feat_removebg}" alt="" width="1006" height="1006" loading="lazy"></div>
     </div>
     <div class="frow">
       <div><span class="feat-tag"><i>${I.upload}</i>Import from Anywhere</span><h2 class="display" style="margin-top:16px;font-size:clamp(34px,4.4vw,52px)">Upload from<br>anywhere</h2>
         <p class="lead" style="margin-top:14px">Pick photos from your library, take a new one with the camera, or bring in files. WaSticker turns any of them into stickers.</p>
         <ul class="checks"><li>Photos, camera or files</li><li>Import from albums and collections</li><li>Works with screenshots and selfies</li></ul>
-        <a class="btn btn-primary" href="#create">Upload a photo ${I.arrow}</a></div>
+        <a class="btn btn-primary d-only" href="#create">Upload a photo ${I.arrow}</a><a class="btn-dl m-only" href="${appUrl('feature')}" target="_blank" rel="noopener">DOWNLOAD APP <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"/></svg></a></div>
       <div class="fart"><img class="feat-img" src="${ASSET.feat_upload}" alt="" width="503" height="503" loading="lazy"></div>
     </div>
     <div class="frow flip">
       <div><span class="feat-tag"><i>${I.edit}</i>Text &amp; Style Editor</span><h2 class="display" style="margin-top:16px;font-size:clamp(34px,4.4vw,52px)">Add your own<br>words</h2>
         <p class="lead" style="margin-top:14px">Put the phrases you actually type on your stickers: "On my way", "Haha", "Thank you". Pick a caption style and it is applied to the whole pack.</p>
         <ul class="checks"><li>Bold caption labels that stay readable in chat</li><li>Emoji, frames and color filters</li><li>Edit any pack later from My sticker packs</li></ul>
-        <a class="btn btn-primary" href="#create">Start customizing ${I.arrow}</a></div>
+        <a class="btn btn-primary d-only" href="#create">Start customizing ${I.arrow}</a><a class="btn-dl m-only" href="${appUrl('feature')}" target="_blank" rel="noopener">DOWNLOAD APP <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"/></svg></a></div>
       <div class="fart"><img class="feat-img" src="${ASSET.feat_custom}" alt="" width="526" height="561" loading="lazy"></div>
     </div>
     <div class="frow">
       <div><span class="feat-tag"><i>${I.share}</i>One-tap Sharing</span><h2 class="display" style="margin-top:16px;font-size:clamp(34px,4.4vw,52px)">Send them<br>everywhere</h2>
         <p class="lead" style="margin-top:14px">Add a pack to WhatsApp with one tap, or share the link so friends can add it too. Packs also work in Telegram and Signal.</p>
         <ul class="checks"><li>One-tap Add to WhatsApp in the app</li><li>Share a pack link with anyone</li><li>Transparent PNGs for other apps</li></ul>
-        <a class="btn btn-primary" href="#article-add-to-whatsapp">How to add to WhatsApp ${I.arrow}</a></div>
+        <a class="btn btn-primary d-only" href="#article-add-to-whatsapp">How to add to WhatsApp ${I.arrow}</a><a class="btn-dl m-only" href="${appUrl('feature')}" target="_blank" rel="noopener">DOWNLOAD APP <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"/></svg></a></div>
       <div class="fart"><img class="feat-img" src="${ASSET.feat_share}" alt="" width="503" height="503" loading="lazy"></div>
     </div>
   </div></section>
@@ -2074,18 +2133,22 @@ function pageHome(){
       <div class="trend-top"><span class="ic">${p.thumb?`<img src="${p.thumb}" alt="">`:stk(p.e[0])}</span><div><b>${esc(p.name)}</b><small>${esc(p.tagline||'Fresh stickers for every chat')}</small></div><span class="count stk-cnt">${(p.imgs||p.e).length} Stickers</span></div>
       <div class="trend-grid${p.anim||p.imgs?' anim':''}">${p.imgs?`<div class="big"><img src="${p.imgs[0]}" alt=""></div>${p.imgs.slice(1,7).map(u=>`<div><img src="${u}" alt=""></div>`).join('')}`:`<div class="big">${stk(p.e[0])}</div>${p.e.slice(1,7).map(e=>`<div>${stk(e)}</div>`).join('')}`}</div>
       <a class="btn-explore" href="#pack-${p.id}">${TG}Explore Stickers</a></article>`).join('')}</div></div>
+    <div class="car-nav-m m-only"><button class="car-btn" data-car="-1" aria-label="Previous packs">${ARR_L}</button><button class="car-btn" data-car="1" aria-label="Next packs">${ARR_R}</button></div>
   </section>
 
   <section class="faq-sec" id="faq" style="background-image:url(${ASSET.faqBg});--plus:url(${ASSET.faqPlus});--close:url(${ASSET.faqClose})"><div class="wrap faq-wrap">
     <img class="faq-dog" src="${ASSET.faqDog}" alt="" width="180" height="180" loading="lazy">
-    <div class="faq-head"><span class="tilt">Questions</span><h2 class="disc-title faq-h">Frequently Asked Questions</h2><p>Everything you need to know about making and sharing stickers.</p></div>
-    <div class="faq-list">${[['What is WaSticker?','WaSticker is a free sticker library and sticker maker. Browse packs made by our team and community, or create your own from photos and text.'],
-       ['Can I make stickers from my own photos?','Yes. Upload a photo, and WaSticker cuts out the subject, adds a sticker border and turns it into a matching set with captions.'],
-       ['Is WaSticker free?','Browsing and adding library packs is free. Every new account also gets 1 free credit to create a pack. More packs cost $1.99 each, or $3.99 for three.'],
-       ['How do I add stickers to WhatsApp?','Open the pack on your phone and tap Add to WhatsApp. The free iPhone app completes the step. WaSticker is iPhone-only for now. Our guide walks through it.'],
-       ['Do you support animated stickers?','Yes. Animated packs are marked with an Animated badge, and you can filter for them on the All stickers page.'],
+    <div class="faq-head"><span class="tilt">Questions</span><h2 class="disc-title faq-h"><span class="d-only">Frequently Asked Questions</span><span class="m-only">Sticker Maker FAQs</span></h2><p>Everything you need to know about making and sharing stickers.</p></div>
+    <div class="faq-list">${[['What is WaSticker - Sticker Maker?','WaSticker is a free sticker library and sticker maker. Browse packs made by our team and community, or create your own from photos and text in the iPhone app.'],
+       ['Can I create stickers from my own photos?','Yes. Upload a photo, and WaSticker cuts out the subject, adds a sticker border and turns it into a matching set with captions.'],
+       ['Can I add text to my stickers?','Yes. Add captions like “On my way” or “Haha”, pick a text style, and finish with emojis and borders.'],
+       ['Does the app support animated stickers?','Yes. Animated packs are marked with an Animated badge, and you can make your own animated stickers in the iPhone app.'],
+       ['Can I create unlimited stickers?','Browsing and adding library packs is free. Every new account gets 1 free credit for its first pack. More packs cost $1.99 each, or $3.99 for three.'],
+       ['Who is this app best for?','Anyone who chats on WhatsApp, iMessage or Telegram: friends, families, couples, creators and small businesses who want stickers of their own faces, pets or brand.'],
+       ['How do I add stickers to WhatsApp?','Open the pack on your iPhone and tap Add to WhatsApp. The free iPhone app completes the step. Our guide walks through it.'],
        ['Can I edit a pack after I create it?','Yes. Go to My sticker packs and choose Edit to rename it, change captions or swap photos. Editing never uses another credit.']]
-      .map(([q,a],i)=>`<details class="faq"${i===0?' open':''}><summary><span>${q}</span><i class="faq-ic" aria-hidden="true"></i></summary><p>${a}</p></details>`).join('')}</div>
+      .map(([q,a],i)=>`<details class="faq"><summary><span>${q}</span><i class="faq-ic" aria-hidden="true"></i></summary><p>${a}</p></details>`).join('')}</div>
+    <div class="faq-more"><p>Still have questions?</p><a class="btn-contact" href="#contact">Contact Support <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"/></svg></a></div>
   </div></section>
 
   <section class="ev-sec"><div class="ev-band" style="background-image:url(${ASSET.evBg})"><div class="wrap ev-inner">
@@ -2100,6 +2163,7 @@ function pageHome(){
   </div></div></section>`;
 }
 function wireFaq(){
+  if(!isMobile()){const f=document.querySelector('details.faq');if(f)f.open=true}
   const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
   const ease='cubic-bezier(.22,1,.36,1)';
   document.querySelectorAll('details.faq').forEach(d=>{
@@ -2134,6 +2198,7 @@ function wireHome(){
   const cl=document.getElementById('carL'),cr=document.getElementById('carR');
   const cw=car.parentElement;const upd=()=>{const m=car.scrollWidth-car.clientWidth;cl.disabled=car.scrollLeft<=2;cr.disabled=car.scrollLeft>=m-2;cw.classList.toggle('at-start',car.scrollLeft<=2);cw.classList.toggle('at-end',car.scrollLeft>=m-2)};
   cl.onclick=()=>car.scrollBy({left:-432,behavior:'smooth'});cr.onclick=()=>car.scrollBy({left:432,behavior:'smooth'});
+  document.querySelectorAll('[data-car]').forEach(b=>b.onclick=()=>car.scrollBy({left:+b.dataset.car*car.clientWidth,behavior:'smooth'}));
   car.addEventListener('scroll',upd,{passive:true});upd();
 }
 
@@ -2851,6 +2916,7 @@ addEventListener('hashchange',()=>{S.page=1;
   if(location.hash!=='#manager')S.confirmDel=null;
   lastHash=location.hash;render()});
 footer();render();
+matchMedia('(max-width:560px)').addEventListener('change',()=>{const h=(location.hash||'#home').slice(1);if(h==='home'||h==='home-faq'||!h)render(true)});
 
 /* ---------- cookie consent ---------- */
 const CK_KEY='was_cookies';
