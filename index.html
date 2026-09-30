@@ -1746,9 +1746,9 @@ body.has-appbar{padding-bottom:84px}
 .btn-contact:hover{transform:translateY(-2px)}
 
 /* floating mobile menu */
-.mnav{position:absolute;left:0;right:0;top:100%;z-index:70;background:var(--card);border:0!important;border-top:1px solid var(--line)!important;border-radius:0 0 22px 22px;padding:12px 16px 18px!important;gap:8px!important;box-shadow:0 24px 40px -14px rgba(16,48,26,.28);max-height:calc(100dvh - 90px);overflow:auto;opacity:0;transform:translateY(-10px);transition:opacity .22s ease,transform .26s cubic-bezier(.22,1,.36,1);animation:none!important}
-.mnav>a{border:1px solid var(--line);background:var(--card)}
-.mnav>a.on{border-color:color-mix(in srgb,var(--green) 35%,var(--line))}
+.mnav{position:absolute;left:0;right:0;top:100%;z-index:70;background:var(--card);border:0!important;border-top:1px solid var(--line)!important;border-radius:0 0 22px 22px;padding:0 0 18px!important;gap:0!important;box-shadow:0 24px 40px -14px rgba(16,48,26,.28);max-height:calc(100dvh - 90px);overflow:auto;opacity:0;transform:translateY(-10px);transition:opacity .22s ease,transform .26s cubic-bezier(.22,1,.36,1);animation:none!important}
+.mnav>a{border-radius:0!important;border-bottom:1px solid var(--line);padding:15px 20px!important}
+.mnav .m-acts{padding:16px 16px 0;margin-top:0!important}
 .mnav.on{opacity:1;transform:none}
 .mnav-bg{position:fixed;inset:0;z-index:65;background:rgba(10,30,18,.35);opacity:0;transition:opacity .22s ease}
 .mnav-bg.on{opacity:1}
@@ -1989,7 +1989,7 @@ function header(route){
       <a href="#create"${on('create')}>${ICO_CREATE} Create Sticker</a><a href="#pricing"${on('pricing')}>${ICO_PRICE} Pricing</a>
       <a href="#stickers"${on('stickers')}>🤪 All Stickers</a><a href="#popular"${on('popular')}>🔥 Popular</a><a href="#categories"${on('categories')}>🏷️ Categories</a>
       ${S.user?`<a href="#manager"${on('manager')}>📦 My sticker packs <span class="muted" style="margin-left:auto;font-size:14px">${cr}</span></a><div class="m-acts"><a href="#pricing">Buy credits</a><a href="#" id="signout2">Sign out</a></div>`
-        :`<div class="m-acts"><a href="#signin">Sign in</a><a class="primary" href="#signup">Sign up free</a></div>`}
+        :`<div class="m-acts"><a href="#pricing">Buy credits</a><a class="primary" href="#signin">Sign in</a></div>`}
     </nav></div></header>`;
   wireHeader();
 }
