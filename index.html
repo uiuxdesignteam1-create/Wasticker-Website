@@ -1649,6 +1649,36 @@ body.lb-open{overflow:hidden}
 .ai-addpack:hover:not(:disabled),.ai-regen:hover:not(:disabled),.pk-add:hover:not(:disabled),.pv-btn.pri:hover:not(:disabled),.pk-next:hover:not(:disabled),.pk-back:hover:not(:disabled){background:#1DB45F!important;transform:translateY(1px);box-shadow:0 2px 0 #13863F!important}
 .btn-signin:active:not(:disabled),.btn.btn-primary:active:not(:disabled),.btn-explore:active:not(:disabled),.pr-btn.pri:active:not(:disabled),.ai-go:active:not(:disabled),.ct-go:active:not(:disabled),.au-go:active:not(:disabled),.pk-create:active:not(:disabled),.ai-addpack:active:not(:disabled),.ai-regen:active:not(:disabled),.pk-add:active:not(:disabled),.pv-btn.pri:active:not(:disabled),.pk-next:active:not(:disabled),.pk-back:active:not(:disabled){transform:translateY(3px);box-shadow:0 0 0 #13863F!important}
 .ct-go{border-radius:10px}
+
+/* cookie consent */
+.ck{position:fixed;left:24px;bottom:24px;z-index:95;width:min(440px,calc(100% - 48px));background:var(--card);border:1px solid var(--card-line);border-radius:24px;padding:22px 22px 20px;box-shadow:0 24px 60px -12px rgba(16,48,26,.28),0 4px 14px rgba(16,48,26,.08);transform:translateY(calc(100% + 40px));opacity:0;transition:transform .45s cubic-bezier(.22,1,.36,1),opacity .3s ease}
+.ck.on{transform:none;opacity:1}
+.ck-h{display:flex;align-items:center;gap:12px;margin:0 0 8px}
+.ck-ic{width:44px;height:44px;border-radius:14px;background:var(--green-soft);display:grid;place-items:center;font-size:24px;flex:none}
+.ck-h h2{margin:0;font-family:var(--f-round);font-weight:600;font-size:19px;color:var(--ink)}
+.ck p{margin:0;font-size:14.5px;line-height:1.55;color:var(--ink-2)}
+.ck p a{color:var(--green-d);font-weight:500}
+.ck-acts{display:flex;gap:10px;margin-top:16px;flex-wrap:wrap}
+.ck-b{flex:1 1 0;min-width:0;height:46px;padding:0 16px;border-radius:14px;font-family:var(--f-round);font-weight:600;font-size:15px;cursor:pointer;white-space:nowrap;transition:transform .12s ease,box-shadow .12s ease,background .15s ease,border-color .15s ease}
+.ck-b.pri{background:var(--green);color:#fff;border:0;box-shadow:var(--press)}
+.ck-b.pri:hover{background:var(--green-d);box-shadow:none;transform:translateY(2px)}
+.ck-b.gh{background:var(--card);color:var(--ink);border:1.5px solid var(--line)}
+.ck-b.gh:hover{border-color:var(--green)}
+.ck-set{display:block;margin:12px auto 0;background:none;border:0;padding:4px 8px;font:500 14px var(--f-body);color:var(--muted);text-decoration:underline;text-underline-offset:3px;cursor:pointer}
+.ck-set:hover{color:var(--green-d)}
+.ck-b:focus-visible,.ck-set:focus-visible{outline:3px solid var(--yellow);outline-offset:2px}
+.mdl.mdl-ck{width:min(620px,100%);max-height:calc(100dvh - 48px)}.ckm{padding:28px 28px 8px;overflow:auto;flex:1 1 auto;min-height:0}.ckm-foot{flex:none}
+.ckm h2{margin:0 0 6px;font-family:var(--f-round);font-weight:600;font-size:24px;color:var(--ink)}
+.ckm>p{margin:0 0 18px;font-size:15px;color:var(--ink-2);line-height:1.55}
+.ck-row{display:flex;gap:16px;align-items:center;padding:16px 0;border-top:1px solid var(--line)}
+.ck-row b{display:block;font-family:var(--f-round);font-weight:600;font-size:16px;color:var(--ink)}
+.ck-row small{display:block;margin-top:3px;font-size:13.5px;line-height:1.5;color:var(--muted)}
+.ck-row>div{flex:1}
+.ck-always{font-size:13px;font-weight:600;color:var(--green-d);white-space:nowrap}
+.ckm-foot{display:flex;gap:10px;padding:16px 28px 24px}
+.ftr .ftr-ck{display:block;background:none;border:0;padding:5px 0;margin:0;font:inherit;font-size:15px;line-height:inherit;color:var(--deep-ink);opacity:.85;cursor:pointer;text-align:left}.ftr .ftr-ck:hover{opacity:1;text-decoration:underline}
+@media (max-width:560px){.ck{left:12px;right:12px;bottom:12px;width:auto;padding:18px 16px 14px;border-radius:20px}.ck-h h2{font-size:17px}.ck p{font-size:14px}.ckm{padding:24px 20px 4px}.ckm-foot{padding:14px 20px 20px;flex-direction:column-reverse}.ckm-foot .ck-b{flex:none;width:100%}}
+@media (prefers-reduced-motion:reduce){.ck{transition:none}}
 </style>
 
 <div id="hdr"></div>
@@ -1908,7 +1938,7 @@ function footer(){
       <div class="socials"><a href="https://facebook.com" target="_blank" rel="noopener" aria-label="Facebook">${I.fb}</a><a href="https://youtube.com" target="_blank" rel="noopener" aria-label="YouTube">${I.yt}</a><a href="https://instagram.com" target="_blank" rel="noopener" aria-label="Instagram">${I.ig}</a><a href="https://x.com" target="_blank" rel="noopener" aria-label="X">${I.xl}</a></div></div>
     <div><h4>Explore</h4><a href="#stickers">All stickers</a><a href="#popular">Popular</a><a href="#categories">Categories</a><a href="#stickers-animated">Animated</a></div>
     <div><h4>Make</h4><a href="#create">Create a pack</a><a href="#manager">My packs</a><a href="#pricing">Pricing</a><a href="#tutorials">Tutorials</a></div>
-    <div><h4>Help</h4><a href="#home-faq">FAQ</a><a href="#article-add-to-whatsapp">Add to WhatsApp</a><a href="#article-pack-rules">Sticker rules</a><a href="#contact">Contact us</a><a href="#terms">Terms of Use</a><a href="#privacy">Privacy Policy</a></div>
+    <div><h4>Help</h4><a href="#home-faq">FAQ</a><a href="#article-add-to-whatsapp">Add to WhatsApp</a><a href="#article-pack-rules">Sticker rules</a><a href="#contact">Contact us</a><a href="#terms">Terms of Use</a><a href="#privacy">Privacy Policy</a><button type="button" class="ftr-ck" data-cookie-settings>Cookie settings</button></div>
     <div><h4>Get the app</h4>${stores()}</div>
   </div>
   <p class="copy">© 2026 WaSticker. All rights reserved.</p>
@@ -2719,6 +2749,7 @@ const LEGAL={
   ['h','Photos you upload'],['p','Photos are used only to create your stickers. You can delete a pack at any time, and its photos are deleted from our servers.'],
   ['h','Sharing'],['p','We share data only with service providers that help us run WaSticker (hosting, AI processing, payments), and only as much as they need. Public packs can be seen by anyone with the link; private packs cannot be found in search.'],
   ['h','Your choices'],['p','You can view, update or delete your data by emailing support@wasticker.io. We reply within 30 days.'],
+  ['h','Cookies'],['p','We use necessary cookies and local storage to keep you signed in and remember your packs, credits and cookie choice. Analytics and marketing cookies are used only if you allow them. You can change your choice any time with Cookie settings in the footer.'],
   ['h','Children'],['p','WaSticker is not directed at children under 13, and we do not knowingly collect their data.'],
   ['h','Contact'],['p','Privacy questions: support@wasticker.io.']]]
 };
@@ -2785,6 +2816,37 @@ addEventListener('hashchange',()=>{S.page=1;
   if(location.hash!=='#manager')S.confirmDel=null;
   lastHash=location.hash;render()});
 footer();render();
+
+/* ---------- cookie consent ---------- */
+const CK_KEY='was_cookies';
+function ckGet(){try{return JSON.parse(localStorage.getItem(CK_KEY))}catch(e){return null}}
+function ckSave(analytics,marketing){const v={v:1,necessary:true,analytics:!!analytics,marketing:!!marketing,date:new Date().toISOString()};
+  try{localStorage.setItem(CK_KEY,JSON.stringify(v))}catch(e){}window.WA_CONSENT=v;document.dispatchEvent(new CustomEvent('wa:consent',{detail:v}));ckHide();return v}
+function ckHide(){const b=document.getElementById('ckBar');if(!b)return;b.classList.remove('on');setTimeout(()=>b.remove(),450)}
+function ckShow(){if(document.getElementById('ckBar'))return;
+  const b=document.createElement('section');b.id='ckBar';b.className='ck';b.setAttribute('role','region');b.setAttribute('aria-label','Cookie consent');
+  b.innerHTML=`<div class="ck-h"><span class="ck-ic" aria-hidden="true">🍪</span><h2>We use cookies</h2></div>
+    <p>We use cookies to keep you signed in and remember your packs. With your OK, we also use them to see how the site is used and to improve it. Read our <a href="#privacy">Privacy Policy</a>.</p>
+    <div class="ck-acts"><button class="ck-b gh" id="ckRej" type="button">Reject</button><button class="ck-b pri" id="ckAcc" type="button">Accept all</button></div>
+    <button class="ck-set" id="ckSet" type="button">Cookie settings</button>`;
+  document.body.appendChild(b);requestAnimationFrame(()=>requestAnimationFrame(()=>b.classList.add('on')));
+  b.querySelector('#ckAcc').onclick=()=>{ckSave(true,true);toast('Cookies accepted')};
+  b.querySelector('#ckRej').onclick=()=>{ckSave(false,false);toast('Only necessary cookies are on')};
+  b.querySelector('#ckSet').onclick=ckSettings;
+  b.querySelector('a[href="#privacy"]').onclick=()=>{};}
+function ckSettings(){const cur=ckGet()||{analytics:false,marketing:false};
+  const row=(id,t,d,on,locked)=>`<div class="ck-row"><div><b>${t}</b><small>${d}</small></div>${locked?'<span class="ck-always">Always on</span>':`<span class="switch"><input type="checkbox" id="${id}" ${on?'checked':''} aria-label="${t}"><span></span></span>`}</div>`;
+  const m=modal(`<div class="ckm"><h2>Cookie settings</h2><p>Choose which cookies WaSticker can use. You can change this any time from the footer.</p>
+    ${row('','Necessary','Keep you signed in, remember your packs, credits and this choice. The site needs these to work.',true,true)}
+    ${row('ckA','Analytics','Help us see which pages and packs people use so we can improve WaSticker.',cur.analytics)}
+    ${row('ckM','Marketing','Let us measure our ads and show you relevant offers on other sites.',cur.marketing)}</div>
+    <div class="ckm-foot"><button class="ck-b gh" id="ckSv" type="button">Save choices</button><button class="ck-b pri" id="ckAll" type="button">Accept all</button></div>`,'mdl-ck');
+  m.querySelector('#ckSv').onclick=()=>{ckSave(m.querySelector('#ckA').checked,m.querySelector('#ckM').checked);closeModal();toast('Cookie choices saved')};
+  m.querySelector('#ckAll').onclick=()=>{ckSave(true,true);closeModal();toast('Cookies accepted')};}
+window.WA_CONSENT=ckGet();
+document.addEventListener('click',e=>{if(e.target.closest('[data-cookie-settings]')){e.preventDefault();ckSettings()}});
+if(!window.WA_CONSENT)setTimeout(ckShow,700);
+
 
 /* ----- sticker lightbox ----- */
 (function(){
