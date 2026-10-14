@@ -1850,13 +1850,13 @@ body.mnav-open #hdr{z-index:80!important}
 .crp-seg button:disabled{opacity:.45;cursor:default}
 .crp-seg button:focus-visible{outline:2px solid #15A04C;outline-offset:-2px}
 .crp-seg i{flex:none;width:1px;height:26px;background:#E5E7EB}
-.crp-foot{display:flex;justify-content:flex-end;gap:12px}
-.crp-foot button{min-width:132px;height:48px;padding:0 26px;border-radius:999px;font-family:var(--f-round);font-weight:600;font-size:15px;letter-spacing:.04em;text-transform:uppercase;cursor:pointer;transition:transform .12s ease,box-shadow .12s ease}
+.crp-foot{display:flex;justify-content:center}
+.crp-foot button{min-width:200px;height:48px;padding:0 26px;border-radius:999px;font-family:var(--f-round);font-weight:600;font-size:15px;letter-spacing:.04em;text-transform:uppercase;cursor:pointer;transition:transform .12s ease,box-shadow .12s ease}
 .crp-cancel{background:#fff;border:0;color:#1D6C3B;box-shadow:0 4px 0 #C9D6CD}
 .crp-cancel:hover{transform:translateY(2px);box-shadow:0 2px 0 #C9D6CD}.crp-cancel:active{transform:translateY(4px);box-shadow:none}
 .crp-next{background:#1DB45F;border:0;color:#fff;box-shadow:0 4px 0 #13863F}
 .crp-next:hover{transform:translateY(2px);box-shadow:0 2px 0 #13863F}.crp-next:active{transform:translateY(4px);box-shadow:none}
-@media (max-width:560px){.crp{padding:20px 16px 18px;gap:14px}.crp-stage{height:300px}.crp-seg{width:100%;justify-content:space-between;gap:2px;padding:4px}.crp-seg button{padding:0 8px;gap:4px;height:40px;font-size:12.5px}.crp-seg button svg{width:20px;height:20px}.crp-foot button{flex:1}}
+@media (max-width:560px){.crp{padding:20px 16px 18px;gap:14px}.crp-stage{height:300px}.crp-seg{width:100%;justify-content:space-between;gap:2px;padding:4px}.crp-seg button{padding:0 8px;gap:4px;height:40px;font-size:12.5px}.crp-seg button svg{width:20px;height:20px}.crp-foot button{min-width:60%}}
 </style>
 
 <div id="hdr"></div>
@@ -2601,7 +2601,7 @@ function openCrop(im,done){
     <div class="crp-deg"><span id="crpD">0°</span></div>
     <div class="crp-ruler" id="crpR" tabindex="0" role="slider" aria-label="Straighten" aria-valuemin="-45" aria-valuemax="45" aria-valuenow="0"><div class="crp-ticks" id="crpT">${ticks}</div><span class="crp-ptr"></span></div>
     <div class="crp-tools"><div class="crp-seg" role="toolbar" aria-label="Photo tools"><button type="button" data-ct="rot">${CRP_I.rot}<span>Rotate</span></button><button type="button" data-ct="fh" aria-pressed="false">${CRP_I.fh}<span>Flip H</span></button><button type="button" data-ct="fv" aria-pressed="false">${CRP_I.fv}<span>Flip V</span></button><i></i><button type="button" data-ct="reset" id="crpZ" disabled>${CRP_I.reset}<span>Reset</span></button></div></div>
-    <div class="crp-foot"><button class="crp-cancel" type="button" id="crpB">Cancel</button><button class="crp-next" type="button" id="crpN">Done</button></div>
+    <div class="crp-foot"><button class="crp-next" type="button" id="crpN">Done</button></div>
   </div>`,'mdl-crop');
   const img=m.querySelector('#crpI'),stage=m.querySelector('#crpS'),mask=m.querySelector('#crpM'),ruler=m.querySelector('#crpR'),strip=m.querySelector('#crpT'),deg=m.querySelector('#crpD'),rz=m.querySelector('#crpZ');
   setTimeout(()=>{const d=m.querySelector('.crp');d.tabIndex=-1;d.style.outline='none';d.focus({preventScroll:true})},40);
@@ -2631,7 +2631,7 @@ function openCrop(im,done){
   ruler.addEventListener('pointerup',()=>{rx=null;st.fine=Math.round(st.fine);draw()});
   ruler.addEventListener('keydown',e=>{if(e.key==='ArrowLeft'||e.key==='ArrowRight'){e.preventDefault();st.fine=Math.max(-45,Math.min(45,st.fine+(e.key==='ArrowRight'?1:-1)));draw()}});
   const close=()=>{window.removeEventListener('resize',draw);closeModal()};
-  m.querySelector('#crpB').onclick=close;
+
   m.querySelector('#crpN').onclick=()=>{const O=512,k=O/F(),sc=s0()*st.z*k;const cv=document.createElement('canvas');cv.width=cv.height=O;const x=cv.getContext('2d');
     x.translate(O/2+st.tx*k,O/2+st.ty*k);x.rotate(ang()*Math.PI/180);x.scale(sc*st.fx,sc*st.fy);x.imageSmoothingQuality='high';x.drawImage(im,-W/2,-H/2);
     close();done(cv.toDataURL('image/webp',.9))};
