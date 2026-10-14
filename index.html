@@ -1799,6 +1799,7 @@ body.mnav-open #hdr{z-index:80!important}
 @media (prefers-reduced-motion:reduce){.ai-mode,.ai-mode.on{transition:none}}
 @media (min-width:561px) and (max-width:900px){.ms-grid{grid-template-columns:repeat(6,minmax(0,1fr))}}
 .ai-sc-th:has(.ms-emo),.as-th:has(.ms-emo){display:grid;place-items:center}.ms-emo.sc{font-size:40px}
+.ai-scroll>.ms-drop:first-child{margin-top:4px}.ai-scroll>.ai-lbl:first-child{margin-top:4px}
 </style>
 
 <div id="hdr"></div>
@@ -2515,8 +2516,7 @@ const MS_CK='<svg class="ms-ck" viewBox="0 0 22 22" aria-hidden="true"><circle c
 const MS_UP='<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 16V5M7 10l5-5 5 5M5 19h14"/></svg>';
 function modeChips(c){return `<div class="ai-modes" role="tablist" aria-label="Ways to create a sticker">${MODE_KEYS.map(k=>{const m=MODES[k],on=c.mode===k;return `<button class="ai-mode${on?' on':''}" role="tab" aria-selected="${on}" data-mode="${k}" type="button" style="--mb:${m.bg}"><span class="e" aria-hidden="true">${m.e}</span>${m.chip}</button>`}).join('')}</div>`}
 function modeLeft(c){const M=MODES[c.mode];const sel=(c.ms||{})[c.mode]||0;
-  return `<div class="ms-intro"><h2>${M.t}</h2><p>${M.d}</p></div>
-    ${M.up?`<h3 class="ai-lbl">Upload your photo</h3><label class="ms-drop${c.img?' has':''}" id="aiDrop" for="aiFile">${c.img?`<img src="${c.img}" alt="Your photo"><span><b>Photo added</b><small>Click to change photo</small></span>`:`<span class="ic">${MS_UP}</span><b>${M.up}</b><small>JPG or PNG · one clear face works best</small>`}</label><input type="file" id="aiFile" accept="image/*" class="sr">`:''}
+  return `${M.up?`<label class="ms-drop${c.img?' has':''}" id="aiDrop" for="aiFile">${c.img?`<img src="${c.img}" alt="Your photo"><span><b>Photo added</b><small>Click to change photo</small></span>`:`<span class="ic">${MS_UP}</span><b>${M.up}</b><small>JPG or PNG · one clear face works best</small>`}</label><input type="file" id="aiFile" accept="image/*" class="sr">`:''}
     ${M.prompt?`<h3 class="ai-lbl">Describe it <span>(optional)</span></h3><div class="ai-prompt ms-prompt"><label for="aiMP" class="sr">Describe your sticker</label><textarea id="aiMP" maxlength="200" placeholder="e.g. my cat as a superhero">${esc(c.mprompt||'')}</textarea></div>`:''}
     ${M.row?`<div class="ai-lbl-row"><h3 class="ai-lbl">${M.grid}</h3><button class="ai-viewall" id="msViewAll" type="button">View All</button></div>
     <div class="ai-srow" id="msRow" role="listbox" aria-label="${M.grid}">${[0,1].map(k=>M.items.map(([n,img,bg,emo],i)=>{const on=i===sel;return `<button class="ai-sc${on?' on':''}" data-ms="${i}" role="option" aria-selected="${on}" type="button"${k?' aria-hidden="true" tabindex="-1"':''}><span class="ai-sc-th" style="background:#${bg}">${img?`<img src="${img}" alt="" loading="lazy">`:`<span class="ms-emo sc" aria-hidden="true">${emo}</span>`}</span><b title="${n}">${n}</b></button>`}).join('')).join('')}</div>`:`<h3 class="ai-lbl">${M.grid}</h3>
