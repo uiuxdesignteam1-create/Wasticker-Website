@@ -1798,6 +1798,7 @@ body.mnav-open #hdr{z-index:80!important}
 }
 @media (prefers-reduced-motion:reduce){.ai-mode,.ai-mode.on{transition:none}}
 @media (min-width:561px) and (max-width:900px){.ms-grid{grid-template-columns:repeat(6,minmax(0,1fr))}}
+.ai-sc-th:has(.ms-emo),.as-th:has(.ms-emo){display:grid;place-items:center}.ms-emo.sc{font-size:40px}
 </style>
 
 <div id="hdr"></div>
@@ -2499,11 +2500,11 @@ const MODES={
     items:CARTOON_STY.map(([n,u])=>[n,u,'F3F4F6']),
     empty:'Upload a selfie, pick a cartoon style, then click Generate Now.',steps:['Upload a selfie','Pick a style','Generate'],
     pr:s=>`My selfie as a ${s} cartoon character, expressive face, thick white sticker border`},
-  emoji:{chip:'AI Emoji',e:'😀',bg:'#FFF3B8',t:'AI Emoji',d:'Make a set of emojis that look like you.',up:'Upload a selfie',grid:'Choose an emoji style',
+  emoji:{chip:'AI Emoji',e:'😀',bg:'#FFF3B8',t:'AI Emoji',d:'Make a set of emojis that look like you.',up:'Upload a selfie',grid:'Choose an emoji style',row:true,
     items:[['3D Style',null,'FFE9C7','🤩'],['Apple Style',null,'DDEEFF','😎'],['Emoji Mashup',null,'FFE0EC','🥳']],
     empty:'Upload a selfie, pick an emoji style, then click Generate Now.',steps:['Upload a selfie','Pick a style','Generate'],
     pr:s=>`An emoji of my face in ${s}, round and expressive`},
-  sticker:{chip:'AI Sticker',e:'✨',bg:'#DDEEFF',t:'AI Sticker',d:'Pick a style and AI creates a unique sticker for you.',up:null,prompt:true,grid:'Choose a sticker style',
+  sticker:{chip:'AI Sticker',e:'✨',bg:'#DDEEFF',t:'AI Sticker',d:'Pick a style and AI creates a unique sticker for you.',up:null,prompt:true,grid:'Choose a sticker style',row:true,
     items:[['Realistic',MTH.realistic,'EEF2F5'],['Chibi',MTH.chibi2,'FFE0EC'],['Cartoon',MTH.cartoon2,'FFE9C7'],['Caricature',MTH.caricature,'E8E2FF'],['3D',MTH.d3,'DDEEFF'],['Anime',MTH.anime2,'E0F5EA']],
     empty:'Pick a sticker style, add an idea if you like, then click Generate Now.',steps:['Add an idea','Pick a style','Generate'],
     pr:(s,idea)=>`${idea||'A cheerful character waving hello'}, ${s} style, thick white sticker border`},
@@ -2518,7 +2519,7 @@ function modeLeft(c){const M=MODES[c.mode];const sel=(c.ms||{})[c.mode]||0;
     ${M.up?`<h3 class="ai-lbl">Upload your photo</h3><label class="ms-drop${c.img?' has':''}" id="aiDrop" for="aiFile">${c.img?`<img src="${c.img}" alt="Your photo"><span><b>Photo added</b><small>Click to change photo</small></span>`:`<span class="ic">${MS_UP}</span><b>${M.up}</b><small>JPG or PNG · one clear face works best</small>`}</label><input type="file" id="aiFile" accept="image/*" class="sr">`:''}
     ${M.prompt?`<h3 class="ai-lbl">Describe it <span>(optional)</span></h3><div class="ai-prompt ms-prompt"><label for="aiMP" class="sr">Describe your sticker</label><textarea id="aiMP" maxlength="200" placeholder="e.g. my cat as a superhero">${esc(c.mprompt||'')}</textarea></div>`:''}
     ${M.row?`<div class="ai-lbl-row"><h3 class="ai-lbl">${M.grid}</h3><button class="ai-viewall" id="msViewAll" type="button">View All</button></div>
-    <div class="ai-srow" id="msRow" role="listbox" aria-label="${M.grid}">${[0,1].map(k=>M.items.map(([n,img,bg],i)=>{const on=i===sel;return `<button class="ai-sc${on?' on':''}" data-ms="${i}" role="option" aria-selected="${on}" type="button"${k?' aria-hidden="true" tabindex="-1"':''}><span class="ai-sc-th" style="background:#${bg}"><img src="${img}" alt="" loading="lazy"></span><b title="${n}">${n}</b></button>`}).join('')).join('')}</div>`:`<h3 class="ai-lbl">${M.grid}</h3>
+    <div class="ai-srow" id="msRow" role="listbox" aria-label="${M.grid}">${[0,1].map(k=>M.items.map(([n,img,bg,emo],i)=>{const on=i===sel;return `<button class="ai-sc${on?' on':''}" data-ms="${i}" role="option" aria-selected="${on}" type="button"${k?' aria-hidden="true" tabindex="-1"':''}><span class="ai-sc-th" style="background:#${bg}">${img?`<img src="${img}" alt="" loading="lazy">`:`<span class="ms-emo sc" aria-hidden="true">${emo}</span>`}</span><b title="${n}">${n}</b></button>`}).join('')).join('')}</div>`:`<h3 class="ai-lbl">${M.grid}</h3>
     <div class="ms-grid" role="radiogroup" aria-label="${M.grid}">${M.items.map(([n,img,bg,emo],i)=>{const on=i===sel;return `<button class="ms${on?' on':''}" data-ms="${i}" type="button" role="radio" aria-checked="${on}"><span class="ms-th" style="background:#${bg}">${img?`<img src="${img}" alt="" loading="lazy">`:`<span class="ms-emo" aria-hidden="true">${emo}</span>`}${on?MS_CK:''}</span>${n}</button>`}).join('')}</div>`}`;
 }
 function aiLeft(c){
@@ -2739,7 +2740,7 @@ function wireCreate(){
     if(!matchMedia('(prefers-reduced-motion: reduce)').matches){const step=t=>{if(!document.body.contains(mr))return;if(!pause&&t>idle&&!document.hidden){pos+=.35;const h=half();if(pos>=h)pos-=h;mr.scrollLeft=pos}window._msRaf=requestAnimationFrame(step)};window._msRaf=requestAnimationFrame(step)}
     mr.querySelectorAll('[data-ms]').forEach(b=>b.onclick=()=>{(c.ms||(c.ms={}))[c.mode]=+b.dataset.ms;c._mx=mr.scrollLeft;re()});
     mr.addEventListener('wheel',e=>{if(Math.abs(e.deltaY)>Math.abs(e.deltaX)&&mr.scrollWidth>mr.clientWidth){const max=mr.scrollWidth-mr.clientWidth;if((e.deltaY>0&&mr.scrollLeft<max)||(e.deltaY<0&&mr.scrollLeft>0)){e.preventDefault();mr.scrollLeft+=e.deltaY}}},{passive:false})}
-  const mva=document.getElementById('msViewAll');if(mva)mva.onclick=()=>{const M=MODES[c.mode],cur=(c.ms||{})[c.mode]||0;const m=modal(`<div class="as"><h2>${M.t} Styles</h2><div class="as-g">${M.items.map(([n,img,bg],i)=>`<button class="as-c${cur===i?' on':''}" data-as="${i}" type="button"><span class="as-th" style="background:#${bg}"><img src="${img}" alt="" loading="lazy"></span><b>${esc(n)}</b></button>`).join('')}</div></div>`,'as-mdl');
+  const mva=document.getElementById('msViewAll');if(mva)mva.onclick=()=>{const M=MODES[c.mode],cur=(c.ms||{})[c.mode]||0;const m=modal(`<div class="as"><h2>${M.t} Styles</h2><div class="as-g">${M.items.map(([n,img,bg,emo],i)=>`<button class="as-c${cur===i?' on':''}" data-as="${i}" type="button"><span class="as-th" style="background:#${bg}">${img?`<img src="${img}" alt="" loading="lazy">`:`<span class="ms-emo" aria-hidden="true">${emo}</span>`}</span><b>${esc(n)}</b></button>`).join('')}</div></div>`,'as-mdl');
     m.querySelectorAll('[data-as]').forEach(b=>b.onclick=()=>{(c.ms||(c.ms={}))[c.mode]=+b.dataset.as;closeModal();re()})};
   const mp=document.getElementById('aiMP');if(mp)mp.oninput=()=>{c.mprompt=mp.value};
   if(c.mode!=='custom')document.querySelectorAll('[data-hist]').forEach(b=>b.onclick=()=>{c.results=c.history[+b.dataset.hist];re()});
