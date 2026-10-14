@@ -1811,11 +1811,11 @@ body.mnav-open #hdr{z-index:80!important}
 .mdl.as-mdl{background:var(--bg) var(--body-pat) center top/1000px auto repeat}
 
 /* crop step (Figma: Crop Popup – See All style) */
-.mdl.mdl-crop{width:min(600px,94vw);max-height:calc(100vh - 32px);max-height:calc(100dvh - 32px);background:var(--bg) var(--body-pat) center top/1000px auto repeat;overflow:auto;border-radius:24px}
+.mdl.mdl-crop{width:min(600px,94vw);max-height:calc(100vh - 32px);max-height:calc(100dvh - 32px);background:var(--hero) var(--hero-pat) center/760px auto;overflow:auto;border-radius:24px}
 .crp{display:flex;flex-direction:column;gap:18px;padding:26px 28px 24px;user-select:none;-webkit-user-select:none}
-.crp-hd h2{margin:0;font-family:var(--f-round);font-weight:600;font-size:20px;line-height:26px;color:#141414}
-.crp-hd p{margin:4px 0 0;font-size:14px;color:#6B7280}
-.crp-stage{position:relative;height:340px;border-radius:18px;background:var(--hero) var(--hero-pat) center/700px auto;border:1px solid #ECEEF1;overflow:hidden;touch-action:none;cursor:grab}
+.crp-hd h2{margin:0;font-family:var(--f-round);font-weight:600;font-size:20px;line-height:26px;color:#fff}
+.crp-hd p{margin:4px 0 0;font-size:14px;color:rgba(255,255,255,.88)}
+.crp-stage{position:relative;height:340px;border-radius:18px;background:var(--hero) var(--hero-pat) center/700px auto;border:1px solid rgba(255,255,255,.7);overflow:hidden;touch-action:none;cursor:grab}
 .crp-stage:active{cursor:grabbing}
 .crp-stage>img{position:absolute;left:50%;top:50%;max-width:none;transform-origin:center;pointer-events:none}
 .crp-chk,.crp-mask{position:absolute;left:50%;top:50%;width:min(280px,62vw);aspect-ratio:1;transform:translate(-50%,-50%)}
@@ -1832,14 +1832,14 @@ body.mnav-open #hdr{z-index:80!important}
 .crp-mask u:nth-of-type(3),.crp-mask u:nth-of-type(4){top:50%;width:4px;height:26px;margin-top:-13px}
 .crp-mask u:nth-of-type(3){left:-3px}.crp-mask u:nth-of-type(4){right:-3px}
 .crp-deg{display:flex;justify-content:center;margin:0 0 -8px}
-.crp-deg span{min-width:46px;padding:3px 14px;border-radius:999px;background:#15A04C;color:#fff;font-family:var(--f-round);font-weight:600;font-size:14px;text-align:center}
-.crp-ruler{position:relative;height:48px;border-radius:14px;background:#fff;border:1px solid #ECEEF1;overflow:hidden;cursor:ew-resize;touch-action:none}
-.crp-ruler:focus-visible{outline:2px solid #15A04C;outline-offset:2px}
+.crp-deg span{min-width:46px;padding:3px 14px;border-radius:999px;background:#15A04C;border:1.5px solid rgba(255,255,255,.55);color:#fff;font-family:var(--f-round);font-weight:600;font-size:14px;text-align:center}
+.crp-ruler{position:relative;height:48px;border-radius:14px;background:transparent;border:0;overflow:hidden;cursor:ew-resize;touch-action:none}
+.crp-ruler:focus-visible{outline:2px solid #FFD94A;outline-offset:2px}
 .crp-ticks{position:absolute;left:50%;top:0;height:100%;display:flex;align-items:center;gap:6px;margin-left:-361px;-webkit-mask-image:none}
-.crp-ruler::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(90deg,#fff,rgba(255,255,255,0) 22%,rgba(255,255,255,0) 78%,#fff)}
-.crp-ticks i{flex:none;width:2px;height:12px;border-radius:2px;background:#D1D5DB}
-.crp-ticks i.lg{height:20px;background:#9CA3AF}
-.crp-ptr{position:absolute;left:50%;top:9px;bottom:9px;width:4px;margin-left:-2px;border-radius:2px;background:#15A04C;z-index:1}
+.crp-ruler{-webkit-mask-image:linear-gradient(90deg,transparent,#000 20%,#000 80%,transparent);mask-image:linear-gradient(90deg,transparent,#000 20%,#000 80%,transparent)}
+.crp-ticks i{flex:none;width:2px;height:12px;border-radius:2px;background:rgba(255,255,255,.5)}
+.crp-ticks i.lg{height:20px;background:#fff}
+.crp-ptr{position:absolute;left:50%;top:8px;bottom:8px;width:5px;margin-left:-2.5px;border-radius:3px;background:#5BE38B;box-shadow:0 0 0 2px #15A04C;z-index:1}
 .crp-tools{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
 .crp-tools button{display:flex;flex-direction:column;align-items:center;gap:4px;padding:10px 6px;border-radius:14px;background:#fff;border:1px solid #ECEEF1;font-family:var(--f-round);font-weight:500;font-size:13px;color:#141414;cursor:pointer;transition:border-color .15s ease,transform .15s ease}
 .crp-tools button:hover:not(:disabled){border-color:#CFE9D8;transform:translateY(-1px)}
