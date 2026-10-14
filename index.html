@@ -1810,50 +1810,48 @@ body.mnav-open #hdr{z-index:80!important}
 .ai-sc-th{padding:3px}.ai-sc-th img{border-radius:12px}
 .mdl.as-mdl{background:var(--bg) var(--body-pat) center top/1000px auto repeat}
 
-/* crop step */
-.mdl.mdl-crop{width:min(440px,100%);max-height:calc(100vh - 24px);max-height:calc(100dvh - 24px);background:var(--hero) var(--hero-pat) center/700px auto;overflow:auto;border-radius:28px}
-.mdl-bg:has(.mdl-crop) .mdl-x{display:none}
-.crp{display:flex;flex-direction:column;color:#fff;user-select:none;-webkit-user-select:none}
-.crp-top{display:grid;grid-template-columns:44px 1fr 44px;align-items:center;padding:16px 16px 6px}
-.crp-top h2{margin:0;text-align:center;font-family:var(--f-round);font-weight:600;font-size:20px;color:#fff}
-.crp-x{width:40px;height:40px;border-radius:50%;border:0;background:#fff;color:#1B6B34;display:grid;place-items:center;cursor:pointer;box-shadow:0 4px 12px rgba(0,0,0,.18)}
-.crp-stage{position:relative;height:min(380px,86vw);margin:4px 0 0;overflow:hidden;touch-action:none;cursor:grab}
+/* crop step (Figma: Crop Popup – See All style) */
+.mdl.mdl-crop{width:min(600px,94vw);max-height:calc(100vh - 32px);max-height:calc(100dvh - 32px);background:var(--bg) var(--body-pat) center top/1000px auto repeat;overflow:auto;border-radius:24px}
+.crp{display:flex;flex-direction:column;gap:18px;padding:26px 28px 24px;user-select:none;-webkit-user-select:none}
+.crp-hd h2{margin:0;font-family:var(--f-round);font-weight:600;font-size:20px;line-height:26px;color:#141414}
+.crp-hd p{margin:4px 0 0;font-size:14px;color:#6B7280}
+.crp-stage{position:relative;height:340px;border-radius:18px;background:#fff;border:1px solid #ECEEF1;overflow:hidden;touch-action:none;cursor:grab}
 .crp-stage:active{cursor:grabbing}
 .crp-stage>img{position:absolute;left:50%;top:50%;max-width:none;transform-origin:center;pointer-events:none}
-.crp-chk,.crp-mask{position:absolute;left:50%;top:50%;width:min(300px,72vw);aspect-ratio:1;transform:translate(-50%,-50%)}
-.crp-chk{background:#fff repeating-conic-gradient(#E6E6E6 0 25%,#fff 0 50%) 0 0/20px 20px}
-.crp-mask{pointer-events:none;outline:1.5px solid #fff;box-shadow:0 0 0 999px rgba(16,72,36,.62);background:linear-gradient(90deg,transparent calc(33.33% - .5px),rgba(255,255,255,.7) 0,rgba(255,255,255,.7) calc(33.33% + .5px),transparent 0,transparent calc(66.66% - .5px),rgba(255,255,255,.7) 0,rgba(255,255,255,.7) calc(66.66% + .5px),transparent 0),linear-gradient(transparent calc(33.33% - .5px),rgba(255,255,255,.7) 0,rgba(255,255,255,.7) calc(33.33% + .5px),transparent 0,transparent calc(66.66% - .5px),rgba(255,255,255,.7) 0,rgba(255,255,255,.7) calc(66.66% + .5px),transparent 0)}
-.crp-mask b{position:absolute;width:26px;height:26px;border:4px solid #fff}
+.crp-chk,.crp-mask{position:absolute;left:50%;top:50%;width:min(280px,62vw);aspect-ratio:1;transform:translate(-50%,-50%)}
+.crp-chk{background:#fff repeating-conic-gradient(#EEF0F2 0 25%,#fff 0 50%) 0 0/18px 18px}
+.crp-mask{pointer-events:none;outline:1.5px solid #fff;box-shadow:0 0 0 999px rgba(255,255,255,.62);background:linear-gradient(90deg,transparent calc(33.33% - .5px),rgba(255,255,255,.75) 0,rgba(255,255,255,.75) calc(33.33% + .5px),transparent 0,transparent calc(66.66% - .5px),rgba(255,255,255,.75) 0,rgba(255,255,255,.75) calc(66.66% + .5px),transparent 0),linear-gradient(transparent calc(33.33% - .5px),rgba(255,255,255,.75) 0,rgba(255,255,255,.75) calc(33.33% + .5px),transparent 0,transparent calc(66.66% - .5px),rgba(255,255,255,.75) 0,rgba(255,255,255,.75) calc(66.66% + .5px),transparent 0)}
+.crp-mask b{position:absolute;width:24px;height:24px;border:4px solid #fff;filter:drop-shadow(0 0 1.5px rgba(0,0,0,.45))}
 .crp-mask b:nth-child(1){left:-4px;top:-4px;border-right:0;border-bottom:0}
 .crp-mask b:nth-child(2){right:-4px;top:-4px;border-left:0;border-bottom:0}
 .crp-mask b:nth-child(3){left:-4px;bottom:-4px;border-right:0;border-top:0}
 .crp-mask b:nth-child(4){right:-4px;bottom:-4px;border-left:0;border-top:0}
 .crp-mask u{position:absolute;background:#fff}
-.crp-mask u:nth-of-type(1),.crp-mask u:nth-of-type(2){left:50%;width:28px;height:4px;margin-left:-14px}
+.crp-mask u:nth-of-type(1),.crp-mask u:nth-of-type(2){left:50%;width:26px;height:4px;margin-left:-13px}
 .crp-mask u:nth-of-type(1){top:-3px}.crp-mask u:nth-of-type(2){bottom:-3px}
-.crp-mask u:nth-of-type(3),.crp-mask u:nth-of-type(4){top:50%;width:4px;height:28px;margin-top:-14px}
+.crp-mask u:nth-of-type(3),.crp-mask u:nth-of-type(4){top:50%;width:4px;height:26px;margin-top:-13px}
 .crp-mask u:nth-of-type(3){left:-3px}.crp-mask u:nth-of-type(4){right:-3px}
-.crp-deg{display:flex;justify-content:center;margin-top:8px}
-.crp-deg span{min-width:60px;padding:5px 14px;border-radius:999px;background:#1FA146;border:1.5px solid rgba(255,255,255,.5);font-family:var(--f-round);font-weight:600;font-size:15px;text-align:center}
-.crp-ruler{position:relative;height:44px;margin:8px 0 0;overflow:hidden;cursor:ew-resize;touch-action:none;-webkit-mask-image:linear-gradient(90deg,transparent,#000 22%,#000 78%,transparent);mask-image:linear-gradient(90deg,transparent,#000 22%,#000 78%,transparent)}
-.crp-ruler:focus-visible{outline:2px solid #FFD94A;outline-offset:-2px}
-.crp-ticks{position:absolute;left:50%;top:0;height:100%;display:flex;align-items:center;gap:6px;margin-left:-361px}
-.crp-ticks i{flex:none;width:2px;height:14px;border-radius:2px;background:rgba(255,255,255,.45)}
-.crp-ticks i.lg{height:22px;background:#fff}
-.crp-ptr{position:absolute;left:50%;top:6px;bottom:6px;width:6px;margin-left:-3px;border-radius:4px;background:#5BE38B;box-shadow:0 0 0 2px #1B6B34}
-.crp-nav{display:flex;justify-content:space-between;align-items:center;padding:18px 22px 20px}
-.crp-nav button{display:inline-flex;align-items:center;gap:8px;border:0;background:none;font-family:var(--f-round);font-weight:600;font-size:19px;letter-spacing:.02em;cursor:pointer}
-.crp-back{color:rgba(255,255,255,.5)}.crp-back svg{color:rgba(130,220,160,.6)}
-.crp-next{color:#fff}.crp-next svg{color:#5BE38B}
-.crp-back:hover{color:rgba(255,255,255,.8)}
-.crp-tools{display:flex;align-items:center;justify-content:space-around;background:#fff;padding:10px 12px 12px}
-.crp-tools button{display:flex;flex-direction:column;align-items:center;gap:4px;border:0;background:none;padding:6px 8px;border-radius:12px;font-family:var(--f-round);font-weight:500;font-size:13px;color:#141414;cursor:pointer}
-.crp-tools button:hover:not(:disabled){background:#F1F8F3}
-.crp-tools button:disabled{color:#A9AFB7;cursor:default}
-.crp-tools button[data-ct=reset]{color:#1FA146}.crp-tools button[data-ct=reset]:disabled{color:#B9DFC6}
-.crp-tools button[data-ct=reset] span{color:#141414}.crp-tools button[data-ct=reset]:disabled span{color:#A9AFB7}
-.crp-tools i{width:1px;height:24px;background:#E5E7EB}
-@media (max-width:560px){.mdl.mdl-crop{border-radius:22px}}
+.crp-deg{display:flex;justify-content:center;margin:0 0 -8px}
+.crp-deg span{min-width:46px;padding:3px 14px;border-radius:999px;background:#15A04C;color:#fff;font-family:var(--f-round);font-weight:600;font-size:14px;text-align:center}
+.crp-ruler{position:relative;height:48px;border-radius:14px;background:#fff;border:1px solid #ECEEF1;overflow:hidden;cursor:ew-resize;touch-action:none}
+.crp-ruler:focus-visible{outline:2px solid #15A04C;outline-offset:2px}
+.crp-ticks{position:absolute;left:50%;top:0;height:100%;display:flex;align-items:center;gap:6px;margin-left:-361px;-webkit-mask-image:none}
+.crp-ruler::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(90deg,#fff,rgba(255,255,255,0) 22%,rgba(255,255,255,0) 78%,#fff)}
+.crp-ticks i{flex:none;width:2px;height:12px;border-radius:2px;background:#D1D5DB}
+.crp-ticks i.lg{height:20px;background:#9CA3AF}
+.crp-ptr{position:absolute;left:50%;top:9px;bottom:9px;width:4px;margin-left:-2px;border-radius:2px;background:#15A04C;z-index:1}
+.crp-tools{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.crp-tools button{display:flex;flex-direction:column;align-items:center;gap:4px;padding:10px 6px;border-radius:14px;background:#fff;border:1px solid #ECEEF1;font-family:var(--f-round);font-weight:500;font-size:13px;color:#141414;cursor:pointer;transition:border-color .15s ease,transform .15s ease}
+.crp-tools button:hover:not(:disabled){border-color:#CFE9D8;transform:translateY(-1px)}
+.crp-tools button:disabled{opacity:.55;cursor:default}
+.crp-tools button[data-ct=reset]{color:#1FA146}.crp-tools button[data-ct=reset] span{color:#141414}
+.crp-foot{display:flex;justify-content:flex-end;gap:12px}
+.crp-foot button{height:46px;padding:0 26px;border-radius:999px;font-family:var(--f-round);font-weight:600;font-size:16px;cursor:pointer}
+.crp-cancel{background:#fff;border:1.5px solid #E5E7EB;color:#312B36}
+.crp-cancel:hover{border-color:#CFE9D8}
+.crp-next{background:#15A04C;border:0;color:#fff;padding:0 30px;box-shadow:0 8px 18px -8px rgba(21,160,76,.6)}
+.crp-next:hover{filter:brightness(1.05)}
+@media (max-width:560px){.crp{padding:20px 16px 18px;gap:14px}.crp-stage{height:300px}.crp-tools{gap:8px}.crp-foot button{flex:1}}
 </style>
 
 <div id="hdr"></div>
@@ -2593,15 +2591,15 @@ function openCrop(im,done){
   const W=im.naturalWidth||im.width,H=im.naturalHeight||im.height;
   const ticks=Array.from({length:91},(_,i)=>`<i class="${(i-45)%5===0?'lg':''}"></i>`).join('');
   const m=modal(`<div class="crp">
-    <div class="crp-top"><button class="crp-x" type="button" id="crpX" aria-label="Cancel">${CRP_I.x}</button><h2>Crop</h2><span></span></div>
+    <div class="crp-hd"><h2>Crop Photo</h2><p>Drag to move, scroll to zoom. Straighten with the ruler.</p></div>
     <div class="crp-stage" id="crpS"><div class="crp-chk"></div><img id="crpI" alt="Photo to crop" draggable="false"><div class="crp-mask" id="crpM"><b></b><b></b><b></b><b></b><u></u><u></u><u></u><u></u></div></div>
     <div class="crp-deg"><span id="crpD">0°</span></div>
     <div class="crp-ruler" id="crpR" tabindex="0" role="slider" aria-label="Straighten" aria-valuemin="-45" aria-valuemax="45" aria-valuenow="0"><div class="crp-ticks" id="crpT">${ticks}</div><span class="crp-ptr"></span></div>
-    <div class="crp-nav"><button class="crp-back" type="button" id="crpB">${CRP_I.back}BACK</button><button class="crp-next" type="button" id="crpN">NEXT${CRP_I.next}</button></div>
-    <div class="crp-tools"><button type="button" data-ct="rot">${CRP_I.rot}<span>Rotate</span></button><button type="button" data-ct="fh">${CRP_I.fh}<span>Flip H</span></button><button type="button" data-ct="fv">${CRP_I.fv}<span>Flip V</span></button><i></i><button type="button" data-ct="reset" id="crpZ" disabled>${CRP_I.reset}<span>Reset</span></button></div>
+    <div class="crp-tools"><button type="button" data-ct="rot">${CRP_I.rot}<span>Rotate</span></button><button type="button" data-ct="fh">${CRP_I.fh}<span>Flip H</span></button><button type="button" data-ct="fv">${CRP_I.fv}<span>Flip V</span></button><button type="button" data-ct="reset" id="crpZ" disabled>${CRP_I.reset}<span>Reset</span></button></div>
+    <div class="crp-foot"><button class="crp-cancel" type="button" id="crpB">Cancel</button><button class="crp-next" type="button" id="crpN">Next</button></div>
   </div>`,'mdl-crop');
   const img=m.querySelector('#crpI'),stage=m.querySelector('#crpS'),mask=m.querySelector('#crpM'),ruler=m.querySelector('#crpR'),strip=m.querySelector('#crpT'),deg=m.querySelector('#crpD'),rz=m.querySelector('#crpZ');
-  setTimeout(()=>{const n=m.querySelector('#crpN');n&&n.focus({preventScroll:true})},40);
+  setTimeout(()=>{const d=m.querySelector('.crp');d.tabIndex=-1;d.style.outline='none';d.focus({preventScroll:true})},40);
   img.src=im.src;img.style.width=W+'px';img.style.height=H+'px';
   const st={r90:0,fine:0,fx:1,fy:1,z:1,tx:0,ty:0};const TICK=8;
   const F=()=>mask.clientWidth;const s0=()=>F()/Math.min(W,H);
@@ -2628,7 +2626,7 @@ function openCrop(im,done){
   ruler.addEventListener('pointerup',()=>{rx=null;st.fine=Math.round(st.fine);draw()});
   ruler.addEventListener('keydown',e=>{if(e.key==='ArrowLeft'||e.key==='ArrowRight'){e.preventDefault();st.fine=Math.max(-45,Math.min(45,st.fine+(e.key==='ArrowRight'?1:-1)));draw()}});
   const close=()=>{window.removeEventListener('resize',draw);closeModal()};
-  m.querySelector('#crpX').onclick=close;m.querySelector('#crpB').onclick=close;
+  m.querySelector('#crpB').onclick=close;
   m.querySelector('#crpN').onclick=()=>{const O=512,k=O/F(),sc=s0()*st.z*k;const cv=document.createElement('canvas');cv.width=cv.height=O;const x=cv.getContext('2d');
     x.translate(O/2+st.tx*k,O/2+st.ty*k);x.rotate(ang()*Math.PI/180);x.scale(sc*st.fx,sc*st.fy);x.imageSmoothingQuality='high';x.drawImage(im,-W/2,-H/2);
     close();done(cv.toDataURL('image/webp',.9))};
