@@ -1863,6 +1863,54 @@ body.mnav-open #hdr{z-index:80!important}
 .btn-signin:hover:not(:disabled),.btn.btn-primary:hover:not(:disabled),.btn-explore:hover:not(:disabled),.pr-btn.pri:hover:not(:disabled),.ai-go:hover:not(:disabled),.ct-go:hover:not(:disabled),.au-go:hover:not(:disabled),.pk-create:hover:not(:disabled),.ai-addpack:hover:not(:disabled),.ai-regen:hover:not(:disabled),.pk-add:hover:not(:disabled),.pv-btn.pri:hover:not(:disabled),.pk-next:hover:not(:disabled),.crp-next:hover:not(:disabled),.mdl-cta:hover:not(:disabled),.mp2-export:hover:not(:disabled),.up-export:hover:not(:disabled),.ck-b.pri:hover:not(:disabled),.hdr-open:hover:not(:disabled),.btn-dl:hover:not(:disabled),.appbar-get:hover:not(:disabled){background:#178A3A!important;border-color:#178A3A!important;filter:none!important;transform:translateY(2px);box-shadow:0 2px 0 #0F6B2C!important}
 .btn-signin:active:not(:disabled),.btn.btn-primary:active:not(:disabled),.btn-explore:active:not(:disabled),.pr-btn.pri:active:not(:disabled),.ai-go:active:not(:disabled),.ct-go:active:not(:disabled),.au-go:active:not(:disabled),.pk-create:active:not(:disabled),.ai-addpack:active:not(:disabled),.ai-regen:active:not(:disabled),.pk-add:active:not(:disabled),.pv-btn.pri:active:not(:disabled),.pk-next:active:not(:disabled),.crp-next:active:not(:disabled),.mdl-cta:active:not(:disabled),.mp2-export:active:not(:disabled),.up-export:active:not(:disabled),.ck-b.pri:active:not(:disabled),.hdr-open:active:not(:disabled),.btn-dl:active:not(:disabled),.appbar-get:active:not(:disabled){background:#13782F!important;transform:translateY(4px);box-shadow:none!important}
 .ck-b.pri{background:#1DB45F;box-shadow:0 4px 0 #13863F}
+
+/* ===== QA fixes (SM_001–SM_024) ===== */
+input[type=search]{padding-right:16px!important}
+input[type=search]::-webkit-search-cancel-button{margin-left:12px;flex:none;cursor:pointer}
+.empty h2,.empty p,.page-head .lead{overflow-wrap:anywhere;word-break:break-word}
+/* icon-only buttons: centre the glyph on every engine (iOS Safari) */
+.chip-nav,.mdl-x,.lb-x,.lb-nav,.up-rm,#carL,#carR,#upShare{padding:0;line-height:0}
+#carL,#carR,#upShare{position:relative}
+:is(.chip-nav,.mdl-x,.lb-x,.lb-nav,.up-rm,#carL,#carR,#upShare)>svg{position:absolute;inset:0;margin:auto;display:block;flex:none}
+.empty{min-width:0;max-width:100%}.empty .btn{max-width:100%;white-space:normal!important;overflow-wrap:anywhere;height:auto!important;min-height:44px;text-align:center}.empty h2{overflow-wrap:anywhere!important;min-width:0}
+/* sticker tiles: emoji centred in the box */
+.sgrid button>.stk{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;line-height:1}
+/* modal close: inside the popup, top-right corner */
+.mdl>.mdl-x{position:absolute!important;top:14px!important;right:14px!important;left:auto!important;bottom:auto!important;z-index:20;width:34px;height:34px;box-shadow:0 1px 4px rgba(0,0,0,.12)}
+.mdl.mdl-pack>.mdl-x{top:18px!important;right:18px!important;background:rgba(255,255,255,.92)}
+.mdl .pk-head{padding-right:64px}
+.mdl .ckm>h2,.mdl .mdl-t,.mdl .as h2,.mdl .shm>h2{padding-right:44px}
+/* lightbox: arrows inside the screen */
+@media(max-width:640px){.lb{grid-template-columns:52px minmax(0,1fr) 52px}.lb-nav{width:40px;height:40px}.lb-html{width:min(60vw,440px)}.lb-img{max-width:62vw}.lb-top{padding:0 14px}}
+/* Add to Pack on phones: stack, no overflow */
+@media(max-width:640px){.mdl .pk-top{grid-template-columns:1fr!important;justify-items:center}.mdl .pk-st{width:150px;max-width:150px}.mdl .pk-acts{grid-template-columns:1fr!important;width:100%}.mdl .pk-act{min-width:0}.mdl .pk-act-tx{min-width:0}.mdl .pk-act-tx b,.mdl .pk-act-tx small{white-space:normal}.mdl .pk-tags{grid-column:1/-1}}
+.acc-grid>*{min-width:0}
+/* generated result: always show the whole image */
+.ai-canvas>.ai-banner-ph{position:absolute;top:16px;bottom:16px;left:50%;transform:translateX(-50%);height:auto;width:auto;aspect-ratio:1;max-width:calc(100% - 32px)}
+.ai-canvas>.ai-banner-ph>*{width:100%;height:100%}
+@media(max-width:640px){.ai-banner{aspect-ratio:4/3;max-height:none}}
+.rbg-pill{max-width:calc(100% - 8px)}
+/* remove uploaded photo */
+.up-wrap{position:relative}
+.up-rm{position:absolute;top:8px;right:8px;width:28px;height:28px;border-radius:50%;border:0;background:rgba(20,20,20,.72);color:#fff;cursor:pointer;z-index:3;box-shadow:0 1px 4px rgba(0,0,0,.2)}
+.up-rm svg{width:14px;height:14px}
+.up-rm:hover{background:#E5484D}.up-wrap:has(.ai-up) .up-rm{top:50%;transform:translateY(-50%)}
+/* sign-in prompt + share modal */
+.sip,.shm{padding:36px 28px 30px;text-align:center}.sip .stk{font-size:52px}
+.sip h2,.shm h2{font-family:var(--f-round);font-weight:700;font-size:22px;color:var(--ink);margin:10px 0 8px}
+.sip p,.shm p{color:var(--muted);margin:0 0 20px}
+.sip-b{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.shm{text-align:left}.shm h2{margin-top:0}
+.shm-link{display:flex;gap:8px;margin-bottom:20px}
+.shm-link input{flex:1;min-width:0;height:44px;border:1.5px solid var(--line);border-radius:12px;padding:0 12px;background:#fff;font-size:14px}
+.shm-copy{height:44px;padding:0 18px;border:0;border-radius:12px;background:#1DB45F;color:#fff;font-weight:700;cursor:pointer}
+.shm-apps{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.shm-apps a{display:flex;flex-direction:column;align-items:center;gap:6px;font-size:13px;color:var(--ink);text-decoration:none}
+.shm-apps a span{width:48px;height:48px;border-radius:50%;display:grid;place-items:center;color:#fff;font-weight:800;font-size:20px}
+.mine-badge{background:#1DB45F!important;color:#fff!important}
+/* character-limit alert */
+.lim-msg{display:block;margin-top:6px;font-size:12.5px;color:#D93025;font-weight:500}
+.at-lim{border-color:#F28B82!important}
 </style>
 
 <div id="hdr"></div>
@@ -2052,6 +2100,8 @@ const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'
 
 /* ---------- components ---------- */
 const stk=(e,size)=>`<span class="stk"${size?` style="font-size:${size}px"`:''}>${e}</span>`;
+function mineCard(p){const st=packStk(p)||[];const cov=p.img||(st[0]?mpImg(st[0]):null);const n=st.length||p.count||0;
+  return `<a class="pcard" href="#mypack-${p.id}"><div class="pthumb" style="background:${p.c||'#DFF3E6'}">${cov?`<img src="${cov}" alt="" loading="lazy">`:stk((p.e||['🙂'])[0])}<span class="anim-badge mine-badge">Your pack</span></div><div class="pmeta"><b>${esc(p.name)}</b><span>${n} ${n===1?'Sticker':'Stickers'} / ${fmt(p.dl||0)} Downloads</span></div></a>`}
 function packCard(p){
   const art=p.img?`<img src="${p.img}" alt="" loading="lazy"${p.imgScale?` style="width:${p.imgScale*100}%;height:${p.imgScale*100}%"`:''}>`:stk(p.e[0]);
   const meta=`${(p.imgs||p.e).length} Stickers / ${fmt(p.dl)} Downloads`;
@@ -2327,11 +2377,12 @@ function pageStickers(kind){
   const title=kind==='animated'?'Animated stickers':kind==='static'?'Static stickers':'All stickers';
   return `<div class="doodle"><div class="wrap page-head">${crumbs([['Home','home'],[title]])}
     <h1 class="h-sec">${title}</h1><p class="lead" style="margin-top:8px">${list.length} packs${S.filter!=='all'?' in '+catOf(S.filter).name:''}. Free to add to WhatsApp.</p>
-    <form id="lform" role="search" style="display:flex;gap:10px;max-width:560px;margin-top:18px"><label for="lq" class="sr">Search stickers</label><input id="lq" class="input" type="search" placeholder="Search stickers, packs, categories" style="flex:1;min-width:0;border-radius:999px;padding-left:20px"><button class="btn btn-primary">${I.search} Search</button></form></div>
+    <form id="lform" role="search" style="display:flex;gap:10px;max-width:560px;margin-top:18px"><label for="lq" class="sr">Search stickers</label><input id="lq" class="input" type="search" maxlength="60" placeholder="Search stickers, packs, categories" style="flex:1;min-width:0;border-radius:999px;padding-left:20px"><button class="btn btn-primary">${I.search} Search</button></form></div>
   <div class="wrap" style="padding-bottom:72px">${listingControls(kind)}
     ${shown.length?`<div class="grid">${shown.map(packCard).join('')}</div>${pager(list.length,per)}`:emptyState('No packs here yet','Try another category or switch between static and animated.')}</div></div>`;
 }
 function wireListing(){
+  const lqi=document.getElementById('lq');if(lqi&&matchMedia('(max-width:480px)').matches)lqi.placeholder='Search stickers';
   const lf=document.getElementById('lform');if(lf)lf.onsubmit=e=>{e.preventDefault();const v=document.getElementById('lq').value.trim();if(v){S.q=v;location.hash='search'}};
   document.querySelectorAll('[data-f]').forEach(b=>b.onclick=()=>{S.filter=b.dataset.f;S.page=1;render(true)});
   document.querySelectorAll('[data-pg]').forEach(b=>b.onclick=()=>{S.page=+b.dataset.pg;render()});
@@ -2396,21 +2447,23 @@ function wirePack(id){
   document.getElementById('addWa').onclick=()=>getApp({title:`Add “${p.name}” to WhatsApp`,ct:'pack_add',art:p.img||p.e[0]});
   document.getElementById('dlPack').onclick=()=>getApp({title:`Download “${p.name}”`,ct:'pack_download',art:p.img||p.e[0]});
   document.getElementById('cpLink').onclick=()=>copy('https://wasticker.io/#pack-'+p.id,'Pack link copied');
-  document.getElementById('favPack').onclick=()=>{S.favPacks=S.favPacks||[];const k=S.favPacks.indexOf(p.id);k<0?S.favPacks.push(p.id):S.favPacks.splice(k,1);toast(k<0?'Added to My Favorites':'Removed from My Favorites');render(true)};
+  if(S.user&&S.pendingFav===p.id){S.pendingFav=null;S.favPacks=S.favPacks||[];if(!S.favPacks.includes(p.id)){S.favPacks.push(p.id);save();setTimeout(()=>toast('Added to My Favorites'),300);render(true);return}}
+  document.getElementById('favPack').onclick=()=>{if(!S.user){S.after='pack-'+p.id;S.pendingFav=p.id;signInPrompt('save favorite packs','Sign in or create a free account to keep your favorite packs in one place.');return}S.favPacks=S.favPacks||[];const k=S.favPacks.indexOf(p.id);k<0?S.favPacks.push(p.id):S.favPacks.splice(k,1);toast(k<0?'Added to My Favorites':'Removed from My Favorites');render(true)};
   document.querySelectorAll('[data-tag]').forEach(a=>a.onclick=e=>{e.preventDefault();S.q=a.dataset.tag;location.hash='search'});
   document.querySelectorAll('[data-e]').forEach(b=>b.onclick=()=>{b.animate([{transform:'scale(1)'},{transform:'scale(1.18) rotate(-6deg)'},{transform:'scale(1)'}],{duration:350})});
 }
 
 function pageSearch(){
   const v=S.q.toLowerCase();const res=v?sorted(PACKS.filter(p=>match(p,v))):[];
+  const mres=v?(S.mine||[]).filter(p=>(p.name||'').toLowerCase().includes(v)||(p.tags||[]).some(t=>String(t).toLowerCase().includes(v))||(p.author||'').toLowerCase().includes(v)):[];const N=res.length+mres.length;
   const pop=PACKS.slice().sort((a,b)=>b.dl-a.dl).slice(0,5);
   return `<div class="doodle"><div class="wrap page-head">${crumbs([['Home','home'],['Search']])}
     <h1 class="sr">Search stickers</h1><form id="sform" role="search" style="display:flex;gap:10px;max-width:620px;flex-wrap:wrap"><label for="sq" class="sr">Search stickers</label>
-      <input id="sq" class="input" type="search" placeholder="Try cat, love, eid, football" value="${esc(S.q)}" style="flex:1;min-width:0;border-radius:999px;padding-left:20px"><button class="btn btn-primary">${I.search} Search</button></form>
-    ${v?`<p class="lead" style="margin-top:16px">${res.length?`<b style="color:var(--ink)">${res.length}</b> ${res.length===1?'pack':'packs'} for “${esc(S.q)}”`:''}</p>`:''}</div>
+      <input id="sq" class="input" type="search" maxlength="60" placeholder="Try cat, love, eid, football" value="${esc(S.q)}" style="flex:1;min-width:0;border-radius:999px;padding-left:20px"><button class="btn btn-primary">${I.search} Search</button></form>
+    ${v?`<p class="lead" style="margin-top:16px">${N?`<b style="color:var(--ink)">${N}</b> ${N===1?'pack':'packs'} for “${esc(S.q)}”`:''}</p>`:''}</div>
   <div class="wrap" style="padding-bottom:72px">
     ${!v?`<h2 class="h-sec" style="font-size:22px;margin-bottom:14px">Popular searches</h2><div class="chips">${['cat','love','eid','football','funny','panda','hello','rain'].map(t=>`<button class="chip" data-s="${t}">${t}</button>`).join('')}</div>`
-      :res.length?`<div class="grid">${res.map(packCard).join('')}</div>`
+      :N?`<div class="grid">${mres.map(mineCard).join('')}${res.map(packCard).join('')}</div>`
       :`${emptyState(`No packs match “${esc(S.q)}”`,'Check the spelling, try a shorter word, or make this pack yourself.',`<div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center"><a class="btn btn-primary" href="#create">${I.plus} Create “${esc(S.q.slice(0,24))}” pack</a><a class="btn btn-ghost" href="#categories">Browse categories</a></div>`)}
         <h2 class="h-sec" style="font-size:22px;margin:24px 0 16px">Popular right now</h2><div class="grid">${pop.map(packCard).join('')}</div>`}
   </div></div>`;
@@ -2474,6 +2527,11 @@ function packPreviewCells(p,n=6){
 }
 
 /* ---------- manager ---------- */
+function signInPrompt(what,sub){modal(`<div class="sip">${stk('🔐')}<h2>Sign in to ${what}</h2><p>${sub||'Your packs and credits are saved to your account.'}</p><div class="sip-b"><a class="btn btn-primary" href="#signin">Sign in</a><a class="btn btn-ghost" href="#signup">Create free account</a></div></div>`,'mdl-app')}
+function shareModal(url,title,head){const u=encodeURIComponent(url),t=encodeURIComponent(title);
+  const L=[['WhatsApp','https://wa.me/?text='+t+'%20'+u,'#25D366','💬'],['Facebook','https://www.facebook.com/sharer/sharer.php?u='+u,'#1877F2','f'],['X','https://x.com/intent/post?text='+t+'&url='+u,'#111','𝕏'],['Email','mailto:?subject='+t+'&body='+u,'#6B7280','✉']];
+  const m=modal(`<div class="shm"><h2>${esc(head||'Share')}</h2><p>Copy the link or share it to an app.</p><div class="shm-link"><input readonly value="${esc(url)}" aria-label="Link"><button class="shm-copy" type="button">Copy</button></div><div class="shm-apps">${L.map(([n,h,c,g])=>`<a href="${h}" target="_blank" rel="noopener"><span style="background:${c}">${g}</span>${n}</a>`).join('')}</div></div>`,'mdl-app');
+  m.querySelector('.shm-copy').onclick=()=>{copy(url,'Link copied');m.querySelector('.shm-copy').textContent='Copied'};m.querySelector('.shm-link input').onfocus=e=>e.target.select()}
 function needSignIn(what){
   return `<div class="wrap sec"><div class="panel empty" style="max-width:520px;margin-inline:auto">${stk('🔐')}<h1 class="h-sec" style="font-size:26px">Sign in to ${what}</h1>
     <p class="muted">Your packs and credits are saved to your account.</p>
@@ -2526,7 +2584,7 @@ function wireManager(){
   document.querySelectorAll('[data-exp]').forEach(b=>b.onclick=e=>{e.stopPropagation();const p=S.mine.find(x=>x.id===b.dataset.exp);const n=(packStk(p)||[]).length;if(n<3)toast(`Add ${3-n} more ${3-n===1?'sticker':'stickers'} to export “${p.name}” to WhatsApp`);if(n>=3)getApp({title:`Export “${p.name}” to WhatsApp`,ct:'export'})});
   const ed=document.getElementById('upEdit');if(ed)ed.onclick=()=>toast('Profile editing is available in the WaSticker app');
   const lk=document.getElementById('upLink');if(lk)lk.onclick=e=>{e.preventDefault();copy('https://'+lk.textContent.trim(),'Profile link copied')};
-  const sh=document.getElementById('upShare');if(sh)sh.onclick=async()=>{const url='https://'+lk.textContent.trim();try{if(navigator.share){await navigator.share({title:S.user.name+' on WaSticker',url});return}}catch(e){}copy(url,'Profile link copied, share it anywhere')};
+  const sh=document.getElementById('upShare');if(sh)sh.onclick=async()=>{const url='https://'+lk.textContent.trim();try{if(navigator.share&&matchMedia('(pointer:coarse)').matches){await navigator.share({title:S.user.name+' on WaSticker',url});return}}catch(e){if(e&&e.name==='AbortError')return}shareModal(url,S.user.name+' on WaSticker','Share profile')};
 }
 
 /* ---------- create ---------- */
@@ -2582,7 +2640,7 @@ const MS_CK='<svg class="ms-ck" viewBox="0 0 22 22" aria-hidden="true"><circle c
 const MS_UP='<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 16V5M7 10l5-5 5 5M5 19h14"/></svg>';
 function modeChips(c){return `<div class="ai-modes" role="tablist" aria-label="Ways to create a sticker">${MODE_KEYS.map(k=>{const m=MODES[k],on=c.mode===k;return `<button class="ai-mode${on?' on':''}" role="tab" aria-selected="${on}" data-mode="${k}" type="button" style="--mb:${m.bg}"><span class="e" aria-hidden="true">${m.e}</span>${m.chip}</button>`}).join('')}</div>`}
 function modeLeft(c){const M=MODES[c.mode];const sel=(c.ms||{})[c.mode]||0;
-  return `${M.up?`<label class="ms-drop${c.img?' has':''}" id="aiDrop" for="aiFile">${c.img?`<img src="${c.img}" alt="Your photo"><span><b>Photo added</b><small>Click to change photo</small></span>`:`<span class="ic">${MS_UP}</span><b>${M.up}</b><small>JPG or PNG · one clear face works best</small>`}</label><input type="file" id="aiFile" accept="image/*" class="sr">`:''}
+  return `${M.up?`<div class="up-wrap"><label class="ms-drop${c.img?' has':''}" id="aiDrop" for="aiFile">${c.img?`<img src="${c.img}" alt="Your photo"><span><b>Photo added</b><small>Click to change photo</small></span>`:`<span class="ic">${MS_UP}</span><b>${M.up}</b><small>JPG or PNG · one clear face works best</small>`}</label><input type="file" id="aiFile" accept="image/*" class="sr">${c.img?`<button class="up-rm" id="upRm" type="button" aria-label="Remove photo" title="Remove photo">${I.close}</button>`:''}</div>`:''}
     ${M.prompt?`<h3 class="ai-lbl">Describe it <span>(optional)</span></h3><div class="ai-prompt ms-prompt"><label for="aiMP" class="sr">Describe your sticker</label><textarea id="aiMP" maxlength="200" placeholder="e.g. my cat as a superhero">${esc(c.mprompt||'')}</textarea></div>`:''}
     ${M.row?`<div class="ai-lbl-row"><h3 class="ai-lbl">${M.grid}</h3><button class="ai-viewall" id="msViewAll" type="button">See All</button></div>
     <div class="ai-srow" id="msRow" role="listbox" aria-label="${M.grid}">${[0,1].map(k=>M.items.map(([n,img,bg,emo],i)=>{const on=i===sel;return `<button class="ai-sc${on?' on':''}" data-ms="${i}" role="option" aria-selected="${on}" aria-label="${n}" type="button"${k?' aria-hidden="true" tabindex="-1"':''}><span class="ai-sc-th">${img?`<img src="${img}" alt="" loading="lazy">`:`<span class="ms-emo sc" aria-hidden="true">${emo}</span>`}</span>${M.nolabel?'':`<b title="${n}">${n}</b>`}</button>`}).join('')).join('')}</div>`:`<h3 class="ai-lbl">${M.grid}</h3>
@@ -2644,7 +2702,7 @@ function openCrop(im,done){
 function aiLeft(c){
   const st=c.style!=null?AIA.styles[c.style]:null;
   return `<div class="ai-tabs" role="tablist"><button role="tab" aria-selected="${c.tab==='text'}" class="${c.tab==='text'?'on':''}" data-tab="text">Text to Sticker</button><button role="tab" aria-selected="${c.tab==='image'}" class="${c.tab==='image'?'on':''}" data-tab="image">Image to Sticker</button></div>
-    ${c.tab==='image'?`<label class="ai-up${c.img?' has':''}" id="aiDrop" for="aiFile">${c.img?`<img class="ai-up-img" src="${c.img}" alt="Your photo"><span>Change image</span>`:`<img class="ai-up-ic" src="${AIA.upload}" alt="" width="40" height="40"><span>Upload Image</span>`}</label><input type="file" id="aiFile" accept="image/*" class="sr">`:''}
+    ${c.tab==='image'?`<div class="up-wrap"><label class="ai-up${c.img?' has':''}" id="aiDrop" for="aiFile">${c.img?`<img class="ai-up-img" src="${c.img}" alt="Your photo"><span>Change image</span>`:`<img class="ai-up-ic" src="${AIA.upload}" alt="" width="40" height="40"><span>Upload Image</span>`}</label><input type="file" id="aiFile" accept="image/*" class="sr">${c.img?`<button class="up-rm" id="upRm" type="button" aria-label="Remove photo" title="Remove photo">${I.close}</button>`:''}</div>`:''}
     <div class="ai-prompt"><label for="aiP" class="sr">Describe your sticker</label><textarea id="aiP" maxlength="400" placeholder="Describe your imagined sticker">${esc(c.prompt)}</textarea>
       <div class="ai-tools"><button class="ai-tb" id="aiIdea" title="Random idea" aria-label="Random idea"><img src="${AIA.idea}" alt=""></button><button class="ai-tb" id="aiTpl" title="Example prompts" aria-label="Example prompts"><img src="${AIA.hist}" alt=""></button><button class="ai-expand" id="aiExp" aria-label="Prompt Expand" ${c.prompt.trim()?'':'disabled'}><img src="${c.prompt.trim()?AIA.pexpA:AIA.pexpI}" alt=""></button><span class="ai-count" id="aiCnt">${c.prompt.length}/400</span><button class="ai-clear" id="aiClr" aria-label="Clear prompt" ${c.prompt?'':'disabled'}><img src="${c.prompt?AIA.clrA:AIA.clrI}" alt=""></button></div></div>
     <div class="ai-ex" id="aiEx" hidden>${IDEAS.map(t=>`<button data-idea="${esc(t)}">${esc(t)}</button>`).join('')}</div>
@@ -2688,7 +2746,7 @@ function pageCreate(){
 function modal(html,cls=''){
   closeModal();
   const m=document.createElement('div');m.className='mdl-bg';m.id='mdl';
-  m.innerHTML=`<div class="mdl ${cls}" role="dialog" aria-modal="true">${html}</div><button class="mdl-x" aria-label="Close">${I.close}</button>`;
+  m.innerHTML=`<div class="mdl ${cls}" role="dialog" aria-modal="true">${html}<button class="mdl-x" aria-label="Close">${I.close}</button></div>`;
   document.body.appendChild(m);document.body.classList.add('mdl-open');
   m.querySelector('.mdl-x').onclick=closeModal;m.onclick=e=>{if(e.target===m)closeModal()};
   document.addEventListener('keydown',mdlEsc);
@@ -2828,7 +2886,7 @@ function wireMyPack(id){
   document.getElementById('mpDl').onclick=()=>getApp({title:`Download “${p.name}”`,ct:'mypack_download',art:cover});
   document.getElementById('mpLink').onclick=()=>copy(url,'Pack link copied');
   
-  document.getElementById('mpShare').onclick=async()=>{try{if(navigator.share){await navigator.share({title:p.name,url});return}}catch(e){}copy(url,'Link copied, share it anywhere')};
+  document.getElementById('mpShare').onclick=async()=>{try{if(navigator.share&&matchMedia('(pointer:coarse)').matches){await navigator.share({title:p.name,url});return}}catch(e){if(e&&e.name==='AbortError')return}shareModal(url,p.name,'Share pack')};
   document.querySelectorAll('#mpImp,.mp-imp').forEach(b=>b.onclick=()=>openLibrary(p));
   document.querySelectorAll('[data-fav]').forEach(b=>b.onclick=()=>{const i=+b.dataset.fav;p.fav=p.fav||[];const k=p.fav.indexOf(i);k<0?p.fav.push(i):p.fav.splice(k,1);save();render(true)});
   document.querySelector('.mp-new').addEventListener('click',()=>{S.ai&&(S.ai.results=null)});
@@ -2890,8 +2948,9 @@ function wireCreate(){
     if(!matchMedia('(prefers-reduced-motion: reduce)').matches){const step=t=>{if(!document.body.contains(sr))return;if(!pause&&t>idle&&!document.hidden){pos+=.35;const h=half();if(pos>=h)pos-=h;sr.scrollLeft=pos}window._srRaf=requestAnimationFrame(step)};window._srRaf=requestAnimationFrame(step)}
     sr.querySelectorAll('[data-sq]').forEach(b=>b.onclick=()=>{const i=+b.dataset.sq;if(i===0){c.style=null;c.noSty=true}else{c.style=c.style===i?null:i;c.noSty=false}c._sx=sr.scrollLeft;re()});
     sr.addEventListener('wheel',e=>{if(Math.abs(e.deltaY)>Math.abs(e.deltaX)&&sr.scrollWidth>sr.clientWidth){const max=sr.scrollWidth-sr.clientWidth;if((e.deltaY>0&&sr.scrollLeft<max)||(e.deltaY<0&&sr.scrollLeft>0)){e.preventDefault();sr.scrollLeft+=e.deltaY}}},{passive:false})}
-  document.getElementById('aiExp').onclick=()=>{if(!c.prompt.trim())return;c.prompt=c.prompt.trim().replace(/[.,]$/,'')+', cute cartoon sticker style, bold outline, thick white border, bright colors, expressive face';re()};
+  document.getElementById('aiExp').onclick=()=>{if(!c.prompt.trim())return;const add=', cute cartoon sticker style, bold outline, thick white border, bright colors, expressive face';if(c.prompt.includes(add.slice(2))){toast('Prompt is already expanded');return}const base=c.prompt.trim().replace(/[.,]$/,'');if(base.length+add.length>400){toast('Prompt is too long to expand (400 characters max)');return}c.prompt=base+add;re()};
   }
+  const urm=document.getElementById('upRm');if(urm)urm.onclick=e=>{e.preventDefault();e.stopPropagation();c.img=null;c.err='';re();toast('Photo removed')};
   const f=document.getElementById('aiFile');
   if(f){const load=file=>{if(!file||!file.type.startsWith('image/')){toast('Please choose a JPG or PNG image');return}const r=new FileReader();r.onload=()=>{const im=new Image();im.onload=()=>{openCrop(im,out=>{c.img=out;re()})};im.onerror=()=>toast('That image could not be opened. Try a JPG or PNG');im.src=r.result};r.readAsDataURL(file)};
     f.onchange=()=>load(f.files[0]);const d=document.getElementById('aiDrop');
@@ -3120,12 +3179,18 @@ function render(keepScroll){
   if(h==='home-faq')setTimeout(()=>document.getElementById('faq').scrollIntoView(),30);
   else if(!keepScroll)scrollTo(0,0);
 }
+try{history.scrollRestoration='manual'}catch(e){}
+let __popY=null,__sT;const __saveY=()=>{try{history.replaceState(Object.assign({},history.state||{},{y:scrollY}),'')}catch(e){}};
+addEventListener('popstate',e=>{__popY=e.state&&typeof e.state.y==='number'?e.state.y:null});
+addEventListener('scroll',()=>{clearTimeout(__sT);__sT=setTimeout(__saveY,150)},{passive:true});
+addEventListener('click',e=>{if(e.target.closest&&e.target.closest('a[href^="#"]'))__saveY()},true);
 let lastHash=location.hash;
 addEventListener('hashchange',()=>{S.page=1;
   if(lastHash==='#create'&&location.hash!=='#create'&&S.editing){S.editing=null;S.cr=null}
   if(!location.hash.startsWith('#category-')&&!location.hash.startsWith('#stickers'))S.filter='all';
   if(location.hash!=='#manager')S.confirmDel=null;
-  lastHash=location.hash;render()});
+  lastHash=location.hash;const y=__popY;__popY=null;if(y!=null){render(true);const t=()=>scrollTo(0,y);t();requestAnimationFrame(t);setTimeout(t,150);setTimeout(t,450)}else render()});
+document.addEventListener('input',e=>{const t=e.target;if(!t.matches||!t.matches('.pk-form input[maxlength],.ct-f input[maxlength],.ct-f textarea[maxlength]'))return;const f=t.closest('.field,.ct-f')||t.parentNode;let n=f.querySelector('.lim-msg');const hit=t.value.length>=t.maxLength;if(hit&&!n){n=document.createElement('small');n.className='lim-msg';n.setAttribute('role','alert');f.appendChild(n)}if(n){n.hidden=!hit;n.textContent=`Maximum ${t.maxLength} characters reached`}t.classList.toggle('at-lim',hit)},true);
 footer();render();
 
 
