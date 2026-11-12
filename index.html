@@ -2121,6 +2121,31 @@ body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;ba
 
 /* Everything band: girl sticker sits in the free space right of the tools grid, not over the tiles */
 @media (min-width:1001px){.ev-girl{right:auto;left:max(calc(50% + 24px),584px)}}
+
+/* ===== Guide page (V1, holos-inspired cards) ===== */
+.gd{padding:20px 0 72px}
+.gd .crumbs{margin:0 0 26px}
+.gd h1{font-family:"Fredoka One",Fredoka,sans-serif;font-weight:400;font-size:clamp(36px,4.6vw,52px);line-height:1.1;color:#1F1A17;letter-spacing:0;margin:0;text-transform:none}
+.gd-sub{font:500 18px/1.55 Fredoka,sans-serif;color:#615850;max-width:36em;margin:12px 0 32px}
+.gd-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px}
+.gd-card{display:flex;gap:20px;align-items:flex-start;height:100%;box-sizing:border-box;padding:26px;border-radius:28px;background:#FFFDF9;text-decoration:none;color:inherit;box-shadow:0 1px 2px rgba(31,26,23,.05),0 12px 28px -14px rgba(59,38,22,.16);transition:transform .25s cubic-bezier(.2,.8,.2,1),box-shadow .25s ease}
+.gd-card:hover{transform:translateY(-3px);box-shadow:0 2px 4px rgba(31,26,23,.06),0 22px 40px -16px rgba(59,38,22,.24)}
+.gd-ic{flex:none;position:relative;width:84px;height:84px;border-radius:22px;background:color-mix(in srgb,var(--c) 70%,#fff);display:grid;place-items:center;overflow:hidden;font-size:46px}
+.gd-ic img{position:absolute;inset:0;margin:auto;width:80%;height:80%;object-fit:contain;transition:transform .25s ease}
+.gd-card:hover .gd-ic img{transform:rotate(-6deg) scale(1.06)}
+.gd-tx{display:flex;flex-direction:column;gap:8px;min-width:0;align-self:stretch;flex:1}
+.gd-grid{grid-auto-rows:1fr}
+.gd-meta{display:flex;align-items:center;gap:8px;font:600 13px/1 Fredoka,sans-serif;color:#857B72}
+.gd-tag{padding:5px 11px;border-radius:999px;background:color-mix(in srgb,var(--c) 22%,transparent);color:#1F1A17;font-weight:700;font-size:12px}
+.gd-tx b{font:700 19px/1.3 Fredoka,sans-serif;color:#1F1A17}
+.gd-d{font:500 15px/1.5 Fredoka,sans-serif;color:#615850}
+.gd-go{font:700 15px/1 Fredoka,sans-serif;color:#178A3A;margin-top:auto;padding-top:6px}
+.gd-card:hover .gd-go span{display:inline-block;transform:translateX(3px);transition:transform .2s}
+.gd-cta{margin-top:64px}
+.gd-badges{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.gd-badges .store-img img{display:block;height:52px;width:auto}
+@media (max-width:820px){.gd-grid{grid-template-columns:1fr;gap:14px}}
+@media (max-width:480px){.gd-card{padding:18px;gap:14px;border-radius:22px}.gd-ic{width:64px;height:64px;border-radius:16px;font-size:34px}.gd-tx b{font-size:17px}.gd-d{font-size:14px}.gd-sub{font-size:16px}}
 /* Hero A (holos style, 1080 grid) */
 .hero-a{background:transparent;padding:72px 0 88px;overflow:hidden;position:relative}
 .ha-in{max-width:1120px;margin:0 auto;padding:0 20px;display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center}
@@ -3409,11 +3434,16 @@ function wireContact(){
 function tutCard(t){return `<a class="tcard" href="#article-${t.id}"><div class="tthumb doodle" style="background:${t.c}">${stk(t.e)}</div>
   <div class="tbody"><div class="tmeta">${t.cat}<span>· ${t.read} min read</span></div><h3>${t.t}</h3><p>${t.x}</p><span class="link">Read guide ${I.arrow.replace('<svg','<svg width="16" height="16" style="vertical-align:-3px"')}</span></div></a>`}
 function pageTutorials(){
-  const cats=['All',...new Set(TUTS.map(t=>t.cat))];const f=S.tcat||'All';
-  return `<div class="doodle"><div class="wrap page-head">${crumbs([['Home','home'],['Tutorials']])}
-    <h1 class="h-sec">Sticker tutorials</h1><p class="lead" style="margin-top:8px">Short guides for making, adding and sharing stickers.</p></div>
-  <div class="wrap" style="padding-bottom:72px"><div class="chips" style="margin-bottom:28px">${cats.map(c=>`<button class="chip${f===c?' on':''}" data-tc="${c}">${c}</button>`).join('')}</div>
-    <div class="tgrid">${TUTS.filter(t=>f==='All'||t.cat===f).map(tutCard).join('')}</div></div></div>`;
+  const ICON={'add-to-whatsapp':114,'photo-to-sticker':101,'remove-background':113,'animated-stickers':103,'eid-packs':102,'pack-rules':105};
+  const TAG={'Getting started':'#B490FF','Create':'#FFD43B','Tools':'#FF9EC7','Collections':'#4BE0A3'};
+  const card=t=>{const p=byId(ICON[t.id]);const art=p&&p.img?`<img src="${p.img}" alt="" loading="lazy">`:stk(t.e);
+    return `<a class="gd-card" href="#article-${t.id}"><span class="gd-ic" style="--c:${t.c}">${art}</span><span class="gd-tx"><span class="gd-meta"><span class="gd-tag" style="--c:${TAG[t.cat]||'#5CC8FF'}">${esc(t.cat)}</span><span>${t.read} min read</span></span><b>${esc(t.t)}</b><span class="gd-d">${esc(t.x)}</span><span class="gd-go">Read the guide <span aria-hidden="true">→</span></span></span></a>`};
+  return `<div class="gd"><div class="wrap">${crumbs([['Home','home'],['Guide']])}
+    <h1>Sticker guides</h1><p class="gd-sub">Short, practical how-tos for making, adding and sharing stickers on your iPhone.</p>
+    <div class="gd-grid">${TUTS.map(card).join('')}</div>
+    <section class="pk2-cta gd-cta"><div><h2>Make stickers from your photos</h2><p>WaSticker cuts out the subject, adds the white outline and sends your pack to WhatsApp, Telegram and iMessage.</p><div class="gd-badges">${stores()}<button type="button" class="hero-gp" data-gp aria-label="Get it on Google Play"><img src="${GPLAY_BADGE}" alt="Get it on Google Play" width="156" height="52"></button></div></div>
+      <div class="ap-cta-art" aria-hidden="true">${byId(114)&&byId(114).img?`<img src="${byId(114).img}" alt="">`:stk('😺')}</div></section>
+  </div></div>`;
 }
 function pageArticle(id){
   const t=TUTS.find(x=>x.id===id);if(!t)return pageNotFound();
@@ -3487,7 +3517,7 @@ function render(keepScroll){
   else if(h==='manager'){html=pageManager();wire=wireManager}
   else if(h==='create'){html=pageCreate();wire=wireCreate}
   else if(h==='signin'||h==='signup'){if(S.user){location.hash='manager';return}html=pageAuth(h==='signup');wire=()=>wireAuth(h==='signup')}
-  else if(h==='tutorials'){html=pageTutorials();wire=()=>document.querySelectorAll('[data-tc]').forEach(b=>b.onclick=()=>{S.tcat=b.dataset.tc;render(true)})}
+  else if(h==='tutorials'){html=pageTutorials();wire=()=>{document.querySelectorAll('[data-gp]').forEach(b=>b.onclick=()=>toast('The Android app is coming soon. Get WaSticker on the App Store for iPhone.'));document.querySelectorAll('[data-tc]').forEach(b=>b.onclick=()=>{S.tcat=b.dataset.tc;render(true)})}}
   else if(h.startsWith('article-')){route='tutorials';html=pageArticle(h.slice(8))}
   else html=pageNotFound();
   closeModal&&closeModal();
