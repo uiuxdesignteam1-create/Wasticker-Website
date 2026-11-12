@@ -2188,6 +2188,33 @@ body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;ba
 .gc-go{margin-top:auto;font:700 15px/1.2 Inter,sans-serif!important;color:#178A3A}
 .gc:hover .gc-go span{display:inline-block;transform:translateX(3px);transition:transform .2s}
 @media (max-width:480px){.gc-cv{height:140px}.gc-art{width:100px;height:100px;margin-left:-50px;top:20px}.gc-b{padding:20px}}
+
+/* ===== Guide detail (sticked style) ===== */
+.ga{padding:48px 20px 80px}
+.ga,.ga *{font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif}
+.ga-card{text-align:left;max-width:768px;margin:0 auto;box-sizing:border-box;background:rgba(255,255,255,.94);border-radius:16px;padding:40px 48px;box-shadow:0 14px 36px -16px rgba(59,38,22,.18)}
+.ga-back{display:inline-block;font-size:14px;font-weight:600;color:#178A3A;text-decoration:none;margin-bottom:18px}
+.ga-back:hover{text-decoration:underline}
+.ga-meta{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:500;color:#857B72;margin-bottom:12px}
+.ga-tag{padding:5px 11px;border-radius:999px;background:color-mix(in srgb,var(--c) 22%,transparent);color:#1F1A17;font:700 12px/1.25 Fredoka,sans-serif!important}
+.ga h1{font-size:30px;font-weight:700;line-height:1.2;letter-spacing:-.01em;color:#1F1A17;margin:0 0 16px;text-transform:none}
+.ga-body{font-size:16px;line-height:1.65;color:#3D3530}
+.ga-body p{margin:0 0 14px}
+.ga-body h2{font-size:20px;font-weight:600;line-height:1.4;color:#1F1A17;margin:30px 0 12px;text-transform:none;letter-spacing:0}
+.ga-body h3{font-size:18px;font-weight:600;line-height:1.5;color:#1F1A17;margin:22px 0 8px}
+.ga-body ul,.ga-body ol{margin:0 0 16px;padding-left:28px}
+.ga-body li{margin:0 0 10px;padding-left:2px}
+.ga-body li::marker{color:#857B72}
+.ga-body b{font-weight:700;color:#1F1A17}
+.ga-body a{color:#178A3A;font-weight:600;text-decoration:underline;text-underline-offset:2px}
+.ga-tip{background:rgba(255,212,59,.22);border:1.5px solid rgba(255,212,59,.8);border-radius:14px;padding:14px 18px;margin:8px 0 18px}
+.ga-try{text-align:center!important;margin-top:32px;background:rgba(29,180,95,.08);border-radius:16px;padding:26px 20px 28px;text-align:center}
+.ga-try p{font-size:18px;font-weight:600;color:#1F1A17;margin:0 0 16px}
+.ga-badges{display:flex;justify-content:center;flex-wrap:wrap;gap:12px}
+.ga-badges .store-img img{display:block;height:52px;width:auto}
+@media (max-width:600px){.ga{padding:16px 12px 40px}.ga-card{padding:28px 20px}.ga h1{font-size:26px}.ga-body h2{font-size:18px}.ga-body h3{font-size:16px}}
+.ga-card h1,.ga-card .ga-body,.ga-card .ga-body *{text-align:left}
+.ga-card .ga-try,.ga-card .ga-try p{text-align:center}
 /* Hero A (holos style, 1080 grid) */
 .hero-a{background:transparent;padding:72px 0 88px;overflow:hidden;position:relative}
 .ha-in{max-width:1120px;margin:0 auto;padding:0 20px;display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center}
@@ -2536,7 +2563,7 @@ function footer(){
 <script>
 /* ---------- article bodies ---------- */
 const BODY={
- 'add-to-whatsapp':[['p','WhatsApp does not let websites install stickers directly, so the last step always happens on your phone. It takes about a minute the first time and a few seconds after that.'],['h','On iPhone'],['ol',['Install the free app from the App Store.','Open the pack link on your iPhone and tap Add to WhatsApp.','Confirm in WhatsApp. Stickers appear under the sticker icon in the message bar.']],['tip','A pack only shows up in WhatsApp if it has at least 3 stickers. Packs you make on WaSticker always meet this rule.']],
+ 'add-to-whatsapp':[['p','WhatsApp does not let websites install stickers directly, so the last step always happens on your phone. With **WaSticker**, it takes about a minute the first time and a few seconds after that — no design skills needed.'],['h','What you need'],['ul',['The **WaSticker** app (free on iPhone)','A sticker pack you like — browse [All packs](#stickers)','A phone with WhatsApp installed']],['h','Step-by-step guide'],['h3','1. Install WaSticker'],['p','Get the app from the App Store and open it once so it can talk to WhatsApp.'],['h3','2. Open the pack'],['p','Open the pack link on your iPhone and tap **Open in WaSticker**. You can also search the pack name in the app.'],['h3','3. Add to WhatsApp'],['p','Tap **Add to WhatsApp** and confirm. WaSticker takes care of the technical bits for you:'],['ul',['Resizes every sticker to 512 × 512 px','Converts files to WhatsApp’s WebP format','Creates the 96 × 96 px tray icon','Opens WhatsApp’s sticker importer']],['p','Tap **Save** in WhatsApp and the pack appears in your sticker tray.'],['h','If the pack doesn’t show'],['ul',['**Update WhatsApp** — older versions can’t import packs','**Check the count** — a pack needs at least 3 stickers','**Restart WhatsApp** — close it fully, then tap Add to WhatsApp again']],['h','Tips'],['ul',['**Name your pack well** — it’s what you’ll see in the sticker tray','**Keep packs small** — 10–15 stickers are easier to scroll than 30','**Learn the rules** — read [WhatsApp sticker rules](#article-pack-rules) for sizes and formats']],['h','Get WaSticker'],['p','Download WaSticker and start your sticker collection. Not sure where to start? [Browse sticker packs](#stickers) for inspiration.']],
  'photo-to-sticker':[['p','The best photo stickers come from photos with one clear subject, even light and a simple background. Faces work especially well because people read expressions instantly, even at sticker size.'],['h','Choosing photos'],['ol',['Pick photos where the face or pet fills at least half the frame.','Avoid strong backlight; the cutout needs a visible edge.','Use different expressions: a laugh, a wink, a surprised face. A pack of nine near-identical smiles gets boring fast.']],['h','Writing captions'],['p','Short captions in capitals read best at 512 px. Think about what you type most in chats: "OK", "On my way", "Haha", "Thank you". Those make the most-used stickers.'],['tip','Keep captions under 12 characters so they stay readable on small phone screens.']],
  'remove-background':[['p','Background removal finds the main subject and cuts it out with a white sticker border. It works on people, pets, food and objects.'],['h','For the cleanest cutout'],['ol',['Shoot against a plain wall or sky.','Leave some space around the subject so hair and ears are not cropped.','Use a photo at least 800 px wide.']],['tip','If the edge looks rough, try the square frame style instead of the round cutout. It hides small mistakes.']],
  'eid-packs':[['p','Festival greetings are the most shared stickers on WaSticker. These packs are ready to send, and you can make your own with family photos in a few minutes.'],['h','Popular right now'],['ol',['Eid Mubarak: moons, lanterns and sweets.','Puja Lights: diyas, flowers and fireworks.','Hello & Bye: everyday greetings for family groups.']],['tip','A family greeting pack makes a lovely gift. Use one photo of each person and add "Eid Mubarak" as the caption.']],
@@ -3487,15 +3514,16 @@ function pageTutorials(){
 }
 function pageArticle(id){
   const t=TUTS.find(x=>x.id===id);if(!t)return pageNotFound();
-  const body=BODY[id].map(([k,v])=>k==='p'?`<p>${v}</p>`:k==='h'?`<h2>${v}</h2>`:k==='tip'?`<div class="tip"><b>Tip:</b> ${v}</div>`:`<ol>${v.map(x=>`<li>${x}</li>`).join('')}</ol>`).join('');
-  return `<div class="wrap page-head"><div class="article">${crumbs([['Home','home'],['Tutorials','tutorials'],[t.cat]])}
-    <div class="tmeta">${t.cat}<span>· ${t.date} · ${t.read} min read</span></div>
-    <h1>${t.t}</h1><p class="lead">${t.x}</p>
-    <div class="cover doodle" style="background:${t.c}">${stk(t.e)}</div>
-    ${body}
-    <div class="panel" style="margin-top:36px;display:flex;gap:16px;align-items:center;justify-content:space-between;flex-wrap:wrap"><div><b style="font-family:var(--f-round);font-size:18px">Ready to try it?</b><p class="muted">Your first pack is free.</p></div><a class="btn btn-primary" href="#create">${I.plus} Create a pack</a></div>
-  </div></div>
-  <div class="wrap sec" style="padding-top:24px"><h2 class="h-sec" style="font-size:24px;margin-bottom:18px">More guides</h2><div class="tgrid">${TUTS.filter(x=>x.id!==id).slice(0,3).map(tutCard).join('')}</div></div>`;
+  const TAG={'Getting started':'#B490FF','Create':'#FFD43B','Tools':'#FF9EC7','Collections':'#4BE0A3'};
+  const md=v=>esc(v).replace(/\*\*(.+?)\*\*/g,'<b>$1</b>').replace(/\[(.+?)\]\((#[\w-]+)\)/g,'<a href="$2">$1</a>');
+  const body=BODY[id].map(([k,v])=>k==='p'?`<p>${md(v)}</p>`:k==='h'?`<h2>${md(v)}</h2>`:k==='h3'?`<h3>${md(v)}</h3>`:k==='tip'?`<div class="ga-tip"><b>Tip:</b> ${md(v)}</div>`:k==='ul'?`<ul>${v.map(x=>`<li>${md(x)}</li>`).join('')}</ul>`:`<ol>${v.map(x=>`<li>${md(x)}</li>`).join('')}</ol>`).join('');
+  return `<div class="ga"><article class="ga-card">
+    <a class="ga-back" href="#tutorials">← All guides</a>
+    <div class="ga-meta"><span class="ga-tag" style="--c:${TAG[t.cat]||'#5CC8FF'}">${esc(t.cat)}</span><span>${t.read} min read</span></div>
+    <h1>${esc(t.t)}</h1>
+    <div class="ga-body">${body}</div>
+    <div class="ga-try"><p>Ready to try it?</p><div class="ga-badges">${stores()}<button type="button" class="hero-gp" data-gp aria-label="Get it on Google Play"><img src="${GPLAY_BADGE}" alt="Get it on Google Play" width="156" height="52"></button></div></div>
+  </article></div>`;
 }
 /* ---------- legal ---------- */
 const LEGAL={
@@ -3558,7 +3586,7 @@ function render(keepScroll){
   else if(h==='create'){html=pageCreate();wire=wireCreate}
   else if(h==='signin'||h==='signup'){if(S.user){location.hash='manager';return}html=pageAuth(h==='signup');wire=()=>wireAuth(h==='signup')}
   else if(h==='tutorials'){html=pageTutorials();wire=()=>{document.querySelectorAll('[data-gp]').forEach(b=>b.onclick=()=>toast('The Android app is coming soon. Get WaSticker on the App Store for iPhone.'));document.querySelectorAll('[data-tc]').forEach(b=>b.onclick=()=>{S.tcat=b.dataset.tc;render(true)})}}
-  else if(h.startsWith('article-')){route='tutorials';html=pageArticle(h.slice(8))}
+  else if(h.startsWith('article-')){route='tutorials';html=pageArticle(h.slice(8));wire=()=>document.querySelectorAll('[data-gp]').forEach(b=>b.onclick=()=>toast('The Android app is coming soon. Get WaSticker on the App Store for iPhone.'))}
   else html=pageNotFound();
   closeModal&&closeModal();
   header(route);
