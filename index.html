@@ -2075,6 +2075,23 @@ input[type=search]::-webkit-search-cancel-button{margin-left:12px;flex:none;curs
 /* fixed texture: background stays still, content scrolls over it */
 body{background:var(--bg)}
 body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background:var(--bg) var(--body-pat) center top/1400px auto repeat}
+
+.pk2-rep:hover{color:#C23B3B;border-color:#E9B4B4;background:#FFF5F5}
+.rpm{text-align:left;padding:28px 28px 24px}
+@media (max-width:480px){.rpm{padding:24px 18px 18px}.rpm-b .btn{flex:1}}
+.rpm h2{font-family:"Fredoka One",Fredoka,sans-serif;font-weight:400;font-size:24px;color:#1F1A17;margin:0}
+.rpm p{color:#615850;font-size:15px;margin:8px 0 16px}
+.rpm-opts{display:grid;gap:8px}
+.rpm-opts label{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1.5px solid rgba(31,26,23,.12);border-radius:14px;cursor:pointer;font:500 15px/1.3 Fredoka,sans-serif;color:#1F1A17;transition:border-color .15s,background .15s}
+.rpm-opts label:hover{border-color:rgba(31,26,23,.3)}
+.rpm-opts label:has(input:checked){border-color:#1DB45F;background:#F1FBF5}
+.rpm-opts input{accent-color:#1DB45F;width:18px;height:18px;margin:0}
+.rpm-note{display:block;margin-top:14px}
+.rpm-note span{display:block;font:600 13px Fredoka,sans-serif;color:#615850;margin-bottom:6px}
+.rpm-note textarea{width:100%;box-sizing:border-box;border:1.5px solid rgba(31,26,23,.12);border-radius:14px;padding:10px 12px;font:500 15px/1.4 Fredoka,sans-serif;resize:vertical;background:#fff}
+.rpm-note textarea:focus{outline:none;border-color:#1DB45F}
+.rpm-b{display:flex;justify-content:flex-end;gap:10px;margin-top:18px}
+.rpm-go:disabled{opacity:.5;cursor:not-allowed}
 /* Hero A (holos style, 1080 grid) */
 .hero-a{background:transparent;padding:72px 0 88px;overflow:hidden;position:relative}
 .ha-in{max-width:1120px;margin:0 auto;padding:0 20px;display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center}
@@ -2670,6 +2687,7 @@ function pagePack(id){
           <button class="pk2-btn pri" id="addWa"><span>Open in WaSticker</span>${I.arrow}</button>
           <button class="pk2-ico${fav?' on':''}" id="favPack" aria-pressed="${fav}" aria-label="${fav?'Remove from favorites':'Add to favorites'}" title="${fav?'Favorited':'Favorite'}">${I.heart}</button>
           <button class="pk2-ico" id="cpLink" aria-label="Copy pack link" title="Copy link">${I.link}</button>
+          <button class="pk2-ico pk2-rep" id="repPack" aria-label="Report this pack" title="Report"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 21V4"/><path d="M5 4h11l-2 4 2 4H5"/></svg></button>
         </div>
         <div id="waNote" hidden class="tip" style="max-width:520px;margin-top:16px">Open this page on your phone and tap <b>Open in WaSticker</b>. The WaSticker app adds the pack to WhatsApp. <a class="link" href="#article-add-to-whatsapp">Step-by-step guide</a></div>
       </div>
@@ -2697,8 +2715,20 @@ function pagePack(id){
     </section>
   </div></div>`;
 }
+function reportModal(p){
+  const R=['Inappropriate or offensive','Copyright or trademark issue','Spam or misleading','Hateful or harassing content','Something else'];
+  const m=modal(`<form class="rpm" novalidate><h2>Report “${esc(p.name)}”</h2><p>Tell us what’s wrong with this pack. Reports are anonymous and reviewed by our team.</p>
+    <div class="rpm-opts" role="radiogroup" aria-label="Reason">${R.map((r,i)=>`<label><input type="radio" name="rr" value="${i}"><span>${r}</span></label>`).join('')}</div>
+    <label class="rpm-note"><span>More details (optional)</span><textarea maxlength="300" rows="3" placeholder="Add anything that helps us review it"></textarea></label>
+    <div class="rpm-b"><button type="button" class="btn btn-ghost rpm-x">Cancel</button><button class="btn btn-primary rpm-go" disabled>Send report</button></div></form>`,'mdl-app');
+  const f=m.querySelector('.rpm'),go=m.querySelector('.rpm-go');
+  f.querySelectorAll('input[name=rr]').forEach(r=>r.onchange=()=>go.disabled=false);
+  m.querySelector('.rpm-x').onclick=closeModal;
+  f.onsubmit=e=>{e.preventDefault();if(go.disabled)return;S.reported=S.reported||[];if(!S.reported.includes(p.id))S.reported.push(p.id);save();closeModal();toast('Thanks. We’ll review this pack.')};
+}
 function wirePack(id){
   const p=byId(id);if(!p)return;
+  const rp=document.getElementById('repPack');if(rp)rp.onclick=()=>reportModal(p);
   document.getElementById('addWa').onclick=()=>getApp({title:`Open “${p.name}” in WaSticker`,ct:'pack_add',art:p.img||p.e[0]});
   const dlb=document.getElementById('dlPack');if(dlb)dlb.onclick=()=>getApp({title:`Download “${p.name}”`,ct:'pack_download',art:p.img||p.e[0]});
   document.getElementById('cpLink').onclick=()=>copy('https://wasticker.io/#pack-'+p.id,'Pack link copied');
