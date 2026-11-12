@@ -2546,7 +2546,7 @@ function pageStickers(kind){
   list=list.slice().sort((x,y)=>y.id-x.id);const per=20;const pages=Math.max(1,Math.ceil(list.length/per));if(S.page>pages)S.page=1;const shown=list.slice((S.page-1)*per,S.page*per);
   const title=kind==='animated'?'Animated sticker packs':kind==='static'?'Static sticker packs':'All sticker packs';
   const crumb=kind==='animated'?'Animated':kind==='static'?'Static':'All packs';
-  const sub=kind==='animated'?'Stickers that move, wave and wink in your chats. Tap one to preview and add it to WhatsApp.':'Free packs for every chat, from funny faces to festival wishes. Tap one to preview and add it to WhatsApp.';
+  const sub=kind==='animated'?'Animated packs that bring movement and personality to your conversations. Select a pack to preview it and add it to WhatsApp.':'Explore sticker packs by mood, moment and category. Select a pack to preview it and add it to WhatsApp.';
   const TINT=['#B490FF','#FFD43B','#FF9EC7','#4BE0A3','#FF9A4D','#5CC8FF'];
   const cats=CATS.filter(c=>base.some(p=>p.cat===c.slug));
   const chip=(f,label,col)=>`<button type="button" class="ap-chip${S.filter===f?' on':''}" data-f="${f}" style="--c:${col}" aria-pressed="${S.filter===f}">${esc(label)}</button>`;
