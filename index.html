@@ -2070,6 +2070,10 @@ input[type=search]::-webkit-search-cancel-button{margin-left:12px;flex:none;curs
 .chip-nav{border:1.5px solid rgba(31,26,23,.14);background:#FFFDF9;color:#1F1A17;box-shadow:0 4px 12px -4px rgba(59,38,22,.25)}
 .chip-nav:hover{border-color:#1F1A17;color:#1F1A17}
 @media (max-width:600px){.chip{height:35px;padding:0 14px;font-size:14px}}
+
+/* fixed texture: background stays still, content scrolls over it */
+body{background:var(--bg)}
+body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background:var(--bg) var(--body-pat) center top/1400px auto repeat}
 /* Hero A (holos style, 1080 grid) */
 .hero-a{background:transparent;padding:72px 0 88px;overflow:hidden;position:relative}
 .ha-in{max-width:1120px;margin:0 auto;padding:0 20px;display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center}
