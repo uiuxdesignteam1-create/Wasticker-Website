@@ -2667,11 +2667,11 @@ function pagePack(id){
         <p class="pk2-desc">${n} ${nm} stickers for your WhatsApp chats, ready to send. Free to add from the WaSticker app.</p>
         <p class="pk2-meta">${n} stickers · ${fmt(p.dl)} downloads · by <b>${esc(p.author)}</b>${p.author==='WaSticker'?`<span class="verified" title="Official pack">${I.check.replace('stroke="currentColor"','stroke="#fff"')}</span>`:''}</p>
         <div class="pk2-acts">
-          <button class="pk2-btn pri" id="addWa">${I.msg}<span>Add to WhatsApp</span></button>
+          <button class="pk2-btn pri" id="addWa"><span>Open in WaSticker</span>${I.arrow}</button>
           <button class="pk2-ico${fav?' on':''}" id="favPack" aria-pressed="${fav}" aria-label="${fav?'Remove from favorites':'Add to favorites'}" title="${fav?'Favorited':'Favorite'}">${I.heart}</button>
           <button class="pk2-ico" id="cpLink" aria-label="Copy pack link" title="Copy link">${I.link}</button>
         </div>
-        <div id="waNote" hidden class="tip" style="max-width:520px;margin-top:16px">Open this page on your phone and tap <b>Add to WhatsApp</b>. The free WaSticker app finishes the step. <a class="link" href="#article-add-to-whatsapp">Step-by-step guide</a></div>
+        <div id="waNote" hidden class="tip" style="max-width:520px;margin-top:16px">Open this page on your phone and tap <b>Open in WaSticker</b>. The WaSticker app adds the pack to WhatsApp. <a class="link" href="#article-add-to-whatsapp">Step-by-step guide</a></div>
       </div>
     </div>
     <section class="pk2-sec">
@@ -2683,7 +2683,7 @@ function pagePack(id){
       <h2>How to add ${nm} to WhatsApp</h2>
       <div class="pk2-steps">
         <div class="pk2-step"><i>1</i><b>Get WaSticker</b><p>Free on the App Store for iPhone.</p></div>
-        <div class="pk2-step"><i>2</i><b>Open the pack</b><p>Open this page on your iPhone and tap Add to WhatsApp, or search ${nm} in the app.</p></div>
+        <div class="pk2-step"><i>2</i><b>Open the pack</b><p>Open this page on your iPhone and tap Open in WaSticker, or search ${nm} in the app.</p></div>
         <div class="pk2-step"><i>3</i><b>Send it</b><p>Tap Add to WhatsApp. The pack appears in your WhatsApp sticker tray.</p></div>
       </div>
     </section>
@@ -2699,7 +2699,7 @@ function pagePack(id){
 }
 function wirePack(id){
   const p=byId(id);if(!p)return;
-  document.getElementById('addWa').onclick=()=>getApp({title:`Add “${p.name}” to WhatsApp`,ct:'pack_add',art:p.img||p.e[0]});
+  document.getElementById('addWa').onclick=()=>getApp({title:`Open “${p.name}” in WaSticker`,ct:'pack_add',art:p.img||p.e[0]});
   const dlb=document.getElementById('dlPack');if(dlb)dlb.onclick=()=>getApp({title:`Download “${p.name}”`,ct:'pack_download',art:p.img||p.e[0]});
   document.getElementById('cpLink').onclick=()=>copy('https://wasticker.io/#pack-'+p.id,'Pack link copied');
   if(S.user&&S.pendingFav===p.id){S.pendingFav=null;S.favPacks=S.favPacks||[];if(!S.favPacks.includes(p.id)){S.favPacks.push(p.id);save();setTimeout(()=>toast('Added to My Favorites'),300);render(true);return}}
