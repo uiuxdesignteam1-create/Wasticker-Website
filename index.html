@@ -2725,7 +2725,7 @@ function pagePack(id){
     <section class="pk2-stk" aria-label="${nm} stickers">
       <div class="pk2-tags pk2-tags-top"><a class="pk2-tag" href="#category-${c.slug}">${esc(c.name)} stickers</a>${p.tags.map(t=>`<a class="pk2-tag" href="#search" data-tag="${t}">#${esc(t)}</a>`).join('')}</div>
       <div class="pk2-grid${p.anim?' anim':''}">${p.imgs?p.imgs.map((u,i)=>`<button aria-label="Sticker ${i+1}" data-e="${i}"><img src="${u}" alt="" loading="lazy"></button>`).join(''):p.e.map((e,i)=>`<button aria-label="Sticker ${i+1}" data-e="${e}">${stk(e)}</button>`).join('')}</div>
-      <div class="pk2-get"><p>Add this pack to WhatsApp with the WaSticker app</p><div class="pk2-stores"><button type="button" class="pk2-badge" id="gpPack" aria-label="Get it on Google Play"><img src="${GPLAY_BADGE}" alt="Get it on Google Play" width="162" height="54"></button><a class="pk2-badge" href="${appUrl('pack_store')}" target="_blank" rel="noopener"><img src="${ASSET.appstore}" alt="Download on the App Store" width="162" height="54"></a></div></div>
+      <div class="pk2-get"><p>Add this pack to WhatsApp with the WaSticker app</p><div class="pk2-stores"><a class="pk2-badge" href="${appUrl('pack_store')}" target="_blank" rel="noopener"><img src="${ASSET.appstore}" alt="Download on the App Store" width="162" height="54"></a><button type="button" class="pk2-badge" id="gpPack" aria-label="Get it on Google Play"><img src="${GPLAY_BADGE}" alt="Get it on Google Play" width="162" height="54"></button></div></div>
     </section>
     <section class="pk2-sec">
       <h2>How to add ${nm} to WhatsApp</h2>
