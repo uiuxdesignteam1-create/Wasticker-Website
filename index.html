@@ -2225,6 +2225,25 @@ body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;ba
 .pk2-stk .pk2-tags{margin:18px 0 0}
 @media (max-width:820px){.pk2-titlerow{flex-direction:column;gap:12px}.pk2-icons{padding-top:0;order:3}.pk2-acts .pk2-btn.pri{flex:1 1 100%}}
 @media (max-width:480px){.pk2-acts .pk2-badge img{height:42px}}
+
+/* Pack page: How to add (variation C — phone + numbered steps) */
+.pk2-how{display:grid;grid-template-columns:360px minmax(0,1fr);gap:48px;align-items:center}
+.pkh-art{position:relative;height:380px;border-radius:28px;background:rgba(75,224,163,.3);overflow:hidden}
+.pkh-phone{position:absolute;left:85px;top:40px;width:190px;height:400px;border-radius:32px;background:#1F1A17;transform:rotate(-4deg);padding:7px;box-sizing:border-box}
+.pkh-scr{width:100%;height:100%;border-radius:26px;background:#ECE5DD;padding:26px 10px;box-sizing:border-box;display:flex;flex-direction:column;gap:10px}
+.pkh-b{display:block;height:24px;border-radius:10px;background:#fff;flex:none}
+.pkh-s{display:grid;place-items:center;width:80px;height:80px;flex:none;font-size:56px;line-height:1}
+.pkh-s img,.pkh-float img{width:100%;height:100%;object-fit:contain;filter:drop-shadow(0 4px 8px rgba(0,0,0,.12))}
+.pkh-me{align-self:flex-end}
+.pkh-sm{width:70px;height:70px}
+.pkh-float{position:absolute;right:14px;top:22px;width:90px;height:90px;display:grid;place-items:center;font-size:62px;transform:rotate(12deg)}
+.pkh-steps h2{margin:0 0 22px}
+.pkh-steps ol{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:22px}
+.pkh-steps li{display:flex;gap:16px;align-items:flex-start}
+.pkh-steps i{flex:none;display:grid;place-items:center;width:36px;height:36px;border-radius:50%;background:#1DB45F;color:#fff;font:700 17px/1 Fredoka,sans-serif;font-style:normal}
+.pkh-steps b{display:block;font:700 19px/1.3 Fredoka,sans-serif;color:#1F1A17}
+.pkh-steps p{margin:4px 0 0;font:500 15px/1.5 Fredoka,sans-serif;color:#615850;max-width:500px}
+@media (max-width:820px){.pk2-how{grid-template-columns:1fr;gap:28px}.pkh-art{max-width:360px;width:100%;margin:0 auto;order:2}.pkh-steps{order:1}}
 /* Hero A (holos style, 1080 grid) */
 .hero-a{background:transparent;padding:72px 0 88px;overflow:hidden;position:relative}
 .ha-in{max-width:1120px;margin:0 auto;padding:0 20px;display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center}
@@ -2815,6 +2834,7 @@ function pagePack(id){
   const items=p.imgs||p.e,n=items.length,fav=(S.favPacks||[]).includes(p.id);
   const nm=esc(p.name),full=/stickers?$/i.test(p.name)?nm:nm+' stickers';
   const art=p.img?`<img src="${p.img}" alt="${nm}">`:stk(p.e[0]);
+  const howArt=i=>{const u=(p.imgs||[])[i];return u?`<img src="${u}" alt="" loading="lazy">`:stk((p.e||[])[i]||'😺')};
   const ctaArt=(p.imgs||[]).slice(0,4).map((u,i)=>`<img src="${u}" alt="" style="--r:${[-8,5,-3,7][i]}deg">`).join('')||p.e.slice(0,4).map((e,i)=>`<span style="--r:${[-8,5,-3,7][i]}deg">${stk(e)}</span>`).join('');
   return `<div class="pk2"><div class="wrap">
     ${crumbs([['Home','home'],['All stickers','stickers'],[c.name,'category-'+c.slug],[p.name]])}
@@ -2836,12 +2856,21 @@ function pagePack(id){
       <div class="pk2-grid${p.anim?' anim':''}">${p.imgs?p.imgs.map((u,i)=>`<button aria-label="Sticker ${i+1}" data-e="${i}"><img src="${u}" alt="" loading="lazy"></button>`).join(''):p.e.map((e,i)=>`<button aria-label="Sticker ${i+1}" data-e="${e}">${stk(e)}</button>`).join('')}</div>
       <div class="pk2-tags"><a class="pk2-tag" href="#category-${c.slug}">${esc(c.name)} stickers</a>${p.tags.map(t=>`<a class="pk2-tag" href="#search" data-tag="${t}">#${esc(t)}</a>`).join('')}</div>
     </section>
-    <section class="pk2-sec">
-      <h2>How to add ${nm} to WhatsApp</h2>
-      <div class="pk2-steps">
-        <div class="pk2-step"><i>1</i><b>Get WaSticker</b><p>Free on the App Store for iPhone.</p></div>
-        <div class="pk2-step"><i>2</i><b>Open the pack</b><p>Open this page on your iPhone and tap Open in WaSticker, or search ${nm} in the app.</p></div>
-        <div class="pk2-step"><i>3</i><b>Send it</b><p>Tap Add to WhatsApp. The pack appears in your WhatsApp sticker tray.</p></div>
+    <section class="pk2-sec pk2-how">
+      <div class="pkh-art" aria-hidden="true"><div class="pkh-phone"><div class="pkh-scr">
+        <span class="pkh-b" style="width:58%"></span>
+        <span class="pkh-s pkh-me">${howArt(0)}</span>
+        <span class="pkh-b" style="width:46%"></span>
+        <span class="pkh-s">${howArt(1)}</span>
+        <span class="pkh-s pkh-me pkh-sm">${howArt(2)}</span>
+      </div></div><span class="pkh-float">${howArt(3)}</span></div>
+      <div class="pkh-steps">
+        <h2>How to add ${nm} to WhatsApp</h2>
+        <ol>
+          <li><i>1</i><div><b>Get WaSticker</b><p>Free on the App Store for iPhone.</p></div></li>
+          <li><i>2</i><div><b>Open the pack</b><p>Open this page on your iPhone and tap Open in WaSticker, or search ${nm} in the app.</p></div></li>
+          <li><i>3</i><div><b>Send it</b><p>Tap Add to WhatsApp. The pack appears in your WhatsApp sticker tray.</p></div></li>
+        </ol>
       </div>
     </section>
     <section class="pk2-sec">
