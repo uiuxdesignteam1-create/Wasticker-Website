@@ -2481,16 +2481,18 @@ function pageHome(){
   const list=full.slice(0,10);
   const trending=[111,112,113,114,24,14,11,107,3,12].map(byId);
   return `
-  <section class="hero-a"><div class="ha-in">
-    <div class="ha-copy">
-      <span class="ha-pill">✨ Free WhatsApp sticker packs</span>
-      <h1>Make WhatsApp <em>stickers</em> in seconds</h1>
-      <p class="ha-lead">Browse free WhatsApp sticker packs, or turn your own photos into a pack in a couple of minutes. Your first pack is free.</p>
-      <div class="ha-ctas"><a class="ha-browse" href="#home" data-hero-browse>Browse packs <span aria-hidden="true">→</span></a>${stores()}</div>
-      <p class="ha-note">No sign-up needed · Works with WhatsApp, Telegram &amp; iMessage</p>
-    </div>
-    <div class="ha-art" aria-hidden="true">${[[101,2,2,32,-8],[102,41,-4,36,5],[103,64,36,32,-4],[104,0,43,36,6],[105,36,64,34,-6],[106,66,74,28,8]].map(([id,x,y,w,r])=>{const p=byId(id);if(!p)return '';const art=p.img?`<img src="${p.img}" alt="" decoding="async">`:stk(p.e[0]);return `<a class="ha-stk" href="#pack-${p.id}" tabindex="-1" style="left:${x}%;top:${y}%;width:${w}%;--r:${r}deg">${art}</a>`}).join('')}</div>
-  </div></section>
+  <section class="hero"><div class="wrap">
+    <span class="hero-logo">${LOGO}</span>
+    <h1>Welcome To<br><span class="l2"><span class="hl"><span class="burst">${BURST}</span><em>Sticker</em></span> Maker<span class="swash">${SWASH}</span></span></h1>
+    <p>Browse free WhatsApp sticker packs, or turn your own photos into a pack in a couple of minutes. Your first pack is free.</p>
+    <p class="get-app">Get the app!<img src="${ASSET.splashSm}" alt="" width="16" height="14"></p>
+    <div class="stores" style="margin-top:10px">${stores()}</div>
+  </div><img class="hero-girl-m m-only" src="${GIRL_HQ}" alt="" width="452" height="494" decoding="async"></section>
+  <div class="feat-strip wrap"><img class="hero-girl" src="${ASSET.girl}" alt="" width="194" height="207"><div class="in">
+    <div class="fs"><img src="${ASSET.ai}" alt="" width="50" height="50"><div><b>AI-Powered Cutout</b><span>Photos to sticker instantly</span></div></div>
+    <div class="fs"><img src="${ASSET.hq}" alt="" width="50" height="50"><div><b>High Quality</b><span>Crisp and clean stickers</span></div></div>
+    <div class="fs"><img src="${ASSET.share}" alt="" width="50" height="50"><div><b>Easy to Share</b><span>WhatsApp, Telegram and more</span></div></div>
+  </div></div>
 
   <section class="sec doodle disc-sec"><div class="wrap">
     <div class="sec-head"><a class="scroll-cue" href="#home" data-cue><span>Scroll to discover</span><img src="${ASSET.scrollGif}" alt="" width="32" height="32"></a><h2 class="disc-title" id="discover">Discover Sticker Packs</h2><p class="lead">Packs made by the WaSticker team and our community. Tap any pack to preview and add it.</p></div>
