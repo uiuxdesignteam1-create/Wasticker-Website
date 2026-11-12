@@ -2215,6 +2215,16 @@ body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;ba
 @media (max-width:600px){.ga{padding:16px 12px 40px}.ga-card{padding:28px 20px}.ga h1{font-size:26px}.ga-body h2{font-size:18px}.ga-body h3{font-size:16px}}
 .ga-card h1,.ga-card .ga-body,.ga-card .ga-body *{text-align:left}
 .ga-card .ga-try,.ga-card .ga-try p{text-align:center}
+
+/* pack header: icons top-right, store badges + Open in WaSticker */
+.pk2-titlerow{display:flex;align-items:flex-start;justify-content:space-between;gap:16px}
+.pk2-titlerow h1{flex:1;min-width:0}
+.pk2-icons{display:flex;gap:8px;flex:none;padding-top:6px}
+.pk2-acts{align-items:center}
+.pk2-acts .pk2-badge img{height:46px;width:auto}
+.pk2-stk .pk2-tags{margin:18px 0 0}
+@media (max-width:820px){.pk2-titlerow{flex-direction:column;gap:12px}.pk2-icons{padding-top:0;order:3}.pk2-acts .pk2-btn.pri{flex:1 1 100%}}
+@media (max-width:480px){.pk2-acts .pk2-badge img{height:42px}}
 /* Hero A (holos style, 1080 grid) */
 .hero-a{background:transparent;padding:72px 0 88px;overflow:hidden;position:relative}
 .ha-in{max-width:1120px;margin:0 auto;padding:0 20px;display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center}
@@ -2811,22 +2821,20 @@ function pagePack(id){
     <div class="pk2-head">
       <div class="pk2-cover${p.anim?' anim':''}" style="background:${p.c}">${art}${p.anim?`<span class="anim-badge">Animated</span>`:''}</div>
       <div class="pk2-info">
-        <h1>${full}</h1>
+        <div class="pk2-titlerow"><h1>${full}</h1><div class="pk2-icons"><button class="pk2-ico${fav?' on':''}" id="favPack" aria-pressed="${fav}" aria-label="${fav?'Remove from favorites':'Add to favorites'}" title="${fav?'Favorited':'Favorite'}">${I.heart}</button><button class="pk2-ico" id="cpLink" aria-label="Copy pack link" title="Copy link">${I.link}</button><button class="pk2-ico pk2-rep" id="repPack" aria-label="Report this pack" title="Report"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 21V4"/><path d="M5 4h11l-2 4 2 4H5"/></svg></button></div></div>
         <p class="pk2-desc">${n} ${nm} stickers made for WhatsApp, Telegram and iMessage. Open the pack in WaSticker to add it to your chats.</p>
         <p class="pk2-meta">${n} stickers · ${fmt(p.dl)} downloads · by <b>${esc(p.author)}</b>${p.author==='WaSticker'?`<span class="verified" title="Official pack">${I.check.replace('stroke="currentColor"','stroke="#fff"')}</span>`:''}</p>
         <div class="pk2-acts">
+          <a class="pk2-badge" href="${appUrl('pack_store')}" target="_blank" rel="noopener"><img src="${ASSET.appstore}" alt="Download on the App Store" width="138" height="46"></a>
+          <button type="button" class="pk2-badge" id="gpPack" aria-label="Get it on Google Play"><img src="${GPLAY_BADGE}" alt="Get it on Google Play" width="138" height="46"></button>
           <button class="pk2-btn pri" id="addWa"><span>Open in WaSticker</span>${I.arrow}</button>
-          <button class="pk2-ico${fav?' on':''}" id="favPack" aria-pressed="${fav}" aria-label="${fav?'Remove from favorites':'Add to favorites'}" title="${fav?'Favorited':'Favorite'}">${I.heart}</button>
-          <button class="pk2-ico" id="cpLink" aria-label="Copy pack link" title="Copy link">${I.link}</button>
-          <button class="pk2-ico pk2-rep" id="repPack" aria-label="Report this pack" title="Report"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 21V4"/><path d="M5 4h11l-2 4 2 4H5"/></svg></button>
         </div>
         <div id="waNote" hidden class="tip" style="max-width:520px;margin-top:16px">Open this page on your phone and tap <b>Open in WaSticker</b>. The WaSticker app adds the pack to WhatsApp. <a class="link" href="#article-add-to-whatsapp">Step-by-step guide</a></div>
       </div>
     </div>
     <section class="pk2-stk" aria-label="${nm} stickers">
-      <div class="pk2-tags pk2-tags-top"><a class="pk2-tag" href="#category-${c.slug}">${esc(c.name)} stickers</a>${p.tags.map(t=>`<a class="pk2-tag" href="#search" data-tag="${t}">#${esc(t)}</a>`).join('')}</div>
       <div class="pk2-grid${p.anim?' anim':''}">${p.imgs?p.imgs.map((u,i)=>`<button aria-label="Sticker ${i+1}" data-e="${i}"><img src="${u}" alt="" loading="lazy"></button>`).join(''):p.e.map((e,i)=>`<button aria-label="Sticker ${i+1}" data-e="${e}">${stk(e)}</button>`).join('')}</div>
-      <div class="pk2-get"><p>Add this pack to WhatsApp with the WaSticker app</p><div class="pk2-stores"><a class="pk2-badge" href="${appUrl('pack_store')}" target="_blank" rel="noopener"><img src="${ASSET.appstore}" alt="Download on the App Store" width="162" height="54"></a><button type="button" class="pk2-badge" id="gpPack" aria-label="Get it on Google Play"><img src="${GPLAY_BADGE}" alt="Get it on Google Play" width="162" height="54"></button></div></div>
+      <div class="pk2-tags"><a class="pk2-tag" href="#category-${c.slug}">${esc(c.name)} stickers</a>${p.tags.map(t=>`<a class="pk2-tag" href="#search" data-tag="${t}">#${esc(t)}</a>`).join('')}</div>
     </section>
     <section class="pk2-sec">
       <h2>How to add ${nm} to WhatsApp</h2>
