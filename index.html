@@ -2003,7 +2003,8 @@ input[type=search]::-webkit-search-cancel-button{margin-left:12px;flex:none;curs
 .pk2-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:16px}
 .pk2-grid button{aspect-ratio:1;display:grid;place-items:center;background:#FFFDF9;border:1.5px solid rgba(31,26,23,.12);border-radius:24px;cursor:pointer;transition:transform .2s ease,border-color .2s ease,box-shadow .2s ease;font-size:64px}
 .pk2-grid button:hover{transform:rotate(-2deg) scale(1.04);border-color:rgba(31,26,23,.24);box-shadow:0 16px 28px -16px rgba(59,38,22,.28)}
-.pk2-grid img{width:82%;height:82%;object-fit:contain}
+.pk2-grid button{position:relative;padding:0;height:auto;min-height:0;overflow:hidden}
+.pk2-grid img{position:absolute;inset:0;margin:auto;width:82%;height:82%;object-fit:contain}
 .pk2-steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px;margin-top:20px}
 .pk2-step{background:#FFFDF9;border-radius:24px;padding:22px;box-shadow:0 1px 2px rgba(31,26,23,.05),0 12px 28px -16px rgba(59,38,22,.2)}
 .pk2-step i{display:grid;place-items:center;width:30px;height:30px;border-radius:50%;background:#1DB45F;color:#fff;font:700 14px/1 Fredoka,sans-serif;font-style:normal}
