@@ -2299,6 +2299,13 @@ PACKS.find(x=>x.id===103).imgScale=.72;
  motivation:'💪🚀🏆⭐🌟🔥🎯✅🙌👏📈🧠💡⏳🏁🥇'};
  const GEN=POOL.emoji;const seg=t=>[...new Intl.Segmenter('en',{granularity:'grapheme'}).segment(t)].map(x=>x.segment);
  for(const p of PACKS){if(p.imgs||!Array.isArray(p.e))continue;const have=new Set(p.e);for(const e of seg((POOL[p.cat]||'')+GEN)){if(p.e.length>=16)break;if(!have.has(e)&&e.trim()){p.e.push(e);have.add(e)}}}
+ /* image packs: borrow real sticker images from other packs (any category) until there are 16 */
+ const own=new Map(PACKS.filter(p=>p.imgs).map(p=>[p.id,p.imgs.slice()]));
+ for(const p of PACKS){if(!p.imgs||p.imgs.length>=16)continue;const have=new Set(p.imgs);
+  const pool=[...PACKS.filter(q=>q.id!==p.id&&own.has(q.id)&&q.cat===p.cat).flatMap(q=>own.get(q.id)),...PACKS.filter(q=>q.id!==p.id&&own.has(q.id)&&q.cat!==p.cat).flatMap(q=>own.get(q.id)),...PACKS.filter(q=>q.id!==p.id&&q.img&&!own.has(q.id)).map(q=>q.img)];
+  /* interleave packs so borrowed stickers are varied */
+  const by=[...own.entries()].filter(([id])=>id!==p.id).map(([,v])=>v);const mix=[];for(let i=0;i<7;i++)for(const v of by)if(v[i])mix.push(v[i]);
+  for(const u of [...mix,...pool]){if(p.imgs.length>=16)break;if(u&&!have.has(u)){p.imgs.push(u);have.add(u)}}}
 })();
 const byId=id=>PACKS.find(p=>p.id==id);
 const catOf=s=>CATS.find(c=>c.slug===s);
