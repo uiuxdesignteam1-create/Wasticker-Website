@@ -2114,6 +2114,10 @@ body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;ba
 .gp-badge.gp-real{width:auto;height:auto;padding:0;border:0;background:none;line-height:0}
 .gp-badge.gp-real img{display:block;width:156px;height:auto}
 @media (max-width:480px){.pk2-stores{gap:10px}.pk2-badge img{height:48px}}
+
+.hero-gp{display:inline-block;padding:0;border:0;background:none;line-height:0;cursor:pointer;border-radius:9px;transition:transform .15s ease}
+.hero-gp img{display:block;width:156px;height:52px}
+.hero-gp:hover{transform:translateY(-2px)}
 /* Hero A (holos style, 1080 grid) */
 .hero-a{background:transparent;padding:72px 0 88px;overflow:hidden;position:relative}
 .ha-in{max-width:1120px;margin:0 auto;padding:0 20px;display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center}
@@ -2486,7 +2490,7 @@ function pageHome(){
     <h1>Welcome To<br><span class="l2"><span class="hl"><span class="burst">${BURST}</span><em>Sticker</em></span> Maker<span class="swash">${SWASH}</span></span></h1>
     <p>Browse free WhatsApp sticker packs, or turn your own photos into a pack in a couple of minutes. Your first pack is free.</p>
     <p class="get-app">Get the app!<img src="${ASSET.splashSm}" alt="" width="16" height="14"></p>
-    <div class="stores" style="margin-top:10px">${stores()}</div>
+    <div class="stores" style="margin-top:10px">${stores()}<button type="button" class="hero-gp" data-gp aria-label="Get it on Google Play"><img src="${GPLAY_BADGE}" alt="Get it on Google Play" width="156" height="52"></button></div>
   </div><img class="hero-girl-m m-only" src="${GIRL_HQ}" alt="" width="452" height="494" decoding="async"></section>
   <div class="feat-strip wrap"><img class="hero-girl" src="${ASSET.girl}" alt="" width="194" height="207"><div class="in">
     <div class="fs"><img src="${ASSET.ai}" alt="" width="50" height="50"><div><b>AI-Powered Cutout</b><span>Photos to sticker instantly</span></div></div>
@@ -2610,7 +2614,7 @@ function wireFaq(){
 }
 function wireHome(){
   wireFaq();
-  document.querySelectorAll('[data-hero-browse]').forEach(b=>b.onclick=e=>{e.preventDefault();const t=document.getElementById('discover');if(t)scrollTo({top:t.getBoundingClientRect().top+scrollY-110,behavior:'smooth'})});const cue=document.querySelector('[data-cue]');if(cue)cue.onclick=e=>{e.preventDefault();const t=document.getElementById('discover');scrollTo({top:t.getBoundingClientRect().top+scrollY-110,behavior:'smooth'})};
+  document.querySelectorAll('[data-gp]').forEach(b=>b.onclick=()=>toast('The Android app is coming soon. Get WaSticker on the App Store for iPhone.'));document.querySelectorAll('[data-hero-browse]').forEach(b=>b.onclick=e=>{e.preventDefault();const t=document.getElementById('discover');if(t)scrollTo({top:t.getBoundingClientRect().top+scrollY-110,behavior:'smooth'})});const cue=document.querySelector('[data-cue]');if(cue)cue.onclick=e=>{e.preventDefault();const t=document.getElementById('discover');scrollTo({top:t.getBoundingClientRect().top+scrollY-110,behavior:'smooth'})};
   document.querySelectorAll('[data-hpg]').forEach(b=>b.onclick=()=>{S.homePage=+b.dataset.hpg;render(true);const g=document.getElementById('discover');scrollTo({top:g.getBoundingClientRect().top+scrollY-110,behavior:'smooth'})});
   document.querySelectorAll('[data-hc]').forEach(b=>b.onclick=()=>{S.homeCat=b.dataset.hc;S.homePage=1;const y=scrollY;render(true);scrollTo(0,y)});
   const car=document.getElementById('car');
