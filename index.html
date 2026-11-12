@@ -2118,6 +2118,9 @@ body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;ba
 .hero-gp{display:inline-block;padding:0;border:0;background:none;line-height:0;cursor:pointer;border-radius:9px;transition:transform .15s ease}
 .hero-gp img{display:block;width:156px;height:52px}
 .hero-gp:hover{transform:translateY(-2px)}
+
+/* Everything band: girl sticker sits in the free space right of the tools grid, not over the tiles */
+@media (min-width:1001px){.ev-girl{right:auto;left:max(calc(50% + 84px),644px);width:210px;bottom:-80px}}
 /* Hero A (holos style, 1080 grid) */
 .hero-a{background:transparent;padding:72px 0 88px;overflow:hidden;position:relative}
 .ha-in{max-width:1120px;margin:0 auto;padding:0 20px;display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center}
