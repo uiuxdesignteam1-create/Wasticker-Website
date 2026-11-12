@@ -2169,6 +2169,25 @@ body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;ba
 .gd-d{font-size:17px;font-weight:500;line-height:24.65px;letter-spacing:normal;color:#615850;margin-top:8px}
 .gd-go{font-size:17px;font-weight:800;line-height:24.65px;letter-spacing:normal;color:#178A3A;margin-top:auto;padding-top:14px}
 @media (max-width:480px){.gd-tx b{font-size:20px;line-height:29px}.gd-d,.gd-go{font-size:17px}}
+
+/* Guide card (Figma 3387:41351): cover + body */
+.gd-grid{grid-auto-rows:1fr}
+.gc{display:flex;flex-direction:column;height:100%;border-radius:26px;background:#FFFDF9;overflow:hidden;text-decoration:none;color:inherit;box-shadow:0 1px 2px rgba(31,26,23,.05),0 12px 28px -14px rgba(59,38,22,.16);transition:transform .25s cubic-bezier(.2,.8,.2,1),box-shadow .25s ease}
+.gc:hover{transform:translateY(-3px);box-shadow:0 2px 4px rgba(31,26,23,.06),0 22px 40px -16px rgba(59,38,22,.24)}
+.gc-cv{position:relative;display:block;height:168px;background:var(--c);flex:none}
+.gc-pill{position:absolute;left:18px;top:18px;padding:6px 12px;border-radius:999px;background:#fff;color:#1F1A17;font:700 12px/1.2 Fredoka,sans-serif!important}
+.gc-art{position:absolute;left:50%;top:18px;width:120px;height:120px;margin-left:-60px;transform:rotate(-6deg);display:grid;place-items:center;font-size:84px;transition:transform .25s ease}
+.gc-art img{width:100%;height:100%;object-fit:contain;filter:drop-shadow(0 6px 10px rgba(0,0,0,.12))}
+.gc:hover .gc-art{transform:rotate(0deg) scale(1.06)}
+.gc-b{display:flex;flex-direction:column;gap:10px;padding:26px;flex:1}
+.gc-meta{display:flex;align-items:center;gap:8px}
+.gc-tag{padding:5px 11px;border-radius:999px;background:color-mix(in srgb,var(--c) 22%,transparent);color:#1F1A17;font:700 12px/1.25 Fredoka,sans-serif!important}
+.gc-rt{color:#857B72;font:600 13px/1.25 Fredoka,sans-serif!important}
+.gc-t{font:700 18px/24px Inter,sans-serif!important;color:#1F1A17;letter-spacing:normal}
+.gc-d{font:400 15px/22px Inter,sans-serif!important;color:#615850}
+.gc-go{margin-top:auto;font:700 15px/1.2 Inter,sans-serif!important;color:#178A3A}
+.gc:hover .gc-go span{display:inline-block;transform:translateX(3px);transition:transform .2s}
+@media (max-width:480px){.gc-cv{height:140px}.gc-art{width:100px;height:100px;margin-left:-50px;top:20px}.gc-b{padding:20px}}
 /* Hero A (holos style, 1080 grid) */
 .hero-a{background:transparent;padding:72px 0 88px;overflow:hidden;position:relative}
 .ha-in{max-width:1120px;margin:0 auto;padding:0 20px;display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center}
@@ -3459,8 +3478,8 @@ function tutCard(t){return `<a class="tcard" href="#article-${t.id}"><div class=
 function pageTutorials(){
   const ICON={'add-to-whatsapp':114,'photo-to-sticker':101,'remove-background':113,'animated-stickers':103,'eid-packs':102,'pack-rules':105};
   const TAG={'Getting started':'#B490FF','Create':'#FFD43B','Tools':'#FF9EC7','Collections':'#4BE0A3'};
-  const card=t=>{const p=byId(ICON[t.id]);const art=p&&p.img?`<img src="${p.img}" alt="" loading="lazy">`:stk(t.e);
-    return `<a class="gd-card" href="#article-${t.id}"><span class="gd-ic" style="--c:${t.c}">${art}</span><span class="gd-tx"><span class="gd-meta"><span class="gd-tag" style="--c:${TAG[t.cat]||'#5CC8FF'}">${esc(t.cat)}</span><span>${t.read} min read</span></span><b>${esc(t.t)}</b><span class="gd-d">${esc(t.x)}</span><span class="gd-go">Read the guide <span aria-hidden="true">→</span></span></span></a>`};
+  const card=t=>{const p=byId(ICON[t.id]);const art=p&&p.img?`<img src="${p.img}" alt="" loading="lazy">`:stk(t.e);const tc=TAG[t.cat]||'#5CC8FF';
+    return `<a class="gc" href="#article-${t.id}"><span class="gc-cv" style="--c:${t.c}"><span class="gc-pill">${esc(t.cat)}</span><span class="gc-art">${art}</span></span><span class="gc-b"><span class="gc-meta"><span class="gc-tag" style="--c:${tc}">${esc(t.cat)}</span><span class="gc-rt">${t.read} min read</span></span><b class="gc-t">${esc(t.t)}</b><span class="gc-d">${esc(t.x)}</span><span class="gc-go">Read the guide <span aria-hidden="true">→</span></span></span></a>`};
   return `<div class="gd"><div class="wrap">${crumbs([['Home','home'],['Guide']])}
     <h1>Sticker guides</h1><p class="gd-sub">Short, practical how-tos for making, adding and sharing stickers on your iPhone.</p>
     <div class="gd-grid">${TUTS.map(card).join('')}</div>
