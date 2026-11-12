@@ -2092,6 +2092,9 @@ body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;ba
 .rpm-note textarea:focus{outline:none;border-color:#1DB45F}
 .rpm-b{display:flex;justify-content:flex-end;gap:10px;margin-top:18px}
 .rpm-go:disabled{opacity:.5;cursor:not-allowed}
+
+.pk2-stk{margin-top:28px}
+.pk2-stk .pk2-tags{margin:22px 0 0}
 /* Hero A (holos style, 1080 grid) */
 .hero-a{background:transparent;padding:72px 0 88px;overflow:hidden;position:relative}
 .ha-in{max-width:1120px;margin:0 auto;padding:0 20px;display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center}
@@ -2688,7 +2691,7 @@ function pagePack(id){
       <div class="pk2-cover${p.anim?' anim':''}" style="background:${p.c}">${art}${p.anim?`<span class="anim-badge">Animated</span>`:''}</div>
       <div class="pk2-info">
         <h1>${full}</h1>
-        <p class="pk2-desc">${n} ${nm} stickers for your WhatsApp chats, ready to send. Free to add from the WaSticker app.</p>
+        <p class="pk2-desc">${n} ${nm} stickers made for WhatsApp, Telegram and iMessage. Open the pack in WaSticker to add it to your chats.</p>
         <p class="pk2-meta">${n} stickers · ${fmt(p.dl)} downloads · by <b>${esc(p.author)}</b>${p.author==='WaSticker'?`<span class="verified" title="Official pack">${I.check.replace('stroke="currentColor"','stroke="#fff"')}</span>`:''}</p>
         <div class="pk2-acts">
           <button class="pk2-btn pri" id="addWa"><span>Open in WaSticker</span>${I.arrow}</button>
@@ -2699,10 +2702,9 @@ function pagePack(id){
         <div id="waNote" hidden class="tip" style="max-width:520px;margin-top:16px">Open this page on your phone and tap <b>Open in WaSticker</b>. The WaSticker app adds the pack to WhatsApp. <a class="link" href="#article-add-to-whatsapp">Step-by-step guide</a></div>
       </div>
     </div>
-    <section class="pk2-sec">
-      <h2>All ${nm} stickers</h2>
-      <div class="pk2-tags"><a class="pk2-tag" href="#category-${c.slug}">${esc(c.name)} stickers</a>${p.tags.map(t=>`<a class="pk2-tag" href="#search" data-tag="${t}">#${esc(t)}</a>`).join('')}</div>
+    <section class="pk2-stk" aria-label="${nm} stickers">
       <div class="pk2-grid${p.anim?' anim':''}">${p.imgs?p.imgs.map((u,i)=>`<button aria-label="Sticker ${i+1}" data-e="${i}"><img src="${u}" alt="" loading="lazy"></button>`).join(''):p.e.map((e,i)=>`<button aria-label="Sticker ${i+1}" data-e="${e}">${stk(e)}</button>`).join('')}</div>
+      <div class="pk2-tags"><a class="pk2-tag" href="#category-${c.slug}">${esc(c.name)} stickers</a>${p.tags.map(t=>`<a class="pk2-tag" href="#search" data-tag="${t}">#${esc(t)}</a>`).join('')}</div>
     </section>
     <section class="pk2-sec">
       <h2>How to add ${nm} to WhatsApp</h2>
