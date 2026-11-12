@@ -2021,7 +2021,6 @@ input[type=search]::-webkit-search-cancel-button{margin-left:12px;flex:none;curs
  .pk2-head{grid-template-columns:1fr;gap:24px}
  .pk2-cover{width:180px}
  .pk2-acts .pk2-btn.pri{flex:1 1 100%}
- .pk2-acts #dlPack{flex:1}
  .pk2-steps{grid-template-columns:1fr;gap:14px}
  .pk2-cta{grid-template-columns:1fr;padding:30px 24px}
  .pk2-cta-art img,.pk2-cta-art span{width:84px;height:84px;font-size:60px}
@@ -2570,7 +2569,6 @@ function pagePack(id){
         <p class="pk2-meta">${n} stickers · ${fmt(p.dl)} downloads · by <b>${esc(p.author)}</b>${p.author==='WaSticker'?`<span class="verified" title="Official pack">${I.check.replace('stroke="currentColor"','stroke="#fff"')}</span>`:''}</p>
         <div class="pk2-acts">
           <button class="pk2-btn pri" id="addWa">${I.msg}<span>Add to WhatsApp</span></button>
-          <button class="pk2-btn" id="dlPack">${I.download}<span>Download</span></button>
           <button class="pk2-ico${fav?' on':''}" id="favPack" aria-pressed="${fav}" aria-label="${fav?'Remove from favorites':'Add to favorites'}" title="${fav?'Favorited':'Favorite'}">${I.heart}</button>
           <button class="pk2-ico" id="cpLink" aria-label="Share pack" title="Copy link">${I.share}</button>
         </div>
@@ -2603,7 +2601,7 @@ function pagePack(id){
 function wirePack(id){
   const p=byId(id);if(!p)return;
   document.getElementById('addWa').onclick=()=>getApp({title:`Add “${p.name}” to WhatsApp`,ct:'pack_add',art:p.img||p.e[0]});
-  document.getElementById('dlPack').onclick=()=>getApp({title:`Download “${p.name}”`,ct:'pack_download',art:p.img||p.e[0]});
+  const dlb=document.getElementById('dlPack');if(dlb)dlb.onclick=()=>getApp({title:`Download “${p.name}”`,ct:'pack_download',art:p.img||p.e[0]});
   document.getElementById('cpLink').onclick=()=>copy('https://wasticker.io/#pack-'+p.id,'Pack link copied');
   if(S.user&&S.pendingFav===p.id){S.pendingFav=null;S.favPacks=S.favPacks||[];if(!S.favPacks.includes(p.id)){S.favPacks.push(p.id);save();setTimeout(()=>toast('Added to My Favorites'),300);render(true);return}}
   document.getElementById('favPack').onclick=()=>{if(!S.user){S.after='pack-'+p.id;S.pendingFav=p.id;signInPrompt('save favorite packs','Sign in or create a free account to keep your favorite packs in one place.');return}S.favPacks=S.favPacks||[];const k=S.favPacks.indexOf(p.id);k<0?S.favPacks.push(p.id):S.favPacks.splice(k,1);toast(k<0?'Added to My Favorites':'Removed from My Favorites');render(true)};
