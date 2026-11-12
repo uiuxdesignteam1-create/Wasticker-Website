@@ -2278,14 +2278,14 @@ function header(route){
   document.getElementById('hdr').innerHTML=`<header class="hdr hx${scrollY>8?' scrolled':''}" id="hdrEl"><div class="wrap"><div class="hdr-in">
     <a class="logo" href="#home" aria-label="WaSticker home">${LOGO}<b>WaSticker</b></a>
     <div class="hx-right">
-      <nav class="hx-nav hide-m" aria-label="Main">${L('stickers','All Packs')}${L('stickers-animated','Animated')}${L('popular','Popular')}${L('categories','Categories')}${L('pricing','Pricing')}${L('tutorials','Guide')}</nav>
+      <nav class="hx-nav hide-m" aria-label="Main">${L('stickers','All Packs')}${L('stickers-animated','Animated')}${L('categories','Categories')}${L('pricing','Pricing')}${L('tutorials','Guide')}</nav>
       ${hxRight}
       <a class="hdr-open hx-get" href="${appUrl('header_open')}" target="_blank" rel="noopener">Get the app</a>
       <button class="menu-btn" id="mBtn" aria-label="Open menu" aria-expanded="false" aria-controls="mnav">${I.menu}</button>
     </div></div>
     <nav class="mnav" id="mnav" aria-label="Mobile" hidden>
       <a href="#create"${on('create')}>${ICO_CREATE} Create Sticker</a><a href="#pricing"${on('pricing')}>${ICO_PRICE} Pricing</a>
-      <a href="#stickers"${on('stickers')}><span class="mi">🤪</span>All Packs</a><a href="#stickers-animated"${on('stickers-animated')}><span class="mi">✨</span>Animated</a><a href="#popular"${on('popular')}><span class="mi">🔥</span>Popular</a><a href="#categories"${on('categories')}><span class="mi">🏷️</span>Categories</a><a href="#tutorials"${on('tutorials')}><span class="mi">🎓</span>Guide</a>
+      <a href="#stickers"${on('stickers')}><span class="mi">🤪</span>All Packs</a><a href="#stickers-animated"${on('stickers-animated')}><span class="mi">✨</span>Animated</a><a href="#categories"${on('categories')}><span class="mi">🏷️</span>Categories</a><a href="#tutorials"${on('tutorials')}><span class="mi">🎓</span>Guide</a>
       ${S.user?`<a href="#manager"${on('manager')}>📦 My sticker packs <span class="muted" style="margin-left:auto;font-size:14px">${cr}</span></a><div class="m-acts"><a href="#pricing">Buy credits</a><a href="#" id="signout2">Sign out</a></div>`
         :`<div class="m-acts"><a href="#pricing">Buy credits</a><a class="primary" href="#signin">Sign in</a></div>`}
     </nav></div></header>`;
