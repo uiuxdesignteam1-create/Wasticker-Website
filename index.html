@@ -2328,6 +2328,8 @@ html{overflow-x:clip}
 .ap-banner::before{display:none}
 .pcard .pmeta .pm-anim{font-style:normal;color:#178A3A;font-weight:600;display:inline-flex;align-items:center;gap:5px}
 .pcard .pmeta .pm-anim i{width:0;height:0;border-style:solid;border-width:4.5px 0 4.5px 7.5px;border-color:transparent transparent transparent currentColor;flex:none}
+.gd .pke h2{font-family:Inter,sans-serif;font-weight:700;letter-spacing:-.02em}
+.gd .ap-banner{margin-top:24px!important}
 /* Hero A (holos style, 1080 grid) */
 .hero-a{background:transparent;padding:72px 0 88px;overflow:hidden;position:relative}
 .ha-in{max-width:1120px;margin:0 auto;padding:0 20px;display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center}
@@ -3626,8 +3628,7 @@ function pageTutorials(){
   return `<div class="gd"><div class="wrap">${crumbs([['Home','home'],['Guide']])}
     <h1>Sticker guides</h1><p class="gd-sub">Short, practical how-tos for making, adding and sharing stickers on your iPhone.</p>
     <div class="gd-grid">${TUTS.map(card).join('')}</div>
-    <section class="pk2-cta gd-cta"><div><h2>Make stickers from your photos</h2><p>WaSticker cuts out the subject, adds the white outline and sends your pack to WhatsApp, Telegram and iMessage.</p><div class="gd-badges">${stores()}<button type="button" class="hero-gp" data-gp aria-label="Get it on Google Play"><img src="${GPLAY_BADGE}" alt="Get it on Google Play" width="156" height="52"></button></div></div>
-      <div class="ap-cta-art" aria-hidden="true">${byId(114)&&byId(114).img?`<img src="${byId(114).img}" alt="">`:stk('😺')}</div></section>
+    <div class="pk2-blk pk2-ctablk ap-banner">${bannerE(i=>{const p=byId(114);const u=p&&p.imgs&&p.imgs[i];return u?`<img src="${u}" alt="" loading="lazy">`:stk('😺')})}</div>
   </div></div>`;
 }
 function pageArticle(id){
