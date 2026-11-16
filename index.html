@@ -2334,6 +2334,13 @@ html{overflow-x:clip}
 @media (max-width:600px){.gd .gd-sub{font-size:15px!important}}
 /* home first screen: hero + feature strip + scroll cue fill the viewport; next section starts below the fold */
 @media (min-width:900px){.hero{display:flex;flex-direction:column;justify-content:center;min-height:calc(100vh - 200px);min-height:calc(100svh - 200px)}.hero>.wrap{width:100%}}
+/* Everything-you-need: phone as its own smaller layer inside the grid (desktop) */
+.ev-phone{display:none}
+@media (min-width:1001px){
+.ev-band{background-size:165% auto!important;background-position:left center!important}
+.ev-phone{display:block;position:absolute;z-index:1;right:-16px;top:50%;transform:translateY(-50%);height:clamp(440px,38vw,520px);aspect-ratio:912/1094;background-repeat:no-repeat;background-size:263% auto;background-position:99.2% 100%;-webkit-mask-image:linear-gradient(to right,transparent 0,#000 14%,#000 80%,transparent 100%),linear-gradient(to bottom,transparent 0,#000 4%,#000 76%,transparent 100%);-webkit-mask-composite:source-in;mask-image:linear-gradient(to right,transparent 0,#000 14%,#000 80%,transparent 100%),linear-gradient(to bottom,transparent 0,#000 4%,#000 76%,transparent 100%);mask-composite:intersect;pointer-events:none}
+.ev-star{right:auto;left:calc(100% - clamp(440px,38vw,520px) * .833 * .36);top:calc(50% - clamp(440px,38vw,520px) * .5 - 6px);width:clamp(72px,6.5vw,92px)}
+}
 /* Hero A (holos style, 1080 grid) */
 .hero-a{background:transparent;padding:72px 0 88px;overflow:hidden;position:relative}
 .ha-in{max-width:1120px;margin:0 auto;padding:0 20px;display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center}
@@ -2790,6 +2797,7 @@ function pageHome(){
   </div></section>
 
   <section class="ev-sec"><div class="ev-band" style="background-image:url(${ASSET.evBg})"><div class="wrap ev-inner">
+    <div class="ev-phone" style="background-image:url(${ASSET.evBg})" aria-hidden="true"></div>
     <img class="ev-orn ev-star" src="${ASSET.evStar}" alt="" width="110" height="110">
     <img class="ev-girl" src="${ASSET.evGirl}" alt="" width="260" height="260">
     <div class="ev-copy">
