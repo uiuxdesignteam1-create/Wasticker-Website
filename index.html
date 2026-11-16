@@ -2323,6 +2323,9 @@ html{overflow-x:clip}
 .ap-chip.on::before,.chip.on::before{content:"";display:inline-block;width:14px;height:14px;margin:0 6px -2px -3px;background:#fff;-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7.5'/%3E%3C/svg%3E") center/contain no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7.5'/%3E%3C/svg%3E") center/contain no-repeat}
 .ap-chip[data-f="all"]:not(.on),.chips>.chip[data-hc="all"]:not(.on),.chips>.chip[data-tc="all"]:not(.on){background:rgba(31,26,23,.06);color:#1F1A17}
 .ap-chip[data-f="all"]:not(.on):hover,.chips>.chip[data-hc="all"]:not(.on):hover,.chips>.chip[data-tc="all"]:not(.on):hover{background:rgba(31,26,23,.11);border-color:rgba(31,26,23,.16)}
+
+.ap-banner{margin-top:56px!important}
+.ap-banner::before{display:none}
 /* Hero A (holos style, 1080 grid) */
 .hero-a{background:transparent;padding:72px 0 88px;overflow:hidden;position:relative}
 .ha-in{max-width:1120px;margin:0 auto;padding:0 20px;display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center}
@@ -2863,10 +2866,7 @@ function pageStickers(kind){
     <p class="ap-sub">${sub}</p>
     <div class="ap-chiprow"><button type="button" class="ap-nav prev" aria-label="Scroll categories left" hidden>${I.left}</button><div class="ap-chips" role="group" aria-label="Filter by category">${chip('all','All packs','#1F1A17')}${cats.map(c=>chip(c.slug,c.name,catTint(c.slug))).join('')}</div><button type="button" class="ap-nav next" aria-label="Scroll categories right" hidden>${I.arrow}</button></div>
     ${shown.length?`<div class="grid ap-grid">${shown.map(packCard).join('')}</div>${list.length>per?`<div class="ap-more" id="apMore" aria-live="polite"><span class="ap-spin" aria-hidden="true"></span><span>Loading more packs…</span></div>`:''}`:emptyState('No packs here yet','Try another category.')}
-    <section class="pk2-cta ap-cta">
-      <div><h2>Make stickers from your photos</h2><p>WaSticker cuts out the subject, adds the outline and sends your pack to WhatsApp, Telegram and iMessage.</p><div class="ap-cta-acts"><a class="pk2-btn pri" href="#create"><span>Create Sticker</span></a>${stores()}</div></div>
-      <div class="ap-cta-art" aria-hidden="true">${cta?`<img src="${cta}" alt="">`:stk('😺')}</div>
-    </section>
+    <div class="pk2-blk pk2-ctablk ap-banner">${bannerE(i=>{const p=byId(114);const u=p&&p.imgs&&p.imgs[i];return u?`<img src="${u}" alt="" loading="lazy">`:stk('😺')})}</div>
   </div></div>`;
 }
 function wireListing(){
@@ -2911,6 +2911,13 @@ function pageCategory(slug){
     <div class="grid">${list.map(packCard).join('')}</div></div></div>`;
 }
 
+document.addEventListener('click',e=>{const g=e.target.closest&&e.target.closest('.pke [data-gp]');if(g)toast('The Android app is coming soon. Get WaSticker on the App Store for iPhone.')});
+function bannerE(art){return `    <section class="pke">
+      <div class="pke-tx"><h2>Make stickers from your photos</h2><p>WaSticker cuts out the subject, adds the white outline and sends your pack to WhatsApp.</p>
+        <div class="pke-badges"><a class="pk2-badge" href="${appUrl('banner_e')}" target="_blank" rel="noopener"><img src="${ASSET.appstore}" alt="Download on the App Store" width="138" height="46"></a><button type="button" class="pk2-badge" data-gp aria-label="Get it on Google Play"><img src="${GPLAY_BADGE}" alt="Get it on Google Play" width="138" height="46"></button></div></div>
+      <div class="pke-art" aria-hidden="true"><span class="pke-blob"></span><div class="pke-phone"><div class="pke-scr"><span class="pke-b" style="width:54%"></span><span class="pke-s pke-me">${art(0)}</span><span class="pke-b" style="width:43%"></span><span class="pke-s">${art(1)}</span></div></div></div>
+    </section>
+`}
 function pagePack(id){
   const p=byId(id);if(!p)return pageNotFound();const c=catOf(p.cat);
   const more=PACKS.filter(x=>x.id!==p.id&&x.cat===p.cat).concat(PACKS.filter(x=>x.id!==p.id&&x.cat!==p.cat).sort((a,b)=>b.dl-a.dl)).slice(0,5);
@@ -2950,11 +2957,7 @@ function pagePack(id){
       <div class="grid">${more.map(packCard).join('')}</div>
     </section>
     <div class="pk2-blk pk2-ctablk">
-    <section class="pke">
-      <div class="pke-tx"><h2>Make stickers from your photos</h2><p>WaSticker cuts out the subject, adds the white outline and sends your pack to WhatsApp.</p>
-        <div class="pke-badges"><a class="pk2-badge" href="${appUrl('pack_banner')}" target="_blank" rel="noopener"><img src="${ASSET.appstore}" alt="Download on the App Store" width="138" height="46"></a><button type="button" class="pk2-badge" data-gp aria-label="Get it on Google Play"><img src="${GPLAY_BADGE}" alt="Get it on Google Play" width="138" height="46"></button></div></div>
-      <div class="pke-art" aria-hidden="true"><span class="pke-blob"></span><div class="pke-phone"><div class="pke-scr"><span class="pke-b" style="width:54%"></span><span class="pke-s pke-me">${howArt(0)}</span><span class="pke-b" style="width:43%"></span><span class="pke-s">${howArt(1)}</span></div></div></div>
-    </section>
+    ${bannerE(howArt)}
     </div>
   </div></div>`;
 }
@@ -2971,7 +2974,6 @@ function reportModal(p){
 }
 function wirePack(id){
   const p=byId(id);if(!p)return;
-  document.querySelectorAll('.pke [data-gp]').forEach(b=>b.onclick=()=>toast('The Android app is coming soon. Get WaSticker on the App Store for iPhone.'));
   const rp=document.getElementById('repPack');if(rp)rp.onclick=()=>reportModal(p);
   const gpb=document.getElementById('gpPack');if(gpb)gpb.onclick=()=>toast('The Android app is coming soon. Get WaSticker on the App Store for iPhone.');
   document.getElementById('addWa').onclick=()=>getApp({title:`Open “${p.name}” in WaSticker`,ct:'pack_add',art:p.img||p.e[0]});
