@@ -2557,8 +2557,8 @@ PACKS.find(x=>x.id===103).imgScale=.72;
   const by=[...own.entries()].filter(([id])=>id!==p.id).map(([,v])=>v);const mix=[];for(let i=0;i<7;i++)for(const v of by)if(v[i])mix.push(v[i]);
   for(const u of [...mix,...pool]){if(p.imgs.length>=16)break;if(u&&!have.has(u)){p.imgs.push(u);have.add(u)}}}
 })();
-// pack cover colours: holos palette (mint, yellow, sky, pink, lilac, orange), rotating
-const PACK_COLORS=['#4BE0A3','#FFD43B','#5CC8FF','#FF9EC7','#B490FF','#FF9A4D'];
+// pack cover colours: holos palette softened (mint, yellow, sky, pink, lilac, orange), rotating
+const PACK_COLORS=['#BBF3DC','#FFEFB5','#C1EAFF','#FFDAEA','#E2D5FF','#FFD9BB']; // holos hues, soft 62% tint
 PACKS.forEach((p,i)=>{p.c=PACK_COLORS[i%6]});
 const byId=id=>PACKS.find(p=>p.id==id);
 const catOf=s=>CATS.find(c=>c.slug===s);
