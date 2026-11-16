@@ -2341,6 +2341,25 @@ html{overflow-x:clip}
 .ev-phone{display:block;position:absolute;z-index:1;right:-16px;top:50%;transform:translateY(-50%);height:clamp(440px,38vw,520px);aspect-ratio:912/1094;background-repeat:no-repeat;background-size:263% auto;background-position:99.2% 100%;-webkit-mask-image:linear-gradient(to right,transparent 0,#000 14%,#000 80%,transparent 100%),linear-gradient(to bottom,transparent 0,#000 4%,#000 76%,transparent 100%);-webkit-mask-composite:source-in;mask-image:linear-gradient(to right,transparent 0,#000 14%,#000 80%,transparent 100%),linear-gradient(to bottom,transparent 0,#000 4%,#000 76%,transparent 100%);mask-composite:intersect;pointer-events:none}
 .ev-star{right:auto;left:calc(100% - clamp(440px,38vw,520px) * .833 * .36);top:calc(50% - clamp(440px,38vw,520px) * .5 - 6px);width:clamp(72px,6.5vw,92px)}
 }
+/* My pack page: same layout as public pack page */
+.mpk .pk2-cover img{position:absolute;inset:14%;width:72%;height:72%;object-fit:contain}
+.mpk .pk2-cover{position:relative}
+.mpk .mpk-new{margin:0 0 12px}
+.mpk .mp-lock{display:inline-flex;vertical-align:middle;margin-right:8px}
+.mpk .mp-lock svg{width:28px;height:28px}
+.mpk-priv{display:inline-flex;align-items:center;height:22px;padding:0 9px;margin-left:8px;border-radius:999px;background:rgba(31,26,23,.07);color:#615850;font-size:12px;font-weight:600;vertical-align:middle}
+.mpk .pk2-btn.pri{gap:8px}
+.mpk .pk2-btn.pri svg{width:18px;height:18px}
+.mpk .pk2-row{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin-bottom:20px}
+.mpk .pk2-stk h2{margin:0}
+.mpk-count{font:500 14px/1 Fredoka,sans-serif;color:#857B72}
+.mpk-grid .pv-stk,.mpk-grid .pv-tile{width:auto;height:auto;aspect-ratio:1;border-radius:24px}
+.mpk-grid .pv-stk{background:#FFFDF9;border:1.5px solid rgba(31,26,23,.12)}
+.mpk-grid .pv-stk>img{position:absolute;inset:10%;width:80%;height:80%;object-fit:contain}
+.mpk-grid .pv-tile{border:1.5px dashed rgba(29,180,95,.55);background:#F3FBF6;color:#178A3A;font:600 14px/1.25 Fredoka,sans-serif}
+.mpk-grid .pv-tile svg{width:26px;height:26px}
+.mpk-grid .pv-tile:hover{background:#E8F7EE;border-color:#1DB45F}
+@media (max-width:600px){.mpk-grid .pv-stk,.mpk-grid .pv-tile{border-radius:16px}.mpk .mp-lock svg{width:22px;height:22px}}
 /* Hero A (holos style, 1080 grid) */
 .hero-a{background:transparent;padding:72px 0 88px;overflow:hidden;position:relative}
 .ha-in{max-width:1120px;margin:0 auto;padding:0 20px;display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center}
@@ -3389,45 +3408,41 @@ function pageMyPack(id){
   const st=packStk(p)||[{ph:p.img||null,key:p.img?null:'stk'}];
   const cover=p.id==='m0'?MILO.cover:mpImg(st[0]),fav=p.fav||[],fresh=S.freshPack===p.id,n=st.length;
   const author=p.author||(S.user?S.user.name:'you');
-  const url='https://wasticker.io/'+encodeURIComponent(author.toLowerCase().replace(/\s+/g,''))+'/'+encodeURIComponent(p.name.toLowerCase().replace(/\s+/g,'-'));
-  const more=PACKS.slice().sort((a,b)=>b.dl-a.dl).slice(0,10);
-  return `<div class="doodle"><div class="wrap pv">
+  const more=PACKS.slice().sort((a,b)=>b.dl-a.dl).slice(0,5);
+  const bg=PACK_COLORS[Math.max(0,(S.mine||[]).indexOf(p))%6];
+  const art=i=>{const s=st[i%st.length];return `<img src="${mpImg(s)}" alt="" loading="lazy">`};
+  const priv=p.priv||p.status==='Draft';
+  return `<div class="pk2 mpk"><div class="wrap">
     ${crumbs(fresh?[['Home','home'],['Create Sticker','create'],[p.name]]:[['Home','home'],['My Profile','manager'],[p.name]])}
-    <div class="pv-badges"><span class="pv-count">${n} ${n===1?'Sticker':'Stickers'}</span>${fresh?`<span class="mp-badge">${I.check} Pack created</span>`:''}</div>
-    <div class="pv-head">
-      <div class="pv-thumb"><img src="${cover}" alt=""></div>
-      <div class="pv-info">
-        <div><h1 class="pv-title">${p.priv||p.status==='Draft'?`<span class="mp-lock" title="Private pack">${MPI.lock}</span>`:''}${esc(p.name)}</h1>
-          <div class="pv-by">By ${esc(author)} <span class="pv-ver">${PVI.check}</span>${p.priv?'<span class="pv-priv">Private</span>':''}</div></div>
-        <div class="pv-stats"><span><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x=".84" y=".84" width="14.31" height="14.31" rx="7.16" fill="#25D366" stroke="#2C5F38"/><path d="M3.4 8c.9-1.7 2.7-2.9 4.6-2.9s3.7 1.2 4.6 2.9c-.9 1.7-2.7 2.9-4.6 2.9S4.3 9.7 3.4 8Z" fill="white" stroke="#2C5F38" stroke-width=".5" stroke-linejoin="round"/><circle cx="8" cy="8" r="1.5" fill="#2C5F38"/></svg>${fmt(p.views||0)} views</span><span>${MPI.dl}${fmt(p.dl||0)} downloads</span><span>${MPI.heart}${fmt(fav.length)} favorites</span></div>
-        ${p.tags&&p.tags.length?`<div class="pv-tags">${p.tags.map(t=>`<span>#${esc(t.toUpperCase())}</span>`).join('')}</div>`:''}
-        <div class="pv-acts">
-          <button class="pv-btn pri" id="mpWa">${PVI.msg}Open in App</button>
-          <button class="pv-btn" id="mpImp">${PVI.lib}Import from Library</button>
-          <button class="pv-btn" id="mpDl">${PVI.dlpack}Download Pack</button>
-          <button class="pv-btn" id="mpLink">${PVI.link}Copy Link</button>
-          <button class="pv-btn" id="mpShare">${PVI.share}Share</button>
+    <div class="pk2-head">
+      <div class="pk2-cover" style="background:${bg}"><img src="${cover}" alt=""></div>
+      <div class="pk2-info">
+        ${fresh?`<span class="mp-badge mpk-new">${I.check} Pack created</span>`:''}
+        <div class="pk2-titlerow"><h1>${priv?`<span class="mp-lock" title="Private pack">${MPI.lock}</span>`:''}${esc(p.name)}</h1><div class="pk2-icons"><button class="pk2-ico" id="mpLink" aria-label="Copy link" title="Copy link">${I.link}</button><button class="pk2-ico" id="mpShare" aria-label="Share" title="Share">${PVI.share}</button></div></div>
+        <p class="pk2-desc">Your sticker pack. Open it in the WaSticker app to add it to WhatsApp, or keep adding stickers below.</p>
+        <p class="pk2-meta">${n} ${n===1?'sticker':'stickers'} · ${fmt(p.dl||0)} downloads · by <b>${esc(author)}</b><span class="verified" title="Your pack">${I.check.replace('stroke="currentColor"','stroke="#fff"')}</span>${priv?'<span class="mpk-priv">Private</span>':''}</p>
+        <div class="pk2-acts">
+          <button class="pk2-btn pri" id="mpWa">Open in WaSticker ${I.arrow}</button>
+          <button class="pk2-btn pk2-open" id="mpImp">${PVI.lib}<span>Import from Library</span></button>
+          <button class="pk2-btn pk2-open" id="mpDl">${PVI.dlpack}<span>Download</span></button>
         </div>
-        <div id="mpNote" hidden class="tip" style="max-width:560px">WhatsApp needs at least 3 stickers in a pack. Add ${Math.max(0,3-n)} more, then open it in the WaSticker app.</div>
+        <div id="mpNote" hidden class="tip" style="max-width:520px;margin-top:16px">WhatsApp needs at least 3 stickers in a pack. Add ${Math.max(0,3-n)} more, then open it in the WaSticker app.</div>
       </div>
     </div>
-    <h2 class="pv-h2">Stickers in this pack</h2>
-    <div class="pv-grid">${st.map((s,i)=>`<div class="pv-stk"><img src="${mpImg(s)}" alt="Sticker ${i+1}"><button class="mp-fav${fav.includes(i)?' on':''}" data-fav="${i}" aria-label="Like sticker ${i+1}" aria-pressed="${fav.includes(i)}">${MPI.fav}</button></div>`).join('')}
-      <button class="pv-tile mp-imp">${I.layers}<span>Import from<br>Library</span></button>
-      <a class="pv-tile mp-new" href="#create"><span class="mp-plus">${MPI.plus}</span><span>Create Sticker</span></a></div>
-  </div>
-  <div class="pv-more"><div class="wrap">
-    <h2 class="pv-h2" style="margin-top:0">You Might Also Like</h2>
-    <div class="pv-mgrid">${more.map(packCard).join('')}</div>
-    <div class="pv-bottom">
-      <div class="pv-card pv-install" style="--doodle:url(${AIA.showbg})"><div class="pvi-left">
-          <div class="pvi-brand"><span class="pvi-logo">${LOGO}</span><span class="pvi-eyebrow">Free on iPhone</span></div>
-          <h3>Install WaSticker</h3><p>Make AI stickers and add whole packs to WhatsApp in one tap.</p>
-          <ul class="pvi-list"><li>${I.check}Text or photo to sticker with AI</li><li>${I.check}One tap export to WhatsApp</li><li>${I.check}Free to start</li></ul>
-          <a class="pvi-store" href="${appUrl('mypack_install')}" target="_blank" rel="noopener"><img src="${ASSET.appstore}" alt="Download on the App Store" width="156" height="52"></a></div>
-        <div class="pvi-art" aria-hidden="true">${[3,5,6,10,8].map((k,i)=>`<img class="a${i}" src="${AIA.styles[k].u}" alt="">`).join('')}</div><div class="pvi-qrwrap"><div class="pv-qr"><img src="${QR_APP}" alt="QR code to install WaSticker on iOS"><span class="pv-qr-logo">${LOGO}</span></div><span class="pvi-cap">Scan with your iPhone camera</span></div></div>
-          </div>
-  </div></div></div>`;
+    <section class="pk2-stk pk2-blk" aria-label="Stickers in this pack">
+      <div class="pk2-row"><h2>Stickers in this pack</h2><span class="mpk-count">${n} of 30</span></div>
+      <div class="pk2-grid mpk-grid">${st.map((s,i)=>`<div class="pv-stk"><img src="${mpImg(s)}" alt="Sticker ${i+1}"><button class="mp-fav${fav.includes(i)?' on':''}" data-fav="${i}" aria-label="Like sticker ${i+1}" aria-pressed="${fav.includes(i)}">${MPI.fav}</button></div>`).join('')}
+        <button class="pv-tile mp-imp">${I.layers}<span>Import from<br>Library</span></button>
+        <a class="pv-tile mp-new" href="#create"><span class="mp-plus">${MPI.plus}</span><span>Create Sticker</span></a></div>
+    </section>
+    <section class="pk2-sec pk2-blk">
+      <div class="pk2-row"><h2>You might also like</h2><a class="pk2-see" href="#stickers">See all →</a></div>
+      <div class="grid">${more.map(packCard).join('')}</div>
+    </section>
+    <div class="pk2-blk pk2-ctablk">
+    ${bannerE(art)}
+    </div>
+  </div></div>`;
 }
 function wireMyPack(id){
   const p=(S.mine||[]).find(x=>x.id===id);if(!p)return;
