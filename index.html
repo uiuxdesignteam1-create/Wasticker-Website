@@ -2326,6 +2326,8 @@ html{overflow-x:clip}
 
 .ap-banner{margin-top:56px!important}
 .ap-banner::before{display:none}
+.pcard .pmeta .pm-anim{font-style:normal;color:#178A3A;font-weight:600;display:inline-flex;align-items:center;gap:5px}
+.pcard .pmeta .pm-anim i{width:0;height:0;border-style:solid;border-width:4.5px 0 4.5px 7.5px;border-color:transparent transparent transparent currentColor;flex:none}
 /* Hero A (holos style, 1080 grid) */
 .hero-a{background:transparent;padding:72px 0 88px;overflow:hidden;position:relative}
 .ha-in{max-width:1120px;margin:0 auto;padding:0 20px;display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center}
@@ -2582,9 +2584,10 @@ function mineCard(p){const st=packStk(p)||[];const cov=p.img||(st[0]?mpImg(st[0]
   return `<a class="pcard" href="#mypack-${p.id}"><div class="pthumb" style="background:${p.c||'#DFF3E6'}">${cov?`<img src="${cov}" alt="" loading="lazy">`:stk((p.e||['🙂'])[0])}<span class="anim-badge mine-badge">Your pack</span></div><div class="pmeta"><b>${esc(p.name)}</b><span>${n} ${n===1?'Sticker':'Stickers'} / ${fmt(p.dl||0)} Downloads</span></div></a>`}
 function packCard(p){
   const art=p.img?`<img src="${p.img}" alt="" loading="lazy"${p.imgScale?` style="width:${p.imgScale*100}%;height:${p.imgScale*100}%"`:''}>`:stk(p.e[0]);
-  const meta=`${(p.imgs||p.e).length} Stickers / ${fmt(p.dl)} Downloads`;
+  const n=(p.imgs||p.e).length;
+  const meta=p.anim?`<em class="pm-anim"><i></i>Animated</em> · ${n} Stickers`:`${n} Stickers / ${fmt(p.dl)} Downloads`;
   return `<a class="pcard" href="#pack-${p.id}">
-    <div class="pthumb${p.anim?' anim':''}" style="background:${p.c}">${art}${p.anim?`<span class="anim-badge">Animated</span>`:''}</div>
+    <div class="pthumb${p.anim?' anim':''}" style="background:${p.c}">${art}</div>
     <div class="pmeta"><b>${esc(p.name)}</b><span>${meta}</span></div></a>`;
 }
 function stores(){return `<a class="store-img" href="${appUrl('store_badge')}" target="_blank" rel="noopener"><img src="${ASSET.appstore}" alt="Download on the App Store" width="156" height="52"></a>`}
