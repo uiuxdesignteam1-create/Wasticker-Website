@@ -2357,7 +2357,11 @@ html{overflow-x:clip}
 .mpk-grid .pv-stk{background:#FFFDF9;border:1.5px solid rgba(31,26,23,.12)}
 .mpk-grid .pv-stk>img{position:absolute;inset:10%;width:80%;height:80%;object-fit:contain}
 .mpk-grid .pv-tile{border:1.5px dashed rgba(29,180,95,.55);background:#F3FBF6;color:#178A3A;font:600 14px/1.25 Fredoka,sans-serif}
-.mpk-grid .pv-tile svg{width:26px;height:26px}
+.mpk-grid .pv-tile{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;padding:12px}
+.mpk-ic{display:grid;place-items:center;width:40px;height:40px;border-radius:50%;background:#1DB45F;color:#fff;flex:none}
+.mpk-grid .pv-tile .mpk-ic svg{width:20px;height:20px;display:block}
+.mpk-grid .pv-tile .mp-plus svg{width:40px;height:40px;display:block}
+.mpk-grid .pv-tile>span:last-child{display:block;line-height:1.25}
 .mpk-grid .pv-tile:hover{background:#E8F7EE;border-color:#1DB45F}
 @media (max-width:600px){.mpk-grid .pv-stk,.mpk-grid .pv-tile{border-radius:16px}.mpk .mp-lock svg{width:22px;height:22px}}
 /* Hero A (holos style, 1080 grid) */
@@ -3432,7 +3436,7 @@ function pageMyPack(id){
     <section class="pk2-stk pk2-blk" aria-label="Stickers in this pack">
       <div class="pk2-row"><h2>Stickers in this pack</h2><span class="mpk-count">${n} of 30</span></div>
       <div class="pk2-grid mpk-grid">${st.map((s,i)=>`<div class="pv-stk"><img src="${mpImg(s)}" alt="Sticker ${i+1}"><button class="mp-fav${fav.includes(i)?' on':''}" data-fav="${i}" aria-label="Like sticker ${i+1}" aria-pressed="${fav.includes(i)}">${MPI.fav}</button></div>`).join('')}
-        <button class="pv-tile mp-imp">${I.layers}<span>Import from<br>Library</span></button>
+        <button class="pv-tile mp-imp mpk-tile"><span class="mpk-ic">${I.layers}</span><span>Import from<br>Library</span></button>
         <a class="pv-tile mp-new" href="#create"><span class="mp-plus">${MPI.plus}</span><span>Create Sticker</span></a></div>
     </section>
     <section class="pk2-sec pk2-blk">
