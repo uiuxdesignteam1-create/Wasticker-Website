@@ -2281,6 +2281,15 @@ html{overflow-x:clip}
 .pk2-ctablk .pk2-cta{margin-top:0}
 .pk2{padding-bottom:24px}
 @media (max-width:600px){.pk2-blk{padding:36px 0}.pk2-stk.pk2-blk{padding-top:22px}}
+
+/* Pack page bottom banner: holos reference size */
+.pk2-ctablk .pk2-cta{max-width:984px;margin:0 auto;box-sizing:border-box;min-height:388px;padding:44px;border-radius:40px;grid-template-columns:minmax(0,430px) minmax(0,1fr);gap:36px}
+.pk2-ctablk .pk2-cta h2{font-size:34px;line-height:1.1;letter-spacing:-.01em}
+.pk2-ctablk .pk2-cta p{font-size:17px;line-height:24.65px;margin:16px 0 24px}
+.pk2-cta-art .pk2-cta-big,.pk2-cta-big{margin-left:0!important;filter:none!important;display:grid;place-items:center;width:272px;height:272px;max-width:100%;margin:0 auto;background:#fff;border-radius:56px;transform:rotate(-6deg);box-shadow:0 24px 50px -12px rgba(0,0,0,.5);font-size:200px;line-height:1}
+.pk2-cta-art .pk2-cta-big img{width:84%;height:84%;object-fit:contain;margin:0;transform:none;filter:none}
+.pk2-ctablk .pk2-cta-art{width:100%}
+@media (max-width:820px){.pk2-ctablk .pk2-cta{grid-template-columns:1fr;min-height:0;padding:32px 24px;border-radius:32px}.pk2-ctablk .pk2-cta h2{font-size:28px}.pk2-cta-art .pk2-cta-big{width:190px;height:190px;border-radius:40px;font-size:120px}}
 /* Hero A (holos style, 1080 grid) */
 .hero-a{background:transparent;padding:72px 0 88px;overflow:hidden;position:relative}
 .ha-in{max-width:1120px;margin:0 auto;padding:0 20px;display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center}
@@ -2876,7 +2885,7 @@ function pagePack(id){
   const nm=esc(p.name),full=/stickers?$/i.test(p.name)?nm:nm+' stickers';
   const art=p.img?`<img src="${p.img}" alt="${nm}">`:stk(p.e[0]);
   const howArt=i=>{const u=(p.imgs||[])[i];return u?`<img src="${u}" alt="" loading="lazy">`:stk((p.e||[])[i]||'😺')};
-  const ctaArt=(p.imgs||[]).slice(0,4).map((u,i)=>`<img src="${u}" alt="" style="--r:${[-8,5,-3,7][i]}deg">`).join('')||p.e.slice(0,4).map((e,i)=>`<span style="--r:${[-8,5,-3,7][i]}deg">${stk(e)}</span>`).join('');
+  const ctaArt=`<span class="pk2-cta-big">${p.img?`<img src="${p.img}" alt="">`:stk(p.e[0])}</span>`;
   return `<div class="pk2"><div class="wrap">
     ${crumbs([['Home','home'],['All stickers','stickers'],[c.name,'category-'+c.slug],[p.name]])}
     <div class="pk2-head">
