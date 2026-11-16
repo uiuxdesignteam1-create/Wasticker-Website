@@ -2256,6 +2256,20 @@ body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;ba
 .hdr.hx .hx-link.on{color:#0C4222}
 .hdr.hx .hx-cta,.hdr.hx .hx-get{font-family:ui-rounded,"SF Pro Rounded",Nunito,system-ui,-apple-system,sans-serif;font-weight:600}
 .hx-nav{gap:2px}
+
+/* Pack page: How to add (variation A — step cards with a sticker) */
+.pk2-howa h2{margin:0 0 22px}
+.pha-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px}
+.pha-card{background:#FFFDF9;border-radius:24px;overflow:hidden;box-shadow:0 1px 2px rgba(31,26,23,.05),0 12px 28px -14px rgba(59,38,22,.16);display:flex;flex-direction:column}
+.pha-top{position:relative;height:120px;background:color-mix(in srgb,var(--c) 35%,#FFFDF9)}
+.pha-top i{position:absolute;left:20px;top:20px;display:grid;place-items:center;width:34px;height:34px;border-radius:50%;background:#1DB45F;color:#fff;font:700 16px/1 Fredoka,sans-serif;font-style:normal}
+.pha-stk{position:absolute;right:24px;top:12px;width:96px;height:96px;display:grid;place-items:center;font-size:68px;line-height:1;transform:rotate(var(--r));transition:transform .25s ease}
+.pha-stk img{width:100%;height:100%;object-fit:contain;filter:drop-shadow(0 6px 10px rgba(0,0,0,.12))}
+.pha-card:hover .pha-stk{transform:rotate(0deg) scale(1.06)}
+.pha-body{padding:18px 20px 22px}
+.pha-body b{display:block;font:700 18px/1.3 Fredoka,sans-serif;color:#1F1A17}
+.pha-body p{margin:6px 0 0;font:500 14px/1.5 Fredoka,sans-serif;color:#615850}
+@media (max-width:820px){.pha-grid{grid-template-columns:1fr;gap:14px}.pha-top{height:104px}.pha-stk{width:84px;height:84px;font-size:58px}}
 /* Hero A (holos style, 1080 grid) */
 .hero-a{background:transparent;padding:72px 0 88px;overflow:hidden;position:relative}
 .ha-in{max-width:1120px;margin:0 auto;padding:0 20px;display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center}
@@ -2872,21 +2886,10 @@ function pagePack(id){
       <div class="pk2-grid${p.anim?' anim':''}">${p.imgs?p.imgs.map((u,i)=>`<button aria-label="Sticker ${i+1}" data-e="${i}"><img src="${u}" alt="" loading="lazy"></button>`).join(''):p.e.map((e,i)=>`<button aria-label="Sticker ${i+1}" data-e="${e}">${stk(e)}</button>`).join('')}</div>
       <div class="pk2-tags"><a class="pk2-tag" href="#category-${c.slug}">${esc(c.name)} stickers</a>${p.tags.map(t=>`<a class="pk2-tag" href="#search" data-tag="${t}">#${esc(t)}</a>`).join('')}</div>
     </section>
-    <section class="pk2-sec pk2-how">
-      <div class="pkh-art" aria-hidden="true"><div class="pkh-phone"><div class="pkh-scr">
-        <span class="pkh-b" style="width:58%"></span>
-        <span class="pkh-s pkh-me">${howArt(0)}</span>
-        <span class="pkh-b" style="width:46%"></span>
-        <span class="pkh-s">${howArt(1)}</span>
-        <span class="pkh-s pkh-me pkh-sm">${howArt(2)}</span>
-      </div></div><span class="pkh-float">${howArt(3)}</span></div>
-      <div class="pkh-steps">
-        <h2>How to add ${nm} to WhatsApp</h2>
-        <ol>
-          <li><i>1</i><div><b>Get WaSticker</b><p>Free on the App Store for iPhone.</p></div></li>
-          <li><i>2</i><div><b>Open the pack</b><p>Open this page on your iPhone and tap Open in WaSticker, or search ${nm} in the app.</p></div></li>
-          <li><i>3</i><div><b>Send it</b><p>Tap Add to WhatsApp. The pack appears in your WhatsApp sticker tray.</p></div></li>
-        </ol>
+    <section class="pk2-sec pk2-howa">
+      <h2>How to add ${nm} to WhatsApp</h2>
+      <div class="pha-grid">
+        ${[['Get WaSticker','Free on the App Store for iPhone.','#5CC8FF',-6],['Open the pack',`Open this page on your iPhone and tap Open in WaSticker, or search ${nm} in the app.`,'#FFD43B',6],['Send it','Tap Add to WhatsApp. The pack appears in your WhatsApp sticker tray.','#4BE0A3',-6]].map(([t,d,c,r],i)=>`<div class="pha-card"><div class="pha-top" style="--c:${c}"><i>${i+1}</i><span class="pha-stk" style="--r:${r}deg">${howArt(i)}</span></div><div class="pha-body"><b>${t}</b><p>${d}</p></div></div>`).join('')}
       </div>
     </section>
     <section class="pk2-sec">
