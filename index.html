@@ -2306,6 +2306,12 @@ html{overflow-x:clip}
 .pke-s img{width:100%;height:100%;object-fit:contain;filter:drop-shadow(0 4px 8px rgba(0,0,0,.12))}
 .pke-me{align-self:flex-end}
 @media (max-width:820px){.pke{grid-template-columns:1fr;min-height:0;padding:32px 24px 0;border-radius:32px;gap:24px}.pke h2{font-size:28px}.pke-art{min-height:260px;margin:0 -24px}.pke-blob{width:300px;height:300px;margin-left:-150px;top:20px}.pke-phone{top:20px}}
+
+/* Open in WaSticker: secondary style so the navbar Create Sticker stays the only green CTA */
+.pk2-btn.pk2-open{height:46px;padding:0 20px;background:#FFFFFF;border:1.5px solid rgba(31,26,23,.18);color:#1F1A17;box-shadow:0 3px 0 rgba(31,26,23,.08)}
+.pk2-btn.pk2-open svg{width:18px;height:18px}
+.pk2-btn.pk2-open:hover{border-color:#1F1A17;background:#FFFFFF;transform:translateY(1px);box-shadow:0 2px 0 rgba(31,26,23,.08)}
+@media (max-width:820px){.pk2-acts .pk2-btn.pk2-open{flex:1 1 100%}}
 /* Hero A (holos style, 1080 grid) */
 .hero-a{background:transparent;padding:72px 0 88px;overflow:hidden;position:relative}
 .ha-in{max-width:1120px;margin:0 auto;padding:0 20px;display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center}
@@ -2913,7 +2919,7 @@ function pagePack(id){
         <div class="pk2-acts">
           <a class="pk2-badge" href="${appUrl('pack_store')}" target="_blank" rel="noopener"><img src="${ASSET.appstore}" alt="Download on the App Store" width="138" height="46"></a>
           <button type="button" class="pk2-badge" id="gpPack" aria-label="Get it on Google Play"><img src="${GPLAY_BADGE}" alt="Get it on Google Play" width="138" height="46"></button>
-          <button class="pk2-btn pri" id="addWa"><span>Open in WaSticker</span>${I.arrow}</button>
+          <button class="pk2-btn pk2-open" id="addWa"><span>Open in WaSticker</span>${I.arrow}</button>
         </div>
         <div id="waNote" hidden class="tip" style="max-width:520px;margin-top:16px">Open this page on your phone and tap <b>Open in WaSticker</b>. The WaSticker app adds the pack to WhatsApp. <a class="link" href="#article-add-to-whatsapp">Step-by-step guide</a></div>
       </div>
