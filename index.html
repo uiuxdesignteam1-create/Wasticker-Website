@@ -2364,6 +2364,7 @@ html{overflow-x:clip}
 .mpk-grid .pv-tile>span:last-child{display:block;line-height:1.25}
 .mpk-grid .pv-tile:hover{background:#E8F7EE;border-color:#1DB45F}
 @media (max-width:600px){.mpk-grid .pv-stk,.mpk-grid .pv-tile{border-radius:16px}.mpk .mp-lock svg{width:22px;height:22px}}
+.see-all .btn-see{border-radius:999px;font-weight:600}
 /* Hero A (holos style, 1080 grid) */
 .hero-a{background:transparent;padding:72px 0 88px;overflow:hidden;position:relative}
 .ha-in{max-width:1120px;margin:0 auto;padding:0 20px;display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center}
@@ -2755,7 +2756,7 @@ function pageHome(){
       ${CATS.map(c=>`<button class="chip${f===c.slug?' on':''}" data-hc="${c.slug}" style="--c:${catTint(c.slug)}">${c.name}</button>`).join('')}
     </div><button class="chip-nav next" aria-label="Scroll categories right">${I.right}</button></div>
     <div class="grid" id="homeGrid">${list.map(packCard).join('')}</div>
-    <div class="see-all"><a class="btn-see" href="#categories">See all categories ${I.arrow}</a></div>
+    <div class="see-all"><a class="btn-see" href="#stickers">Browse all packs ${I.arrow}</a></div>
   </div></section>
 
   <section class="doodle"><div class="wrap">
