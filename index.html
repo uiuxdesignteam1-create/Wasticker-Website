@@ -2478,6 +2478,9 @@ body.is-ap #hdr{position:relative}
 .pcard .pmeta .pm-stats2{gap:8px}
 @keyframes pkFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
 .pk-newp{animation:pkFloat 2.4s ease-in-out infinite;box-shadow:0 4px 10px rgba(31,26,23,.18)}
+.pcard .pthumb{overflow:visible}
+.pk-newp{right:8px;bottom:-7px;background:#FFFFFF}
+@media (max-width:600px){.pk-newp{right:6px;bottom:-6px}}
 .pcard:nth-child(2n) .pk-newp{animation-delay:-.8s}.pcard:nth-child(3n) .pk-newp{animation-delay:-1.6s}
 @media (prefers-reduced-motion:reduce){.pk-newp{animation:none}}
 @media (max-width:600px){.pk-newp{right:6px;bottom:6px;height:20px;padding:0 7px;font-size:10px}.pcard .pmeta .pm-stats2{gap:6px}}
