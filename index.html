@@ -3051,7 +3051,6 @@ function apResults(list,q){const per=20,shown=list.slice(0,per);
   if(!shown.length)return emptyState('No packs here yet','Try another category.');
   return `<div class="grid ap-grid">${shown.map((p,i)=>apCard(p,i)).join('')}</div>${list.length>per?`<div class="ap-more" id="apMore" aria-live="polite"><span class="ap-spin" aria-hidden="true"></span><span>Loading more packs…</span></div>`:''}`}
 function apCard(p,i){let h=packCard(window.__apNew&&window.__apNew.has(p.id)?Object.assign(Object.create(p),{isNew:1}):p);const t=window.__apTab,b=[];
-  if((t==='top'||t==='trending')&&!(S.apq||'').trim()&&i<99)b.push(`<span class="pk-rank${i<3?' gold':''}${t==='trending'?' hot':''}">${t==='trending'?'<i></i>':''}#${i+1}</span>`);
   return b.length?h.replace(/(<div class="pthumb[^"]*"[^>]*>)/,'$1<span class="pk-badges">'+b.join('')+'</span>'):h}
 function apMountMore(){const more=document.getElementById('apMore'),grid=document.querySelector('.ap-grid');if(window.__apIO){window.__apIO.disconnect();window.__apIO=null}
   if(!(more&&grid&&window.__apList))return;let n=grid.children.length;const list=window.__apList;
