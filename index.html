@@ -2562,6 +2562,22 @@ body.is-ap #hdr{position:relative}
 @media (max-width:600px){.stp-big{border-radius:36px;transform:none}.stp-fav{width:42px;height:42px;top:14px;right:14px}.stp-anim{top:18px;left:16px}.stp-info h1{font-size:30px}.stp-desc{font-size:15px}.stp-meta{font-size:13px}.stp-tag{height:32px;padding:0 12px;font-size:13px}.st-grid,.st-grid.st-rel{grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}.st-tile,.pk2-st{border-radius:16px}.st-heart{width:28px;height:28px;top:6px;right:6px}.stp-band{padding:28px 0 32px}.stp-get .stp-acts .pk2-open{flex:1 1 100%}
  .stp-sticky{display:flex;position:fixed;left:20px;right:20px;bottom:calc(16px + env(safe-area-inset-bottom));z-index:60;height:54px;align-items:center;justify-content:center;border-radius:999px;background:#1DB45F;color:#fff;font:600 17px/1 Fredoka,sans-serif;text-decoration:none;box-shadow:0 3px 0 #13863F,0 12px 24px -8px rgba(0,0,0,.3)}
  .stp{padding-bottom:84px}}
+/* Share sheet (app style) */
+.mdl.shr-mdl{width:min(560px,100%);max-height:none;border-radius:32px;background:#F7F4EF}
+.shr{padding:28px 24px 26px}
+.shr h2{font:600 24px/1.2 Fredoka,sans-serif;color:#1F1A17;text-align:center;margin:2px 40px 22px}
+.shr-row{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.shr-b{display:flex;align-items:center;justify-content:center;gap:9px;height:56px;padding:0 12px;border-radius:999px;border:0;cursor:pointer;font:600 17px/1 Fredoka,sans-serif;color:#fff;transition:transform .15s ease,filter .15s ease}
+.shr-b svg{width:26px;height:26px;flex:none}
+.shr .shr-b{display:flex!important;flex-direction:row!important;flex-wrap:nowrap;white-space:nowrap}
+.shr-b span{min-width:0;overflow:hidden;text-overflow:ellipsis}
+@media (max-width:420px){.shr-b{font-size:14px!important;gap:5px!important;padding:0 6px!important}.shr-b svg{width:20px!important;height:20px!important}}
+.shr-b:hover{transform:translateY(-1px);filter:brightness(1.04)}
+.shr-b:active{transform:translateY(1px)}
+.shr-b.wa{background:#2BD366}.shr-b.im{background:#3E9BFA}.shr-b.ms{background:#0A9AE0}
+.shr-b.lt{background:#fff;color:#1F1A17;box-shadow:0 1px 0 rgba(31,26,23,.06),0 0 0 1px rgba(31,26,23,.05)}
+@media (max-width:600px){.mdl-bg:has(.shr-mdl){align-items:flex-end;padding:0}.mdl.shr-mdl{width:100%;border-radius:28px 28px 0 0;animation:shr-up .28s ease}.shr{padding:24px 16px calc(28px + env(safe-area-inset-bottom))}.shr h2{font-size:22px}.shr-row{gap:10px}.shr-b{height:52px;font-size:15px;gap:7px;padding:0 8px}.shr-b svg{width:22px;height:22px}}
+@keyframes shr-up{from{transform:translateY(100%)}to{transform:none}}
 /* Hero A (holos style, 1080 grid) */
 .hero-a{background:transparent;padding:72px 0 88px;overflow:hidden;position:relative}
 .ha-in{max-width:1120px;margin:0 auto;padding:0 20px;display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center}
@@ -3221,6 +3237,23 @@ const STI={dl:'<svg viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="
 const stTint=c=>`color-mix(in srgb,${c} 45%,#FFFFFF)`;
 function stFavKey(id,n){return id+':'+n}
 function stTile(p,i,cur){const items=p.imgs||p.e,x=items[i],key=stFavKey(p.id,i+1),on=(S.favStk||[]).includes(key);return `<a class="st-tile${cur?' cur':''}" href="#sticker-${p.id}-${i+1}" aria-label="${esc(p.name)} sticker ${i+1}"${cur?' aria-current="page"':''}>${p.imgs?`<img src="${x}" alt="" loading="lazy">`:stk(x)}<button type="button" class="st-heart${on?' on':''}" data-stfav="${key}" aria-label="${on?'Remove from':'Add to'} favorites" aria-pressed="${on}">${I.heart}</button></a>`}
+const SHI={wa:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.5 11.6a8.6 8.6 0 0 1-12.7 7.6L3.5 20.5l1.3-4.2a8.6 8.6 0 1 1 15.7-4.7Z"/><path d="M9 8.6c.2-.5.6-.6.9-.6h.4c.2 0 .4.1.5.4l.6 1.5c.1.2 0 .5-.1.7l-.5.6c.6 1.1 1.5 2 2.6 2.6l.6-.5c.2-.2.5-.2.7-.1l1.5.6c.3.1.4.3.4.5v.4c0 .3-.1.7-.6.9-.6.3-1.5.4-2.7-.1-1.9-.8-3.4-2.3-4.2-4.2-.5-1.2-.4-2.1-.1-2.7Z" fill="currentColor" stroke="none"/></svg>',im:'<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 3.5c5.2 0 9.4 3.5 9.4 7.8s-4.2 7.8-9.4 7.8c-1 0-2-.1-2.9-.4L4.6 20.5l1.3-3.6A7.4 7.4 0 0 1 2.6 11.3C2.6 7 6.8 3.5 12 3.5Z"/></svg>',ms:'<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 2.8c-5.2 0-9.2 3.8-9.2 8.9 0 2.7 1.1 5 2.9 6.6v3.2l2.9-1.6c1 .3 2.2.5 3.4.5 5.2 0 9.2-3.8 9.2-8.8S17.2 2.8 12 2.8Z" fill="#fff"/><path d="m6.6 14.4 2.9-4.6 2.3 1.8 3.3-1.8-2.9 4.6-2.3-1.8-3.3 1.8Z" fill="#0A9AE0"/></svg>',lib:'<svg viewBox="0 0 24 24" aria-hidden="true"><g transform="translate(12 12)"><ellipse rx="3.2" ry="6" cy="-5.2" fill="#F7B500"/><ellipse rx="3.2" ry="6" cy="-5.2" transform="rotate(45)" fill="#F78A1D" opacity=".9"/><ellipse rx="3.2" ry="6" cy="-5.2" transform="rotate(90)" fill="#EE4A55" opacity=".9"/><ellipse rx="3.2" ry="6" cy="-5.2" transform="rotate(135)" fill="#C64BC4" opacity=".9"/><ellipse rx="3.2" ry="6" cy="-5.2" transform="rotate(180)" fill="#5E6DE6" opacity=".9"/><ellipse rx="3.2" ry="6" cy="-5.2" transform="rotate(225)" fill="#2FA9E8" opacity=".9"/><ellipse rx="3.2" ry="6" cy="-5.2" transform="rotate(270)" fill="#34C759" opacity=".9"/><ellipse rx="3.2" ry="6" cy="-5.2" transform="rotate(315)" fill="#B6D72C" opacity=".9"/></g></svg>',cp:'<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="2.5" width="12" height="15" rx="3" fill="#1DB45F"/><rect x="4" y="6.5" width="12" height="15" rx="3" fill="#25D366" stroke="#fff" stroke-width="1.6"/></svg>',mo:'<svg viewBox="0 0 24 24" fill="none" stroke="#1DB45F" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 15V4m0 0L7.5 8.5M12 4l4.5 4.5"/><path d="M5 13v5a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-5"/></svg>'};
+function shareSheet(p,n){const url='https://wasticker.io/#sticker-'+p.id+'-'+n,img=(p.imgs||[])[n-1],txt=`${p.name} sticker ${n} on WaSticker`;
+  const m=modal(`<div class="shr"><h2>Share sticker</h2><div class="shr-row">
+    <button type="button" class="shr-b wa" data-sh="wa">${SHI.wa}<span>WhatsApp</span></button>
+    <button type="button" class="shr-b im" data-sh="im">${SHI.im}<span>iMessage</span></button>
+    <button type="button" class="shr-b ms" data-sh="ms">${SHI.ms}<span>Messenger</span></button>
+    <button type="button" class="shr-b lt" data-sh="lib">${SHI.lib}<span>Library</span></button>
+    <button type="button" class="shr-b lt" data-sh="cp">${SHI.cp}<span>Copy</span></button>
+    <button type="button" class="shr-b lt" data-sh="mo">${SHI.mo}<span>More</span></button></div></div>`,'shr-mdl');
+  const mob=/iPhone|iPad|Android/i.test(navigator.userAgent);
+  m.querySelectorAll('[data-sh]').forEach(b=>b.onclick=async()=>{const k=b.dataset.sh;
+    if(k==='wa'){window.open('https://wa.me/?text='+encodeURIComponent(txt+' '+url),'_blank','noopener');closeModal()}
+    else if(k==='im'){location.href='sms:&body='+encodeURIComponent(txt+' '+url);closeModal()}
+    else if(k==='ms'){if(mob)location.href='fb-messenger://share/?link='+encodeURIComponent(url);else{window.open('https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(url),'_blank','noopener')}closeModal()}
+    else if(k==='lib'){if(img){const a=document.createElement('a');a.href=img;a.download=(p.name+'-sticker-'+n).replace(/\s+/g,'-').toLowerCase()+'.png';document.body.appendChild(a);a.click();a.remove();toast('Sticker saved')}else toast('Open the pack in WaSticker to save this sticker');closeModal()}
+    else if(k==='cp'){let ok=false;if(img&&navigator.clipboard&&window.ClipboardItem){try{const bl=await fetch(img).then(r=>r.blob());const png=bl.type==='image/png'?bl:await new Promise(res=>{const i=new Image();i.crossOrigin='anonymous';i.onload=()=>{const c=document.createElement('canvas');c.width=i.naturalWidth;c.height=i.naturalHeight;c.getContext('2d').drawImage(i,0,0);c.toBlob(res,'image/png')};i.src=URL.createObjectURL(bl)});await navigator.clipboard.write([new ClipboardItem({'image/png':png})]);ok=true;toast('Sticker copied')}catch(e){}}if(!ok)copy(url,'Sticker link copied');closeModal()}
+    else if(k==='mo'){if(navigator.share){navigator.share({title:txt,url}).catch(()=>{})}else copy(url,'Sticker link copied');closeModal()}})}
 function pageSticker(id,n){
   const p=byId(id);if(!p)return pageNotFound();const items=p.imgs||p.e,N=items.length;if(!(n>=1&&n<=N))n=1;const i=n-1,x=items[i];
   const c=catOf(p.cat)||{name:'Sticker',slug:p.cat};const key=stFavKey(p.id,n),fav=(S.favStk||[]).includes(key);
@@ -3260,7 +3293,7 @@ function pageSticker(id,n){
 function wireSticker(id,n){const p=byId(id);if(!p)return;
   document.title=`${p.name} Sticker ${n} for WhatsApp, Telegram & iMessage · WaSticker`;
   const L=document.getElementById('stLink');if(L)L.onclick=()=>copy('https://wasticker.io/#sticker-'+p.id+'-'+n,'Sticker link copied');
-  const Sh=document.getElementById('stShare');if(Sh)Sh.onclick=()=>{const url='https://wasticker.io/#sticker-'+p.id+'-'+n;if(navigator.share)navigator.share({title:p.name+' sticker '+n,url}).catch(()=>{});else copy(url,'Sticker link copied')};
+  const Sh=document.getElementById('stShare');if(Sh)Sh.onclick=()=>shareSheet(p,n);
   const F=document.getElementById('stFollow');if(F)F.onclick=()=>{const on=F.classList.toggle('on');F.textContent=on?'Following':'Follow';toast(on?'You’re following braincraft':'Unfollowed')};
   document.querySelectorAll('.stp-tag[data-tag]').forEach(a=>a.onclick=e=>{e.preventDefault();S.apq=a.dataset.tag;S.filter='all';location.hash='stickers'});
   const tile=document.querySelector('.st-tile.cur');if(tile&&tile.parentElement.scrollWidth>tile.parentElement.clientWidth)tile.parentElement.scrollLeft=tile.offsetLeft-40;
