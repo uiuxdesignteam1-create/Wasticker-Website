@@ -2359,6 +2359,9 @@ html{overflow-x:clip}
 .mpk-count{font:500 14px/1 Fredoka,sans-serif;color:#857B72}
 .mpk-grid .pv-stk,.mpk-grid .pv-tile{width:auto;height:auto;aspect-ratio:1;border-radius:24px}
 .mpk-grid .pv-stk{background:#FFFDF9;border:1.5px solid rgba(31,26,23,.12)}
+.mpk-grid .pv-stk .st-heart{position:absolute;top:8px;right:8px;width:32px;height:32px;z-index:2}
+.mpk-grid .pv-stk:hover .st-heart{opacity:1}
+@media (max-width:600px){.mpk-grid .pv-stk .st-heart{width:28px;height:28px;top:6px;right:6px}}
 .mpk-grid .pv-stk>img{position:absolute;inset:10%;width:80%;height:80%;object-fit:contain}
 .mpk-grid .pv-tile{border:1.5px dashed rgba(29,180,95,.55);background:#F3FBF6;color:#178A3A;font:600 14px/1.25 Fredoka,sans-serif}
 .mpk-grid .pv-tile{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;padding:12px}
@@ -3778,7 +3781,7 @@ function pageMyPack(id){
       <div class="pk2-cover"><img src="${cover}" alt=""></div>
       <div class="pk2-info">
         ${fresh?`<span class="mp-badge mpk-new">${I.check} Pack created</span>`:''}
-        <div class="pk2-titlerow"><h1>${priv?`<span class="mp-lock" title="Private pack">${MPI.lock}</span>`:''}${esc(p.name)}</h1><div class="pk2-icons"><button class="pk2-ico" id="mpLink" aria-label="Copy link" title="Copy link">${I.link}</button><button class="pk2-ico" id="mpShare" aria-label="Share" title="Share">${PVI.share}</button></div></div>
+        <div class="pk2-titlerow"><h1>${priv?`<span class="mp-lock" title="Private pack">${MPI.lock}</span>`:''}${esc(p.name)}</h1><div class="pk2-icons"><button class="pk2-ico" id="mpLink" aria-label="Copy link" title="Copy link">${I.link}</button><button class="pk2-ico" id="mpShare" aria-label="Share" title="Share">${STI.share}</button></div></div>
         <p class="pk2-desc">Your sticker pack. Open it in the WaSticker app to add it to WhatsApp, or keep adding stickers below.</p>
         <p class="pk2-meta">${n} ${n===1?'sticker':'stickers'} · ${fmt(p.dl||0)} downloads · by <b>${esc(author)}</b><span class="verified" title="Your pack">${I.check.replace('stroke="currentColor"','stroke="#fff"')}</span>${priv?'<span class="mpk-priv">Private</span>':''}</p>
         <div class="pk2-acts">
@@ -3791,7 +3794,7 @@ function pageMyPack(id){
     </div>
     <section class="pk2-stk pk2-blk" aria-label="Stickers in this pack">
       <div class="pk2-row"><h2>Stickers in this pack</h2><span class="mpk-count">${n} of 30</span></div>
-      <div class="pk2-grid mpk-grid">${st.map((s,i)=>`<div class="pv-stk"><img src="${mpImg(s)}" alt="Sticker ${i+1}"><button class="mp-fav${fav.includes(i)?' on':''}" data-fav="${i}" aria-label="Like sticker ${i+1}" aria-pressed="${fav.includes(i)}">${MPI.fav}</button></div>`).join('')}
+      <div class="pk2-grid mpk-grid">${st.map((s,i)=>`<div class="pv-stk"><img src="${mpImg(s)}" alt="Sticker ${i+1}"><button class="st-heart mp-heart${fav.includes(i)?' on':''}" data-fav="${i}" aria-label="Like sticker ${i+1}" aria-pressed="${fav.includes(i)}">${I.heart}</button></div>`).join('')}
         <button class="pv-tile mp-imp mpk-tile"><span class="mpk-ic">${I.layers}</span><span>Import from<br>Library</span></button>
         <a class="pv-tile mp-new" href="#create"><span class="mp-plus">${MPI.plus}</span><span>Create Sticker</span></a></div>
     </section>
@@ -4205,7 +4208,7 @@ if(IS_ANDROID)document.addEventListener('click',e=>{const a=e.target.closest('a[
     box.addEventListener('touchstart',e=>{tx=e.touches[0].clientX},{passive:true});box.addEventListener('touchend',e=>{if(tx==null)return;const dx=e.changedTouches[0].clientX-tx;if(Math.abs(dx)>50)go(dx<0?1:-1);tx=null});
     document.addEventListener('keydown',key);box.querySelector('.lb-x').focus()};
   document.addEventListener('click',e=>{
-    const t=e.target.closest('.pv-stk,.sgrid>button');if(!t||e.target.closest('.mp-fav'))return;
+    const t=e.target.closest('.pv-stk,.sgrid>button');if(!t||e.target.closest('.mp-fav,.st-heart'))return;
     const grid=t.parentElement;const tiles=[...grid.querySelectorAll(t.classList.contains('pv-stk')?'.pv-stk':':scope>button')];
     const list=tiles.map(x=>{const im=x.querySelector('img');return im?{src:im.src}:{html:x.innerHTML}});
     const h=document.querySelector('.pv-title h1,.phead h1,h1');openLightbox(list,tiles.indexOf(t),h?h.textContent.trim():'')});
