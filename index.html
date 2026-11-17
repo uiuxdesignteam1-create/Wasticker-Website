@@ -2978,7 +2978,7 @@ function pageStickers(kind){
     <p class="ap-sub" id="apSub" data-def="${esc(sub)}">${q?apCount(list.length,q):sub}</p>
     <div class="ap-search" id="apSearch">
       <div class="ap-sfield" role="search">
-      <div class="ap-sbox"><span class="ap-sic" aria-hidden="true"></span><input id="apQ" type="search" autocomplete="off" spellcheck="false" placeholder="Search Stickers..." aria-label="Search sticker packs" value="${esc(q)}" aria-controls="apSug" aria-expanded="false"><button type="button" class="ap-clear" id="apClear" aria-label="Clear search"${q?'':' hidden'}>✕</button><kbd class="ap-kbd" aria-hidden="true"${q?' hidden':''}>⌘ K</kbd></div>
+      <div class="ap-sbox"><span class="ap-sic" aria-hidden="true"></span><input id="apQ" type="search" autocomplete="off" spellcheck="false" placeholder="Search Stickers..." aria-label="Search sticker packs" value="${esc(q)}" aria-controls="apSug" aria-expanded="false"><button type="button" class="ap-clear" id="apClear" aria-label="Clear search"${q?'':' hidden'}>✕</button></div>
       <div class="ap-sug" id="apSug" role="listbox" hidden></div>
       </div>
       <div class="ap-chiprow"><button type="button" class="ap-nav prev" aria-label="Scroll categories left" hidden>${I.left}</button><div class="ap-chips" role="group" aria-label="Filter by category">${chip('top','Top','#FFD43B',IC.top)}${chip('trending','Trending','#FF9A4D',IC.trending)}${chip('new','New','#4BE0A3',IC.new)}${chip('all','All packs','#1F1A17')}${cats.map(c=>chip(c.slug,c.name,catTint(c.slug))).join('')}</div><button type="button" class="ap-nav next" aria-label="Scroll categories right" hidden>${I.arrow}</button></div>
