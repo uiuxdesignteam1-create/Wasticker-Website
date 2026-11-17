@@ -2455,6 +2455,24 @@ body.is-ap #hdr{position:relative}
 .pcard .pmeta b.pm-trow{display:flex;align-items:center;gap:6px;min-width:0;overflow:visible}
 .pcard .pmeta .pm-trow .pm-name{display:block;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font:inherit;color:inherit;margin:0;letter-spacing:inherit}
 .pm-tag{flex:none;display:inline-flex;align-items:center;height:18px;padding:0 7px;border-radius:999px;background:#1DB45F;color:#fff;font:700 10px/1 Fredoka,sans-serif;font-style:normal;letter-spacing:.02em}
+/* Pack card D: count pill, favorite button, downloads + favorites */
+.pk-count{position:absolute;right:8px;bottom:8px;z-index:2;display:inline-flex;align-items:center;height:23px;padding:0 9px;border-radius:999px;background:rgba(255,255,255,.88);font:600 11px/1 Fredoka,sans-serif;color:#1F1A17;pointer-events:none}
+.pk-fav{position:absolute;top:8px;right:8px;z-index:3;width:32px;height:32px;border:0;border-radius:50%;background:rgba(255,255,255,.92);cursor:pointer;display:grid;place-items:center;opacity:0;transform:scale(.85);transition:opacity .15s ease,transform .15s ease;box-shadow:0 2px 6px rgba(31,26,23,.10)}
+.pk-fav::before{content:"";width:17px;height:17px;background:#178A3A;-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2.2' stroke-linejoin='round'%3E%3Cpath d='M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10Z'/%3E%3C/svg%3E") center/contain no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2.2' stroke-linejoin='round'%3E%3Cpath d='M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10Z'/%3E%3C/svg%3E") center/contain no-repeat}
+.pk-fav.on::before{background:#F0457A;-webkit-mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10Z'/%3E%3C/svg%3E");mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10Z'/%3E%3C/svg%3E")}
+.pk-fav.on{opacity:1;transform:none}
+@media (hover:hover){.pcard:hover .pk-fav,.pk-fav:focus-visible{opacity:1;transform:none}.pk-fav:hover{transform:scale(1.08)}}
+.pk-badges{position:absolute;top:10px;left:10px;z-index:2;display:flex;gap:6px;pointer-events:none}
+.pk-badges .pk-rank,.pk-badges .pk-new{position:static}
+.pcard .pmeta .pm-stats2{display:flex;align-items:center;gap:12px;margin-top:5px;overflow:visible;white-space:nowrap}
+.pcard .pmeta .pm-s{display:inline-flex;align-items:center;gap:4px;margin:0;font:500 13px/1.2 Fredoka,sans-serif;color:#857B72;overflow:visible}
+.pcard .pmeta .pm-w{font-style:normal}
+@media (hover:none){.pk-fav:not(.on){display:none}}
+@media (max-width:400px){.pcard .pmeta .pm-w{display:none}}
+.pm-ic{width:15px;height:15px;flex:none;background:center/contain no-repeat}
+.pm-ic.dl{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14' fill='none'%3E%3Cpath d='M7 .9c.42 0 1.33.03 2.3.21.98.19 1.93.52 2.5 1.09.57.57.9 1.52 1.09 2.5.18.97.21 1.88.21 2.3 0 .42-.03 1.33-.21 2.3-.19.98-.52 1.93-1.09 2.5-.57.57-1.52.9-2.5 1.09-.97.18-1.88.21-2.3.21-.42 0-1.33-.03-2.3-.21-.98-.19-1.93-.52-2.5-1.09-.57-.57-.9-1.52-1.09-2.5C.93 8.33.9 7.42.9 7c0-.42.03-1.33.21-2.3.19-.98.52-1.93 1.09-2.5.57-.57 1.52-.9 2.5-1.09C5.67.93 6.58.9 7 .9Z' fill='%2325D366' stroke='%232C5F38' stroke-width='.8'/%3E%3Cpath d='M7 2.6c.88 0 1.6.72 1.6 1.6v2.6h1.2c.36 0 .69.22.83.55.14.34.06.72-.2.98l-2.8 2.8a.9.9 0 0 1-1.26 0l-2.8-2.8a.9.9 0 0 1-.2-.98c.14-.33.47-.55.83-.55H5.4V4.2c0-.88.72-1.6 1.6-1.6Z' fill='%23fff' stroke='%232C5F38' stroke-width='.4' stroke-linejoin='round'/%3E%3C/svg%3E")}
+.pm-ic.fv{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14' fill='none'%3E%3Crect x='.7' y='.7' width='12.6' height='12.6' rx='6.3' fill='%2325D366' stroke='%232C5F38' stroke-width='.8'/%3E%3Cpath d='M5 4.1c.68 0 1.43.35 1.97 1.3.01.02.06.02.07 0 .68-1.2 1.72-1.44 2.48-1.23.42.12.79.38 1.05.74.29.39.43.88.43 1.4 0 .75-.43 1.69-1.22 2.57l-.17.18c-.78.81-1.73 1.34-2.19 1.64a.76.76 0 0 1-.85 0c-.46-.3-1.4-.83-2.19-1.64C3.49 8.13 3 7.11 3 6.31c0-.52.15-1.01.44-1.4.26-.36.63-.62 1.05-.74.17-.05.34-.07.51-.07Z' fill='%23fff' stroke='%232C5F38' stroke-width='.4' stroke-linejoin='round'/%3E%3C/svg%3E")}
+@media (max-width:600px){.pk-count{right:6px;bottom:6px;height:20px;padding:0 7px;font-size:10px}.pk-fav{top:6px;right:6px;width:28px;height:28px}.pk-fav::before{width:15px;height:15px}.pk-badges{top:8px;left:8px;gap:4px}.pcard .pmeta .pm-stats2{gap:8px}.pcard .pmeta .pm-s{font-size:12px;gap:3px}.pm-ic{width:13px;height:13px}}
 /* Hero A (holos style, 1080 grid) */
 .hero-a{background:transparent;padding:72px 0 88px;overflow:hidden;position:relative}
 .ha-in{max-width:1120px;margin:0 auto;padding:0 20px;display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center}
@@ -2715,9 +2733,10 @@ function mineCard(p){const st=packStk(p)||[];const cov=p.img||(st[0]?mpImg(st[0]
 function packCard(p){
   const art=p.img?`<img src="${p.img}" alt="" loading="lazy"${p.imgScale?` style="width:${p.imgScale*100}%;height:${p.imgScale*100}%"`:''}>`:stk(p.e[0]);
   const n=(p.imgs||p.e).length;
-  const meta=`${n} Stickers / ${fmt(p.dl)} Downloads`;
+  const fav=(S.favPacks||[]).includes(p.id),likes=(p.likes!=null?p.likes:Math.round(p.dl*(.018+((p.id*37)%23)/1000)))+(fav?1:0);
+  const meta=`<span class="pm-stats2"><span class="pm-s"><i class="pm-ic dl" aria-hidden="true"></i>${fmt(p.dl)}<em class="pm-w"> downloads</em></span><span class="pm-s"><i class="pm-ic fv" aria-hidden="true"></i>${fmt(likes)}</span></span>`;
   return `<a class="pcard" href="#pack-${p.id}">
-    <div class="pthumb${p.anim?' anim':''}" style="background:${p.c}">${art}</div>
+    <div class="pthumb${p.anim?' anim':''}" style="background:${p.c}">${art}<span class="pk-count">${n} Stickers</span><button type="button" class="pk-fav${fav?' on':''}" data-favp="${p.id}" aria-label="${fav?'Remove from':'Add to'} favorites" aria-pressed="${fav}"></button></div>
     <div class="pmeta">${p.anim?`<b class="pm-trow"><span class="pm-name">${esc(p.name)}</span><em class="pm-tag">Animated</em></b>`:`<b>${esc(p.name)}</b>`}<span>${meta}</span></div></a>`;
 }
 function stores(){return `<a class="store-img" href="${appUrl('store_badge')}" target="_blank" rel="noopener"><img src="${ASSET.appstore}" alt="Download on the App Store" width="156" height="52"></a>`}
@@ -3027,7 +3046,7 @@ function apResults(list,q){const per=20,shown=list.slice(0,per);
 function apCard(p,i){let h=packCard(p);const t=window.__apTab,b=[];
   if((t==='top'||t==='trending')&&!(S.apq||'').trim()&&i<99)b.push(`<span class="pk-rank${i<3?' gold':''}${t==='trending'?' hot':''}">${t==='trending'?'<i></i>':''}#${i+1}</span>`);
   if(window.__apNew&&window.__apNew.has(p.id))b.push('<span class="pk-new">New</span>');
-  return b.length?h.replace(/(<div class="pthumb[^"]*"[^>]*>)/,'$1'+b.join('')):h}
+  return b.length?h.replace(/(<div class="pthumb[^"]*"[^>]*>)/,'$1<span class="pk-badges">'+b.join('')+'</span>'):h}
 function apMountMore(){const more=document.getElementById('apMore'),grid=document.querySelector('.ap-grid');if(window.__apIO){window.__apIO.disconnect();window.__apIO=null}
   if(!(more&&grid&&window.__apList))return;let n=grid.children.length;const list=window.__apList;
   const load=()=>{if(n>=list.length){io.disconnect();more.remove();return}const next=list.slice(n,n+20);grid.insertAdjacentHTML('beforeend',next.map((p,k)=>apCard(p,n+k)).join(''));n+=next.length;if(n>=list.length){io.disconnect();more.remove()}};
@@ -3059,6 +3078,10 @@ function wireApSearch(){const box=document.getElementById('apSearch');if(!box)re
   const sen=document.createElement('div');sen.className='ap-sen';box.before(sen);new IntersectionObserver(([en])=>box.classList.toggle('stuck',!en.isIntersecting&&en.boundingClientRect.top<1),{rootMargin:'-1px 0px 0px 0px'}).observe(sen);
   if(S.apStuck){S.apStuck=0;scrollTo(0,sen.getBoundingClientRect().top+scrollY+parseFloat(getComputedStyle(box).marginTop)+1)}
 }
+if(!window.__pkFav){window.__pkFav=1;document.addEventListener('click',e=>{const b=e.target.closest&&e.target.closest('.pk-fav');if(!b)return;e.preventDefault();e.stopPropagation();const id=+b.dataset.favp;
+  if(!S.user){S.after=(location.hash||'#home').slice(1);S.pendingFav=id;signInPrompt('save favorite packs','Sign in or create a free account to keep your favorite packs in one place.');return}
+  S.favPacks=S.favPacks||[];const k=S.favPacks.indexOf(id);k<0?S.favPacks.push(id):S.favPacks.splice(k,1);save();
+  document.querySelectorAll('.pk-fav[data-favp="'+id+'"]').forEach(x=>{x.classList.toggle('on',k<0);x.setAttribute('aria-pressed',k<0);x.setAttribute('aria-label',(k<0?'Remove from':'Add to')+' favorites')});toast(k<0?'Added to My Favorites':'Removed from My Favorites')},true)}
 if(!window.__apKey){window.__apKey=1;document.addEventListener('keydown',e=>{const inp=document.getElementById('apQ');if(!inp)return;const tag=(e.target.tagName||'').toLowerCase();if(((e.metaKey||e.ctrlKey)&&e.key.toLowerCase()==='k')||(e.key==='/'&&!/input|textarea|select/.test(tag)&&!e.target.isContentEditable)){e.preventDefault();inp.focus();inp.select()}})}
 function wireListing(){
   apMountMore();wireApSearch();
