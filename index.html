@@ -2679,6 +2679,12 @@ body.is-ap #hdr{position:relative}
 .upc-more{color:#1F2937}
 .um-ap{width:44px;height:44px;display:inline-grid;flex:none}.um-ap svg{width:44px;height:44px}
 @media(max-width:560px){.ord-grid{grid-template-columns:repeat(3,1fr)}}
+.up-acts{display:flex;align-items:center;gap:8px;flex:none}
+.up-del{position:relative;z-index:2;width:32px;height:32px;padding:0;border-radius:50%;border:1px solid rgba(229,23,79,.18);background:#fff;display:grid;place-items:center;cursor:pointer;transition:background .15s ease,border-color .15s ease,transform .12s ease}
+.up-del svg{width:32px;height:32px}
+.up-del:hover{background:#FFF0F3;border-color:#E5174F;transform:translateY(-1px)}
+.up-del:focus-visible{outline:2px solid #E5174F;outline-offset:2px}
+.ccp-ok.del{background:#FDE3EA;overflow:hidden}.ccp-ok.del svg{width:56px;height:56px}
 /* Hero A (holos style, 1080 grid) */
 .hero-a{background:transparent;padding:72px 0 88px;overflow:hidden;position:relative}
 .ha-in{max-width:1120px;margin:0 auto;padding:0 20px;display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center}
@@ -3591,7 +3597,7 @@ function pageManager(){
     return `<article class="up-pack"><a class="up-pack-link" href="#mypack-${p.id}" aria-label="Open ${esc(p.name)}"></a>
       <div class="up-pack-h"><div><b>${priv?`<span class="up-lock">${lock}</span>`:''}${esc(p.name)}<span class="stk-cnt">${st.length} ${st.length===1?'Sticker':'Stickers'}</span></b>
         <div class="up-pack-meta"><span>${esc(handle)}</span><span>${MPI.dl}${fmt(p.dl||0)}</span><span>${MPI.heart}${fmt((p.fav||[]).length+(p.sample?Math.round((p.dl||0)*.6):0))}</span></div></div>
-        <button class="up-export" data-exp="${p.id}">Export</button></div>
+        <div class="up-acts"><button type="button" class="up-del" data-del="${p.id}" aria-label="Delete ${esc(p.name)}" title="Delete pack">${API.trash}</button><button class="up-export" data-exp="${p.id}">Export</button></div></div>
       <div class="up-row">${st.length?st.slice(0,7).map(s=>`<span class="up-stk"><img src="${mpImg(s)}" alt=""></span>`).join(''):`<span class="up-empty">No stickers yet</span>`}</div></article>`};
   return `<div class="up">
     <div class="upc" style="--sky:url(${AIA.sky});--doodle:url(${AIA.showbg})">
@@ -3623,6 +3629,9 @@ function pageManager(){
 function wireManager(){
   document.querySelectorAll('[data-ptab]').forEach(b=>b.onclick=()=>{S.profTab=b.dataset.ptab;render(true)});
   document.querySelectorAll('.up-pack-link').forEach(a=>a.addEventListener('click',()=>{S.freshPack=null}));
+  document.querySelectorAll('[data-del]').forEach(b=>b.onclick=e=>{e.preventDefault();e.stopPropagation();const p=(S.mine||[]).find(x=>x.id===b.dataset.del);if(!p)return;const n=(packStk(p)||[]).length||p.count||0;
+    const m=modal(`<div class="shr pmn"><span class="ccp-ok del" aria-hidden="true">${API.trash}</span><h2 style="text-align:center">Delete “${esc(p.name)}”?</h2><p class="pmn-q">This removes the pack and its ${n} ${n===1?'sticker':'stickers'} from your account. You can’t undo this.</p><div class="pmn-acts"><button type="button" class="ap-ebtn" data-pc="no">Cancel</button><button type="button" class="ap-ebtn pmn-del" data-pc="yes">Delete Pack</button></div></div>`,'shr-mdl');
+    m.querySelector('[data-pc=no]').onclick=closeModal;m.querySelector('[data-pc=yes]').onclick=()=>{S.mine=(S.mine||[]).filter(x=>x.id!==p.id);save();closeModal();render(true);setTimeout(()=>toast('Pack deleted'),200)}});
   document.querySelectorAll('[data-exp]').forEach(b=>b.onclick=e=>{e.stopPropagation();const p=S.mine.find(x=>x.id===b.dataset.exp);const n=(packStk(p)||[]).length;if(n<3)toast(`Add ${3-n} more ${3-n===1?'sticker':'stickers'} to export “${p.name}” to WhatsApp`);if(n>=3)getApp({title:`Export “${p.name}” to WhatsApp`,ct:'export'})});
   const ed=document.getElementById('upEdit');if(ed)ed.onclick=()=>toast('Profile editing is available in the WaSticker app');
   const lk=document.getElementById('upLink');if(lk)lk.onclick=e=>{e.preventDefault();copy('https://'+lk.textContent.trim(),'Profile link copied')};
