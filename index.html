@@ -2734,7 +2734,7 @@ function packCard(p){
   const art=p.img?`<img src="${p.img}" alt="" loading="lazy"${p.imgScale?` style="width:${p.imgScale*100}%;height:${p.imgScale*100}%"`:''}>`:stk(p.e[0]);
   const n=(p.imgs||p.e).length;
   const fav=(S.favPacks||[]).includes(p.id),likes=(p.likes!=null?p.likes:Math.round(p.dl*(.018+((p.id*37)%23)/1000)))+(fav?1:0);
-  const meta=`<span class="pm-stats2"><span class="pm-s"><i class="pm-ic dl" aria-hidden="true"></i>${fmt(p.dl)}<em class="pm-w"> downloads</em></span><span class="pm-s"><i class="pm-ic fv" aria-hidden="true"></i>${fmt(likes)}</span></span>`;
+  const meta=`<span class="pm-stats2"><span class="pm-s" title="Downloads"><i class="pm-ic dl" aria-hidden="true"></i>${fmt(p.dl)}</span><span class="pm-s" title="Favorites"><i class="pm-ic fv" aria-hidden="true"></i>${fmt(likes)}</span></span>`;
   return `<a class="pcard" href="#pack-${p.id}">
     <div class="pthumb${p.anim?' anim':''}" style="background:${p.c}">${art}<span class="pk-count">${n} Stickers</span><button type="button" class="pk-fav${fav?' on':''}" data-favp="${p.id}" aria-label="${fav?'Remove from':'Add to'} favorites" aria-pressed="${fav}"></button></div>
     <div class="pmeta">${p.anim?`<b class="pm-trow"><span class="pm-name">${esc(p.name)}</span><em class="pm-tag">Animated</em></b>`:`<b>${esc(p.name)}</b>`}<span>${meta}</span></div></a>`;
