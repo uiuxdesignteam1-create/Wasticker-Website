@@ -2410,6 +2410,10 @@ body.is-ap #hdr{position:relative}
 
 @media (max-width:600px){.ap-sbox{height:50px;padding:0 10px 0 16px}.ap-sbox input{font-size:16px}.ap-kbd{display:none}.ap-search{margin-top:12px}}
 .ap-chip,.chip,.ap-chip.on,.ap-chip.on:hover,.chip.on,.chip.on:hover{font-weight:500!important}
+.ap-chip.has-ic{display:inline-flex;align-items:center;gap:6px}
+.ap-cic{display:inline-flex;width:16px;height:16px;margin-left:-2px}
+.ap-cic svg{width:16px;height:16px;display:block}
+.ap-chip.has-ic.on::before{display:none}
 /* Hero A (holos style, 1080 grid) */
 .hero-a{background:transparent;padding:72px 0 88px;overflow:hidden;position:relative}
 .ha-in{max-width:1120px;margin:0 auto;padding:0 20px;display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center}
@@ -2939,16 +2943,21 @@ const TINTS=['#B490FF','#FFD43B','#FF9EC7','#4BE0A3','#FF9A4D','#5CC8FF'];
 const catTint=slug=>TINTS[Math.max(0,CATS.findIndex(c=>c.slug===slug))%TINTS.length];
 function pageStickers(kind){
   const base=PACKS.filter(p=>kind==='all'||(kind==='animated'?p.anim:!p.anim));
-  if(S.filter!=='all'&&!base.some(p=>p.cat===S.filter))S.filter='all';
-  let list=S.filter==='all'?base:base.filter(p=>p.cat===S.filter);
-  list=list.slice().sort((x,y)=>y.id-x.id);const per=20;window.__apBase=list;window.__apKind=kind;
+  const SPECIAL=['top','trending','new'];
+  if(S.filter!=='all'&&!SPECIAL.includes(S.filter)&&!base.some(p=>p.cat===S.filter))S.filter='all';
+  let list=S.filter==='all'||SPECIAL.includes(S.filter)?base:base.filter(p=>p.cat===S.filter);
+  list=list.slice().sort((x,y)=>y.id-x.id);
+  if(S.filter==='top')list.sort((x,y)=>y.dl-x.dl);
+  else if(S.filter==='trending'){const ids=base.map(p=>p.id),mn=Math.min(...ids),mx=Math.max(...ids)||1;const sc=p=>p.dl*(.35+.65*((p.id-mn)/((mx-mn)||1)));list.sort((x,y)=>sc(y)-sc(x))}
+  else if(S.filter==='new')list=list.slice(0,24);const per=20;window.__apBase=list;window.__apKind=kind;
   const q=(S.apq||'').trim();if(q)list=apMatch(list,q);window.__apList=list;const shown=list.slice(0,per);
   const title=kind==='animated'?'Animated sticker packs':kind==='static'?'Static sticker packs':'All sticker packs';
   const crumb=kind==='animated'?'Animated':kind==='static'?'Static':'All packs';
   const sub=kind==='animated'?'Animated packs that bring movement and personality to your conversations. Select a pack to preview it and add it to WhatsApp.':'Explore sticker packs by mood, moment and category. Select a pack to preview it and add it to WhatsApp.';
   const TINT=['#B490FF','#FFD43B','#FF9EC7','#4BE0A3','#FF9A4D','#5CC8FF'];
   const cats=CATS.filter(c=>base.some(p=>p.cat===c.slug));
-  const chip=(f,label,col)=>`<button type="button" class="ap-chip${S.filter===f?' on':''}" data-f="${f}" style="--c:${col}" aria-pressed="${S.filter===f}">${esc(label)}</button>`;
+  const chip=(f,label,col,ic)=>`<button type="button" class="ap-chip${ic?' has-ic':''}${S.filter===f?' on':''}" data-f="${f}" style="--c:${col}" aria-pressed="${S.filter===f}">${ic?`<span class="ap-cic" aria-hidden="true">${ic}</span>`:''}${esc(label)}</button>`;
+  const IC={top:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0V4Z"/><path d="M17 5h3v2a3 3 0 0 1-3 3M7 5H4v2a3 3 0 0 0 3 3"/></svg>',trending:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22c4 0 7-2.7 7-7 0-3.5-2.2-6-4.5-8.5-.4 2.3-1.6 3.6-3 4.2C11.8 7.6 10.6 5 8.5 3 8.7 6.2 5 8.6 5 14.5 5 18.9 8 22 12 22Z"/><path d="M12 22c-1.8 0-3-1.3-3-3.2 0-2 1.6-3 3-4.8 1.4 1.8 3 2.8 3 4.8 0 1.9-1.2 3.2-3 3.2Z"/></svg>',new:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9L12 3Z"/><path d="M19 15l.8 2.2L22 18l-2.2.8L19 21l-.8-2.2L16 18l2.2-.8L19 15Z"/></svg>'};
   const cta=(PACKS.find(p=>p.img)||{}).img;
   return `<div class="ap"><div class="wrap">
     ${crumbs([['Home','home'],[crumb]])}
@@ -2959,7 +2968,7 @@ function pageStickers(kind){
       <div class="ap-sbox"><span class="ap-sic" aria-hidden="true"></span><input id="apQ" type="search" autocomplete="off" spellcheck="false" placeholder="Search Stickers..." aria-label="Search sticker packs" value="${esc(q)}" aria-controls="apSug" aria-expanded="false"><button type="button" class="ap-clear" id="apClear" aria-label="Clear search"${q?'':' hidden'}>✕</button><kbd class="ap-kbd" aria-hidden="true"${q?' hidden':''}>⌘ K</kbd></div>
       <div class="ap-sug" id="apSug" role="listbox" hidden></div>
       </div>
-      <div class="ap-chiprow"><button type="button" class="ap-nav prev" aria-label="Scroll categories left" hidden>${I.left}</button><div class="ap-chips" role="group" aria-label="Filter by category">${chip('all','All packs','#1F1A17')}${cats.map(c=>chip(c.slug,c.name,catTint(c.slug))).join('')}</div><button type="button" class="ap-nav next" aria-label="Scroll categories right" hidden>${I.arrow}</button></div>
+      <div class="ap-chiprow"><button type="button" class="ap-nav prev" aria-label="Scroll categories left" hidden>${I.left}</button><div class="ap-chips" role="group" aria-label="Filter by category">${chip('top','Top','#FFD43B',IC.top)}${chip('trending','Trending','#FF9A4D',IC.trending)}${chip('new','New','#4BE0A3',IC.new)}${chip('all','All packs','#1F1A17')}${cats.map(c=>chip(c.slug,c.name,catTint(c.slug))).join('')}</div><button type="button" class="ap-nav next" aria-label="Scroll categories right" hidden>${I.arrow}</button></div>
     </div>
     <div id="apRes">${apResults(list,q)}</div>
     <div class="pk2-blk pk2-ctablk ap-banner">${bannerE(i=>{const p=byId(114);const u=p&&p.imgs&&p.imgs[i];return u?`<img src="${u}" alt="" loading="lazy">`:stk('😺')})}</div>
