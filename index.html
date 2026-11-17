@@ -2371,6 +2371,36 @@ html{overflow-x:clip}
 .see-all .btn-see{border-radius:999px;font-weight:600;background:#FFFFFF;border:1.5px solid rgba(31,26,23,.18);color:#1F1A17;box-shadow:0 3px 0 rgba(31,26,23,.10);transition:transform .15s ease,box-shadow .15s ease,border-color .15s ease}
 .see-all .btn-see:hover{background:#FFFFFF;border-color:#1F1A17;color:#1F1A17;box-shadow:0 2px 0 rgba(31,26,23,.14);transform:translateY(1px)}
 .see-all .btn-see:active{box-shadow:0 0 0 rgba(31,26,23,.14);transform:translateY(3px)}
+/* All Packs search (variation B) — sticky under the navbar */
+.ap-search{position:sticky;top:76px;z-index:40;margin:24px 0 -8px}
+.ap-sen{height:0}
+.ap-sbox{display:flex;align-items:center;gap:10px;height:56px;padding:0 12px 0 20px;border-radius:999px;background:#FFFFFF;border:1.5px solid rgba(31,26,23,.14);box-shadow:0 8px 20px -10px rgba(59,38,22,.10);transition:border-color .15s ease,box-shadow .2s ease}
+.ap-search.stuck .ap-sbox{box-shadow:0 14px 32px -12px rgba(59,38,22,.28)}
+.ap-sbox:focus-within{border-color:#1F1A17;box-shadow:0 0 0 4px rgba(31,26,23,.06),0 10px 24px -12px rgba(59,38,22,.2)}
+.ap-sic{width:22px;height:22px;flex:none;background:#857B72;-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2.2' stroke-linecap='round'%3E%3Ccircle cx='11' cy='11' r='7'/%3E%3Cpath d='m20 20-3.6-3.6'/%3E%3C/svg%3E") center/contain no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2.2' stroke-linecap='round'%3E%3Ccircle cx='11' cy='11' r='7'/%3E%3Cpath d='m20 20-3.6-3.6'/%3E%3C/svg%3E") center/contain no-repeat}
+.ap-sbox:focus-within .ap-sic{background:#1F1A17}
+.ap-sbox input{flex:1;min-width:0;height:100%;border:0;outline:0;background:transparent;font:500 17px/1 Fredoka,sans-serif;color:#1F1A17}
+.ap-sbox input::placeholder{color:#857B72}
+.ap-sbox input::-webkit-search-cancel-button{display:none}
+.ap-kbd{flex:none;padding:5px 9px;border-radius:9px;background:#F3ECE1;font:600 12px/1 Fredoka,sans-serif;color:#857B72}
+.ap-clear{flex:none;width:30px;height:30px;border-radius:50%;border:0;background:rgba(31,26,23,.08);color:#615850;font:600 12px/1 Fredoka,sans-serif;cursor:pointer}
+.ap-clear:hover{background:rgba(31,26,23,.14);color:#1F1A17}
+.ap-sug{position:absolute;left:0;right:0;top:calc(100% + 8px);max-height:min(420px,60vh);overflow:auto;padding:8px;border-radius:24px;background:#FFFFFF;border:1px solid rgba(31,26,23,.08);box-shadow:0 24px 48px -16px rgba(59,38,22,.28)}
+.ap-sug-h{margin:8px 12px 6px;font:700 11px/1 Fredoka,sans-serif;letter-spacing:.06em;text-transform:uppercase;color:#857B72}
+.ap-sug-i{display:flex;align-items:center;gap:12px;padding:8px 12px;border-radius:14px;color:#1F1A17;text-decoration:none}
+.ap-sug-i:hover,.ap-sug-i.act{background:#F7F2EA}
+.ap-sug-th{width:44px;height:44px;border-radius:12px;display:grid;place-items:center;overflow:hidden;flex:none}
+.ap-sug-th img{width:82%;height:82%;object-fit:contain}
+.ap-sug-th span{font-size:26px}
+.ap-sug-tx{display:flex;flex-direction:column;gap:3px;font:500 15px/1.2 Fredoka,sans-serif}
+.ap-sug-tx b{font-weight:700}
+.ap-sug-tx small{font:500 12px/1 Fredoka,sans-serif;color:#857B72}
+.ap-sug-cats{display:flex;flex-wrap:wrap;gap:8px;padding:4px 12px 8px}
+.ap-sug-cats .ap-chip.act{outline:2px solid #1F1A17}
+.ap-sug-none{margin:0;padding:16px;font:500 15px/1.3 Fredoka,sans-serif;color:#615850}
+.ap-sub b{color:#1F1A17;font-weight:600}
+@media (max-width:900px){.ap-search{top:68px}}
+@media (max-width:600px){.ap-sbox{height:50px;padding:0 10px 0 16px}.ap-sbox input{font-size:16px}.ap-kbd{display:none}.ap-search{margin-top:20px}}
 /* Hero A (holos style, 1080 grid) */
 .hero-a{background:transparent;padding:72px 0 88px;overflow:hidden;position:relative}
 .ha-in{max-width:1120px;margin:0 auto;padding:0 20px;display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center}
@@ -2902,7 +2932,8 @@ function pageStickers(kind){
   const base=PACKS.filter(p=>kind==='all'||(kind==='animated'?p.anim:!p.anim));
   if(S.filter!=='all'&&!base.some(p=>p.cat===S.filter))S.filter='all';
   let list=S.filter==='all'?base:base.filter(p=>p.cat===S.filter);
-  list=list.slice().sort((x,y)=>y.id-x.id);const per=20;window.__apList=list;const shown=list.slice(0,per);
+  list=list.slice().sort((x,y)=>y.id-x.id);const per=20;window.__apBase=list;window.__apKind=kind;
+  const q=(S.apq||'').trim();if(q)list=apMatch(list,q);window.__apList=list;const shown=list.slice(0,per);
   const title=kind==='animated'?'Animated sticker packs':kind==='static'?'Static sticker packs':'All sticker packs';
   const crumb=kind==='animated'?'Animated':kind==='static'?'Static':'All packs';
   const sub=kind==='animated'?'Animated packs that bring movement and personality to your conversations. Select a pack to preview it and add it to WhatsApp.':'Explore sticker packs by mood, moment and category. Select a pack to preview it and add it to WhatsApp.';
@@ -2913,17 +2944,54 @@ function pageStickers(kind){
   return `<div class="ap"><div class="wrap">
     ${crumbs([['Home','home'],[crumb]])}
     <h1>${title}</h1>
-    <p class="ap-sub">${sub}</p>
+    <p class="ap-sub" id="apSub" data-def="${esc(sub)}">${q?apCount(list.length,q):sub}</p>
+    <div class="ap-search" id="apSearch" role="search">
+      <div class="ap-sbox"><span class="ap-sic" aria-hidden="true"></span><input id="apQ" type="search" autocomplete="off" spellcheck="false" placeholder="Search sticker packs… e.g. cat, love, Eid" aria-label="Search sticker packs" value="${esc(q)}" aria-controls="apSug" aria-expanded="false"><button type="button" class="ap-clear" id="apClear" aria-label="Clear search"${q?'':' hidden'}>✕</button><kbd class="ap-kbd" aria-hidden="true"${q?' hidden':''}>⌘ K</kbd></div>
+      <div class="ap-sug" id="apSug" role="listbox" hidden></div>
+    </div>
     <div class="ap-chiprow"><button type="button" class="ap-nav prev" aria-label="Scroll categories left" hidden>${I.left}</button><div class="ap-chips" role="group" aria-label="Filter by category">${chip('all','All packs','#1F1A17')}${cats.map(c=>chip(c.slug,c.name,catTint(c.slug))).join('')}</div><button type="button" class="ap-nav next" aria-label="Scroll categories right" hidden>${I.arrow}</button></div>
-    ${shown.length?`<div class="grid ap-grid">${shown.map(packCard).join('')}</div>${list.length>per?`<div class="ap-more" id="apMore" aria-live="polite"><span class="ap-spin" aria-hidden="true"></span><span>Loading more packs…</span></div>`:''}`:emptyState('No packs here yet','Try another category.')}
+    <div id="apRes">${apResults(list,q)}</div>
     <div class="pk2-blk pk2-ctablk ap-banner">${bannerE(i=>{const p=byId(114);const u=p&&p.imgs&&p.imgs[i];return u?`<img src="${u}" alt="" loading="lazy">`:stk('😺')})}</div>
   </div></div>`;
 }
+const apNorm=t=>String(t||'').toLowerCase();
+function apMatch(list,q){const w=apNorm(q).split(/\s+/).filter(Boolean);return list.filter(p=>{const c=CATS.find(c=>c.slug===p.cat);const hay=apNorm([p.name,p.cat,c&&c.name,(p.tags||[]).join(' '),p.anim?'animated gif':''].join(' '));return w.every(x=>hay.includes(x))})}
+const apCount=(n,q)=>`<b>${n} ${n===1?'pack':'packs'}</b> for “${esc(q)}”`;
+function apResults(list,q){const per=20,shown=list.slice(0,per);
+  if(!shown.length)return q?emptyState(`No packs for “${esc(q)}”`,'Try another word, like cat, love or funny, or pick a category below.'):emptyState('No packs here yet','Try another category.');
+  return `<div class="grid ap-grid">${shown.map(packCard).join('')}</div>${list.length>per?`<div class="ap-more" id="apMore" aria-live="polite"><span class="ap-spin" aria-hidden="true"></span><span>Loading more packs…</span></div>`:''}`}
+function apMountMore(){const more=document.getElementById('apMore'),grid=document.querySelector('.ap-grid');if(window.__apIO){window.__apIO.disconnect();window.__apIO=null}
+  if(!(more&&grid&&window.__apList))return;let n=grid.children.length;const list=window.__apList;
+  const load=()=>{if(n>=list.length){io.disconnect();more.remove();return}const next=list.slice(n,n+20);grid.insertAdjacentHTML('beforeend',next.map(packCard).join(''));n+=next.length;if(n>=list.length){io.disconnect();more.remove()}};
+  const io=new IntersectionObserver(es=>{if(es.some(e=>e.isIntersecting))load()},{rootMargin:'600px 0px'});io.observe(more);window.__apIO=io}
+function wireApSearch(){const box=document.getElementById('apSearch');if(!box)return;const inp=document.getElementById('apQ'),clr=document.getElementById('apClear'),kbd=box.querySelector('.ap-kbd'),sug=document.getElementById('apSug'),sub=document.getElementById('apSub'),res=document.getElementById('apRes');
+  if(kbd&&!/Mac|iPhone|iPad/.test(navigator.platform||navigator.userAgent))kbd.textContent='Ctrl K';
+  let act=-1;
+  const apply=()=>{const q=inp.value.trim();S.apq=q;const list=q?apMatch(window.__apBase||[],q):(window.__apBase||[]);window.__apList=list;res.innerHTML=apResults(list,q);apMountMore();sub.innerHTML=q?apCount(list.length,q):esc(sub.dataset.def);clr.hidden=!q;if(kbd)kbd.hidden=!!q};
+  const close=()=>{sug.hidden=true;inp.setAttribute('aria-expanded','false');act=-1};
+  const open=()=>{const q=inp.value.trim();if(!q){close();return}
+    const ps=apMatch(window.__apBase||[],q).slice(0,5);const cs=CATS.filter(c=>apNorm(c.name).includes(apNorm(q))||apNorm(c.slug).includes(apNorm(q))).slice(0,6);
+    const hl=t=>{const i=apNorm(t).indexOf(apNorm(q));return i<0?esc(t):esc(t.slice(0,i))+'<b>'+esc(t.slice(i,i+q.length))+'</b>'+esc(t.slice(i+q.length))};
+    if(!ps.length&&!cs.length){sug.innerHTML=`<p class="ap-sug-none">No packs found for “${esc(q)}”</p>`}
+    else sug.innerHTML=(ps.length?`<p class="ap-sug-h">Packs</p>${ps.map(p=>`<a class="ap-sug-i" role="option" href="#pack-${p.id}"><span class="ap-sug-th" style="background:${p.c}">${p.img?`<img src="${p.img}" alt="">`:`<span>${p.e[0]}</span>`}</span><span class="ap-sug-tx"><span>${hl(p.name)}</span><small>${(p.imgs||p.e).length} stickers${p.anim?' · Animated':''}</small></span></a>`).join('')}`:'')+(cs.length?`<p class="ap-sug-h">Categories</p><div class="ap-sug-cats">${cs.map(c=>`<button type="button" class="ap-chip" role="option" data-sf="${c.slug}" style="--c:${catTint(c.slug)}">${esc(c.name)}</button>`).join('')}</div>`:'');
+    sug.hidden=false;inp.setAttribute('aria-expanded','true');act=-1};
+  let t;inp.addEventListener('input',()=>{clearTimeout(t);t=setTimeout(apply,120);open()});
+  inp.addEventListener('focus',open);
+  inp.addEventListener('keydown',e=>{const items=[...sug.querySelectorAll('[role=option]')];
+    if(e.key==='ArrowDown'&&items.length){e.preventDefault();act=(act+1)%items.length}else if(e.key==='ArrowUp'&&items.length){e.preventDefault();act=(act-1+items.length)%items.length}
+    else if(e.key==='Enter'){e.preventDefault();if(act>=0&&items[act]){items[act].click();return}clearTimeout(t);apply();close();const g=document.getElementById('apRes');if(g)g.scrollIntoView({behavior:'smooth',block:'start'});return}
+    else if(e.key==='Escape'){if(!sug.hidden)close();else if(inp.value){inp.value='';apply()}else inp.blur();return}else return;
+    items.forEach((x,i)=>x.classList.toggle('act',i===act));if(items[act])items[act].scrollIntoView({block:'nearest'})});
+  clr.onclick=()=>{inp.value='';apply();close();inp.focus()};
+  sug.addEventListener('mousedown',e=>e.preventDefault());
+  sug.addEventListener('click',e=>{const c=e.target.closest('[data-sf]');if(c){S.filter=c.dataset.sf;S.apq='';S.page=1;close();render(true)}else if(e.target.closest('a'))close()});
+  inp.addEventListener('blur',()=>setTimeout(close,120));
+  // sticky shadow
+  const sen=document.createElement('div');sen.className='ap-sen';box.before(sen);new IntersectionObserver(([en])=>box.classList.toggle('stuck',!en.isIntersecting&&en.boundingClientRect.top<120),{rootMargin:'-90px 0px 0px 0px'}).observe(sen);
+}
+if(!window.__apKey){window.__apKey=1;document.addEventListener('keydown',e=>{const inp=document.getElementById('apQ');if(!inp)return;const tag=(e.target.tagName||'').toLowerCase();if(((e.metaKey||e.ctrlKey)&&e.key.toLowerCase()==='k')||(e.key==='/'&&!/input|textarea|select/.test(tag)&&!e.target.isContentEditable)){e.preventDefault();inp.focus();inp.select()}})}
 function wireListing(){
-  const more=document.getElementById('apMore'),grid=document.querySelector('.ap-grid');
-  if(more&&grid&&window.__apList){let n=grid.children.length;const list=window.__apList;
-    const load=()=>{if(n>=list.length){io.disconnect();more.remove();return}const next=list.slice(n,n+20);grid.insertAdjacentHTML('beforeend',next.map(packCard).join(''));n+=next.length;if(n>=list.length){io.disconnect();more.remove()}};
-    const io=new IntersectionObserver(es=>{if(es.some(e=>e.isIntersecting))load()},{rootMargin:'600px 0px'});io.observe(more);}
+  apMountMore();wireApSearch();
   const lqi=document.getElementById('lq');if(lqi&&matchMedia('(max-width:480px)').matches)lqi.placeholder='Search stickers';
   const lf=document.getElementById('lform');if(lf)lf.onsubmit=e=>{e.preventDefault();const v=document.getElementById('lq').value.trim();if(v){S.q=v;location.hash='search'}};
   document.querySelectorAll('[data-f]').forEach(b=>b.onclick=()=>{const r=document.querySelector('.ap-chips');S.apScroll=r?r.scrollLeft:0;S.filter=b.dataset.f;S.page=1;render(true)});
