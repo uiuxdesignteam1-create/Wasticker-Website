@@ -2443,6 +2443,14 @@ body.is-ap #hdr{position:relative}
 .pk-rank.gold.hot i{background:#1F1A17}
 .pk-new{position:absolute;top:10px;right:10px;z-index:2;height:24px;padding:0 9px;display:inline-flex;align-items:center;border-radius:999px;background:#1DB45F;color:#fff;font:700 11px/1 Fredoka,sans-serif;letter-spacing:.04em;text-transform:uppercase}
 @media (max-width:600px){.ap-tabs{gap:20px}.ap-tab{font-size:15px}.pk-rank{top:8px;left:8px;height:24px;padding:0 7px;font-size:12px}.pk-new{top:8px;right:8px;height:22px;padding:0 7px;font-size:10px}}
+/* All Packs sort chips (variation B): outlined group + divider */
+.ap-chip.ap-sort{display:inline-flex;align-items:center;gap:6px;background:#FFFFFF!important;border:1.5px solid rgba(31,26,23,.16)!important;color:#1F1A17}
+.ap-chip.ap-sort:hover{border-color:rgba(31,26,23,.4)!important}
+.ap-chip.ap-sort.on,.ap-chip.ap-sort.on:hover{background:#1F1A17!important;border-color:#1F1A17!important;color:#fff!important}
+.ap-chip.ap-sort.on::before{display:none}
+.ap-sort-top .ap-cic{color:#E0A800}.ap-sort-trending .ap-cic{color:#F07A1A}.ap-sort-new .ap-cic{color:#1DB45F}
+.ap-chip.ap-sort.on .ap-cic{color:#fff}
+.ap-cdiv{flex:none;align-self:center;width:1.5px;height:24px;margin:0 4px;background:rgba(31,26,23,.15);border-radius:2px}
 /* Hero A (holos style, 1080 grid) */
 .hero-a{background:transparent;padding:72px 0 88px;overflow:hidden;position:relative}
 .ha-in{max-width:1120px;margin:0 auto;padding:0 20px;display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center}
@@ -2999,8 +3007,7 @@ function pageStickers(kind){
       <div class="ap-sbox"><span class="ap-sic" aria-hidden="true"></span><input id="apQ" type="search" autocomplete="off" spellcheck="false" placeholder="Search Stickers..." aria-label="Search sticker packs" value="${esc(q)}" aria-controls="apSug" aria-expanded="false"><button type="button" class="ap-clear" id="apClear" aria-label="Clear search"${q?'':' hidden'}>✕</button></div>
       <div class="ap-sug" id="apSug" role="listbox" hidden></div>
       </div>
-      <div class="ap-tabs" role="tablist" aria-label="Sort packs">${[['all','All packs',''],['top','Top',IC.top],['trending','Trending',IC.trending],['new','New',IC.new]].map(([t,l,ic])=>`<button type="button" role="tab" class="ap-tab${tab===t?' on':''}" data-tab="${t}" aria-selected="${tab===t}">${ic?`<span class="ap-tic" aria-hidden="true">${ic}</span>`:''}${l}</button>`).join('')}</div>
-      <div class="ap-chiprow"><button type="button" class="ap-nav prev" aria-label="Scroll categories left" hidden>${I.left}</button><div class="ap-chips" role="group" aria-label="Filter by category">${chip('all','All categories','#1F1A17')}${cats.map(c=>chip(c.slug,c.name,catTint(c.slug))).join('')}</div><button type="button" class="ap-nav next" aria-label="Scroll categories right" hidden>${I.arrow}</button></div>
+      <div class="ap-chiprow"><button type="button" class="ap-nav prev" aria-label="Scroll categories left" hidden>${I.left}</button><div class="ap-chips" role="group" aria-label="Filter packs">${[['top','Top',IC.top],['trending','Trending',IC.trending],['new','New',IC.new]].map(([t,l,ic])=>`<button type="button" class="ap-chip ap-sort ap-sort-${t}${tab===t?' on':''}" data-tab="${t}" aria-pressed="${tab===t}"><span class="ap-cic" aria-hidden="true">${ic}</span>${l}</button>`).join('')}<span class="ap-cdiv" aria-hidden="true"></span>${chip('all','All packs','#1F1A17')}${cats.map(c=>chip(c.slug,c.name,catTint(c.slug))).join('')}</div><button type="button" class="ap-nav next" aria-label="Scroll categories right" hidden>${I.arrow}</button></div>
     </div>
     <div id="apRes">${apResults(list,q)}</div>
     <div class="pk2-blk pk2-ctablk ap-banner">${bannerE(i=>{const p=byId(114);const u=p&&p.imgs&&p.imgs[i];return u?`<img src="${u}" alt="" loading="lazy">`:stk('😺')})}</div>
@@ -3051,7 +3058,7 @@ function wireApSearch(){const box=document.getElementById('apSearch');if(!box)re
 if(!window.__apKey){window.__apKey=1;document.addEventListener('keydown',e=>{const inp=document.getElementById('apQ');if(!inp)return;const tag=(e.target.tagName||'').toLowerCase();if(((e.metaKey||e.ctrlKey)&&e.key.toLowerCase()==='k')||(e.key==='/'&&!/input|textarea|select/.test(tag)&&!e.target.isContentEditable)){e.preventDefault();inp.focus();inp.select()}})}
 function wireListing(){
   apMountMore();wireApSearch();
-  document.querySelectorAll('[data-tab]').forEach(b=>b.onclick=()=>{S.apTab=b.dataset.tab;S.apStuck=!!document.querySelector('.ap-search.stuck');const r=document.querySelector('.ap-chips');S.apScroll=r?r.scrollLeft:0;render(true)});
+  document.querySelectorAll('[data-tab]').forEach(b=>b.onclick=()=>{S.apTab=S.apTab===b.dataset.tab?'all':b.dataset.tab;S.apStuck=!!document.querySelector('.ap-search.stuck');const r=document.querySelector('.ap-chips');S.apScroll=r?r.scrollLeft:0;render(true)});
   const lqi=document.getElementById('lq');if(lqi&&matchMedia('(max-width:480px)').matches)lqi.placeholder='Search stickers';
   const lf=document.getElementById('lform');if(lf)lf.onsubmit=e=>{e.preventDefault();const v=document.getElementById('lq').value.trim();if(v){S.q=v;location.hash='search'}};
   document.querySelectorAll('[data-f]').forEach(b=>b.onclick=()=>{const r=document.querySelector('.ap-chips');S.apScroll=r?r.scrollLeft:0;S.apStuck=!!document.querySelector('.ap-search.stuck');S.filter=b.dataset.f;S.page=1;render(true)});
