@@ -2485,7 +2485,7 @@ body.is-ap #hdr{position:relative}
 .stp .crumbs{margin-bottom:28px}
 .stp-hero{display:grid;grid-template-columns:minmax(0,440px) minmax(0,1fr);gap:64px;align-items:start;padding-bottom:56px}
 .stp-left{display:flex;flex-direction:column;align-items:center;gap:20px}
-.stp-big{position:relative;margin:0;width:100%;aspect-ratio:1;border-radius:44px;display:grid;place-items:center;transform:rotate(-2deg);box-shadow:0 18px 40px -20px rgba(59,38,22,.55)}
+.stp-big{position:relative;margin:0;width:100%;aspect-ratio:1;border-radius:44px;background:#FFFDF9;display:grid;place-items:center;transform:rotate(-2deg);box-shadow:0 18px 40px -20px rgba(59,38,22,.55)}
 .stp-big>img{width:72%;height:72%;object-fit:contain;filter:drop-shadow(0 10px 14px rgba(0,0,0,.12))}
 .stp-big>.stk{font-size:180px;line-height:1}
 .stp-anim{position:absolute;top:22px;left:22px;height:26px;padding:0 11px;display:inline-flex;align-items:center;border-radius:999px;background:#1DB45F;color:#fff;font:700 12px/1 Fredoka,sans-serif}
@@ -2511,7 +2511,7 @@ body.is-ap #hdr{position:relative}
 .stp-tag.cat{background:color-mix(in srgb,var(--c) 22%,transparent);color:#1F1A17}
 .stp-tag:hover{background:#EADFCF}.stp-tag.cat:hover{background:color-mix(in srgb,var(--c) 34%,transparent)}
 .stp-creator{display:flex;align-items:center;gap:14px;padding:14px 18px;border-radius:22px;background:#FFFFFF;border:1px solid rgba(31,26,23,.06);margin-bottom:16px}
-.stp-av{width:48px;height:48px;border-radius:50%;flex:none;background:#1DB45F url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round'%3E%3Ccircle cx='12' cy='12' r='8'/%3E%3Cpath d='M9 14c.8 1 1.8 1.5 3 1.5s2.2-.5 3-1.5'/%3E%3Ccircle cx='9.5' cy='10' r='.6' fill='white'/%3E%3Ccircle cx='14.5' cy='10' r='.6' fill='white'/%3E%3C/svg%3E") center/26px no-repeat}
+.stp-av{width:48px;height:48px;border-radius:50%;flex:none;background:#D7E4E2 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Ccircle cx='24' cy='19' r='8' fill='%2392ADAA'/%3E%3Cpath d='M9 41c2-8 8-12 15-12s13 4 15 12' fill='%2392ADAA'/%3E%3C/svg%3E") center/cover no-repeat;overflow:hidden}
 .stp-cn{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}
 .stp-cn b{font:600 17px/1.2 Fredoka,sans-serif;color:#1F1A17}
 .stp-cn small{font:500 13px/1.2 Fredoka,sans-serif;color:#178A3A}
@@ -2530,7 +2530,7 @@ body.is-ap #hdr{position:relative}
 .stp-pn{display:flex;justify-content:space-between;margin-top:18px}
 .stp-nav{display:inline-flex;align-items:center;height:40px;padding:0 16px;border-radius:999px;background:#fff;border:1.5px solid rgba(31,26,23,.16);box-shadow:0 3px 0 rgba(31,26,23,.10);font:600 14px/1 Fredoka,sans-serif;color:#1F1A17;text-decoration:none;transition:transform .15s ease,box-shadow .15s ease,border-color .15s ease}
 .stp-nav:hover{border-color:#1F1A17;transform:translateY(1px);box-shadow:0 2px 0 rgba(31,26,23,.14)}
-.stp-band{background:var(--band);padding:48px 0 56px}
+.stp-band{background:transparent;padding:8px 0 8px}
 .stp-band .pk2-row,.stp-rel .pk2-row{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin-bottom:20px}
 .stp-band h2,.stp-rel h2{font:400 clamp(24px,2.4vw,30px)/1.15 "Fredoka One",Fredoka,sans-serif;color:#1F1A17;margin:0}
 .st-grid{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:16px}
@@ -2549,6 +2549,7 @@ body.is-ap #hdr{position:relative}
 @media (max-width:480px){.pk2-grid .pk2-st .st-heart{width:28px;height:28px;top:6px;right:6px}}
 @media (hover:none){.st-heart{opacity:1}}
 .stp-rel{padding-top:48px}
+.stp .st-heart{opacity:1}
 .st-rel .st-tile{border-color:transparent}
 .stp-sticky{display:none}
 .pk2-st{position:relative;aspect-ratio:1;display:grid;place-items:center;background:#FFFDF9;border:1.5px solid rgba(31,26,23,.12);border-radius:24px;transition:transform .2s ease,border-color .2s ease,box-shadow .2s ease;font-size:56px;text-decoration:none}
@@ -3229,7 +3230,7 @@ function pageSticker(id,n){
     ${crumbs([['Home','home'],['All packs','stickers'],[p.name,'pack-'+p.id],['Sticker '+n]])}
     <div class="stp-hero">
       <div class="stp-left">
-        <figure class="stp-big" style="background:${p.c}">${art(x)}${p.anim?'<span class="stp-anim">Animated</span>':''}<button type="button" class="stp-fav${fav?' on':''}" data-stfav="${key}" aria-label="${fav?'Remove from':'Add to'} favorites" aria-pressed="${fav}">${I.heart}</button></figure>
+        <figure class="stp-big">${art(x)}${p.anim?'<span class="stp-anim">Animated</span>':''}<button type="button" class="stp-fav${fav?' on':''}" data-stfav="${key}" aria-label="${fav?'Remove from':'Add to'} favorites" aria-pressed="${fav}">${I.heart}</button></figure>
         <div class="stp-stats"><span title="Downloads">${STI.dl}${sdl.toLocaleString('en-US')}</span><span title="Favorites">${STI.fv}<b id="stFvN">${sfv.toLocaleString('en-US')}</b></span></div>
       </div>
       <div class="stp-info">
@@ -3237,19 +3238,19 @@ function pageSticker(id,n){
         <p class="stp-desc">${desc}</p>
         <div class="stp-meta"><span>Sticker ${n} of ${N} · <a href="#pack-${p.id}">${esc(p.name)} pack</a>${p.anim?' · <em class="pm-tag">Animated</em>':''}</span><span class="stp-icons"><button type="button" class="pk2-ico" id="stLink" aria-label="Copy sticker link" title="Copy link">${I.link}</button><button type="button" class="pk2-ico" id="stShare" aria-label="Share sticker" title="Share">${STI.share}</button></span></div>
         <div class="stp-tags"><a class="stp-tag cat" href="#category-${c.slug}" style="--c:${catTint(c.slug)}">${esc(c.name)}</a>${p.anim?'<a class="stp-tag cat" href="#stickers-animated" style="--c:#5CC8FF">Animated</a>':''}${tags.map(t=>`<a class="stp-tag" href="#search" data-tag="${esc(t)}">#${esc(t)}</a>`).join('')}</div>
-        <div class="stp-creator"><span class="stp-av" aria-hidden="true"></span><span class="stp-cn"><b>WaSticker</b><small>Official pack · ${N} stickers</small></span><button type="button" class="stp-follow" id="stFollow">Follow</button></div>
+        <div class="stp-creator"><span class="stp-av" aria-hidden="true"></span><span class="stp-cn"><b>braincraft</b><small>14 followers · 32 packs</small></span><button type="button" class="stp-follow" id="stFollow">Follow</button></div>
         <div class="stp-get"><h2>Get this pack</h2><p>Free on WaSticker. Add all ${N} stickers to WhatsApp in one tap.</p>
           <div class="stp-acts"><a class="pk2-badge" href="${appUrl('sticker_store')}" target="_blank" rel="noopener"><img src="${ASSET.appstore}" alt="Download on the App Store" width="138" height="46"></a><button type="button" class="pk2-badge" data-gp aria-label="Get it on Google Play"><img src="${GPLAY_BADGE}" alt="Get it on Google Play" width="138" height="46"></button><a class="pk2-btn pk2-open" href="${appUrl('sticker_open')}" target="_blank" rel="noopener"><span>Open in WaSticker</span>${I.arrow}</a></div></div>
         <div class="stp-pn">${n>1?`<a class="stp-nav" href="#sticker-${p.id}-${n-1}">← Sticker ${n-1}</a>`:'<span></span>'}${n<N?`<a class="stp-nav" href="#sticker-${p.id}-${n+1}">Sticker ${n+1} →</a>`:`<a class="stp-nav" href="#pack-${p.id}">Whole pack →</a>`}</div>
       </div>
     </div></div>
-    <section class="stp-band" style="--band:${stTint(p.c)}"><div class="wrap">
+    <section class="stp-band"><div class="wrap">
       <div class="pk2-row"><h2>More from ${esc(p.name)}</h2><a class="pk2-see" href="#pack-${p.id}">See the whole pack →</a></div>
       <div class="st-grid">${items.map((_,k)=>stTile(p,k,k===i)).join('')}</div>
     </div></section>
     <div class="wrap">
     <section class="stp-rel"><div class="pk2-row"><h2>Related stickers</h2><a class="pk2-see" href="#category-${c.slug}">More ${esc(c.name.toLowerCase())} stickers →</a></div>
-      <div class="st-grid st-rel">${rel.map(q=>`<a class="st-tile" style="background:${q.c}" href="#sticker-${q.id}-1" aria-label="${esc(q.name)} sticker">${q.img?`<img src="${q.img}" alt="" loading="lazy">`:stk(q.e[0])}</a>`).join('')}</div></section>
+      <div class="st-grid st-rel">${rel.map(q=>{const k=q.id+':1',on=(S.favStk||[]).includes(k);return `<a class="st-tile" style="background:${q.c}" href="#sticker-${q.id}-1" aria-label="${esc(q.name)} sticker">${q.img?`<img src="${q.img}" alt="" loading="lazy">`:stk(q.e[0])}<button type="button" class="st-heart${on?' on':''}" data-stfav="${k}" aria-label="${on?'Remove from':'Add to'} favorites" aria-pressed="${on}">${I.heart}</button></a>`}).join('')}</div></section>
     <div class="pk2-blk pk2-ctablk">${bannerE(k=>{const u=(p.imgs||[])[(i+k+1)%N];return u?`<img src="${u}" alt="" loading="lazy">`:stk((p.e||[])[(i+k+1)%N]||'😺')})}</div>
     </div>
     <a class="stp-sticky" href="${appUrl('sticker_open_m')}" target="_blank" rel="noopener">Open in WaSticker →</a>
@@ -3259,7 +3260,7 @@ function wireSticker(id,n){const p=byId(id);if(!p)return;
   document.title=`${p.name} Sticker ${n} for WhatsApp, Telegram & iMessage · WaSticker`;
   const L=document.getElementById('stLink');if(L)L.onclick=()=>copy('https://wasticker.io/#sticker-'+p.id+'-'+n,'Sticker link copied');
   const Sh=document.getElementById('stShare');if(Sh)Sh.onclick=()=>{const url='https://wasticker.io/#sticker-'+p.id+'-'+n;if(navigator.share)navigator.share({title:p.name+' sticker '+n,url}).catch(()=>{});else copy(url,'Sticker link copied')};
-  const F=document.getElementById('stFollow');if(F)F.onclick=()=>{const on=F.classList.toggle('on');F.textContent=on?'Following':'Follow';toast(on?'You’re following WaSticker':'Unfollowed')};
+  const F=document.getElementById('stFollow');if(F)F.onclick=()=>{const on=F.classList.toggle('on');F.textContent=on?'Following':'Follow';toast(on?'You’re following braincraft':'Unfollowed')};
   document.querySelectorAll('.stp-tag[data-tag]').forEach(a=>a.onclick=e=>{e.preventDefault();S.apq=a.dataset.tag;S.filter='all';location.hash='stickers'});
   const tile=document.querySelector('.st-tile.cur');if(tile&&tile.parentElement.scrollWidth>tile.parentElement.clientWidth)tile.parentElement.scrollLeft=tile.offsetLeft-40;
 }
