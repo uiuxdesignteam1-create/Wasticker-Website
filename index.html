@@ -2374,7 +2374,7 @@ html{overflow-x:clip}
 /* All Packs search (variation B) — sticky under the navbar */
 /* sticked-style: navbar scrolls away, search band sticks to the very top */
 body.is-ap #hdr{position:relative}
-.ap-search{position:sticky;top:0;z-index:40;margin:16px 0 -16px;padding:8px 0 12px}
+.ap-search{position:sticky;top:0;z-index:40;margin:16px 0 -16px;padding:8px 0 14px}
 .ap-search::before{content:"";position:absolute;inset:0 calc(50% - 50vw);z-index:-1;background:#FBF6EE;opacity:0;box-shadow:0 6px 8px -2px rgba(0,0,0,.06);transition:opacity .2s ease}
 .ap-search.stuck::before{opacity:1}
 .ap-sen{height:0}
@@ -2389,7 +2389,10 @@ body.is-ap #hdr{position:relative}
 .ap-kbd{flex:none;padding:5px 9px;border-radius:9px;background:#F3ECE1;font:600 12px/1 Fredoka,sans-serif;color:#857B72}
 .ap-clear{flex:none;width:30px;height:30px;border-radius:50%;border:0;background:rgba(31,26,23,.08);color:#615850;font:600 12px/1 Fredoka,sans-serif;cursor:pointer}
 .ap-clear:hover{background:rgba(31,26,23,.14);color:#1F1A17}
-.ap-sug{position:absolute;left:0;right:0;top:calc(100% - 4px);max-height:min(420px,60vh);overflow:auto;padding:8px;border-radius:24px;background:#FFFFFF;border:1px solid rgba(31,26,23,.08);box-shadow:0 24px 48px -16px rgba(59,38,22,.28)}
+.ap-sfield{position:relative}
+.ap-search .ap-chiprow{margin:12px 0 0}
+#apRes{margin-top:24px}
+.ap-sug{position:absolute;left:0;right:0;top:calc(100% + 8px);z-index:5;max-height:min(420px,60vh);overflow:auto;padding:8px;border-radius:24px;background:#FFFFFF;border:1px solid rgba(31,26,23,.08);box-shadow:0 24px 48px -16px rgba(59,38,22,.28)}
 .ap-sug-h{margin:8px 12px 6px;font:700 11px/1 Fredoka,sans-serif;letter-spacing:.06em;text-transform:uppercase;color:#857B72}
 .ap-sug-i{display:flex;align-items:center;gap:12px;padding:8px 12px;border-radius:14px;color:#1F1A17;text-decoration:none}
 .ap-sug-i:hover,.ap-sug-i.act{background:#F7F2EA}
@@ -2949,11 +2952,13 @@ function pageStickers(kind){
     ${crumbs([['Home','home'],[crumb]])}
     <h1>${title}</h1>
     <p class="ap-sub" id="apSub" data-def="${esc(sub)}">${q?apCount(list.length,q):sub}</p>
-    <div class="ap-search" id="apSearch" role="search">
+    <div class="ap-search" id="apSearch">
+      <div class="ap-sfield" role="search">
       <div class="ap-sbox"><span class="ap-sic" aria-hidden="true"></span><input id="apQ" type="search" autocomplete="off" spellcheck="false" placeholder="Search sticker packs… e.g. cat, love, Eid" aria-label="Search sticker packs" value="${esc(q)}" aria-controls="apSug" aria-expanded="false"><button type="button" class="ap-clear" id="apClear" aria-label="Clear search"${q?'':' hidden'}>✕</button><kbd class="ap-kbd" aria-hidden="true"${q?' hidden':''}>⌘ K</kbd></div>
       <div class="ap-sug" id="apSug" role="listbox" hidden></div>
+      </div>
+      <div class="ap-chiprow"><button type="button" class="ap-nav prev" aria-label="Scroll categories left" hidden>${I.left}</button><div class="ap-chips" role="group" aria-label="Filter by category">${chip('all','All packs','#1F1A17')}${cats.map(c=>chip(c.slug,c.name,catTint(c.slug))).join('')}</div><button type="button" class="ap-nav next" aria-label="Scroll categories right" hidden>${I.arrow}</button></div>
     </div>
-    <div class="ap-chiprow"><button type="button" class="ap-nav prev" aria-label="Scroll categories left" hidden>${I.left}</button><div class="ap-chips" role="group" aria-label="Filter by category">${chip('all','All packs','#1F1A17')}${cats.map(c=>chip(c.slug,c.name,catTint(c.slug))).join('')}</div><button type="button" class="ap-nav next" aria-label="Scroll categories right" hidden>${I.arrow}</button></div>
     <div id="apRes">${apResults(list,q)}</div>
     <div class="pk2-blk pk2-ctablk ap-banner">${bannerE(i=>{const p=byId(114);const u=p&&p.imgs&&p.imgs[i];return u?`<img src="${u}" alt="" loading="lazy">`:stk('😺')})}</div>
   </div></div>`;
@@ -2993,13 +2998,14 @@ function wireApSearch(){const box=document.getElementById('apSearch');if(!box)re
   inp.addEventListener('blur',()=>setTimeout(close,120));
   // sticky shadow
   const sen=document.createElement('div');sen.className='ap-sen';box.before(sen);new IntersectionObserver(([en])=>box.classList.toggle('stuck',!en.isIntersecting&&en.boundingClientRect.top<1),{rootMargin:'-1px 0px 0px 0px'}).observe(sen);
+  if(S.apStuck){S.apStuck=0;scrollTo(0,sen.getBoundingClientRect().top+scrollY+parseFloat(getComputedStyle(box).marginTop)+1)}
 }
 if(!window.__apKey){window.__apKey=1;document.addEventListener('keydown',e=>{const inp=document.getElementById('apQ');if(!inp)return;const tag=(e.target.tagName||'').toLowerCase();if(((e.metaKey||e.ctrlKey)&&e.key.toLowerCase()==='k')||(e.key==='/'&&!/input|textarea|select/.test(tag)&&!e.target.isContentEditable)){e.preventDefault();inp.focus();inp.select()}})}
 function wireListing(){
   apMountMore();wireApSearch();
   const lqi=document.getElementById('lq');if(lqi&&matchMedia('(max-width:480px)').matches)lqi.placeholder='Search stickers';
   const lf=document.getElementById('lform');if(lf)lf.onsubmit=e=>{e.preventDefault();const v=document.getElementById('lq').value.trim();if(v){S.q=v;location.hash='search'}};
-  document.querySelectorAll('[data-f]').forEach(b=>b.onclick=()=>{const r=document.querySelector('.ap-chips');S.apScroll=r?r.scrollLeft:0;S.filter=b.dataset.f;S.page=1;render(true)});
+  document.querySelectorAll('[data-f]').forEach(b=>b.onclick=()=>{const r=document.querySelector('.ap-chips');S.apScroll=r?r.scrollLeft:0;S.apStuck=!!document.querySelector('.ap-search.stuck');S.filter=b.dataset.f;S.page=1;render(true)});
   const apc=document.querySelector('.ap-chips');if(apc){const pv=document.querySelector('.ap-nav.prev'),nx=document.querySelector('.ap-nav.next');
     if(S.apScroll){apc.scrollLeft=S.apScroll;S.apScroll=0}else{const on=apc.querySelector('.on');if(on&&on.offsetLeft+on.offsetWidth>apc.clientWidth)apc.scrollLeft=on.offsetLeft-40}
     const upd=()=>{const m=apc.scrollWidth-apc.clientWidth;pv.hidden=apc.scrollLeft<4;nx.hidden=apc.scrollLeft>m-4;apc.parentNode.classList.toggle('fl',apc.scrollLeft>4);apc.parentNode.classList.toggle('fr',apc.scrollLeft<m-4)};
