@@ -1975,7 +1975,7 @@ input[type=search]::-webkit-search-cancel-button{margin-left:12px;flex:none;curs
 .pk2{background:transparent;padding:20px 0 72px}
 .pk2 .crumbs{margin:0 0 22px}
 .pk2-head{display:grid;grid-template-columns:240px minmax(0,1fr);gap:40px;align-items:center;padding-bottom:36px;border-bottom:1px solid rgba(31,26,23,.12)}
-.pk2-cover{position:relative;aspect-ratio:1;border-radius:32px;display:grid;place-items:center;transform:rotate(-4deg);box-shadow:0 2px 4px rgba(31,26,23,.06),0 22px 40px -18px rgba(59,38,22,.35);overflow:hidden}
+.pk2-cover{position:relative;aspect-ratio:1;border-radius:32px;background:#FFFDF9;border:1.5px solid rgba(31,26,23,.08);display:grid;place-items:center;transform:rotate(-4deg);box-shadow:0 2px 4px rgba(31,26,23,.06),0 22px 40px -18px rgba(59,38,22,.35);overflow:hidden}
 .pk2-cover img{width:78%;height:78%;object-fit:contain}
 .pk2-cover .stk{font-size:120px}
 .pk2-cover .anim-badge{top:14px;right:14px}
@@ -3281,7 +3281,7 @@ function pagePack(id){
   return `<div class="pk2"><div class="wrap">
     ${crumbs([['Home','home'],['All stickers','stickers'],[c.name,'category-'+c.slug],[p.name]])}
     <div class="pk2-head">
-      <div class="pk2-cover${p.anim?' anim':''}" style="background:${p.c}">${art}${p.anim?`<span class="anim-badge">Animated</span>`:''}</div>
+      <div class="pk2-cover${p.anim?' anim':''}">${art}${p.anim?`<span class="anim-badge">Animated</span>`:''}</div>
       <div class="pk2-info">
         <div class="pk2-titlerow"><h1>${full}</h1><div class="pk2-icons"><button class="pk2-ico${fav?' on':''}" id="favPack" aria-pressed="${fav}" aria-label="${fav?'Remove from favorites':'Add to favorites'}" title="${fav?'Favorited':'Favorite'}">${I.heart}</button><button class="pk2-ico" id="cpLink" aria-label="Copy pack link" title="Copy link">${I.link}</button><button class="pk2-ico pk2-rep" id="repPack" aria-label="Report this pack" title="Report"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 21V4"/><path d="M5 4h11l-2 4 2 4H5"/></svg></button></div></div>
         <p class="pk2-desc">${n} ${nm} stickers made for WhatsApp, Telegram and iMessage. Open the pack in WaSticker to add it to your chats.</p>
@@ -3728,7 +3728,7 @@ function pageMyPack(id){
   return `<div class="pk2 mpk"><div class="wrap">
     ${crumbs(fresh?[['Home','home'],['Create Sticker','create'],[p.name]]:[['Home','home'],['My Profile','manager'],[p.name]])}
     <div class="pk2-head">
-      <div class="pk2-cover" style="background:${bg}"><img src="${cover}" alt=""></div>
+      <div class="pk2-cover"><img src="${cover}" alt=""></div>
       <div class="pk2-info">
         ${fresh?`<span class="mp-badge mpk-new">${I.check} Pack created</span>`:''}
         <div class="pk2-titlerow"><h1>${priv?`<span class="mp-lock" title="Private pack">${MPI.lock}</span>`:''}${esc(p.name)}</h1><div class="pk2-icons"><button class="pk2-ico" id="mpLink" aria-label="Copy link" title="Copy link">${I.link}</button><button class="pk2-ico" id="mpShare" aria-label="Share" title="Share">${PVI.share}</button></div></div>
