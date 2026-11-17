@@ -2955,7 +2955,7 @@ function pageStickers(kind){
     <p class="ap-sub" id="apSub" data-def="${esc(sub)}">${q?apCount(list.length,q):sub}</p>
     <div class="ap-search" id="apSearch">
       <div class="ap-sfield" role="search">
-      <div class="ap-sbox"><span class="ap-sic" aria-hidden="true"></span><input id="apQ" type="search" autocomplete="off" spellcheck="false" placeholder="Search sticker packs… e.g. cat, love, Eid" aria-label="Search sticker packs" value="${esc(q)}" aria-controls="apSug" aria-expanded="false"><button type="button" class="ap-clear" id="apClear" aria-label="Clear search"${q?'':' hidden'}>✕</button><kbd class="ap-kbd" aria-hidden="true"${q?' hidden':''}>⌘ K</kbd></div>
+      <div class="ap-sbox"><span class="ap-sic" aria-hidden="true"></span><input id="apQ" type="search" autocomplete="off" spellcheck="false" placeholder="Search Stickers..." aria-label="Search sticker packs" value="${esc(q)}" aria-controls="apSug" aria-expanded="false"><button type="button" class="ap-clear" id="apClear" aria-label="Clear search"${q?'':' hidden'}>✕</button><kbd class="ap-kbd" aria-hidden="true"${q?' hidden':''}>⌘ K</kbd></div>
       <div class="ap-sug" id="apSug" role="listbox" hidden></div>
       </div>
       <div class="ap-chiprow"><button type="button" class="ap-nav prev" aria-label="Scroll categories left" hidden>${I.left}</button><div class="ap-chips" role="group" aria-label="Filter by category">${chip('all','All packs','#1F1A17')}${cats.map(c=>chip(c.slug,c.name,catTint(c.slug))).join('')}</div><button type="button" class="ap-nav next" aria-label="Scroll categories right" hidden>${I.arrow}</button></div>
@@ -2976,8 +2976,7 @@ function apMountMore(){const more=document.getElementById('apMore'),grid=documen
   const io=new IntersectionObserver(es=>{if(es.some(e=>e.isIntersecting))load()},{rootMargin:'600px 0px'});io.observe(more);window.__apIO=io}
 function wireApSearch(){const box=document.getElementById('apSearch');if(!box)return;const inp=document.getElementById('apQ'),clr=document.getElementById('apClear'),kbd=box.querySelector('.ap-kbd'),sug=document.getElementById('apSug'),sub=document.getElementById('apSub'),res=document.getElementById('apRes');
   if(kbd&&!/Mac|iPhone|iPad/.test(navigator.platform||navigator.userAgent))kbd.textContent='Ctrl K';
-  if(matchMedia('(max-width:600px)').matches)inp.placeholder='Search sticker packs';
-  let act=-1;
+    let act=-1;
   const apply=()=>{const q=inp.value.trim();S.apq=q;const list=q?apMatch(window.__apBase||[],q):(window.__apBase||[]);window.__apList=list;res.innerHTML=apResults(list,q);apMountMore();sub.innerHTML=q?apCount(list.length,q):esc(sub.dataset.def);clr.hidden=!q;if(kbd)kbd.hidden=!!q};
   const close=()=>{sug.hidden=true;inp.setAttribute('aria-expanded','false');act=-1};
   const open=()=>{const q=inp.value.trim();if(!q){close();return}
