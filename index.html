@@ -3861,11 +3861,11 @@ function wireMyPack(id){
       if(k==='wa'||k==='im'||k==='tg'){if(n<3&&k==='wa'){toast('WhatsApp needs at least 3 stickers in a pack');return}getApp({title:`Export “${p.name}” to ${k==='wa'?'WhatsApp':k==='im'?'iMessage':'Telegram'}`,ct:'mypack_export_'+k,art:cover})}
       else{if(!imgs.length){toast('Nothing to export yet');return}dl(imgs,p.name);toast(`Saving ${imgs.length} ${imgs.length===1?'sticker':'stickers'}…`)}})};
   document.getElementById('mpMenu').onclick=()=>{const m=modal(`<div class="shr pmn"><h2>Pack menu</h2>
+      <button type="button" class="pmn-i" data-pm="share"><span class="pmn-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 5l7 7-7 7"/><path d="M21 12H10a6 6 0 0 0-6 6v1"/></svg></span><span>Share pack link</span></button>
       <button type="button" class="pmn-i" data-pm="edit"><span class="pmn-ic">${I.edit}</span><span>Edit pack</span></button>
-      <button type="button" class="pmn-i" data-pm="import"><span class="pmn-ic">${I.layers}</span><span>Import from Library</span></button>
       <button type="button" class="pmn-i del" data-pm="del"><span class="pmn-ic">${I.trash}</span><span>Delete pack</span></button></div>`,'shr-mdl');
     m.querySelectorAll('[data-pm]').forEach(b=>b.onclick=()=>{const k=b.dataset.pm;
-      if(k==='import'){closeModal();openLibrary(p)}
+      if(k==='share'){closeModal();setTimeout(()=>document.getElementById('mpShare').click(),60)}
       else if(k==='edit'){const box=b.closest('.pmn');const on=!!(p.priv||p.status==='Draft');box.classList.add('pme');box.innerHTML=`<h2>Edit pack</h2>
         <label class="pme-l" for="pmnName">Pack name</label><div class="pme-f"><input class="pmn-in" id="pmnName" maxlength="40" value="${esc(p.name)}"><span class="pme-c" id="pmnCt">${p.name.length}/40</span></div>
         <label class="pme-l" for="pmnAuth">Author name</label><div class="pme-f dis"><span class="pme-ui">${MPI.user||'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c1.5-3.5 4.5-5 8-5s6.5 1.5 8 5"/></svg>'}</span><input class="pmn-in" id="pmnAuth" value="${esc(author)}" disabled></div>
