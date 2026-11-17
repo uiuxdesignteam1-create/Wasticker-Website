@@ -2427,6 +2427,22 @@ body.is-ap #hdr{position:relative}
 .ap-ebtn.pri:hover{background:#178A3A;border-color:#178A3A;box-shadow:0 2px 0 #0F6E33}
 .ap-ebtn:active{transform:translateY(3px);box-shadow:none}
 @media (max-width:600px){.ap-empty-art{width:170px;height:170px}.ap-empty-art svg{width:156px}.ap-empty h2{font-size:24px}.ap-empty p{font-size:15px}}
+/* All Packs tabs (variation K) */
+.ap-tabs{display:flex;gap:28px;margin-top:14px;border-bottom:1.5px solid rgba(31,26,23,.10);overflow-x:auto;scrollbar-width:none}
+.ap-tabs::-webkit-scrollbar{display:none}
+.ap-tab{display:inline-flex;align-items:center;gap:6px;padding:10px 0 11px;margin-bottom:-1.5px;border:0;border-bottom:3px solid transparent;background:none;font:500 16px/1 Fredoka,sans-serif;color:#615850;cursor:pointer;white-space:nowrap;transition:color .15s ease,border-color .15s ease}
+.ap-tab:hover{color:#1F1A17}
+.ap-tab.on{color:#1F1A17;font-weight:600;border-bottom-color:#1DB45F}
+.ap-tic{display:inline-flex;width:18px;height:18px;color:#857B72}
+.ap-tic svg{width:18px;height:18px;display:block}
+.ap-tab.on .ap-tic{color:#178A3A}
+.ap-search .ap-tabs+.ap-chiprow{margin-top:14px}
+.pk-rank{position:absolute;top:10px;left:10px;z-index:2;display:inline-flex;align-items:center;gap:3px;height:28px;min-width:28px;padding:0 9px;border-radius:999px;background:#FFFFFF;color:#1F1A17;font:700 13px/1 Fredoka,sans-serif;box-shadow:0 2px 6px rgba(31,26,23,.12)}
+.pk-rank.gold{background:#FFD43B}
+.pk-rank.hot i{width:12px;height:12px;background:#F07A1A;-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 22c4 0 7-2.7 7-7 0-3.5-2.2-6-4.5-8.5-.4 2.3-1.6 3.6-3 4.2C11.8 7.6 10.6 5 8.5 3 8.7 6.2 5 8.6 5 14.5 5 18.9 8 22 12 22Z'/%3E%3C/svg%3E") center/contain no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 22c4 0 7-2.7 7-7 0-3.5-2.2-6-4.5-8.5-.4 2.3-1.6 3.6-3 4.2C11.8 7.6 10.6 5 8.5 3 8.7 6.2 5 8.6 5 14.5 5 18.9 8 22 12 22Z'/%3E%3C/svg%3E") center/contain no-repeat}
+.pk-rank.gold.hot i{background:#1F1A17}
+.pk-new{position:absolute;top:10px;right:10px;z-index:2;height:24px;padding:0 9px;display:inline-flex;align-items:center;border-radius:999px;background:#1DB45F;color:#fff;font:700 11px/1 Fredoka,sans-serif;letter-spacing:.04em;text-transform:uppercase}
+@media (max-width:600px){.ap-tabs{gap:20px}.ap-tab{font-size:15px}.pk-rank{top:8px;left:8px;height:24px;padding:0 7px;font-size:12px}.pk-new{top:8px;right:8px;height:22px;padding:0 7px;font-size:10px}}
 /* Hero A (holos style, 1080 grid) */
 .hero-a{background:transparent;padding:72px 0 88px;overflow:hidden;position:relative}
 .ha-in{max-width:1120px;margin:0 auto;padding:0 20px;display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center}
@@ -2956,13 +2972,15 @@ const TINTS=['#B490FF','#FFD43B','#FF9EC7','#4BE0A3','#FF9A4D','#5CC8FF'];
 const catTint=slug=>TINTS[Math.max(0,CATS.findIndex(c=>c.slug===slug))%TINTS.length];
 function pageStickers(kind){
   const base=PACKS.filter(p=>kind==='all'||(kind==='animated'?p.anim:!p.anim));
-  const SPECIAL=['top','trending','new'];
-  if(S.filter!=='all'&&!SPECIAL.includes(S.filter)&&!base.some(p=>p.cat===S.filter))S.filter='all';
-  let list=S.filter==='all'||SPECIAL.includes(S.filter)?base:base.filter(p=>p.cat===S.filter);
+  if(['top','trending','new'].includes(S.filter)){S.apTab=S.filter;S.filter='all'}
+  const tab=['top','trending','new'].includes(S.apTab)?S.apTab:'all';
+  if(S.filter!=='all'&&!base.some(p=>p.cat===S.filter))S.filter='all';
+  let list=S.filter==='all'?base:base.filter(p=>p.cat===S.filter);
   list=list.slice().sort((x,y)=>y.id-x.id);
-  if(S.filter==='top')list.sort((x,y)=>y.dl-x.dl);
-  else if(S.filter==='trending'){const ids=base.map(p=>p.id),mn=Math.min(...ids),mx=Math.max(...ids)||1;const sc=p=>p.dl*(.35+.65*((p.id-mn)/((mx-mn)||1)));list.sort((x,y)=>sc(y)-sc(x))}
-  else if(S.filter==='new')list=list.slice(0,24);const per=20;window.__apBase=list;window.__apKind=kind;
+  window.__apNew=new Set(PACKS.slice().sort((x,y)=>y.id-x.id).slice(0,8).map(p=>p.id));
+  if(tab==='top')list.sort((x,y)=>y.dl-x.dl);
+  else if(tab==='trending'){const ids=base.map(p=>p.id),mn=Math.min(...ids),mx=Math.max(...ids)||1;const sc=p=>p.dl*(.35+.65*((p.id-mn)/((mx-mn)||1)));list.sort((x,y)=>sc(y)-sc(x))}
+  else if(tab==='new')list=list.slice(0,24);window.__apTab=tab;const per=20;window.__apBase=list;window.__apKind=kind;
   const q=(S.apq||'').trim();if(q)list=apMatch(list,q);window.__apList=list;const shown=list.slice(0,per);
   const title=kind==='animated'?'Animated sticker packs':kind==='static'?'Static sticker packs':'All sticker packs';
   const crumb=kind==='animated'?'Animated':kind==='static'?'Static':'All packs';
@@ -2981,7 +2999,8 @@ function pageStickers(kind){
       <div class="ap-sbox"><span class="ap-sic" aria-hidden="true"></span><input id="apQ" type="search" autocomplete="off" spellcheck="false" placeholder="Search Stickers..." aria-label="Search sticker packs" value="${esc(q)}" aria-controls="apSug" aria-expanded="false"><button type="button" class="ap-clear" id="apClear" aria-label="Clear search"${q?'':' hidden'}>✕</button></div>
       <div class="ap-sug" id="apSug" role="listbox" hidden></div>
       </div>
-      <div class="ap-chiprow"><button type="button" class="ap-nav prev" aria-label="Scroll categories left" hidden>${I.left}</button><div class="ap-chips" role="group" aria-label="Filter by category">${chip('top','Top','#FFD43B',IC.top)}${chip('trending','Trending','#FF9A4D',IC.trending)}${chip('new','New','#4BE0A3',IC.new)}${chip('all','All packs','#1F1A17')}${cats.map(c=>chip(c.slug,c.name,catTint(c.slug))).join('')}</div><button type="button" class="ap-nav next" aria-label="Scroll categories right" hidden>${I.arrow}</button></div>
+      <div class="ap-tabs" role="tablist" aria-label="Sort packs">${[['all','All packs',''],['top','Top',IC.top],['trending','Trending',IC.trending],['new','New',IC.new]].map(([t,l,ic])=>`<button type="button" role="tab" class="ap-tab${tab===t?' on':''}" data-tab="${t}" aria-selected="${tab===t}">${ic?`<span class="ap-tic" aria-hidden="true">${ic}</span>`:''}${l}</button>`).join('')}</div>
+      <div class="ap-chiprow"><button type="button" class="ap-nav prev" aria-label="Scroll categories left" hidden>${I.left}</button><div class="ap-chips" role="group" aria-label="Filter by category">${chip('all','All categories','#1F1A17')}${cats.map(c=>chip(c.slug,c.name,catTint(c.slug))).join('')}</div><button type="button" class="ap-nav next" aria-label="Scroll categories right" hidden>${I.arrow}</button></div>
     </div>
     <div id="apRes">${apResults(list,q)}</div>
     <div class="pk2-blk pk2-ctablk ap-banner">${bannerE(i=>{const p=byId(114);const u=p&&p.imgs&&p.imgs[i];return u?`<img src="${u}" alt="" loading="lazy">`:stk('😺')})}</div>
@@ -2993,10 +3012,14 @@ const apCount=(n,q)=>`<b>${n} ${n===1?'pack':'packs'}</b> for “${esc(q)}”`;
 function apResults(list,q){const per=20,shown=list.slice(0,per);
   if(!shown.length&&q){return `<div class="ap-empty" role="status"><div class="ap-empty-art"><svg viewBox="0 0 240 200" width="200" height="167" fill="none" stroke="#1F1A17" stroke-width="4" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><ellipse cx="120" cy="175" rx="96" ry="15" fill="#1F1A17" fill-opacity=".08" stroke="none"/><path d="M50 92 120 72 190 92 120 112Z" fill="#E9B98A"/><path d="M50 92 120 112 120 182 50 160Z" fill="#F7C99B"/><path d="M190 92 120 112 120 182 190 160Z" fill="#E9B98A"/><path d="M50 92 26 118 96 140 120 112Z" fill="#FFD9B0"/><path d="M190 92 214 118 144 140 120 112Z" fill="#FFD9B0"/><circle cx="120" cy="29" r="25" fill="#FFD43B"/><path d="M112 22q0-8 8-8t8 7q0 6-8 9v5"/><circle cx="120" cy="44" r="3" fill="#1F1A17" stroke="none"/><ellipse cx="99" cy="144" rx="3" ry="4" fill="#1F1A17" stroke="none"/><ellipse cx="107" cy="148" rx="3" ry="4" fill="#1F1A17" stroke="none"/><path d="M92 160q8-6 18 2" stroke-width="3.5"/><path d="M36 37l3.1 7.9L47 48l-7.9 3.1L36 59l-3.1-7.9L25 48l7.9-3.1Z" fill="#4BE0A3" stroke-width="3"/><path d="M204 43l2.5 6.5L213 52l-6.5 2.5L204 61l-2.5-6.5L195 52l6.5-2.5Z" fill="#FF9EC7" stroke-width="3"/></svg></div><h2>No packs for “${esc(q)}”</h2><p>We couldn’t find a pack with that name. Check the spelling or try a shorter word.</p><div class="ap-empty-acts"><button type="button" class="ap-ebtn" data-ap-clear>Clear search</button><button type="button" class="ap-ebtn pri" data-ap-all>Browse all packs</button></div></div>`}
   if(!shown.length)return emptyState('No packs here yet','Try another category.');
-  return `<div class="grid ap-grid">${shown.map(packCard).join('')}</div>${list.length>per?`<div class="ap-more" id="apMore" aria-live="polite"><span class="ap-spin" aria-hidden="true"></span><span>Loading more packs…</span></div>`:''}`}
+  return `<div class="grid ap-grid">${shown.map((p,i)=>apCard(p,i)).join('')}</div>${list.length>per?`<div class="ap-more" id="apMore" aria-live="polite"><span class="ap-spin" aria-hidden="true"></span><span>Loading more packs…</span></div>`:''}`}
+function apCard(p,i){let h=packCard(p);const t=window.__apTab,b=[];
+  if((t==='top'||t==='trending')&&!(S.apq||'').trim()&&i<99)b.push(`<span class="pk-rank${i<3?' gold':''}${t==='trending'?' hot':''}">${t==='trending'?'<i></i>':''}#${i+1}</span>`);
+  if(window.__apNew&&window.__apNew.has(p.id))b.push('<span class="pk-new">New</span>');
+  return b.length?h.replace(/(<div class="pthumb[^"]*"[^>]*>)/,'$1'+b.join('')):h}
 function apMountMore(){const more=document.getElementById('apMore'),grid=document.querySelector('.ap-grid');if(window.__apIO){window.__apIO.disconnect();window.__apIO=null}
   if(!(more&&grid&&window.__apList))return;let n=grid.children.length;const list=window.__apList;
-  const load=()=>{if(n>=list.length){io.disconnect();more.remove();return}const next=list.slice(n,n+20);grid.insertAdjacentHTML('beforeend',next.map(packCard).join(''));n+=next.length;if(n>=list.length){io.disconnect();more.remove()}};
+  const load=()=>{if(n>=list.length){io.disconnect();more.remove();return}const next=list.slice(n,n+20);grid.insertAdjacentHTML('beforeend',next.map((p,k)=>apCard(p,n+k)).join(''));n+=next.length;if(n>=list.length){io.disconnect();more.remove()}};
   const io=new IntersectionObserver(es=>{if(es.some(e=>e.isIntersecting))load()},{rootMargin:'600px 0px'});io.observe(more);window.__apIO=io}
 function wireApSearch(){const box=document.getElementById('apSearch');if(!box)return;const inp=document.getElementById('apQ'),clr=document.getElementById('apClear'),kbd=box.querySelector('.ap-kbd'),sug=document.getElementById('apSug'),sub=document.getElementById('apSub'),res=document.getElementById('apRes');
   if(kbd&&!/Mac|iPhone|iPad/.test(navigator.platform||navigator.userAgent))kbd.textContent='Ctrl K';
@@ -3028,6 +3051,7 @@ function wireApSearch(){const box=document.getElementById('apSearch');if(!box)re
 if(!window.__apKey){window.__apKey=1;document.addEventListener('keydown',e=>{const inp=document.getElementById('apQ');if(!inp)return;const tag=(e.target.tagName||'').toLowerCase();if(((e.metaKey||e.ctrlKey)&&e.key.toLowerCase()==='k')||(e.key==='/'&&!/input|textarea|select/.test(tag)&&!e.target.isContentEditable)){e.preventDefault();inp.focus();inp.select()}})}
 function wireListing(){
   apMountMore();wireApSearch();
+  document.querySelectorAll('[data-tab]').forEach(b=>b.onclick=()=>{S.apTab=b.dataset.tab;S.apStuck=!!document.querySelector('.ap-search.stuck');const r=document.querySelector('.ap-chips');S.apScroll=r?r.scrollLeft:0;render(true)});
   const lqi=document.getElementById('lq');if(lqi&&matchMedia('(max-width:480px)').matches)lqi.placeholder='Search stickers';
   const lf=document.getElementById('lform');if(lf)lf.onsubmit=e=>{e.preventDefault();const v=document.getElementById('lq').value.trim();if(v){S.q=v;location.hash='search'}};
   document.querySelectorAll('[data-f]').forEach(b=>b.onclick=()=>{const r=document.querySelector('.ap-chips');S.apScroll=r?r.scrollLeft:0;S.apStuck=!!document.querySelector('.ap-search.stuck');S.filter=b.dataset.f;S.page=1;render(true)});
