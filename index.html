@@ -2455,6 +2455,15 @@ body.is-ap #hdr{position:relative}
 .pcard .pmeta b.pm-trow{display:flex;align-items:center;gap:6px;min-width:0;overflow:visible}
 .pcard .pmeta .pm-trow .pm-name{display:block;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font:inherit;color:inherit;margin:0;letter-spacing:inherit}
 .pm-tag{flex:none;display:inline-flex;align-items:center;height:18px;padding:0 7px;border-radius:999px;background:#1DB45F;color:#fff;font:700 10px/1 Fredoka,sans-serif;font-style:normal;letter-spacing:.02em}
+/* Pack card stats chips (variation C) */
+.pcard .pmeta .pm-stats{display:flex;flex-wrap:nowrap;gap:5px;margin-top:6px;color:inherit;font:inherit;white-space:normal;overflow:visible}
+.pcard .pmeta .pm-st{display:inline-flex;align-items:center;gap:3px;height:24px;padding:0 7px;flex:none;border-radius:999px;font:600 12px/1 Fredoka,sans-serif;color:#1F1A17;white-space:nowrap;margin:0}
+.pm-st i{width:13px;height:13px;flex:none;background:currentColor;-webkit-mask:var(--ic) center/contain no-repeat;mask:var(--ic) center/contain no-repeat}
+.pm-st.s{background:#F3ECE1}.pm-st.s i{--ic:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 12V7a3 3 0 0 0-3-3H7a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h5'/%3E%3Cpath d='M20 12a8 8 0 0 0-8 8'/%3E%3C/svg%3E");background:#615850}
+.pm-st.d{background:#E3F6EA}.pm-st.d i{--ic:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 4v11m0 0 4.5-4.5M12 15l-4.5-4.5M5 20h14'/%3E%3C/svg%3E");background:#178A3A}
+.pm-st.f{background:#FFE4EE}.pm-st.f i{--ic:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10Z'/%3E%3C/svg%3E");background:#E0457A}
+@media (max-width:600px){.pcard .pmeta .pm-stats{gap:3px}.pcard .pmeta .pm-st{height:22px;padding:0 5px;font-size:11px;gap:2px}.pm-st i{width:10px;height:10px}}
+@media (max-width:360px){.pcard .pmeta .pm-st.s{display:none}}
 /* Hero A (holos style, 1080 grid) */
 .hero-a{background:transparent;padding:72px 0 88px;overflow:hidden;position:relative}
 .ha-in{max-width:1120px;margin:0 auto;padding:0 20px;display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center}
@@ -2715,10 +2724,11 @@ function mineCard(p){const st=packStk(p)||[];const cov=p.img||(st[0]?mpImg(st[0]
 function packCard(p){
   const art=p.img?`<img src="${p.img}" alt="" loading="lazy"${p.imgScale?` style="width:${p.imgScale*100}%;height:${p.imgScale*100}%"`:''}>`:stk(p.e[0]);
   const n=(p.imgs||p.e).length;
-  const meta=`${n} Stickers / ${fmt(p.dl)} Downloads`;
+  const likes=p.likes!=null?p.likes:Math.round(p.dl*(.018+((p.id*37)%23)/1000));
+  const meta=`<span class="pm-stats" aria-label="${n} stickers, ${fmt(p.dl)} downloads, ${fmt(likes)} favorites"><span class="pm-st s"><i></i>${n}</span><span class="pm-st d"><i></i>${fmt(p.dl)}</span><span class="pm-st f"><i></i>${fmt(likes)}</span></span>`;
   return `<a class="pcard" href="#pack-${p.id}">
     <div class="pthumb${p.anim?' anim':''}" style="background:${p.c}">${art}</div>
-    <div class="pmeta">${p.anim?`<b class="pm-trow"><span class="pm-name">${esc(p.name)}</span><em class="pm-tag">Animated</em></b>`:`<b>${esc(p.name)}</b>`}<span>${meta}</span></div></a>`;
+    <div class="pmeta">${p.anim?`<b class="pm-trow"><span class="pm-name">${esc(p.name)}</span><em class="pm-tag">Animated</em></b>`:`<b>${esc(p.name)}</b>`}${meta}</div></a>`;
 }
 function stores(){return `<a class="store-img" href="${appUrl('store_badge')}" target="_blank" rel="noopener"><img src="${ASSET.appstore}" alt="Download on the App Store" width="156" height="52"></a>`}
 
