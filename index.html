@@ -2414,6 +2414,19 @@ body.is-ap #hdr{position:relative}
 .ap-cic{display:inline-flex;width:16px;height:16px;margin-left:-2px}
 .ap-cic svg{width:16px;height:16px;display:block}
 .ap-chip.has-ic.on::before{display:none}
+/* All Packs: no search results (variation A) */
+.ap-empty{display:flex;flex-direction:column;align-items:center;text-align:center;padding:48px 20px 24px}
+.ap-empty-art{width:170px;height:170px;border-radius:50%;background:#FFE7CC;display:grid;place-items:center;margin-bottom:18px}
+.ap-empty-art img{width:128px;height:128px;object-fit:contain;transform:rotate(-6deg);filter:drop-shadow(0 10px 14px rgba(0,0,0,.14))}
+.ap-empty h2{font:400 30px/1.15 "Fredoka One",Fredoka,sans-serif;color:#1F1A17;margin:0 0 10px}
+.ap-empty p{font:400 17px/1.55 Fredoka,sans-serif;color:#615850;max-width:30em;margin:0 0 24px}
+.ap-empty-acts{display:flex;flex-wrap:wrap;justify-content:center;gap:12px}
+.ap-ebtn{height:48px;padding:0 24px;border-radius:999px;background:#FFFFFF;border:1.5px solid rgba(31,26,23,.18);color:#1F1A17;font:600 16px/1 Fredoka,sans-serif;cursor:pointer;box-shadow:0 3px 0 rgba(31,26,23,.10);transition:transform .15s ease,box-shadow .15s ease,border-color .15s ease,background .15s ease}
+.ap-ebtn:hover{border-color:#1F1A17;box-shadow:0 2px 0 rgba(31,26,23,.14);transform:translateY(1px)}
+.ap-ebtn.pri{background:#1DB45F;border-color:#1DB45F;color:#fff;box-shadow:0 3px 0 #13863F}
+.ap-ebtn.pri:hover{background:#178A3A;border-color:#178A3A;box-shadow:0 2px 0 #0F6E33}
+.ap-ebtn:active{transform:translateY(3px);box-shadow:none}
+@media (max-width:600px){.ap-empty-art{width:140px;height:140px}.ap-empty-art img{width:104px;height:104px}.ap-empty h2{font-size:24px}.ap-empty p{font-size:15px}}
 /* Hero A (holos style, 1080 grid) */
 .hero-a{background:transparent;padding:72px 0 88px;overflow:hidden;position:relative}
 .ha-in{max-width:1120px;margin:0 auto;padding:0 20px;display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center}
@@ -2978,7 +2991,8 @@ const apNorm=t=>String(t||'').toLowerCase();
 function apMatch(list,q){const w=apNorm(q).split(/\s+/).filter(Boolean);return list.filter(p=>{const c=CATS.find(c=>c.slug===p.cat);const hay=apNorm([p.name,p.cat,c&&c.name,(p.tags||[]).join(' '),p.anim?'animated gif':''].join(' '));return w.every(x=>hay.includes(x))})}
 const apCount=(n,q)=>`<b>${n} ${n===1?'pack':'packs'}</b> for “${esc(q)}”`;
 function apResults(list,q){const per=20,shown=list.slice(0,per);
-  if(!shown.length)return q?emptyState(`No packs for “${esc(q)}”`,'Try another word, like cat, love or funny, or pick a category below.'):emptyState('No packs here yet','Try another category.');
+  if(!shown.length&&q){const m=byId(109),u=m&&m.img;return `<div class="ap-empty" role="status"><div class="ap-empty-art">${u?`<img src="${u}" alt="">`:stk('🙈')}</div><h2>No packs for “${esc(q)}”</h2><p>We couldn’t find a pack with that name. Check the spelling or try a shorter word.</p><div class="ap-empty-acts"><button type="button" class="ap-ebtn" data-ap-clear>Clear search</button><button type="button" class="ap-ebtn pri" data-ap-all>Browse all packs</button></div></div>`}
+  if(!shown.length)return emptyState('No packs here yet','Try another category.');
   return `<div class="grid ap-grid">${shown.map(packCard).join('')}</div>${list.length>per?`<div class="ap-more" id="apMore" aria-live="polite"><span class="ap-spin" aria-hidden="true"></span><span>Loading more packs…</span></div>`:''}`}
 function apMountMore(){const more=document.getElementById('apMore'),grid=document.querySelector('.ap-grid');if(window.__apIO){window.__apIO.disconnect();window.__apIO=null}
   if(!(more&&grid&&window.__apList))return;let n=grid.children.length;const list=window.__apList;
@@ -3003,6 +3017,7 @@ function wireApSearch(){const box=document.getElementById('apSearch');if(!box)re
     else if(e.key==='Escape'){if(!sug.hidden)close();else if(inp.value){inp.value='';apply()}else inp.blur();return}else return;
     items.forEach((x,i)=>x.classList.toggle('act',i===act));if(items[act])items[act].scrollIntoView({block:'nearest'})});
   clr.onclick=()=>{inp.value='';apply();close();inp.focus()};
+  res.addEventListener('click',e=>{if(e.target.closest('[data-ap-clear]')){inp.value='';apply();inp.focus()}else if(e.target.closest('[data-ap-all]')){S.apq='';S.filter='all';S.page=1;render(true)}});
   sug.addEventListener('mousedown',e=>e.preventDefault());
   sug.addEventListener('click',e=>{const c=e.target.closest('[data-sf]');if(c){S.filter=c.dataset.sf;S.apq='';S.page=1;close();render(true)}else if(e.target.closest('a'))close()});
   inp.addEventListener('blur',()=>setTimeout(close,120));
