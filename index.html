@@ -2416,8 +2416,8 @@ body.is-ap #hdr{position:relative}
 .ap-chip.has-ic.on::before{display:none}
 /* All Packs: no search results (variation A) */
 .ap-empty{display:flex;flex-direction:column;align-items:center;text-align:center;padding:48px 20px 24px}
-.ap-empty-art{width:170px;height:170px;border-radius:50%;background:#FFE7CC;display:grid;place-items:center;margin-bottom:18px}
-.ap-empty-art img{width:128px;height:128px;object-fit:contain;transform:rotate(-6deg);filter:drop-shadow(0 10px 14px rgba(0,0,0,.14))}
+.ap-empty-art{width:220px;height:220px;border-radius:50%;background:#FFF4E0;display:grid;place-items:center;margin-bottom:18px}
+.ap-empty-art svg{display:block;width:200px;height:auto;margin-top:6px}
 .ap-empty h2{font:400 30px/1.15 "Fredoka One",Fredoka,sans-serif;color:#1F1A17;margin:0 0 10px}
 .ap-empty p{font:400 17px/1.55 Fredoka,sans-serif;color:#615850;max-width:30em;margin:0 0 24px}
 .ap-empty-acts{display:flex;flex-wrap:wrap;justify-content:center;gap:12px}
@@ -2426,7 +2426,7 @@ body.is-ap #hdr{position:relative}
 .ap-ebtn.pri{background:#1DB45F;border-color:#1DB45F;color:#fff;box-shadow:0 3px 0 #13863F}
 .ap-ebtn.pri:hover{background:#178A3A;border-color:#178A3A;box-shadow:0 2px 0 #0F6E33}
 .ap-ebtn:active{transform:translateY(3px);box-shadow:none}
-@media (max-width:600px){.ap-empty-art{width:140px;height:140px}.ap-empty-art img{width:104px;height:104px}.ap-empty h2{font-size:24px}.ap-empty p{font-size:15px}}
+@media (max-width:600px){.ap-empty-art{width:170px;height:170px}.ap-empty-art svg{width:156px}.ap-empty h2{font-size:24px}.ap-empty p{font-size:15px}}
 /* Hero A (holos style, 1080 grid) */
 .hero-a{background:transparent;padding:72px 0 88px;overflow:hidden;position:relative}
 .ha-in{max-width:1120px;margin:0 auto;padding:0 20px;display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center}
@@ -2991,7 +2991,7 @@ const apNorm=t=>String(t||'').toLowerCase();
 function apMatch(list,q){const w=apNorm(q).split(/\s+/).filter(Boolean);return list.filter(p=>{const c=CATS.find(c=>c.slug===p.cat);const hay=apNorm([p.name,p.cat,c&&c.name,(p.tags||[]).join(' '),p.anim?'animated gif':''].join(' '));return w.every(x=>hay.includes(x))})}
 const apCount=(n,q)=>`<b>${n} ${n===1?'pack':'packs'}</b> for “${esc(q)}”`;
 function apResults(list,q){const per=20,shown=list.slice(0,per);
-  if(!shown.length&&q){const m=byId(109),u=m&&m.img;return `<div class="ap-empty" role="status"><div class="ap-empty-art">${u?`<img src="${u}" alt="">`:stk('🙈')}</div><h2>No packs for “${esc(q)}”</h2><p>We couldn’t find a pack with that name. Check the spelling or try a shorter word.</p><div class="ap-empty-acts"><button type="button" class="ap-ebtn" data-ap-clear>Clear search</button><button type="button" class="ap-ebtn pri" data-ap-all>Browse all packs</button></div></div>`}
+  if(!shown.length&&q){return `<div class="ap-empty" role="status"><div class="ap-empty-art"><svg viewBox="0 0 240 200" width="200" height="167" fill="none" stroke="#1F1A17" stroke-width="4" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><ellipse cx="120" cy="175" rx="96" ry="15" fill="#1F1A17" fill-opacity=".08" stroke="none"/><path d="M50 92 120 72 190 92 120 112Z" fill="#E9B98A"/><path d="M50 92 120 112 120 182 50 160Z" fill="#F7C99B"/><path d="M190 92 120 112 120 182 190 160Z" fill="#E9B98A"/><path d="M50 92 26 118 96 140 120 112Z" fill="#FFD9B0"/><path d="M190 92 214 118 144 140 120 112Z" fill="#FFD9B0"/><circle cx="120" cy="29" r="25" fill="#FFD43B"/><path d="M112 22q0-8 8-8t8 7q0 6-8 9v5"/><circle cx="120" cy="44" r="3" fill="#1F1A17" stroke="none"/><ellipse cx="99" cy="144" rx="3" ry="4" fill="#1F1A17" stroke="none"/><ellipse cx="107" cy="148" rx="3" ry="4" fill="#1F1A17" stroke="none"/><path d="M92 160q8-6 18 2" stroke-width="3.5"/><path d="M36 37l3.1 7.9L47 48l-7.9 3.1L36 59l-3.1-7.9L25 48l7.9-3.1Z" fill="#4BE0A3" stroke-width="3"/><path d="M204 43l2.5 6.5L213 52l-6.5 2.5L204 61l-2.5-6.5L195 52l6.5-2.5Z" fill="#FF9EC7" stroke-width="3"/></svg></div><h2>No packs for “${esc(q)}”</h2><p>We couldn’t find a pack with that name. Check the spelling or try a shorter word.</p><div class="ap-empty-acts"><button type="button" class="ap-ebtn" data-ap-clear>Clear search</button><button type="button" class="ap-ebtn pri" data-ap-all>Browse all packs</button></div></div>`}
   if(!shown.length)return emptyState('No packs here yet','Try another category.');
   return `<div class="grid ap-grid">${shown.map(packCard).join('')}</div>${list.length>per?`<div class="ap-more" id="apMore" aria-live="polite"><span class="ap-spin" aria-hidden="true"></span><span>Loading more packs…</span></div>`:''}`}
 function apMountMore(){const more=document.getElementById('apMore'),grid=document.querySelector('.ap-grid');if(window.__apIO){window.__apIO.disconnect();window.__apIO=null}
