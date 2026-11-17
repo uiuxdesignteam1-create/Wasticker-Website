@@ -2588,6 +2588,20 @@ body.is-ap #hdr{position:relative}
 .shr-b.lt{background:#fff;color:#1F1A17;box-shadow:0 1px 0 rgba(31,26,23,.06),0 0 0 1px rgba(31,26,23,.05)}
 @media (max-width:600px){.mdl-bg:has(.shr-mdl){align-items:flex-end;padding:0}.mdl.shr-mdl{width:100%;border-radius:28px 28px 0 0;animation:shr-up .28s ease}.shr{padding:24px 16px calc(28px + env(safe-area-inset-bottom))}.shr h2{font-size:22px}.shr-row{gap:10px}.shr-b{height:52px;font-size:15px;gap:7px;padding:0 8px}.shr-b svg{width:22px;height:22px}}
 @keyframes shr-up{from{transform:translateY(100%)}to{transform:none}}
+.shr-row2{grid-template-columns:repeat(3,minmax(0,1fr));margin-top:12px}
+.shr .shr-row+.shr-row{margin-top:12px}
+.pmn{padding-bottom:22px}
+.pmn-i{display:flex;align-items:center;gap:16px;width:100%;padding:12px 6px;border:0;border-bottom:1px solid rgba(31,26,23,.08);background:none;cursor:pointer;font:500 18px/1.2 Fredoka,sans-serif;color:#1F1A17;text-align:left}
+.pmn-i:last-child{border-bottom:0}
+.pmn-ic{width:48px;height:48px;border-radius:50%;background:#fff;display:grid;place-items:center;flex:none;box-shadow:0 1px 3px rgba(31,26,23,.08)}
+.pmn-ic svg{width:22px;height:22px}
+.pmn-i:hover{background:rgba(31,26,23,.03);border-radius:14px}
+.pmn-i.del{color:#E5174F}.pmn-i.del .pmn-ic{color:#E5174F}
+.pmn-q{font:400 16px/1.5 Fredoka,sans-serif;color:#615850;text-align:center;margin:-8px 8px 22px}
+.pmn-acts{display:flex;gap:12px;justify-content:center}
+.pmn-in{display:block;width:100%;height:52px;padding:0 18px;margin:0 0 20px;border-radius:999px;border:1.5px solid rgba(31,26,23,.16);background:#fff;font:400 17px/1 Fredoka,sans-serif;color:#1F1A17;outline:0}
+.pmn-in:focus{border-color:#1DB45F;box-shadow:0 0 0 4px rgba(29,180,95,.16)}
+.ap-ebtn.pmn-del{background:#E5174F;border-color:#E5174F;color:#fff;box-shadow:0 3px 0 #B5103D}
 /* Hero A (holos style, 1080 grid) */
 .hero-a{background:transparent;padding:72px 0 88px;overflow:hidden;position:relative}
 .ha-in{max-width:1120px;margin:0 auto;padding:0 20px;display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center}
@@ -3781,13 +3795,13 @@ function pageMyPack(id){
       <div class="pk2-cover"><img src="${cover}" alt=""></div>
       <div class="pk2-info">
         ${fresh?`<span class="mp-badge mpk-new">${I.check} Pack created</span>`:''}
-        <div class="pk2-titlerow"><h1>${priv?`<span class="mp-lock" title="Private pack">${MPI.lock}</span>`:''}${esc(p.name)}</h1><div class="pk2-icons"><button class="pk2-ico" id="mpLink" aria-label="Copy link" title="Copy link">${I.link}</button><button class="pk2-ico" id="mpShare" aria-label="Share" title="Share">${STI.share}</button></div></div>
+        <div class="pk2-titlerow"><h1>${priv?`<span class="mp-lock" title="Private pack">${MPI.lock}</span>`:''}${esc(p.name)}</h1><div class="pk2-icons"><button class="pk2-ico" id="mpLink" aria-label="Copy link" title="Copy link">${I.link}</button><button class="pk2-ico" id="mpShare" aria-label="Share" title="Share">${STI.share}</button><button class="pk2-ico" id="mpMenu" aria-label="Pack menu" title="More"><svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><circle cx="12" cy="5" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="12" cy="19" r="2"/></svg></button></div></div>
         <p class="pk2-desc">Your sticker pack. Open it in the WaSticker app to add it to WhatsApp, or keep adding stickers below.</p>
         <p class="pk2-meta">${n} ${n===1?'sticker':'stickers'} · ${fmt(p.dl||0)} downloads · by <b>${esc(author)}</b><span class="verified" title="Your pack">${I.check.replace('stroke="currentColor"','stroke="#fff"')}</span>${priv?'<span class="mpk-priv">Private</span>':''}</p>
         <div class="pk2-acts">
           <button class="pk2-btn pri" id="mpWa">Open in WaSticker ${I.arrow}</button>
           <button class="pk2-btn pk2-open" id="mpImp">${PVI.lib}<span>Import from Library</span></button>
-          <button class="pk2-btn pk2-open" id="mpDl">${PVI.dlpack}<span>Download</span></button>
+          <button class="pk2-btn pk2-open" id="mpDl">${STI.share}<span>Export</span></button>
         </div>
         <div id="mpNote" hidden class="tip" style="max-width:520px;margin-top:16px">WhatsApp needs at least 3 stickers in a pack. Add ${Math.max(0,3-n)} more, then open it in the WaSticker app.</div>
       </div>
@@ -3813,7 +3827,30 @@ function wireMyPack(id){
   const url='https://wasticker.io/'+encodeURIComponent(author.toLowerCase().replace(/\s+/g,''))+'/'+encodeURIComponent(p.name.toLowerCase().replace(/\s+/g,'-'));
   const n=(packStk(p)||[1]).length;const cover=p.id==='m0'?MILO.cover:mpImg((packStk(p)||[{key:'stk'}])[0]);
   document.getElementById('mpWa').onclick=()=>{if(n<3){const t=document.getElementById('mpNote');t.hidden=false}else getApp({title:`Add “${p.name}” to WhatsApp`,ct:'mypack_open',art:cover})};
-  document.getElementById('mpDl').onclick=()=>getApp({title:`Download “${p.name}”`,ct:'mypack_download',art:cover});
+  document.getElementById('mpDl').onclick=()=>{const st=packStk(p)||[];const imgs=st.map(x=>mpImg(x)).filter(Boolean);
+    const m=modal(`<div class="shr"><h2>Export pack</h2>
+      <div class="shr-pv"><span class="shr-th"><img src="${cover}" alt=""></span><span class="shr-pt"><b>${esc(p.name)}</b><small>${n} ${n===1?'sticker':'stickers'} · ready to export</small></span></div>
+      <div class="shr-row">
+      <button type="button" class="shr-b wa" data-ex="wa">${SHI.wa}<span>WhatsApp</span></button>
+      <button type="button" class="shr-b im" data-ex="im">${SHI.im}<span>iMessage</span></button>
+      <button type="button" class="shr-b tg" data-ex="tg">${SHI.tg}<span>Telegram</span></button></div>
+      <div class="shr-row shr-row2">
+      <button type="button" class="shr-b lt" data-ex="lib">${SHI.lib}<span>Library</span></button>
+      <button type="button" class="shr-b lt" data-ex="files"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7.5A2.5 2.5 0 0 1 5.5 5h4l2 2h7A2.5 2.5 0 0 1 21 9.5v8a2.5 2.5 0 0 1-2.5 2.5h-13A2.5 2.5 0 0 1 3 17.5Z" fill="#1DB45F"/></svg><span>Files</span></button></div></div>`,'shr-mdl');
+    const dl=(list,name)=>{list.forEach((u,k)=>setTimeout(()=>{const a=document.createElement('a');a.href=u;a.download=(name+'-'+(k+1)).replace(/\s+/g,'-').toLowerCase()+'.png';document.body.appendChild(a);a.click();a.remove()},k*180))};
+    m.querySelectorAll('[data-ex]').forEach(b=>b.onclick=()=>{const k=b.dataset.ex;closeModal();
+      if(k==='wa'||k==='im'||k==='tg'){if(n<3&&k==='wa'){toast('WhatsApp needs at least 3 stickers in a pack');return}getApp({title:`Export “${p.name}” to ${k==='wa'?'WhatsApp':k==='im'?'iMessage':'Telegram'}`,ct:'mypack_export_'+k,art:cover})}
+      else{if(!imgs.length){toast('Nothing to export yet');return}dl(imgs,p.name);toast(`Saving ${imgs.length} ${imgs.length===1?'sticker':'stickers'}…`)}})};
+  document.getElementById('mpMenu').onclick=()=>{const m=modal(`<div class="shr pmn"><h2>Pack menu</h2>
+      <button type="button" class="pmn-i" data-pm="edit"><span class="pmn-ic">${I.edit}</span><span>Rename pack</span></button>
+      <button type="button" class="pmn-i" data-pm="import"><span class="pmn-ic">${I.layers}</span><span>Import from Library</span></button>
+      <button type="button" class="pmn-i del" data-pm="del"><span class="pmn-ic">${I.trash}</span><span>Delete pack</span></button></div>`,'shr-mdl');
+    m.querySelectorAll('[data-pm]').forEach(b=>b.onclick=()=>{const k=b.dataset.pm;
+      if(k==='import'){closeModal();openLibrary(p)}
+      else if(k==='edit'){const box=b.closest('.pmn');box.innerHTML=`<h2>Rename pack</h2><input class="pmn-in" id="pmnName" maxlength="40" value="${esc(p.name)}" aria-label="Pack name"><div class="pmn-acts"><button type="button" class="ap-ebtn" data-pc="no">Cancel</button><button type="button" class="ap-ebtn pri" data-pc="yes">Save</button></div>`;const inp=box.querySelector('#pmnName');inp.focus();inp.select();
+        const go=()=>{const nm=inp.value.trim();if(!nm){inp.focus();return}p.name=nm.slice(0,40);save();closeModal();render(true);toast('Pack renamed')};box.querySelector('[data-pc=no]').onclick=closeModal;box.querySelector('[data-pc=yes]').onclick=go;inp.onkeydown=e=>{if(e.key==='Enter')go()}}
+      else if(k==='del'){const box=b.closest('.pmn');box.innerHTML=`<h2>Delete “${esc(p.name)}”?</h2><p class="pmn-q">This removes the pack and its ${n} ${n===1?'sticker':'stickers'} from your account. You can’t undo this.</p><div class="pmn-acts"><button type="button" class="ap-ebtn" data-pc="no">Cancel</button><button type="button" class="ap-ebtn pmn-del" data-pc="yes">Delete pack</button></div>`;
+        box.querySelector('[data-pc=no]').onclick=closeModal;box.querySelector('[data-pc=yes]').onclick=()=>{S.mine=(S.mine||[]).filter(x=>x.id!==p.id);save();closeModal();location.hash='manager';setTimeout(()=>toast('Pack deleted'),200)}}})};
   document.getElementById('mpLink').onclick=()=>copy(url,'Pack link copied');
   
   document.getElementById('mpShare').onclick=()=>{const st=packStk(p)||[];const cv=p.id==='m0'?MILO.cover:(st[0]?mpImg(st[0]):null);shareCore({h:'Share pack',url,img:cv,txt:`${p.name} sticker pack on WaSticker`,th:cv?`<img src="${cv}" alt="">`:stk('🙂'),t1:p.name,t2:`${st.length||1} stickers · by ${p.author||(S.user?S.user.name:'you')}`,file:p.name+'-cover',saved:'Cover saved',copyLink:1,linkMsg:'Pack link copied'})};
