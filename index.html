@@ -4387,10 +4387,12 @@ if(IS_ANDROID)document.addEventListener('click',e=>{const a=e.target.closest('a[
 
 
 /* ----- my pack: sticker info panel (variation C) ----- */
+const STATSH='<svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x=".84" y=".84" width="14.31" height="14.31" rx="7.16" fill="#25D366" stroke="#2C5F38"/><path d="M8.9 9.05V10.9c0 .2.24.3.38.16l3.06-3.06a.23.23 0 0 0 0-.32L9.28 4.62a.23.23 0 0 0-.38.16v1.83c-2.4.04-4.2 1.9-4.2 4.3v.42c0 .1.12.13.17.05C6.1 9.6 7.6 9 8.9 9.05Z" fill="#fff" stroke="#2C5F38" stroke-width=".5" stroke-linejoin="round"/></svg>';
+
 const LBI={share:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 5l7 7-7 7"/><path d="M21 12H10a6 6 0 0 0-6 6v1"/></svg>',tag:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M5 9h15M4 15h15M10 3 8 21M16 3l-2 18"/></svg>'};
 function mpInfo(p,list){return {
   html:i=>{const n=list.length,st=mpStat(p,i),tg=mpTags(p,i);return `<div class="lbi-hd"><small>Sticker ${i+1} of ${n}</small><h2>${esc(p.name)} #${i+1}</h2></div>
-    <div class="lbi-chips"><div class="lbi-chip"><span>${MPI.dl}<b>${fmt(st.d)}</b></span><small>Downloads</small></div><div class="lbi-chip"><span>${MPI.heart}<b>${fmt(st.l)}</b></span><small>Likes</small></div><div class="lbi-chip"><span><i class="lbi-sh">${LBI.share}</i><b>${fmt(st.s)}</b></span><small>Shares</small></div></div>
+    <div class="lbi-chips"><div class="lbi-chip"><span>${MPI.dl}<b>${fmt(st.d)}</b></span><small>Downloads</small></div><div class="lbi-chip"><span>${MPI.heart}<b>${fmt(st.l)}</b></span><small>Likes</small></div><div class="lbi-chip"><span>${STATSH}<b>${fmt(st.s)}</b></span><small>Shares</small></div></div>
     <div class="lbi-tags">${tg.length?tg.map(t=>`<span>#${esc(String(t).replace(/^#/,''))}</span>`).join(''):'<em>No tags yet</em>'}</div>
     <div class="lbi-acts">
       <button type="button" class="lbi-a" data-la="share"><span class="lbi-ic">${API.share}</span><span class="lf">Share Sticker</span><span class="ls">Share</span></button>
