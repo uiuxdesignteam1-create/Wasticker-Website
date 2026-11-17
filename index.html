@@ -2531,7 +2531,7 @@ body.is-ap #hdr{position:relative}
 .stp-pn{display:flex;justify-content:space-between;margin-top:18px}
 .stp-nav{display:inline-flex;align-items:center;height:40px;padding:0 16px;border-radius:999px;background:#fff;border:1.5px solid rgba(31,26,23,.16);box-shadow:0 3px 0 rgba(31,26,23,.10);font:600 14px/1 Fredoka,sans-serif;color:#1F1A17;text-decoration:none;transition:transform .15s ease,box-shadow .15s ease,border-color .15s ease}
 .stp-nav:hover{border-color:#1F1A17;transform:translateY(1px);box-shadow:0 2px 0 rgba(31,26,23,.14)}
-.stp-band{background:transparent;padding:8px 0 8px}
+.stp-band{background:transparent;padding:8px 0 56px}
 .stp-band .pk2-row,.stp-rel .pk2-row{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin-bottom:20px}
 .stp-band h2,.stp-rel h2{font:400 clamp(24px,2.4vw,30px)/1.15 "Fredoka One",Fredoka,sans-serif;color:#1F1A17;margin:0}
 .st-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:16px}
@@ -3250,8 +3250,6 @@ function pageSticker(id,n){
       <div class="st-grid">${items.map((_,k)=>stTile(p,k,k===i)).join('')}</div>
     </div></section>
     <div class="wrap">
-    <section class="stp-rel"><div class="pk2-row"><h2>Related stickers</h2><a class="pk2-see" href="#category-${c.slug}">More ${esc(c.name.toLowerCase())} stickers →</a></div>
-      <div class="st-grid st-rel">${rel.map(q=>{const k=q.id+':1',on=(S.favStk||[]).includes(k);return `<a class="st-tile" href="#sticker-${q.id}-1" aria-label="${esc(q.name)} sticker">${q.img?`<img src="${q.img}" alt="" loading="lazy">`:stk(q.e[0])}<button type="button" class="st-heart${on?' on':''}" data-stfav="${k}" aria-label="${on?'Remove from':'Add to'} favorites" aria-pressed="${on}">${I.heart}</button></a>`}).join('')}</div></section>
     <div class="pk2-blk pk2-ctablk">${bannerE(k=>{const u=(p.imgs||[])[(i+k+1)%N];return u?`<img src="${u}" alt="" loading="lazy">`:stk((p.e||[])[(i+k+1)%N]||'😺')})}</div>
     </div>
     <a class="stp-sticky" href="${appUrl('sticker_open_m')}" target="_blank" rel="noopener">Open in WaSticker →</a>
