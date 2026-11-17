@@ -2480,6 +2480,73 @@ body.is-ap #hdr{position:relative}
 .pk-newp{right:8px;bottom:-11.5px;background:#FFFFFF;box-shadow:0 2px 6px rgba(31,26,23,.16)}
 @media (max-width:600px){.pk-newp{right:6px;bottom:-10px}}
 @media (max-width:600px){.pk-newp{right:6px;bottom:-10px;height:20px;padding:0 7px;font-size:10px}.pcard .pmeta .pm-stats2{gap:6px}}
+/* Sticker detail page */
+.stp .crumbs{margin-bottom:28px}
+.stp-hero{display:grid;grid-template-columns:minmax(0,440px) minmax(0,1fr);gap:64px;align-items:start;padding-bottom:56px}
+.stp-left{display:flex;flex-direction:column;align-items:center;gap:20px}
+.stp-big{position:relative;margin:0;width:100%;aspect-ratio:1;border-radius:44px;display:grid;place-items:center;transform:rotate(-2deg);box-shadow:0 18px 40px -20px rgba(59,38,22,.55)}
+.stp-big>img{width:72%;height:72%;object-fit:contain;filter:drop-shadow(0 10px 14px rgba(0,0,0,.12))}
+.stp-big>.stk{font-size:180px;line-height:1}
+.stp-anim{position:absolute;top:22px;left:22px;height:26px;padding:0 11px;display:inline-flex;align-items:center;border-radius:999px;background:#1DB45F;color:#fff;font:700 12px/1 Fredoka,sans-serif}
+.stp-fav,.st-heart{border:0;border-radius:50%;background:rgba(255,255,255,.94);color:#178A3A;display:grid;place-items:center;cursor:pointer;transition:transform .15s ease}
+.stp-fav{position:absolute;top:18px;right:18px;width:48px;height:48px;box-shadow:0 2px 6px rgba(0,0,0,.12)}
+.stp-fav svg{width:24px;height:24px}
+.stp-fav:hover,.st-heart:hover{transform:scale(1.08)}
+.stp-fav.on,.st-heart.on{color:#F0457A}
+.stp-fav.on svg path,.st-heart.on svg path{fill:currentColor}
+.stp-stats{display:flex;gap:20px;font:500 16px/1 Fredoka,sans-serif;color:#615850}
+.stp-stats span{display:inline-flex;align-items:center;gap:7px}
+.stp-stats svg{width:18px;height:18px}
+.stp-stats b{font-weight:500}
+.stp-info h1{font:400 clamp(32px,3.6vw,46px)/1.1 "Fredoka One",Fredoka,sans-serif;color:#1F1A17;margin:0 0 12px}
+.stp-desc{font:400 17px/1.55 Fredoka,sans-serif;color:#615850;margin:0 0 16px;max-width:34em}
+.stp-meta{display:flex;align-items:center;justify-content:space-between;gap:12px;font:600 15px/1.3 Fredoka,sans-serif;color:#615850}
+.stp-meta a{color:#178A3A;text-decoration:none}.stp-meta a:hover{text-decoration:underline}
+.stp-meta .pm-tag{vertical-align:2px}
+.stp-icons{display:flex;gap:8px;flex:none}
+.stp-tags{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0 22px}
+.stp-tag{display:inline-flex;align-items:center;height:34px;padding:0 14px;border-radius:999px;background:#F3ECE1;color:#615850;font:500 14px/1 Fredoka,sans-serif;text-decoration:none;transition:background .15s ease}
+.stp-tag.cat{background:color-mix(in srgb,var(--c) 22%,transparent);color:#1F1A17}
+.stp-tag:hover{background:#EADFCF}.stp-tag.cat:hover{background:color-mix(in srgb,var(--c) 34%,transparent)}
+.stp-creator{display:flex;align-items:center;gap:14px;padding:14px 18px;border-radius:22px;background:#FFFFFF;border:1px solid rgba(31,26,23,.06);margin-bottom:16px}
+.stp-av{width:48px;height:48px;border-radius:50%;flex:none;background:#1DB45F url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round'%3E%3Ccircle cx='12' cy='12' r='8'/%3E%3Cpath d='M9 14c.8 1 1.8 1.5 3 1.5s2.2-.5 3-1.5'/%3E%3Ccircle cx='9.5' cy='10' r='.6' fill='white'/%3E%3Ccircle cx='14.5' cy='10' r='.6' fill='white'/%3E%3C/svg%3E") center/26px no-repeat}
+.stp-cn{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}
+.stp-cn b{font:600 17px/1.2 Fredoka,sans-serif;color:#1F1A17}
+.stp-cn small{font:500 13px/1.2 Fredoka,sans-serif;color:#178A3A}
+.stp-follow{height:36px;padding:0 18px;border:0;border-radius:999px;background:#1DB45F;color:#fff;font:600 14px/1 Fredoka,sans-serif;cursor:pointer;box-shadow:0 2px 0 #13863F}
+.stp-follow.on{background:#E3F6EA;color:#178A3A;box-shadow:none}
+.stp-get{padding:20px 22px 22px;border-radius:28px;background:#FFFDF9;box-shadow:0 1px 0 rgba(31,26,23,.12),0 10px 24px -16px rgba(59,38,22,.3)}
+.stp-get h2{font:600 20px/1.2 Fredoka,sans-serif;color:#1F1A17;margin:0 0 4px}
+.stp-get p{font:400 15px/1.45 Fredoka,sans-serif;color:#615850;margin:0 0 14px}
+.stp-acts{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.stp-acts .pk2-open{text-decoration:none}
+.stp-pn{display:flex;justify-content:space-between;margin-top:18px}
+.stp-nav{display:inline-flex;align-items:center;height:40px;padding:0 16px;border-radius:999px;background:#fff;border:1.5px solid rgba(31,26,23,.16);box-shadow:0 3px 0 rgba(31,26,23,.10);font:600 14px/1 Fredoka,sans-serif;color:#1F1A17;text-decoration:none;transition:transform .15s ease,box-shadow .15s ease,border-color .15s ease}
+.stp-nav:hover{border-color:#1F1A17;transform:translateY(1px);box-shadow:0 2px 0 rgba(31,26,23,.14)}
+.stp-band{background:var(--band);padding:48px 0 56px}
+.stp-band .pk2-row,.stp-rel .pk2-row{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin-bottom:20px}
+.stp-band h2,.stp-rel h2{font:400 clamp(24px,2.4vw,30px)/1.15 "Fredoka One",Fredoka,sans-serif;color:#1F1A17;margin:0}
+.st-grid{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:16px}
+.st-tile{position:relative;aspect-ratio:1;border-radius:24px;background:#FFFDF9;border:1.5px solid rgba(31,26,23,.08);display:grid;place-items:center;transition:transform .2s ease,box-shadow .2s ease}
+.st-tile:hover{transform:rotate(-2deg) scale(1.03);box-shadow:0 16px 28px -16px rgba(59,38,22,.28)}
+.st-tile.cur{border:3px solid #1DB45F}
+.st-tile>img{position:absolute;inset:13%;width:74%;height:74%;object-fit:contain}
+.st-tile>.stk{font-size:56px;line-height:1}
+.st-tile:not(.pcard){text-decoration:none}
+.st-heart{position:absolute;top:8px;right:8px;width:32px;height:32px;opacity:0}
+.st-heart svg{width:17px;height:17px}
+.st-tile:hover .st-heart,.st-heart.on,.st-heart:focus-visible{opacity:1}
+@media (hover:none){.st-heart{opacity:1}}
+.stp-rel{padding-top:48px}
+.st-rel .st-tile{border-color:transparent}
+.stp-sticky{display:none}
+.pk2-st{position:relative;aspect-ratio:1;display:grid;place-items:center;background:#FFFDF9;border:1.5px solid rgba(31,26,23,.12);border-radius:24px;transition:transform .2s ease,border-color .2s ease,box-shadow .2s ease;font-size:56px;text-decoration:none}
+.pk2-st:hover{transform:rotate(-2deg) scale(1.04);border-color:rgba(31,26,23,.24);box-shadow:0 16px 28px -16px rgba(59,38,22,.28)}
+.pk2-st img{position:absolute;inset:0;margin:auto;width:82%;height:82%;object-fit:contain}
+@media (max-width:900px){.stp-hero{grid-template-columns:1fr;gap:28px;padding-bottom:32px}.stp-left{max-width:440px;margin:0 auto;width:100%}.st-grid{grid-template-columns:repeat(4,minmax(0,1fr))}}
+@media (max-width:600px){.stp-big{border-radius:36px;transform:none}.stp-fav{width:42px;height:42px;top:14px;right:14px}.stp-anim{top:18px;left:16px}.stp-info h1{font-size:30px}.stp-desc{font-size:15px}.stp-meta{font-size:13px}.stp-tag{height:32px;padding:0 12px;font-size:13px}.st-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}.st-tile,.pk2-st{border-radius:16px}.st-heart{width:28px;height:28px;top:6px;right:6px}.stp-band{padding:28px 0 32px}.stp-get .stp-acts .pk2-open{flex:1 1 100%}
+ .stp-sticky{display:flex;position:fixed;left:20px;right:20px;bottom:calc(16px + env(safe-area-inset-bottom));z-index:60;height:54px;align-items:center;justify-content:center;border-radius:999px;background:#1DB45F;color:#fff;font:600 17px/1 Fredoka,sans-serif;text-decoration:none;box-shadow:0 3px 0 #13863F,0 12px 24px -8px rgba(0,0,0,.3)}
+ .stp{padding-bottom:84px}}
 /* Hero A (holos style, 1080 grid) */
 .hero-a{background:transparent;padding:72px 0 88px;overflow:hidden;position:relative}
 .ha-in{max-width:1120px;margin:0 auto;padding:0 20px;display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center}
@@ -3135,6 +3202,62 @@ function bannerE(art){return `    <section class="pke">
       <div class="pke-art" aria-hidden="true"><span class="pke-blob"></span><div class="pke-phone"><div class="pke-scr"><span class="pke-b" style="width:54%"></span><span class="pke-s pke-me">${art(0)}</span><span class="pke-b" style="width:43%"></span><span class="pke-s">${art(1)}</span></div></div></div>
     </section>
 `}
+const STI={dl:'<svg viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M7 .9c.42 0 1.33.03 2.3.21.98.19 1.93.52 2.5 1.09.57.57.9 1.52 1.09 2.5.18.97.21 1.88.21 2.3 0 .42-.03 1.33-.21 2.3-.19.98-.52 1.93-1.09 2.5-.57.57-1.52.9-2.5 1.09-.97.18-1.88.21-2.3.21-.42 0-1.33-.03-2.3-.21-.98-.19-1.93-.52-2.5-1.09-.57-.57-.9-1.52-1.09-2.5C.93 8.33.9 7.42.9 7c0-.42.03-1.33.21-2.3.19-.98.52-1.93 1.09-2.5.57-.57 1.52-.9 2.5-1.09C5.67.93 6.58.9 7 .9Z" fill="#25D366" stroke="#2C5F38" stroke-width=".8"/><path d="M7 2.6c.88 0 1.6.72 1.6 1.6v2.6h1.2c.36 0 .69.22.83.55.14.34.06.72-.2.98l-2.8 2.8a.9.9 0 0 1-1.26 0l-2.8-2.8a.9.9 0 0 1-.2-.98c.14-.33.47-.55.83-.55H5.4V4.2c0-.88.72-1.6 1.6-1.6Z" fill="#fff" stroke="#2C5F38" stroke-width=".4"/></svg>',fv:'<svg viewBox="0 0 14 14" fill="none" aria-hidden="true"><rect x=".7" y=".7" width="12.6" height="12.6" rx="6.3" fill="#25D366" stroke="#2C5F38" stroke-width=".8"/><path d="M5 4.1c.68 0 1.43.35 1.97 1.3.01.02.06.02.07 0 .68-1.2 1.72-1.44 2.48-1.23.42.12.79.38 1.05.74.29.39.43.88.43 1.4 0 .75-.43 1.69-1.22 2.57l-.17.18c-.78.81-1.73 1.34-2.19 1.64a.76.76 0 0 1-.85 0c-.46-.3-1.4-.83-2.19-1.64C3.49 8.13 3 7.11 3 6.31c0-.52.15-1.01.44-1.4.26-.36.63-.62 1.05-.74.17-.05.34-.07.51-.07Z" fill="#fff" stroke="#2C5F38" stroke-width=".4"/></svg>',heart:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10Z"/></svg>',share:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 15V3m0 0L8 7m4-4 4 4"/><path d="M5 12v6a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-6"/></svg>'};
+const stTint=c=>`color-mix(in srgb,${c} 45%,#FFFFFF)`;
+function stFavKey(id,n){return id+':'+n}
+function stTile(p,i,cur){const items=p.imgs||p.e,x=items[i],key=stFavKey(p.id,i+1),on=(S.favStk||[]).includes(key);return `<a class="st-tile${cur?' cur':''}" href="#sticker-${p.id}-${i+1}" aria-label="${esc(p.name)} sticker ${i+1}"${cur?' aria-current="page"':''}>${p.imgs?`<img src="${x}" alt="" loading="lazy">`:stk(x)}<button type="button" class="st-heart${on?' on':''}" data-stfav="${key}" aria-label="${on?'Remove from':'Add to'} favorites" aria-pressed="${on}">${STI.heart}</button></a>`}
+function pageSticker(id,n){
+  const p=byId(id);if(!p)return pageNotFound();const items=p.imgs||p.e,N=items.length;if(!(n>=1&&n<=N))n=1;const i=n-1,x=items[i];
+  const c=catOf(p.cat)||{name:'Sticker',slug:p.cat};const key=stFavKey(p.id,n),fav=(S.favStk||[]).includes(key);
+  const sdl=Math.max(40,Math.round(p.dl/N*(.6+((p.id*7+n*13)%9)/10))),sfv=Math.round(sdl*(.02+((n*11)%7)/200))+(fav?1:0);
+  const kind=p.anim?'An animated':'A';const desc=`${kind} ${c.name.toLowerCase()} sticker from the ${esc(p.name)} pack, ready for your chats. ${p.anim?'It keeps moving in':'Use it in'} WhatsApp, Telegram and iMessage — get the whole pack free with WaSticker.`;
+  const tags=(p.tags||[]).slice(0,6);
+  const rel=PACKS.filter(q=>q.id!==p.id&&q.cat===p.cat).concat(PACKS.filter(q=>q.id!==p.id&&q.cat!==p.cat)).slice(0,6);
+  const art=x=>p.imgs?`<img src="${x}" alt="${esc(p.name)} sticker ${n}">`:stk(x);
+  return `<div class="stp"><div class="wrap">
+    ${crumbs([['Home','home'],['All packs','stickers'],[p.name,'pack-'+p.id],['Sticker '+n]])}
+    <div class="stp-hero">
+      <div class="stp-left">
+        <figure class="stp-big" style="background:${p.c}">${art(x)}${p.anim?'<span class="stp-anim">Animated</span>':''}<button type="button" class="stp-fav${fav?' on':''}" data-stfav="${key}" aria-label="${fav?'Remove from':'Add to'} favorites" aria-pressed="${fav}">${STI.heart}</button></figure>
+        <div class="stp-stats"><span title="Downloads">${STI.dl}${sdl.toLocaleString('en-US')}</span><span title="Favorites">${STI.fv}<b id="stFvN">${sfv.toLocaleString('en-US')}</b></span></div>
+      </div>
+      <div class="stp-info">
+        <h1>${esc(p.name)} sticker ${n}</h1>
+        <p class="stp-desc">${desc}</p>
+        <div class="stp-meta"><span>Sticker ${n} of ${N} · <a href="#pack-${p.id}">${esc(p.name)} pack</a>${p.anim?' · <em class="pm-tag">Animated</em>':''}</span><span class="stp-icons"><button type="button" class="pk2-ico" id="stLink" aria-label="Copy sticker link" title="Copy link">${I.link}</button><button type="button" class="pk2-ico" id="stShare" aria-label="Share sticker" title="Share">${STI.share}</button></span></div>
+        <div class="stp-tags"><a class="stp-tag cat" href="#category-${c.slug}" style="--c:${catTint(c.slug)}">${esc(c.name)}</a>${p.anim?'<a class="stp-tag cat" href="#stickers-animated" style="--c:#5CC8FF">Animated</a>':''}${tags.map(t=>`<a class="stp-tag" href="#search" data-tag="${esc(t)}">#${esc(t)}</a>`).join('')}</div>
+        <div class="stp-creator"><span class="stp-av" aria-hidden="true"></span><span class="stp-cn"><b>WaSticker</b><small>Official pack · ${N} stickers</small></span><button type="button" class="stp-follow" id="stFollow">Follow</button></div>
+        <div class="stp-get"><h2>Get this pack</h2><p>Free on WaSticker. Add all ${N} stickers to WhatsApp in one tap.</p>
+          <div class="stp-acts"><a class="pk2-badge" href="${appUrl('sticker_store')}" target="_blank" rel="noopener"><img src="${ASSET.appstore}" alt="Download on the App Store" width="138" height="46"></a><button type="button" class="pk2-badge" data-gp aria-label="Get it on Google Play"><img src="${GPLAY_BADGE}" alt="Get it on Google Play" width="138" height="46"></button><a class="pk2-btn pk2-open" href="${appUrl('sticker_open')}" target="_blank" rel="noopener"><span>Open in WaSticker</span>${I.arrow}</a></div></div>
+        <div class="stp-pn">${n>1?`<a class="stp-nav" href="#sticker-${p.id}-${n-1}">← Sticker ${n-1}</a>`:'<span></span>'}${n<N?`<a class="stp-nav" href="#sticker-${p.id}-${n+1}">Sticker ${n+1} →</a>`:`<a class="stp-nav" href="#pack-${p.id}">Whole pack →</a>`}</div>
+      </div>
+    </div></div>
+    <section class="stp-band" style="--band:${stTint(p.c)}"><div class="wrap">
+      <div class="pk2-row"><h2>More from ${esc(p.name)}</h2><a class="pk2-see" href="#pack-${p.id}">See the whole pack →</a></div>
+      <div class="st-grid">${items.map((_,k)=>stTile(p,k,k===i)).join('')}</div>
+    </div></section>
+    <div class="wrap">
+    <section class="stp-rel"><div class="pk2-row"><h2>Related stickers</h2><a class="pk2-see" href="#category-${c.slug}">More ${esc(c.name.toLowerCase())} stickers →</a></div>
+      <div class="st-grid st-rel">${rel.map(q=>`<a class="st-tile" style="background:${q.c}" href="#sticker-${q.id}-1" aria-label="${esc(q.name)} sticker">${q.img?`<img src="${q.img}" alt="" loading="lazy">`:stk(q.e[0])}</a>`).join('')}</div></section>
+    <div class="pk2-blk pk2-ctablk">${bannerE(k=>{const u=(p.imgs||[])[(i+k+1)%N];return u?`<img src="${u}" alt="" loading="lazy">`:stk((p.e||[])[(i+k+1)%N]||'😺')})}</div>
+    </div>
+    <a class="stp-sticky" href="${appUrl('sticker_open_m')}" target="_blank" rel="noopener">Open in WaSticker →</a>
+  </div>`;
+}
+function wireSticker(id,n){const p=byId(id);if(!p)return;
+  document.title=`${p.name} Sticker ${n} for WhatsApp, Telegram & iMessage · WaSticker`;
+  const L=document.getElementById('stLink');if(L)L.onclick=()=>copy('https://wasticker.io/#sticker-'+p.id+'-'+n,'Sticker link copied');
+  const Sh=document.getElementById('stShare');if(Sh)Sh.onclick=()=>{const url='https://wasticker.io/#sticker-'+p.id+'-'+n;if(navigator.share)navigator.share({title:p.name+' sticker '+n,url}).catch(()=>{});else copy(url,'Sticker link copied')};
+  const F=document.getElementById('stFollow');if(F)F.onclick=()=>{const on=F.classList.toggle('on');F.textContent=on?'Following':'Follow';toast(on?'You’re following WaSticker':'Unfollowed')};
+  document.querySelectorAll('.stp-tag[data-tag]').forEach(a=>a.onclick=e=>{e.preventDefault();S.apq=a.dataset.tag;S.filter='all';location.hash='stickers'});
+  const tile=document.querySelector('.st-tile.cur');if(tile&&tile.parentElement.scrollWidth>tile.parentElement.clientWidth)tile.parentElement.scrollLeft=tile.offsetLeft-40;
+}
+if(!window.__stFav){window.__stFav=1;document.addEventListener('click',e=>{const b=e.target.closest&&e.target.closest('[data-stfav]');if(!b)return;e.preventDefault();e.stopPropagation();const key=b.dataset.stfav;
+  if(!S.user){S.after=(location.hash||'#home').slice(1);signInPrompt('save favorite stickers','Sign in or create a free account to keep your favorite stickers in one place.');return}
+  S.favStk=S.favStk||[];const k=S.favStk.indexOf(key);k<0?S.favStk.push(key):S.favStk.splice(k,1);save();
+  document.querySelectorAll('[data-stfav="'+key+'"]').forEach(x=>{x.classList.toggle('on',k<0);x.setAttribute('aria-pressed',k<0);x.setAttribute('aria-label',(k<0?'Remove from':'Add to')+' favorites')});
+  if(b.classList.contains('stp-fav')){const nEl=document.getElementById('stFvN');if(nEl){const v=+nEl.textContent.replace(/,/g,'')+(k<0?1:-1);nEl.textContent=v.toLocaleString('en-US')}}
+  toast(k<0?'Sticker added to favorites':'Removed from favorites')},true)}
 function pagePack(id){
   const p=byId(id);if(!p)return pageNotFound();const c=catOf(p.cat);
   const more=PACKS.filter(x=>x.id!==p.id&&x.cat===p.cat).concat(PACKS.filter(x=>x.id!==p.id&&x.cat!==p.cat).sort((a,b)=>b.dl-a.dl)).slice(0,5);
@@ -3160,7 +3283,7 @@ function pagePack(id){
       </div>
     </div>
     <section class="pk2-stk pk2-blk" aria-label="${nm} stickers">
-      <div class="pk2-grid${p.anim?' anim':''}">${p.imgs?p.imgs.map((u,i)=>`<button aria-label="Sticker ${i+1}" data-e="${i}"><img src="${u}" alt="" loading="lazy"></button>`).join(''):p.e.map((e,i)=>`<button aria-label="Sticker ${i+1}" data-e="${e}">${stk(e)}</button>`).join('')}</div>
+      <div class="pk2-grid${p.anim?' anim':''}">${(p.imgs||p.e).map((x,i)=>`<a class="pk2-st" href="#sticker-${p.id}-${i+1}" aria-label="${esc(p.name)} sticker ${i+1}">${p.imgs?`<img src="${x}" alt="" loading="lazy">`:stk(x)}</a>`).join('')}</div>
       <div class="pk2-tags"><a class="pk2-tag" href="#category-${c.slug}">${esc(c.name)} stickers</a>${p.tags.map(t=>`<a class="pk2-tag" href="#search" data-tag="${t}">#${esc(t)}</a>`).join('')}</div>
     </section>
     <section class="pk2-sec pk2-howa pk2-blk">
@@ -3904,6 +4027,7 @@ function render(keepScroll){
   else if(h==='categories'){html=pageCategories()}
   else if(h.startsWith('category-')){route='categories';html=pageCategory(h.slice(9));wire=wireListing}
   else if(h.startsWith('mypack-')){route='create';const id=h.slice(7);html=pageMyPack(id);wire=()=>wireMyPack(id)}
+  else if(h.startsWith('sticker-')){route='stickers';const m=h.slice(8).split('-'),n=+m.pop(),id=m.join('-');html=pageSticker(id,n);wire=()=>wireSticker(id,n)}
   else if(h.startsWith('pack-')){route='stickers';const id=h.slice(5);html=pagePack(id);wire=()=>wirePack(id)}
   else if(h==='search'){html=pageSearch();wire=wireSearch}
   else if(h==='pricing'){html=pagePricing();wire=wirePricing}
@@ -3925,7 +4049,7 @@ function render(keepScroll){
   wire();
   wireChipRows();
   const titles={home:'WaSticker · Free WhatsApp Sticker Maker',stickers:'Stickers · WaSticker',popular:'Popular packs · WaSticker',categories:'Categories · WaSticker',search:'Search · WaSticker',pricing:'Pricing · WaSticker',contact:'Contact us · WaSticker',manager:'My packs · WaSticker',create:'Create sticker · WaSticker',signin:'Sign in · WaSticker',signup:'Sign up · WaSticker',tutorials:'Tutorials · WaSticker',terms:'Terms of Use · WaSticker',privacy:'Privacy Policy · WaSticker'};
-  const h1=document.querySelector('#app h1');const named=h.startsWith('pack-')||h.startsWith('article-')||h.startsWith('category-')||h.startsWith('mypack-');
+  const h1=document.querySelector('#app h1');const named=h.startsWith('sticker-')||h.startsWith('pack-')||h.startsWith('article-')||h.startsWith('category-')||h.startsWith('mypack-');
   document.title=named&&h1?h1.textContent.trim()+' · WaSticker':titles[route]||'WaSticker';
   if(h==='home-faq')setTimeout(()=>document.getElementById('faq').scrollIntoView(),30);
   else if(!keepScroll)scrollTo(0,0);
