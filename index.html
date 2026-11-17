@@ -2451,6 +2451,10 @@ body.is-ap #hdr{position:relative}
 .ap-sort-top .ap-cic{color:#E0A800}.ap-sort-trending .ap-cic{color:#F07A1A}.ap-sort-new .ap-cic{color:#1DB45F}
 .ap-chip.ap-sort.on .ap-cic{color:#fff}
 .ap-cdiv{flex:none;align-self:center;width:1.5px;height:24px;margin:0 4px;background:rgba(31,26,23,.15);border-radius:2px}
+/* Pack card: Animated tag next to the title (variation B) */
+.pcard .pmeta b.pm-trow{display:flex;align-items:center;gap:6px;min-width:0;overflow:visible}
+.pcard .pmeta .pm-trow .pm-name{display:block;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font:inherit;color:inherit;margin:0;letter-spacing:inherit}
+.pm-tag{flex:none;display:inline-flex;align-items:center;height:18px;padding:0 7px;border-radius:999px;background:#1DB45F;color:#fff;font:700 10px/1 Fredoka,sans-serif;font-style:normal;letter-spacing:.02em}
 /* Hero A (holos style, 1080 grid) */
 .hero-a{background:transparent;padding:72px 0 88px;overflow:hidden;position:relative}
 .ha-in{max-width:1120px;margin:0 auto;padding:0 20px;display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center}
@@ -2711,10 +2715,10 @@ function mineCard(p){const st=packStk(p)||[];const cov=p.img||(st[0]?mpImg(st[0]
 function packCard(p){
   const art=p.img?`<img src="${p.img}" alt="" loading="lazy"${p.imgScale?` style="width:${p.imgScale*100}%;height:${p.imgScale*100}%"`:''}>`:stk(p.e[0]);
   const n=(p.imgs||p.e).length;
-  const meta=p.anim?`<em class="pm-anim"><i></i>Animated</em> · ${n} Stickers`:`${n} Stickers / ${fmt(p.dl)} Downloads`;
+  const meta=`${n} Stickers / ${fmt(p.dl)} Downloads`;
   return `<a class="pcard" href="#pack-${p.id}">
     <div class="pthumb${p.anim?' anim':''}" style="background:${p.c}">${art}</div>
-    <div class="pmeta"><b>${esc(p.name)}</b><span>${meta}</span></div></a>`;
+    <div class="pmeta">${p.anim?`<b class="pm-trow"><span class="pm-name">${esc(p.name)}</span><em class="pm-tag">Animated</em></b>`:`<b>${esc(p.name)}</b>`}<span>${meta}</span></div></a>`;
 }
 function stores(){return `<a class="store-img" href="${appUrl('store_badge')}" target="_blank" rel="noopener"><img src="${ASSET.appstore}" alt="Download on the App Store" width="156" height="52"></a>`}
 
