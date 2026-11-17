@@ -2548,9 +2548,8 @@ body.is-ap #hdr{position:relative}
 .pk2-grid .pk2-st .st-heart:hover{transform:scale(1.08)}
 @media (max-width:480px){.pk2-grid .pk2-st .st-heart{width:28px;height:28px;top:6px;right:6px}}
 @media (hover:none){.st-heart{opacity:1}}
-.stp-rel{padding-top:48px}
+.stp-rel{padding-top:48px;padding-bottom:56px}
 .stp .st-heart{opacity:1}
-.st-rel .st-tile{border-color:transparent}
 .stp-sticky{display:none}
 .pk2-st{position:relative;aspect-ratio:1;display:grid;place-items:center;background:#FFFDF9;border:1.5px solid rgba(31,26,23,.12);border-radius:24px;transition:transform .2s ease,border-color .2s ease,box-shadow .2s ease;font-size:56px;text-decoration:none}
 .pk2-st:hover{transform:rotate(-2deg) scale(1.04);border-color:rgba(31,26,23,.24);box-shadow:0 16px 28px -16px rgba(59,38,22,.28)}
@@ -3250,7 +3249,7 @@ function pageSticker(id,n){
     </div></section>
     <div class="wrap">
     <section class="stp-rel"><div class="pk2-row"><h2>Related stickers</h2><a class="pk2-see" href="#category-${c.slug}">More ${esc(c.name.toLowerCase())} stickers →</a></div>
-      <div class="st-grid st-rel">${rel.map(q=>{const k=q.id+':1',on=(S.favStk||[]).includes(k);return `<a class="st-tile" style="background:${q.c}" href="#sticker-${q.id}-1" aria-label="${esc(q.name)} sticker">${q.img?`<img src="${q.img}" alt="" loading="lazy">`:stk(q.e[0])}<button type="button" class="st-heart${on?' on':''}" data-stfav="${k}" aria-label="${on?'Remove from':'Add to'} favorites" aria-pressed="${on}">${I.heart}</button></a>`}).join('')}</div></section>
+      <div class="st-grid st-rel">${rel.map(q=>{const k=q.id+':1',on=(S.favStk||[]).includes(k);return `<a class="st-tile" href="#sticker-${q.id}-1" aria-label="${esc(q.name)} sticker">${q.img?`<img src="${q.img}" alt="" loading="lazy">`:stk(q.e[0])}<button type="button" class="st-heart${on?' on':''}" data-stfav="${k}" aria-label="${on?'Remove from':'Add to'} favorites" aria-pressed="${on}">${I.heart}</button></a>`}).join('')}</div></section>
     <div class="pk2-blk pk2-ctablk">${bannerE(k=>{const u=(p.imgs||[])[(i+k+1)%N];return u?`<img src="${u}" alt="" loading="lazy">`:stk((p.e||[])[(i+k+1)%N]||'😺')})}</div>
     </div>
     <a class="stp-sticky" href="${appUrl('sticker_open_m')}" target="_blank" rel="noopener">Open in WaSticker →</a>
