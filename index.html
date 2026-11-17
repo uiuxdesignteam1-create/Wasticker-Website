@@ -2602,6 +2602,27 @@ body.is-ap #hdr{position:relative}
 .pmn-in{display:block;width:100%;height:52px;padding:0 18px;margin:0 0 20px;border-radius:999px;border:1.5px solid rgba(31,26,23,.16);background:#fff;font:400 17px/1 Fredoka,sans-serif;color:#1F1A17;outline:0}
 .pmn-in:focus{border-color:#1DB45F;box-shadow:0 0 0 4px rgba(29,180,95,.16)}
 .ap-ebtn.pmn-del{background:#E5174F;border-color:#E5174F;color:#fff;box-shadow:0 3px 0 #B5103D}
+.pme .pmn-in{margin:0;height:54px;background:#fff;border:2px solid rgba(31,26,23,.1)}
+.pme .pmn-in:focus{border-color:#1DB45F}
+.pme-l{display:block;font:600 15px/1 Fredoka,sans-serif;color:#615850;margin:4px 4px 8px;text-align:left}
+.pme-f{position:relative;margin-bottom:16px}
+.pme-f .pmn-in{padding-right:60px}
+.pme-c{position:absolute;right:18px;top:50%;transform:translateY(-50%);font:400 13px Fredoka,sans-serif;color:#857B72}
+.pme-f.dis .pmn-in{background:#EFEBE4;border-color:rgba(31,26,23,.06);color:#857B72;padding-left:46px;cursor:not-allowed;-webkit-text-fill-color:#857B72;opacity:1}
+.pme-ui{position:absolute;left:18px;top:50%;transform:translateY(-50%);width:18px;height:18px;color:#857B72;display:grid}
+.pme-ui svg{width:18px;height:18px}
+.pme-pv{display:flex;align-items:center;gap:14px;padding:14px 16px;border-radius:22px;background:#fff;margin:4px 0 20px;cursor:pointer;text-align:left}
+.pme-pi{width:40px;height:40px;display:grid;place-items:center;flex:none}
+.pme-pi svg{width:40px;height:40px}
+.pme-pt{flex:1;min-width:0}.pme-pt b{display:block;font:600 16px/1.3 Fredoka,sans-serif;color:#1F1A17}
+.pme-pt small{display:block;font:400 13px/1.4 Fredoka,sans-serif;color:#857B72;margin-top:2px}
+.pme-pv input{position:absolute;opacity:0;pointer-events:none}
+.pme-tg{width:52px;height:32px;border-radius:999px;background:#D9D3CA;position:relative;flex:none;transition:background .2s}
+.pme-tg::after{content:"";position:absolute;left:3px;top:3px;width:26px;height:26px;border-radius:50%;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.18);transition:transform .2s}
+.pme-pv input:checked+.pme-tg{background:#1DB45F}.pme-pv input:checked+.pme-tg::after{transform:translateX(20px)}
+.pme-pv input:focus-visible+.pme-tg{outline:2px solid #1DB45F;outline-offset:2px}
+.pme-up{display:block;width:100%;height:54px;border:0;border-radius:999px;background:#1DB45F;color:#fff;font:600 18px Fredoka,sans-serif;cursor:pointer;box-shadow:0 3px 0 #13863F;transition:background .15s}
+.pme-up:hover{background:#178A3A}
 /* Hero A (holos style, 1080 grid) */
 .hero-a{background:transparent;padding:72px 0 88px;overflow:hidden;position:relative}
 .ha-in{max-width:1120px;margin:0 auto;padding:0 20px;display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center}
@@ -3847,8 +3868,12 @@ function wireMyPack(id){
       <button type="button" class="pmn-i del" data-pm="del"><span class="pmn-ic">${I.trash}</span><span>Delete pack</span></button></div>`,'shr-mdl');
     m.querySelectorAll('[data-pm]').forEach(b=>b.onclick=()=>{const k=b.dataset.pm;
       if(k==='import'){closeModal();openLibrary(p)}
-      else if(k==='edit'){const box=b.closest('.pmn');box.innerHTML=`<h2>Edit pack</h2><input class="pmn-in" id="pmnName" maxlength="40" value="${esc(p.name)}" aria-label="Pack name"><div class="pmn-acts"><button type="button" class="ap-ebtn" data-pc="no">Cancel</button><button type="button" class="ap-ebtn pri" data-pc="yes">Save</button></div>`;const inp=box.querySelector('#pmnName');inp.focus();inp.select();
-        const go=()=>{const nm=inp.value.trim();if(!nm){inp.focus();return}p.name=nm.slice(0,40);save();closeModal();render(true);toast('Pack updated')};box.querySelector('[data-pc=no]').onclick=closeModal;box.querySelector('[data-pc=yes]').onclick=go;inp.onkeydown=e=>{if(e.key==='Enter')go()}}
+      else if(k==='edit'){const box=b.closest('.pmn');const on=!!(p.priv||p.status==='Draft');box.classList.add('pme');box.innerHTML=`<h2>Edit pack</h2>
+        <label class="pme-l" for="pmnName">Pack name</label><div class="pme-f"><input class="pmn-in" id="pmnName" maxlength="40" value="${esc(p.name)}"><span class="pme-c" id="pmnCt">${p.name.length}/40</span></div>
+        <label class="pme-l" for="pmnAuth">Author name</label><div class="pme-f dis"><span class="pme-ui">${MPI.user||'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c1.5-3.5 4.5-5 8-5s6.5 1.5 8 5"/></svg>'}</span><input class="pmn-in" id="pmnAuth" value="${esc(author)}" disabled></div>
+        <label class="pme-pv"><span class="pme-pi">${MPI.lock}</span><span class="pme-pt"><b>Private pack</b><small>Private packs won’t appear in search. Only people with the pack link or pack code can view it.</small></span><input type="checkbox" id="pmnPriv"${on?' checked':''}><span class="pme-tg" aria-hidden="true"></span></label>
+        <button type="button" class="pme-up" data-pc="yes">Update</button>`;const inp=box.querySelector('#pmnName'),ct=box.querySelector('#pmnCt');inp.focus();inp.select();inp.oninput=()=>ct.textContent=inp.value.length+'/40';
+        const go=()=>{const nm=inp.value.trim();if(!nm){inp.focus();return}p.name=nm.slice(0,40);const pv=box.querySelector('#pmnPriv').checked;p.priv=pv;p.status=pv?'Draft':'Published';save();closeModal();render(true);toast('Pack updated')};box.querySelector('[data-pc=yes]').onclick=go;inp.onkeydown=e=>{if(e.key==='Enter')go()}}
       else if(k==='del'){const box=b.closest('.pmn');box.innerHTML=`<h2>Delete “${esc(p.name)}”?</h2><p class="pmn-q">This removes the pack and its ${n} ${n===1?'sticker':'stickers'} from your account. You can’t undo this.</p><div class="pmn-acts"><button type="button" class="ap-ebtn" data-pc="no">Cancel</button><button type="button" class="ap-ebtn pmn-del" data-pc="yes">Delete pack</button></div>`;
         box.querySelector('[data-pc=no]').onclick=closeModal;box.querySelector('[data-pc=yes]').onclick=()=>{S.mine=(S.mine||[]).filter(x=>x.id!==p.id);save();closeModal();location.hash='manager';setTimeout(()=>toast('Pack deleted'),200)}}})};
   document.getElementById('mpLink').onclick=()=>copy(url,'Pack link copied');
