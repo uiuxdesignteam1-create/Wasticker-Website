@@ -3818,10 +3818,9 @@ function pageMyPack(id){
         ${fresh?`<span class="mp-badge mpk-new">${I.check} Pack created</span>`:''}
         <div class="pk2-titlerow"><h1>${priv?`<span class="mp-lock" title="Private pack">${MPI.lock}</span>`:''}${esc(p.name)}</h1><div class="pk2-icons"><button class="pk2-ico" id="mpLink" aria-label="Copy link" title="Copy link">${I.link}</button><button class="pk2-ico" id="mpShare" aria-label="Share" title="Share">${STI.share}</button><button class="pk2-ico" id="mpMenu" aria-label="Pack menu" title="More"><svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><circle cx="12" cy="5" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="12" cy="19" r="2"/></svg></button></div></div>
         <p class="pk2-desc">Your sticker pack. Open it in the WaSticker app to add it to WhatsApp, or keep adding stickers below.</p>
-        <p class="pk2-meta">${n} ${n===1?'sticker':'stickers'} · ${fmt(p.dl||0)} downloads · by <b>${esc(author)}</b><span class="verified" title="Your pack">${I.check.replace('stroke="currentColor"','stroke="#fff"')}</span>${priv?'<span class="mpk-priv">Private</span>':''}</p>
+        <p class="pk2-meta">${n} ${n===1?'sticker':'stickers'} · ${fmt(p.dl||0)} downloads · ${fmt(p.fol||(p.id==='m0'?1200:0))} followers · by <b>${esc(author)}</b><span class="verified" title="Your pack">${I.check.replace('stroke="currentColor"','stroke="#fff"')}</span>${priv?'<span class="mpk-priv">Private</span>':''}</p>
         <div class="pk2-acts">
           <button class="pk2-btn pri" id="mpWa">Open in WaSticker ${I.arrow}</button>
-          <button class="pk2-btn pk2-open" id="mpImp">${PVI.lib}<span>Import from Library</span></button>
           <button class="pk2-btn pk2-open" id="mpDl">${STI.share}<span>Export</span></button>
         </div>
         <div id="mpNote" hidden class="tip" style="max-width:520px;margin-top:16px">WhatsApp needs at least 3 stickers in a pack. Add ${Math.max(0,3-n)} more, then open it in the WaSticker app.</div>
@@ -3829,9 +3828,8 @@ function pageMyPack(id){
     </div>
     <section class="pk2-stk pk2-blk" aria-label="Stickers in this pack">
       <div class="pk2-row"><h2>Stickers in this pack</h2><span class="mpk-count">${n} of 30</span></div>
-      <div class="pk2-grid mpk-grid">${st.map((s,i)=>`<div class="pv-stk"><img src="${mpImg(s)}" alt="Sticker ${i+1}"><button class="st-heart mp-heart${fav.includes(i)?' on':''}" data-fav="${i}" aria-label="Like sticker ${i+1}" aria-pressed="${fav.includes(i)}">${I.heart}</button></div>`).join('')}
-        <button class="pv-tile mp-imp mpk-tile"><span class="mpk-ic">${I.layers}</span><span>Import from<br>Library</span></button>
-        <a class="pv-tile mp-new" href="#create"><span class="mp-plus">${MPI.plus}</span><span>Create Sticker</span></a></div>
+      <div class="pk2-grid mpk-grid"><a class="pv-tile mp-new" href="#create"><span class="mp-plus">${MPI.plus}</span><span>Create Sticker</span></a>
+        <button class="pv-tile mp-imp mpk-tile"><span class="mpk-ic">${I.layers}</span><span>Import from<br>Library</span></button>${st.map((s,i)=>`<div class="pv-stk"><img src="${mpImg(s)}" alt="Sticker ${i+1}"><button class="st-heart mp-heart${fav.includes(i)?' on':''}" data-fav="${i}" aria-label="Like sticker ${i+1}" aria-pressed="${fav.includes(i)}">${I.heart}</button></div>`).join('')}</div>
     </section>
     <section class="pk2-sec pk2-blk">
       <div class="pk2-row"><h2>You might also like</h2><a class="pk2-see" href="#stickers">See all →</a></div>
