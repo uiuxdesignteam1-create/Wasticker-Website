@@ -4098,7 +4098,7 @@ function wireMyPack(id){
   document.getElementById('mpShare').onclick=()=>{const st=packStk(p)||[];const cv=p.id==='m0'?MILO.cover:(st[0]?mpImg(st[0]):null);shareCore({h:'Share pack',url,img:cv,txt:`${p.name} sticker pack on WaSticker`,th:cv?`<img src="${cv}" alt="">`:stk('🙂'),t1:p.name,t2:`${st.length||1} stickers · by ${p.author||(S.user?S.user.name:'you')}`,file:p.name+'-cover',saved:'Cover saved',copyLink:1,linkMsg:'Pack link copied'})};
   document.querySelectorAll('#mpImp,.mp-imp').forEach(b=>b.onclick=()=>openLibrary(p));
   document.querySelectorAll('[data-fav]').forEach(b=>b.onclick=()=>{const i=+b.dataset.fav;p.fav=p.fav||[];const k=p.fav.indexOf(i);k<0?p.fav.push(i):p.fav.splice(k,1);save();render(true)});
-  document.querySelector('.mp-new').addEventListener('click',()=>{S.ai&&(S.ai.results=null)});
+  {const mn=document.querySelector('.mp-new');if(mn)mn.addEventListener('click',()=>{S.ai&&(S.ai.results=null)});}
 }
 
 function openLibrary(p){
