@@ -2715,7 +2715,10 @@ body.is-ap #hdr{position:relative}
 .mnav .mx-i:hover,.mnav .mx-i.on{background:rgba(16,48,26,.04)!important;color:#1F1A17}
 .mnav .mx-i img,.mnav .mx-i .um-ap,.mnav .mx-i .um-ap svg{width:36px;height:36px;flex:none}
 .mnav .mx-i.danger{color:#E5174F}
-.mx-acts{display:grid;gap:10px;padding:14px 16px 0}.mx-acts.two{grid-template-columns:1fr 1.4fr}
+.mx-acts{display:grid;gap:10px;padding:16px 16px 0}.mx-acts.two{grid-template-columns:1fr 1fr}
+.mnav .mx-acts a svg{width:18px;height:18px;margin-right:8px;flex:none}
+.mnav .mx-acts a{white-space:nowrap;padding:0 12px!important}
+.mnav .mx-i img{border-radius:0}
 .mnav .mx-acts a{display:flex;align-items:center;justify-content:center;height:50px;border-radius:999px!important;padding:0 18px!important;font:600 16px var(--f-round);border:0}
 .mnav .mx-acts a.mx-cta{background:#1DB45F!important;color:#fff!important;box-shadow:0 3px 0 #13863F}
 .mnav .mx-acts a.mx-sec{background:#fff!important;color:#1F1A17!important;border:1.5px solid rgba(31,26,23,.16)!important;box-shadow:0 3px 0 rgba(31,26,23,.08)}
@@ -3026,13 +3029,13 @@ function header(route){
       ${S.user?`<div class="mx-acct">
         <a class="mx-who" href="#manager"><img src="${UM.av}" alt=""><span><b>${esc(S.user.name||S.user.email)}</b><small>${esc(S.user.email)}</small></span><span class="mx-cr"><img src="${AIA.coin}" alt="" width="20" height="20">${S.credits}</span></a>
         <a class="mx-i${ac('manager')}" href="#manager"><img src="${UM.profile}" alt="">My Profile</a>
-        <button type="button" class="mx-i" data-mx="umShare"><img src="${UM.share}" alt="">Share Profile</button>
-        <button type="button" class="mx-i" data-mx="umCopy"><img src="${UM.copy}" alt="">Copy Link</button>
-        <button type="button" class="mx-i" data-mx="umPass"><img src="${UM.pass}" alt="">Change Password</button>
+        <button type="button" class="mx-i" data-mx="umShare"><span class="um-ap">${API.share}</span>Share Profile</button>
+        <button type="button" class="mx-i" data-mx="umCopy"><span class="um-ap">${API.copy}</span>Copy Link</button>
+        <button type="button" class="mx-i" data-mx="umPass"><span class="um-ap">${API.lock}</span>Change Password</button>
         <button type="button" class="mx-i" data-mx="umBlock"><span class="um-ap">${API.blocklist}</span>Block List</button>
-        <button type="button" class="mx-i danger" id="signout2"><img src="${UM.out}" alt="">Sign Out</button></div>
-      <div class="mx-acts"><a class="mx-cta" href="#create">Create Sticker</a></div>`
-        :`<div class="mx-acts two"><a class="mx-sec" href="#signin">Sign in</a><a class="mx-cta" href="#create">Create Sticker</a></div>`}
+        <button type="button" class="mx-i danger" id="signout2"><span class="um-ap">${API.signout}</span>Sign Out</button></div>
+      <div class="mx-acts"><a class="mx-cta" href="#create">${I.plus}Create Sticker</a></div>`
+        :`<div class="mx-acts two"><a class="mx-sec" href="#signin">Sign in</a><a class="mx-cta" href="#create">${I.plus}Create Sticker</a></div>`}
     </nav></div></header>`;
   wireHeader();
 }
