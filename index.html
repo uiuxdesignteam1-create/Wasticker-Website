@@ -4042,8 +4042,7 @@ function pageMyPack(id){
     </div>
     <section class="pk2-stk pk2-blk" aria-label="Stickers in this pack">
       <div class="pk2-row"><h2>Stickers in this pack</h2><span class="mpk-count">${n} of 30</span></div>
-      <div class="pk2-grid mpk-grid"><a class="pv-tile mp-new" href="#create"><span class="mp-plus">${MPI.plus}</span><span>Create Sticker</span></a>
-        <button class="pv-tile mp-imp mpk-tile"><span class="mpk-ic">${I.layers}</span><span>Import from<br>Library</span></button>${st.map((s,i)=>`<div class="pv-stk"><img src="${mpImg(s)}" alt="Sticker ${i+1}"><button class="st-heart mp-heart${fav.includes(i)?' on':''}" data-fav="${i}" aria-label="Like sticker ${i+1}" aria-pressed="${fav.includes(i)}">${I.heart}</button></div>`).join('')}</div>
+      <div class="pk2-grid mpk-grid">${st.map((s,i)=>`<div class="pv-stk"><img src="${mpImg(s)}" alt="Sticker ${i+1}"><button class="st-heart mp-heart${fav.includes(i)?' on':''}" data-fav="${i}" aria-label="Like sticker ${i+1}" aria-pressed="${fav.includes(i)}">${I.heart}</button></div>`).join('')}</div>
     </section>
     <section class="pk2-sec pk2-blk">
       <div class="pk2-row"><h2>You might also like</h2><a class="pk2-see" href="#stickers">See all →</a></div>
