@@ -2702,8 +2702,8 @@ body.is-ap #hdr{position:relative}
 @media(max-width:420px){.stp-th{width:44px;height:44px;border-radius:11px}.stp-arr{width:34px;height:34px}.stp-strip,.stp-ths{gap:6px}}
 @media (max-width:1023px){
 .mnav .mx-links{display:flex;flex-direction:column;padding:6px 0}
-.mnav a.mx-l{display:flex;align-items:center;justify-content:space-between;padding:14px 20px!important;border-radius:0!important;border-bottom:.6px solid rgba(16,48,26,.08);background:none!important;font:700 17px/1.2 var(--f-round);color:var(--nav-ink)}
-.mnav a.mx-l.on{color:var(--green-d)}
+.mnav a.mx-l{display:flex;align-items:center;justify-content:space-between;padding:14px 20px!important;border-radius:0!important;border-bottom:.6px solid rgba(16,48,26,.08);background:none!important;font:500 17px/1.2 var(--f-round);color:#1F1A17}
+.mnav a.mx-l.on{color:#178A3A}
 .mnav a.mx-l.on::after{content:"";width:8px;height:8px;border-radius:50%;background:#1DB45F}
 .mnav a.mx-l:hover{background:rgba(16,48,26,.03)!important}
 .mx-acct{display:flex;flex-direction:column;padding:8px 12px 0}
@@ -2730,6 +2730,16 @@ body.is-ap #hdr{position:relative}
  .pk2-acts .pk2-badge,.stp-acts .pk2-badge{flex:1 1 0;min-width:0;display:block}
  .pk2-acts .pk2-badge img,.stp-acts .pk2-badge img{width:100%;height:auto;max-height:none;display:block}
  .stp-acts{flex-wrap:wrap}.stp-acts .pk2-btn.pk2-open{flex:1 1 100%}
+}
+@media (max-width:1023px){
+.mnav .mx-i{font-weight:500!important;font-size:16px!important;color:#1F1A17}
+.mnav .mx-i.danger{color:#E5174F!important}
+.mx-who b{font-weight:600!important;font-size:16px!important;color:#1F1A17}
+.mx-who small{font-weight:400!important;font-size:13px!important;color:#857B72!important}
+.mx-cr{font-weight:600!important;font-size:14px!important}
+.mnav .mx-acts a{font-weight:600!important;font-size:16px!important}
+.hdr.hx .hx-get{font-weight:600!important;font-size:15px!important}
+.hdr.hx .logo b{font-family:'Fredoka One',Fredoka,sans-serif!important;font-weight:400!important;font-size:22px!important;color:#0F3D22}
 }
 /* Hero A (holos style, 1080 grid) */
 .hero-a{background:transparent;padding:72px 0 88px;overflow:hidden;position:relative}
@@ -3035,7 +3045,7 @@ function header(route){
     <nav class="mnav" id="mnav" aria-label="Mobile" hidden>
       <div class="mx-links">${[['stickers','All Packs'],['stickers-animated','Animated'],['categories','Categories'],['pricing','Pricing'],['tutorials','Guide']].map(([r,t])=>`<a class="mx-l${ac(r)}" href="#${r}"${route===r?' aria-current="page"':''}>${t}</a>`).join('')}</div>
       ${S.user?`<div class="mx-acct">
-        <a class="mx-who" href="#manager"><img src="${UM.av}" alt=""><span><b>${esc(S.user.name||S.user.email)}</b><small>${esc(S.user.email)}</small></span><span class="mx-cr"><img src="${AIA.coin}" alt="" width="20" height="20">${S.credits}</span></a>
+        <a class="mx-who" href="#manager"><img src="${UM.av}" alt=""><span><b>${esc(S.user.name||S.user.email)}</b><small>${esc(S.user.handle||String(S.user.name||'me').toLowerCase().replace(/[^a-z0-9]+/g,'.')+'.official')} · ${cr}</small></span><span class="mx-cr"><img src="${AIA.coin}" alt="" width="20" height="20">${S.credits}</span></a>
         <a class="mx-i${ac('manager')}" href="#manager"><img src="${UM.profile}" alt="">My Profile</a>
         <button type="button" class="mx-i" data-mx="umShare"><span class="um-ap">${API.share}</span>Share Profile</button>
         <button type="button" class="mx-i" data-mx="umCopy"><span class="um-ap">${API.copy}</span>Copy Link</button>
