@@ -2743,6 +2743,7 @@ body.is-ap #hdr{position:relative}
 .hdr.hx .hx-get{font-weight:600!important;font-size:15px!important}
 .hdr.hx .logo b{font-family:'Fredoka One',Fredoka,sans-serif!important;font-weight:400!important;font-size:22px!important;color:#0F3D22}
 }
+.stp-av.me{overflow:hidden;background:#FFD9BB}.stp-av.me img{width:100%;height:100%;object-fit:cover}
 /* Hero A (holos style, 1080 grid) */
 .hero-a{background:transparent;padding:72px 0 88px;overflow:hidden;position:relative}
 .ha-in{max-width:1120px;margin:0 auto;padding:0 20px;display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center}
@@ -3436,16 +3437,18 @@ function shareCore(o){const {url,img,txt}=o,p={name:o.file},n='';
     else if(k==='lib'){if(img){const a=document.createElement('a');a.href=img;a.download=String(o.file).replace(/\s+/g,'-').toLowerCase()+'.png';document.body.appendChild(a);a.click();a.remove();toast(o.saved||'Sticker saved')}else toast('Open the pack in WaSticker to save it');closeModal()}
     else if(k==='cp'){let ok=false;if(!o.copyLink&&img&&navigator.clipboard&&window.ClipboardItem){try{const bl=await fetch(img).then(r=>r.blob());const png=bl.type==='image/png'?bl:await new Promise(res=>{const i=new Image();i.crossOrigin='anonymous';i.onload=()=>{const c=document.createElement('canvas');c.width=i.naturalWidth;c.height=i.naturalHeight;c.getContext('2d').drawImage(i,0,0);c.toBlob(res,'image/png')};i.src=URL.createObjectURL(bl)});await navigator.clipboard.write([new ClipboardItem({'image/png':png})]);ok=true;toast(o.copied||'Sticker copied')}catch(e){}}if(!ok)copy(url,o.linkMsg||'Sticker link copied');closeModal()}
     else if(k==='mo'){if(navigator.share){navigator.share({title:txt,url}).catch(()=>{})}else copy(url,o.linkMsg||'Sticker link copied');closeModal()}})}
+function stPack(id){const p=byId(id);if(p)return p;const mp=(S.mine||[]).find(x=>String(x.id)===String(id));if(!mp)return null;const st=packStk(mp)||[];
+  return {id:mp.id,name:mp.name,imgs:st.map(x=>mpImg(x)),e:st.map(()=>'🙂'),dl:mp.dl||0,author:(S.user&&S.user.name)||'You',cat:'',tags:mp.tags||[],mine:mp}}
 function pageSticker(id,n){
-  const p=byId(id);if(!p)return pageNotFound();const items=p.imgs||p.e,N=items.length;if(!(n>=1&&n<=N))n=1;const i=n-1,x=items[i];
+  const p=stPack(id);if(!p)return pageNotFound();const MP=p.mine;const items=p.imgs||p.e,N=items.length;if(!(n>=1&&n<=N))n=1;const i=n-1,x=items[i];
   const c=catOf(p.cat)||{name:'Sticker',slug:p.cat};const key=stFavKey(p.id,n),fav=(S.favStk||[]).includes(key);
-  const sdl=Math.max(40,Math.round(p.dl/N*(.6+((p.id*7+n*13)%9)/10))),sfv=Math.round(sdl*(.02+((n*11)%7)/200))+(fav?1:0);
+  const pidn=typeof p.id==='number'?p.id:[...String(p.id)].reduce((a,ch)=>a+ch.charCodeAt(0),0);let sdl=Math.max(40,Math.round(p.dl/N*(.6+((pidn*7+n*13)%9)/10))),sfv=Math.round(sdl*(.02+((n*11)%7)/200))+(fav?1:0);if(MP){const ms=mpStat(MP,i);sdl=ms.d;sfv=ms.l+(fav?1:0)}
   const kind=p.anim?'An animated':'A';const desc=`${kind} ${c.name.toLowerCase()} sticker from the ${esc(p.name)} pack, ready for your chats. ${p.anim?'It keeps moving in':'Use it in'} WhatsApp, Telegram and iMessage — get the whole pack free with WaSticker.`;
-  const tags=(p.tags||[]).slice(0,6);
+  const tags=(MP?mpTags(MP,i):(p.tags||[])).slice(0,6);const desc2=MP?`A sticker from your pack ${esc(p.name)}. Open the pack in the WaSticker app to add it to WhatsApp, Telegram or iMessage.`:desc;
   const rel=PACKS.filter(q=>q.id!==p.id&&q.cat===p.cat).concat(PACKS.filter(q=>q.id!==p.id&&q.cat!==p.cat)).slice(0,7);
   const art=x=>p.imgs?`<img src="${x}" alt="${esc(p.name)} sticker ${n}">`:stk(x);
   return `<div class="stp"><div class="wrap">
-    ${crumbs([['Home','home'],['All packs','stickers'],[p.name,'pack-'+p.id],['Sticker '+n]])}
+    ${crumbs(MP?[['Home','home'],['My Profile','manager'],[p.name,'mypack-'+p.id],['Sticker '+n]]:[['Home','home'],['All packs','stickers'],[p.name,'pack-'+p.id],['Sticker '+n]])}
     <div class="stp-hero">
       <div class="stp-left">
         <figure class="stp-big">${art(x)}${p.anim?'<span class="stp-anim">Animated</span>':''}<button type="button" class="stp-fav${fav?' on':''}" data-stfav="${key}" aria-label="${fav?'Remove from':'Add to'} favorites" aria-pressed="${fav}">${I.heart}</button></figure>
@@ -3457,16 +3460,16 @@ function pageSticker(id,n){
       </div>
       <div class="stp-info">
         <h1>${esc(p.name)} sticker ${n}</h1>
-        <p class="stp-desc">${desc}</p>
-        <div class="stp-meta"><span>Sticker ${n} of ${N} · <a href="#pack-${p.id}">${esc(p.name)} pack</a>${p.anim?' · <em class="pm-tag">Animated</em>':''}</span><span class="stp-icons"><button type="button" class="pk2-ico" id="stLink" aria-label="Copy sticker link" title="Copy link">${I.link}</button><button type="button" class="pk2-ico" id="stShare" aria-label="Share sticker" title="Share">${STI.share}</button><button type="button" class="pk2-ico" id="stMore" aria-label="Sticker menu" title="More"><svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><circle cx="12" cy="5" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="12" cy="19" r="2"/></svg></button></span></div>
-        <div class="stp-tags"><a class="stp-tag cat" href="#category-${c.slug}" style="--c:${catTint(c.slug)}">${esc(c.name)}</a>${p.anim?'<a class="stp-tag cat" href="#stickers-animated" style="--c:#5CC8FF">Animated</a>':''}${tags.map(t=>`<a class="stp-tag" href="#search" data-tag="${esc(t)}">#${esc(t)}</a>`).join('')}</div>
-        <div class="stp-creator"><span class="stp-av" aria-hidden="true"></span><span class="stp-cn"><b>braincraft</b><small>14 followers · 32 packs</small></span><button type="button" class="stp-follow" id="stFollow">Follow</button></div>
-        <div class="stp-get"><h2>Get this pack</h2><p>Free on WaSticker. Add all ${N} stickers to WhatsApp in one tap.</p>
+        <p class="stp-desc">${desc2}</p>
+        <div class="stp-meta"><span>Sticker ${n} of ${N} · <a href="#${MP?'mypack-':'pack-'}${p.id}">${esc(p.name)} pack</a>${p.anim?' · <em class="pm-tag">Animated</em>':''}</span><span class="stp-icons"><button type="button" class="pk2-ico" id="stLink" aria-label="Copy sticker link" title="Copy link">${I.link}</button><button type="button" class="pk2-ico" id="stShare" aria-label="Share sticker" title="Share">${STI.share}</button><button type="button" class="pk2-ico" id="stMore" aria-label="Sticker menu" title="More"><svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><circle cx="12" cy="5" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="12" cy="19" r="2"/></svg></button></span></div>
+        <div class="stp-tags">${MP?(tags.length?'':'<span class="stp-tag">No tags yet</span>'):`<a class="stp-tag cat" href="#category-${c.slug}" style="--c:${catTint(c.slug)}">${esc(c.name)}</a>`}${p.anim?'<a class="stp-tag cat" href="#stickers-animated" style="--c:#5CC8FF">Animated</a>':''}${tags.map(t=>`<a class="stp-tag" href="#search" data-tag="${esc(t)}">#${esc(t)}</a>`).join('')}</div>
+        ${MP?`<div class="stp-creator"><span class="stp-av me" aria-hidden="true"><img src="${UM.av}" alt=""></span><span class="stp-cn"><b>${esc(p.author)}</b><small>Your pack · ${N} stickers</small></span></div>`:`<div class="stp-creator"><span class="stp-av" aria-hidden="true"></span><span class="stp-cn"><b>braincraft</b><small>14 followers · 32 packs</small></span><button type="button" class="stp-follow" id="stFollow">Follow</button></div>`}
+        <div class="stp-get"><h2>${MP?'Add your pack':'Get this pack'}</h2><p>${MP?`Open it in WaSticker to add all ${N} stickers to WhatsApp.`:`Free on WaSticker. Add all ${N} stickers to WhatsApp in one tap.`}</p>
           <div class="stp-acts"><a class="pk2-badge" href="${appUrl('sticker_store')}" target="_blank" rel="noopener"><img src="${ASSET.appstore}" alt="Download on the App Store" width="138" height="46"></a><button type="button" class="pk2-badge" data-gp aria-label="Get it on Google Play"><img src="${GPLAY_BADGE}" alt="Get it on Google Play" width="138" height="46"></button><a class="pk2-btn pk2-open" href="${appUrl('sticker_open')}" target="_blank" rel="noopener"><span>Open in WaSticker</span></a></div></div>
       </div>
     </div></div>
     <section class="stp-band"><div class="wrap">
-      <div class="pk2-row"><h2>More from ${esc(p.name)}</h2><a class="pk2-see" href="#pack-${p.id}">See the whole pack →</a></div>
+      <div class="pk2-row"><h2>More from ${esc(p.name)}</h2><a class="pk2-see" href="#${MP?'mypack-':'pack-'}${p.id}">See the whole pack →</a></div>
       <div class="st-grid">${items.map((_,k)=>stTile(p,k,k===i)).join('')}</div>
     </div></section>
     <div class="wrap">
@@ -3475,14 +3478,21 @@ function pageSticker(id,n){
     <a class="stp-sticky" href="${appUrl('sticker_open_m')}" target="_blank" rel="noopener">Open in WaSticker</a>
   </div>`;
 }
-function wireSticker(id,n){const p=byId(id);if(!p)return;
+function wireSticker(id,n){const p=stPack(id);if(!p)return;const MP=p.mine;
   document.title=`${p.name} Sticker ${n} for WhatsApp, Telegram & iMessage · WaSticker`;
   const L=document.getElementById('stLink');if(L)L.onclick=()=>copy('https://wasticker.io/#sticker-'+p.id+'-'+n,'Sticker link copied');
   const Sh=document.getElementById('stShare');if(Sh)Sh.onclick=()=>shareSheet(p,n);
   {const N=(p.imgs||p.e).length,go=d=>{const k=n+d;if(k>=1&&k<=N)location.hash='sticker-'+p.id+'-'+k};const big=document.querySelector('.stp-big');let sx=null;
    if(big){big.addEventListener('touchstart',e=>{sx=e.touches[0].clientX},{passive:true});big.addEventListener('touchend',e=>{if(sx==null)return;const dx=e.changedTouches[0].clientX-sx;sx=null;if(Math.abs(dx)>45)go(dx<0?1:-1)},{passive:true})}
    if(window.__stKey)document.removeEventListener('keydown',window.__stKey);window.__stKey=e=>{if(!location.hash.startsWith('#sticker-')||document.querySelector('.mdl,.lb')||/INPUT|TEXTAREA/.test((e.target||{}).tagName||''))return;if(e.key==='ArrowLeft')go(-1);if(e.key==='ArrowRight')go(1)};document.addEventListener('keydown',window.__stKey)}
-  const Mo=document.getElementById('stMore');if(Mo)Mo.onclick=()=>{const im=(p.imgs||[])[n-1];menuSheet('Sticker Menu',[
+  const Mo=document.getElementById('stMore');if(Mo&&MP)Mo.onclick=()=>{const i=n-1;menuSheet('Sticker Menu',[
+    {ic:'share',t:'Share Sticker',fn:()=>{closeModal();setTimeout(()=>shareSheet(p,n),150)}},
+    {ic:'edit',t:'Edit Sticker',fn:()=>{closeModal();setTimeout(()=>getApp({ct:'mypack_edit_sticker'}),150)}},
+    {ic:'tags',t:'Edit Tags',fn:box=>{const cur=mpTags(MP,i).map(t=>String(t).replace(/^#/,'')).join(', ');box.innerHTML=`<h2>Edit Tags</h2><label class="pme-l" for="stTg">Tags <small style="font-weight:400;color:#857B72">(comma separated)</small></label><div class="pme-f"><input class="pmn-in" id="stTg" maxlength="120" value="${esc(cur)}" placeholder="cat, happy, cute"></div><div class="pmn-acts"><button type="button" class="ap-ebtn" data-pc="no">Cancel</button><button type="button" class="ap-ebtn pri" data-pc="yes">Save tags</button></div>`;
+      const inp=box.querySelector('#stTg');inp.focus();const go=()=>{mpSetTags(MP,i,inp.value.split(',').map(x=>x.trim().replace(/^#/,'')).filter(Boolean).slice(0,10));save();closeModal();render(true);toast('Tags updated')};box.querySelector('[data-pc=no]').onclick=closeModal;box.querySelector('[data-pc=yes]').onclick=go;inp.onkeydown=e=>{if(e.key==='Enter')go()}}},
+    {ic:'trash',t:'Delete Sticker',red:1,fn:box=>{const N=(p.imgs||[]).length;if(N<2){toast('A pack needs at least one sticker');return}box.innerHTML=`<h2>Delete sticker ${n}?</h2><p class="pmn-q">This removes it from “${esc(p.name)}”. You can’t undo this.</p><div class="pmn-acts"><button type="button" class="ap-ebtn" data-pc="no">Cancel</button><button type="button" class="ap-ebtn pmn-del" data-pc="yes">Delete</button></div>`;
+      box.querySelector('[data-pc=no]').onclick=closeModal;box.querySelector('[data-pc=yes]').onclick=()=>{mpDelStk(MP,i);save();closeModal();location.hash='mypack-'+p.id;setTimeout(()=>toast('Sticker deleted'),250)}}}])};
+  else if(Mo)Mo.onclick=()=>{const im=(p.imgs||[])[n-1];menuSheet('Sticker Menu',[
     {ic:'share',t:'Share Sticker',fn:()=>{closeModal();setTimeout(()=>shareSheet(p,n),150)}},
     {ic:'edit',t:'Edit Sticker',fn:()=>{closeModal();setTimeout(()=>getApp({title:'Edit this sticker in the WaSticker app',ct:'sticker_edit',art:im||(p.e||[])[n-1]}),150)}},
     {ic:'report',t:'Report',red:1,fn:()=>{closeModal();setTimeout(()=>reportModal({id:p.id+'-'+n,name:`${p.name} sticker ${n}`},'sticker'),150)}},
@@ -4368,7 +4378,7 @@ function render(keepScroll){
   else if(h==='categories'){html=pageCategories()}
   else if(h.startsWith('category-')){route='categories';html=pageCategory(h.slice(9));wire=wireListing}
   else if(h.startsWith('mypack-')){route='create';const id=h.slice(7);html=pageMyPack(id);wire=()=>wireMyPack(id)}
-  else if(h.startsWith('sticker-')){route='stickers';const m=h.slice(8).split('-'),n=+m.pop(),id=m.join('-');html=pageSticker(id,n);wire=()=>wireSticker(id,n)}
+  else if(h.startsWith('sticker-')){const m=h.slice(8).split('-'),n=+m.pop(),id=m.join('-');route=byId(id)?'stickers':'manager';html=pageSticker(id,n);wire=()=>wireSticker(id,n)}
   else if(h.startsWith('pack-')){route='stickers';const id=h.slice(5);html=pagePack(id);wire=()=>wirePack(id)}
   else if(h==='search'){html=pageSearch();wire=wireSearch}
   else if(h==='pricing'){html=pagePricing();wire=wirePricing}
@@ -4514,6 +4524,7 @@ function mpInfo(p,list){return {
     const grid=t.parentElement;const tiles=[...grid.querySelectorAll(t.classList.contains('pv-stk')?'.pv-stk':':scope>button')];
     const list=tiles.map(x=>{const im=x.querySelector('img');return im?{src:im.src}:{html:x.innerHTML}});
     const h=document.querySelector('.pv-title h1,.phead h1,h1');const mm=location.hash.match(/^#mypack-(.+)$/);const mp=mm&&(S.mine||[]).find(x=>x.id===mm[1]);
-    openLightbox(list,tiles.indexOf(t),h?h.textContent.trim():'',mp&&t.classList.contains('pv-stk')?mpInfo(mp,list):null)});
+    if(mp&&t.classList.contains('pv-stk')){location.hash='sticker-'+mp.id+'-'+(tiles.indexOf(t)+1);return}
+    openLightbox(list,tiles.indexOf(t),h?h.textContent.trim():'',null)});
 })();
 </script>
