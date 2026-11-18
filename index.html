@@ -2686,6 +2686,18 @@ body.is-ap #hdr{position:relative}
 .up-del:focus-visible{outline:2px solid #E5174F;outline-offset:2px}
 .ccp-ok.del{background:#FDE3EA;overflow:hidden}.ccp-ok.del svg{width:56px;height:56px}
 .stp-acts .pk2-btn.pk2-open{height:46px;min-height:46px}
+.stp-strip{display:flex;align-items:center;gap:8px;margin-top:2px}
+.stp-ths{display:flex;gap:8px}
+.stp-th{width:52px;height:52px;border-radius:13px;background:#FFFDF9;border:1.5px solid rgba(31,26,23,.08);display:grid;place-items:center;transition:transform .12s ease,border-color .12s ease;flex:none}
+.stp-th img{width:80%;height:80%;object-fit:contain}.stp-th .stk{font-size:28px}
+.stp-th:hover{transform:translateY(-2px);border-color:rgba(29,180,95,.6)}
+.stp-th.on{background:#E9F8EF;border:2px solid #1DB45F}
+.stp-th:focus-visible,.stp-arr:focus-visible{outline:2px solid #1DB45F;outline-offset:2px}
+.stp-arr{width:38px;height:38px;border-radius:50%;background:#fff;border:1.5px solid rgba(31,26,23,.14);display:grid;place-items:center;color:#1F1A17;flex:none;transition:border-color .12s ease,transform .12s ease}
+.stp-arr svg{width:18px;height:18px}.stp-arr:hover{border-color:#1F1A17;transform:translateY(-1px)}
+.stp-arr.off{opacity:.35;pointer-events:none}
+.stp-cap{margin:-6px 0 0;font:400 13px/1.3 Fredoka,sans-serif;color:#857B72;text-align:center}
+@media(max-width:420px){.stp-th{width:44px;height:44px;border-radius:11px}.stp-arr{width:34px;height:34px}.stp-strip,.stp-ths{gap:6px}}
 /* Hero A (holos style, 1080 grid) */
 .hero-a{background:transparent;padding:72px 0 88px;overflow:hidden;position:relative}
 .ha-in{max-width:1120px;margin:0 auto;padding:0 20px;display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center}
@@ -3385,6 +3397,10 @@ function pageSticker(id,n){
       <div class="stp-left">
         <figure class="stp-big">${art(x)}${p.anim?'<span class="stp-anim">Animated</span>':''}<button type="button" class="stp-fav${fav?' on':''}" data-stfav="${key}" aria-label="${fav?'Remove from':'Add to'} favorites" aria-pressed="${fav}">${I.heart}</button></figure>
         <div class="stp-stats"><span title="Downloads">${STI.dl}${sdl.toLocaleString('en-US')}</span><span title="Favorites">${STI.fv}<b id="stFvN">${sfv.toLocaleString('en-US')}</b></span></div>
+        <nav class="stp-strip" aria-label="Stickers in this pack">${(()=>{const W=5,st=Math.max(0,Math.min(i-2,N-W)),en=Math.min(N,st+W);const th=k=>{const u=items[k];return `<a class="stp-th${k===i?' on':''}" href="#sticker-${p.id}-${k+1}" aria-label="Sticker ${k+1}"${k===i?' aria-current="true"':''}>${p.imgs?`<img src="${u}" alt="" loading="lazy">`:stk(u)}</a>`};
+          const arr=(d,lab,svg)=>{const k=i+d;return k>=0&&k<N?`<a class="stp-arr" href="#sticker-${p.id}-${k+1}" aria-label="${lab}">${svg}</a>`:`<span class="stp-arr off" aria-hidden="true">${svg}</span>`};
+          return arr(-1,'Previous sticker','<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg>')+`<div class="stp-ths">${Array.from({length:en-st},(_,j)=>th(st+j)).join('')}</div>`+arr(1,'Next sticker','<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg>')})()}</nav>
+        <p class="stp-cap">Sticker ${n} of ${N} · swipe or tap a sticker</p>
       </div>
       <div class="stp-info">
         <h1>${esc(p.name)} sticker ${n}</h1>
@@ -3394,7 +3410,6 @@ function pageSticker(id,n){
         <div class="stp-creator"><span class="stp-av" aria-hidden="true"></span><span class="stp-cn"><b>braincraft</b><small>14 followers · 32 packs</small></span><button type="button" class="stp-follow" id="stFollow">Follow</button></div>
         <div class="stp-get"><h2>Get this pack</h2><p>Free on WaSticker. Add all ${N} stickers to WhatsApp in one tap.</p>
           <div class="stp-acts"><a class="pk2-badge" href="${appUrl('sticker_store')}" target="_blank" rel="noopener"><img src="${ASSET.appstore}" alt="Download on the App Store" width="138" height="46"></a><button type="button" class="pk2-badge" data-gp aria-label="Get it on Google Play"><img src="${GPLAY_BADGE}" alt="Get it on Google Play" width="138" height="46"></button><a class="pk2-btn pk2-open" href="${appUrl('sticker_open')}" target="_blank" rel="noopener"><span>Open in WaSticker</span></a></div></div>
-        <div class="stp-pn">${n>1?`<a class="stp-nav" href="#sticker-${p.id}-${n-1}">← Sticker ${n-1}</a>`:'<span></span>'}${n<N?`<a class="stp-nav" href="#sticker-${p.id}-${n+1}">Sticker ${n+1} →</a>`:`<a class="stp-nav" href="#pack-${p.id}">Whole pack →</a>`}</div>
       </div>
     </div></div>
     <section class="stp-band"><div class="wrap">
@@ -3411,6 +3426,9 @@ function wireSticker(id,n){const p=byId(id);if(!p)return;
   document.title=`${p.name} Sticker ${n} for WhatsApp, Telegram & iMessage · WaSticker`;
   const L=document.getElementById('stLink');if(L)L.onclick=()=>copy('https://wasticker.io/#sticker-'+p.id+'-'+n,'Sticker link copied');
   const Sh=document.getElementById('stShare');if(Sh)Sh.onclick=()=>shareSheet(p,n);
+  {const N=(p.imgs||p.e).length,go=d=>{const k=n+d;if(k>=1&&k<=N)location.hash='sticker-'+p.id+'-'+k};const big=document.querySelector('.stp-big');let sx=null;
+   if(big){big.addEventListener('touchstart',e=>{sx=e.touches[0].clientX},{passive:true});big.addEventListener('touchend',e=>{if(sx==null)return;const dx=e.changedTouches[0].clientX-sx;sx=null;if(Math.abs(dx)>45)go(dx<0?1:-1)},{passive:true})}
+   if(window.__stKey)document.removeEventListener('keydown',window.__stKey);window.__stKey=e=>{if(!location.hash.startsWith('#sticker-')||document.querySelector('.mdl,.lb')||/INPUT|TEXTAREA/.test((e.target||{}).tagName||''))return;if(e.key==='ArrowLeft')go(-1);if(e.key==='ArrowRight')go(1)};document.addEventListener('keydown',window.__stKey)}
   const Mo=document.getElementById('stMore');if(Mo)Mo.onclick=()=>{const im=(p.imgs||[])[n-1];menuSheet('Sticker Menu',[
     {ic:'share',t:'Share Sticker',fn:()=>{closeModal();setTimeout(()=>shareSheet(p,n),150)}},
     {ic:'edit',t:'Edit Sticker',fn:()=>{closeModal();setTimeout(()=>getApp({title:'Edit this sticker in the WaSticker app',ct:'sticker_edit',art:im||(p.e||[])[n-1]}),150)}},
