@@ -3669,7 +3669,7 @@ function pageManager(){
     return `<article class="up-pack"><a class="up-pack-link" href="#mypack-${p.id}" aria-label="Open ${esc(p.name)}"></a>
       <div class="up-pack-h"><div><b>${priv?`<span class="up-lock">${lock}</span>`:''}${esc(p.name)}<span class="stk-cnt">${st.length} ${st.length===1?'Sticker':'Stickers'}</span></b>
         <div class="up-pack-meta"><span>${esc(handle)}</span><span>${MPI.dl}${fmt(p.dl||0)}</span><span>${MPI.heart}${fmt((p.fav||[]).length+(p.sample?Math.round((p.dl||0)*.6):0))}</span></div></div>
-        <div class="up-acts"><button type="button" class="up-del" data-del="${p.id}" aria-label="Delete ${esc(p.name)}" title="Delete pack">${API.trash}</button><button class="up-export" data-exp="${p.id}">Export</button></div></div>
+        <div class="up-acts"><button class="up-export" data-exp="${p.id}">Export</button></div></div>
       <div class="up-row">${st.length?st.slice(0,7).map(s=>`<span class="up-stk"><img src="${mpImg(s)}" alt=""></span>`).join(''):`<span class="up-empty">No stickers yet</span>`}</div></article>`};
   return `<div class="up">
     <div class="upc" style="--sky:url(${AIA.sky});--doodle:url(${AIA.showbg})">
