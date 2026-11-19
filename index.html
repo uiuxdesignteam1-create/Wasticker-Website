@@ -2688,11 +2688,15 @@ body.is-ap #hdr{position:relative}
 .up-del:focus-visible{outline:2px solid #E5174F;outline-offset:2px}
 .ccp-ok.del{background:#FDE3EA;overflow:hidden}.ccp-ok.del svg{width:56px;height:56px}
 .stp-acts .pk2-btn.pk2-open{height:46px;min-height:46px}
-.stp-meta{width:100%;display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:4px}
-.stp-pg{display:flex;align-items:center;gap:10px}
-.stp-strip{width:100%;display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:8px;margin-top:-4px}
-.stp-prog{width:100%;height:4px;border-radius:2px;background:#E6E1DA;overflow:hidden;margin-top:-6px}
-.stp-prog i{display:block;height:100%;border-radius:2px;background:#1DB45F;transition:width .25s ease}
+.stp-nrow{display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap}
+.stp-dot{width:4px;height:4px;border-radius:50%;background:#C9C1B7}
+.stp-edge{position:absolute;top:50%;width:48px;height:48px;margin-top:-24px;border-radius:50%;background:#fff;color:#1F1A17;display:grid;place-items:center;box-shadow:0 4px 0 rgba(31,26,23,.08),0 8px 20px -8px rgba(59,38,22,.45);border:1.5px solid rgba(31,26,23,.1);z-index:2;transition:transform .15s ease,border-color .15s ease}
+.stp-edge.l{left:-24px}.stp-edge.r{right:-24px}
+.stp-edge svg{width:20px;height:20px}
+.stp-edge:hover{border-color:#1F1A17;transform:scale(1.06)}
+.stp-edge:focus-visible{outline:2px solid #1DB45F;outline-offset:2px}
+.stp-edge.off{opacity:.35;pointer-events:none}
+@media(max-width:600px){.stp-edge{width:40px;height:40px;margin-top:-20px}.stp-edge.l{left:-10px}.stp-edge.r{right:-10px}.stp-edge svg{width:18px;height:18px}}
 .stp-th{width:100%;max-width:56px;aspect-ratio:1;border-radius:14px;background:#FFFDF9;border:1.5px solid rgba(31,26,23,.08);display:grid;place-items:center;transition:transform .12s ease,border-color .12s ease;flex:none}
 .stp-th img{width:80%;height:80%;object-fit:contain}.stp-th .stk{font-size:28px}
 .stp-th:hover{transform:translateY(-2px);border-color:rgba(29,180,95,.6)}
@@ -2701,7 +2705,7 @@ body.is-ap #hdr{position:relative}
 .stp-arr{width:32px;height:32px;border-radius:50%;background:#fff;border:1.5px solid rgba(31,26,23,.14);display:grid;place-items:center;color:#1F1A17;flex:none;transition:border-color .12s ease,transform .12s ease}
 .stp-arr svg{width:16px;height:16px}.stp-arr:hover{border-color:#1F1A17;transform:translateY(-1px)}
 .stp-arr.off{opacity:.35;pointer-events:none}
-.stp-cap{margin:0;font:600 15px/1 Fredoka,sans-serif;color:#1F1A17;min-width:44px;text-align:center;font-variant-numeric:tabular-nums}
+.stp-cap{margin:0;font:600 15px/1 Fredoka,sans-serif;color:#1F1A17;font-variant-numeric:tabular-nums}
 @media(max-width:420px){.stp-th{border-radius:11px}.stp-strip{gap:6px}.stp-stats{gap:14px;font-size:15px}}
 @media (max-width:1023px){
 .mnav .mx-links{display:flex;flex-direction:column;padding:6px 0}
@@ -4405,12 +4409,8 @@ function pageSticker(id,n){
     ${crumbs(MP?[['Home','home'],['My Profile','manager'],[p.name,'mypack-'+p.id],['Sticker '+n]]:[['Home','home'],['All packs','stickers'],[p.name,'pack-'+p.id],['Sticker '+n]])}
     <div class="stp-hero">
       <div class="stp-left">
-        <figure class="stp-big">${art(x)}${p.anim?'<span class="stp-anim">Animated</span>':''}<button type="button" class="stp-fav${fav?' on':''}" data-stfav="${key}" aria-label="${fav?'Remove from':'Add to'} favorites" aria-pressed="${fav}">${I.heart}</button></figure>
-        <div class="stp-meta">${(()=>{const arr=(d,lab,svg)=>{const k=i+d;return k>=0&&k<N?`<a class="stp-arr" href="#sticker-${p.id}-${k+1}" aria-label="${lab}">${svg}</a>`:`<span class="stp-arr off" aria-hidden="true">${svg}</span>`};
-          return `<div class="stp-pg">${arr(-1,'Previous sticker','<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg>')}<span class="stp-cap" aria-label="Sticker ${n} of ${N}">${n} / ${N}</span>${arr(1,'Next sticker','<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg>')}</div>`})()}
-          <div class="stp-stats"><span title="Downloads">${STI.dl}${sdl.toLocaleString('en-US')}</span><span title="Favorites">${STI.fv}<b id="stFvN">${sfv.toLocaleString('en-US')}</b></span></div></div>
-        <nav class="stp-strip" aria-label="Stickers in this pack">${(()=>{const W=7,st=Math.max(0,Math.min(i-3,N-W)),en=Math.min(N,st+W);return Array.from({length:en-st},(_,j)=>{const k=st+j,u=items[k];return `<a class="stp-th${k===i?' on':''}" href="#sticker-${p.id}-${k+1}" aria-label="Sticker ${k+1}"${k===i?' aria-current="true"':''}>${p.imgs?`<img src="${u}" alt="" loading="lazy">`:stk(u)}</a>`}).join('')})()}</nav>
-        <div class="stp-prog" role="progressbar" aria-label="Position in pack" aria-valuemin="1" aria-valuemax="${N}" aria-valuenow="${n}"><i style="width:${(n/N*100).toFixed(2)}%"></i></div>
+        <figure class="stp-big">${art(x)}${p.anim?'<span class="stp-anim">Animated</span>':''}<button type="button" class="stp-fav${fav?' on':''}" data-stfav="${key}" aria-label="${fav?'Remove from':'Add to'} favorites" aria-pressed="${fav}">${I.heart}</button>${(()=>{const arr=(d,lab,c,path)=>{const k=i+d,sv=`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="${path}"/></svg>`;return k>=0&&k<N?`<a class="stp-edge ${c}" href="#sticker-${p.id}-${k+1}" aria-label="${lab}">${sv}</a>`:`<span class="stp-edge ${c} off" aria-hidden="true">${sv}</span>`};return arr(-1,'Previous sticker','l','M15 5l-7 7 7 7')+arr(1,'Next sticker','r','M9 5l7 7-7 7')})()}</figure>
+        <div class="stp-nrow"><span class="stp-cap">Sticker ${n} of ${N}</span><span class="stp-dot" aria-hidden="true"></span><div class="stp-stats"><span title="Downloads">${STI.dl}${sdl.toLocaleString('en-US')}</span><span title="Favorites">${STI.fv}<b id="stFvN">${sfv.toLocaleString('en-US')}</b></span></div></div>
       </div>
       <div class="stp-info">
         <h1>${esc(p.name)} sticker ${n}</h1>
