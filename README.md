@@ -4,6 +4,7 @@ Front-end prototype of the WaSticker web app. Everything lives in **one file, `i
 
 - Live: https://uiuxdesignteam1-create.github.io/Wasticker-Website/
 - Design: Figma "WA Sticker Website" (file `Cb50iRtT3EusV7pDZyynV1`)
+  - Page **"WaSticker Web · Live v1"** = the full design of the live site: components, colour variables, text styles, desktop (1440) + mobile (390) screens
 - Full handover notes: see the "WaSticker Website — Developer Handover" doc
 
 ## Run locally
@@ -25,7 +26,7 @@ Push to `main` → GitHub Pages redeploys in about a minute. Phones cache hard: 
 | Part | Where to look in `index.html` |
 | --- | --- |
 | Router | `render()` switches on `location.hash` |
-| Pages | `pageSticker` / `wireSticker`, `stPack(id)`, manager + `mypack-<id>` |
+| Pages | `pageSticker` / `wireSticker` (‹ › on the card edges = `.stp-edge`, swipe, ←/→ keys), `stPack(id)`, manager + `mypack-<id>` |
 | State | global `S`, persisted by `save()` to `localStorage` keys `was_user`, `was_credits`, `was_mine`, `was_lib`, `was_blocked` (+ `sessionStorage` `was_appbar`) |
 | Data | `PACKS` array; demo own pack MILO is `m0` |
 | Menus | `menuSheet`, `shareSheet`, `reportModal`, `blockAsk`, `blockListModal`, `passModal`, `orderSheet` |
