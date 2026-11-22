@@ -4623,12 +4623,21 @@ function needSignIn(what){
     <p class="muted">Your packs and credits are saved to your account.</p>
     <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center"><a class="btn btn-primary" href="#signin">Sign in</a><a class="btn btn-ghost" href="#signup">Create free account</a></div></div></div>`;
 }
+function savedPacks(){return PACKS.filter(p=>p.img)}
+function pageSaved(){
+  if(!S.user){S.after='saved';return needSignIn('see your saved packs')}
+  const u=S.user,handle=(u.handle||u.name.toLowerCase().replace(/[^a-z0-9]+/g,'.')+'.official');
+  const list=savedPacks();
+  return `<div class="doodle"><div class="wrap page-head">${crumbs([['Home','home'],['My Profile','manager'],['Saved Packs']])}
+    <h1 class="h-sec">Saved Packs</h1><p class="lead" style="margin-top:8px">${list.length} ${list.length===1?'pack':'packs'} saved by @${esc(handle)}.</p></div>
+  <div class="wrap" style="padding-bottom:72px">${list.length?`<div class="grid">${list.map(packCard).join('')}</div>`:emptyState('No saved packs yet','Packs you save show up here.',`<a class="btn btn-primary" href="#stickers">Browse packs</a>`)}</div></div>`;
+}
 function pageManager(){
   if(!S.user){S.after='manager';return needSignIn('see your sticker packs')}
   const u=S.user,handle=(u.handle||u.name.toLowerCase().replace(/[^a-z0-9]+/g,'.')+'.official');
   const tab=S.profTab||'stickers';
   const packs=S.mine||[];const total=packs.reduce((a,p)=>a+((packStk(p)||[]).length||p.count||0),0);
-  const saved=PACKS.filter(p=>p.img).slice(0,8);
+  const saved=savedPacks();
   const favs=PACKS.filter(p=>(S.favPacks||[]).includes(p.id));
   const lock=MPI.lock.replace('width="24" height="24"','width="18" height="18"');
   const card=p=>{const st=packStk(p)||[];const priv=p.priv||p.status==='Draft';
@@ -4657,7 +4666,7 @@ function pageManager(){
     <div class="up-head"><div class="up-tabs" role="tablist"><div class="wrap"><button role="tab" aria-selected="${tab==='stickers'}" class="${tab==='stickers'?'on':''}" data-ptab="stickers">My Stickers</button><button role="tab" aria-selected="${tab==='favs'}" class="${tab==='favs'?'on':''}" data-ptab="favs">My Favorites</button></div></div></div>
     <div class="doodle up-body"><div class="wrap">
     ${tab==='stickers'?`
-      <div class="up-sec-h"><h2>Saved Packs</h2><a href="#stickers" class="up-see">See All ${I.right}</a></div>
+      <div class="up-sec-h"><h2>Saved Packs</h2><a href="#saved" class="up-see">See All ${I.right}</a></div>
       <div class="grid up-saved-grid">${saved.slice(0,5).map(packCard).join('')}</div>
       <div class="up-sec-h" style="margin-top:36px"><h2>My Packs</h2><a href="#create" class="up-see">${I.plus} New pack</a></div>
       ${packs.length?`<div class="up-packs">${packs.map(card).join('')}</div>`:emptyState('No sticker packs yet','Create your first sticker with AI.',`<a class="btn btn-primary" href="#create">${I.plus} Create Sticker</a>`)}`
@@ -5341,6 +5350,7 @@ function render(keepScroll){
   else if(h==='contact'){html=pageContact();wire=wireContact}
   else if(h==='terms'||h==='privacy'){html=pageLegal(h)}
   else if(h==='manager'){html=pageManager();wire=wireManager}
+  else if(h==='saved'){route='manager';html=pageSaved()}
   else if(h==='create'){html=pageCreate();wire=wireCreate}
   else if(h==='signin'||h==='signup'){if(S.user){location.hash='manager';return}html=pageAuth(h==='signup');wire=()=>wireAuth(h==='signup')}
   else if(h==='tutorials'){html=pageTutorials();wire=()=>{document.querySelectorAll('[data-gp]').forEach(b=>b.onclick=()=>openPlay('badge'));document.querySelectorAll('[data-tc]').forEach(b=>b.onclick=()=>{S.tcat=b.dataset.tc;render(true)})}}
@@ -5355,9 +5365,9 @@ function render(keepScroll){
   document.body.classList.toggle('is-create',h==='create');
   wire();
   wireChipRows();
-  const titles={home:'WaSticker · Free WhatsApp Sticker Maker',stickers:'Stickers · WaSticker',popular:'Popular packs · WaSticker',categories:'Categories · WaSticker',search:'Search · WaSticker',pricing:'Pricing · WaSticker',contact:'Contact us · WaSticker',manager:'My packs · WaSticker',create:'Create sticker · WaSticker',signin:'Sign in · WaSticker',signup:'Sign up · WaSticker',tutorials:'Tutorials · WaSticker',terms:'Terms of Use · WaSticker',privacy:'Privacy Policy · WaSticker'};
+  const titles={home:'WaSticker · Free WhatsApp Sticker Maker',stickers:'Stickers · WaSticker',popular:'Popular packs · WaSticker',categories:'Categories · WaSticker',search:'Search · WaSticker',pricing:'Pricing · WaSticker',contact:'Contact us · WaSticker',manager:'My packs · WaSticker',saved:'Saved Packs · WaSticker',create:'Create sticker · WaSticker',signin:'Sign in · WaSticker',signup:'Sign up · WaSticker',tutorials:'Tutorials · WaSticker',terms:'Terms of Use · WaSticker',privacy:'Privacy Policy · WaSticker'};
   const h1=document.querySelector('#app h1');const named=h.startsWith('sticker-')||h.startsWith('pack-')||h.startsWith('article-')||h.startsWith('category-')||h.startsWith('mypack-');
-  document.title=named&&h1?h1.textContent.trim()+' · WaSticker':titles[route]||'WaSticker';
+  document.title=named&&h1?h1.textContent.trim()+' · WaSticker':titles[h]||titles[route]||'WaSticker';
   if(h==='home-faq')setTimeout(()=>document.getElementById('faq').scrollIntoView(),30);
   else if(!keepScroll)scrollTo(0,0);
 }
