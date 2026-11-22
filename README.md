@@ -36,7 +36,7 @@ Push to `main` → GitHub Pages redeploys in about a minute. Phones cache hard: 
 
 ## Routes
 
-`home`, `home-faq`, `stickers`, `stickers-animated`, `stickers-static`, `categories`, `category-<slug>`, `popular`, `pack-<id>`, `sticker-<packId>-<n>`, `create`, `manager`, `mypack-<id>`, `search`, `pricing`, `tutorials`, `article-<slug>`, `signin`, `signup`, `contact`, `privacy`, `terms`.
+`home`, `home-faq`, `stickers`, `stickers-animated`, `stickers-static`, `categories`, `category-<slug>`, `popular`, `pack-<id>`, `sticker-<packId>-<n>`, `create`, `manager`, `saved` (Saved Packs), `mypack-<id>`, `search`, `pricing`, `tutorials`, `article-<slug>`, `signin`, `signup`, `contact`, `privacy`, `terms`.
 
 ## Demo only (needs a backend)
 
