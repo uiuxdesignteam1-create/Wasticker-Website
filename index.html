@@ -2790,6 +2790,8 @@ body.is-ap #hdr{position:relative}
 .shr-qrc em{font:500 13px Fredoka,sans-serif;font-style:normal;color:#178A3A;margin-top:2px}
 .shr-b[data-sh=qrs] svg,.shr-b[data-sh=cp] svg,.shr-b[data-sh=mo] svg{width:22px!important;height:22px!important}
 @media(max-width:420px){.shr-qr{width:112px;height:112px}}
+.up-saved-grid{margin-top:4px}
+@media (max-width:560px){.up-saved-grid .pcard:nth-child(5){display:none}}
 /* Hero A (holos style, 1080 grid) */
 .hero-a{background:transparent;padding:72px 0 88px;overflow:hidden;position:relative}
 .ha-in{max-width:1120px;margin:0 auto;padding:0 20px;display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center}
@@ -4656,7 +4658,7 @@ function pageManager(){
     <div class="doodle up-body"><div class="wrap">
     ${tab==='stickers'?`
       <div class="up-sec-h"><h2>Saved Packs</h2><a href="#stickers" class="up-see">See All ${I.right}</a></div>
-      <div class="up-saved">${saved.map(p=>`<a class="up-sv" href="#pack-${p.id}"><span class="up-sv-th" style="background:${p.c}"><img src="${p.img}" alt=""><i class="up-crown">👑</i><em class="stk-cnt">${(p.imgs||p.e).length} Stickers</em></span><b>${esc(p.name)}</b></a>`).join('')}</div>
+      <div class="grid up-saved-grid">${saved.slice(0,5).map(packCard).join('')}</div>
       <div class="up-sec-h" style="margin-top:36px"><h2>My Packs</h2><a href="#create" class="up-see">${I.plus} New pack</a></div>
       ${packs.length?`<div class="up-packs">${packs.map(card).join('')}</div>`:emptyState('No sticker packs yet','Create your first sticker with AI.',`<a class="btn btn-primary" href="#create">${I.plus} Create Sticker</a>`)}`
     :`<div class="up-sec-h"><h2>My Favorites</h2></div>${favs.length?`<div class="grid">${favs.map(packCard).join('')}</div>`:emptyState('No favorites yet','Tap the heart on any pack to save it here.',`<a class="btn btn-primary" href="#popular">Browse popular packs</a>`)}`}
